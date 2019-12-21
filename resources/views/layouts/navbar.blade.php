@@ -3,7 +3,7 @@
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
         {{-- <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"> --}}
-        <h3>NGSCHOOLINFO</h3>
+        <h3>NIGERIASCHOOLINFO</h3>
       </a>
 
       <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">

@@ -64,7 +64,7 @@
 				  </div>
 				</div>
 
-				<div class="field is-grouped">
+				<div class="field is-grouped is-pulled-right">
 				  <div class="control">
 				    <button class="button is-link">Submit</button>
 				  </div>

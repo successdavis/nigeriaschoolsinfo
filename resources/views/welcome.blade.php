@@ -1,5 +1,7 @@
-@include ('partials/header')
-@include ('partials/navbar')
-@include ('partials/footer')
-@include ('partials/streamer')
-@include ('partials/displaypost')
+@extends('layouts.app')
+@section('content')
+
+	@include ('sections/streamer')
+	@include ('sections/displaypost')
+
+@endsection

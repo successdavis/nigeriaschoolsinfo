@@ -20398,7 +20398,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "field is-grouped" }, [
+          _c("div", { staticClass: "field is-grouped is-pulled-right" }, [
             _c("div", { staticClass: "control" }, [
               _c("button", { staticClass: "button is-link" }, [
                 _vm._v("Submit")
