@@ -17,6 +17,8 @@
 
 Auth::routes();
 
+Route::post('api/{school}/addlogo', 'SchoolLogoController@store')->name('school.logo')->middleware('auth');
+
 Route::get('/', 'PostController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/posts/{post}', 'PostController@show')->name('post.show');

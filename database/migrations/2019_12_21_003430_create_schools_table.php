@@ -28,6 +28,7 @@ class CreateSchoolsTable extends Migration
             $table->string('type'); // University, Polytechnics, Nurses School
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }

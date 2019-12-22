@@ -24,4 +24,12 @@ class SchoolTest extends TestCase
             'id', "name", "description", "date_created", "logo_path", "website", "portal-website","state","lga","address", "admitting", "type", "phone", "email"
           ]), 1);
     }
+
+    /** @test */
+    public function it_generate_a_string_path()
+    {
+        $school = create('App\Schools');
+
+        $this->assertEquals("/schools/{$school->slug}", $school->path());
+    }
 }

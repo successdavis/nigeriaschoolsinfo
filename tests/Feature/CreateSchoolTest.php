@@ -29,4 +29,18 @@ class CreateSchoolTest extends TestCase
         $this->json('post', route('schools.store'), $school->toArray())
             ->assertStatus(201);
     }
+
+    /** @test */
+    public function a_school_requires_a_unique_slug()
+    {
+        $this->signIn();
+
+        $school = create('App\Schools', ['name' => 'Foo Title']);
+
+        $this->assertEquals($school->fresh()->slug, 'foo-title');
+
+        // $School = $this->postJson(route('posts.save'), $post->toArray())->json();
+
+        // $this->assertEquals("foo-title-{$post['id']}", $post['slug']);
+    }
 }

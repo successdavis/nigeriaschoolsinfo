@@ -10,7 +10,7 @@ $factory->define(Schools::class, function (Faker $faker) {
         'name' 			=> $faker->name, 
         'description'	=> $faker->paragraph, 
         'date_created' 	=> $faker->date($format = 'Y-m-d', $max = 'now'),
-        'logo_path'		=> $faker->imageUrl, 
+        // 'logo_path'		=> $faker->imageUrl, 
         'website'		=> $faker->url, 
         'portal-website'=> $faker->url,
         'state'			=> '1',
