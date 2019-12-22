@@ -31,7 +31,7 @@ class SchoolLogoTest extends TestCase
     }
 
      /** @test */
-    public function a_valid_avatar_must_be_provided()
+    public function a_valid_logo_must_be_provided()
     {
         $this->withExceptionHandling()->signIn();
 

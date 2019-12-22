@@ -18,4 +18,12 @@ class ExamsTest extends TestCase
             'id', "name", "description", "date_created", "logo_path", "website", "portal-website", "admitting", "type", "phone", "email"
           ]), 1);
     }
+
+    /** @test */
+    public function it_generate_a_string_path()
+    {
+        $exams = create('App\Exams');
+
+        $this->assertEquals("/exams/{$exams->slug}", $exams->path());
+    }
 }

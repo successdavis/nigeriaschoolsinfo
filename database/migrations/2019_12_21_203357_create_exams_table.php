@@ -16,6 +16,7 @@ class CreateExamsTable extends Migration
         Schema::create('exams', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('short_name');
             $table->string('description');
             $table->string('logo_path')->nullable();
             $table->string('website')->nullable();
@@ -26,7 +27,7 @@ class CreateExamsTable extends Migration
             $table->string('type'); // University, Polytechnics, Nurses School
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
-
+            $table->string('slug')->nullable();
         });
     }
 

@@ -8,6 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Schools::class, function (Faker $faker) {
     return [
         'name' 			=> $faker->name, 
+        'short_name'    => $faker->word, 
         'description'	=> $faker->paragraph, 
         'date_created' 	=> $faker->date($format = 'Y-m-d', $max = 'now'),
         // 'logo_path'		=> $faker->imageUrl, 
