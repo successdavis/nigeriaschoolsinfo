@@ -8,6 +8,6 @@ trait Source
 {
     public function posts()
     {
-    	$this->morphMany('App\Post', 'source');
+    	return $this->morphMany('App\Post', 'source')->latest();
     }
 }

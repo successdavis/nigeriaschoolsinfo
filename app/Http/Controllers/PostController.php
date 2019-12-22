@@ -47,7 +47,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('posts.show', compact('post'));
+        $relatedPosts = $post->source->getRecent();
+        // dd($relatedPosts);
+        return view('posts.show', compact('post','relatedPosts'));
     }
 
     /**

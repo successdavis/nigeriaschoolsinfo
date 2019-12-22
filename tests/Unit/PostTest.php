@@ -32,11 +32,19 @@ class PostTest extends TestCase
     	$this->assertInstanceOf('App\Exams', $post->source);
     }
 
+    /** @test */
+    public function it_is_an_instance_of_user()
+    {
+        $post = create('App\Post');
+
+        $this->assertInstanceOf('App\User', $post->publisher);
+    }
+
 	/** @test */
     public function it_generate_a_string_path()
     {
         $post = create('App\Post');
 
-        $this->assertEquals("/posts/{$post->title}", $post->path());
+        $this->assertEquals("/posts/{$post->slug}", $post->path());
     }
 }

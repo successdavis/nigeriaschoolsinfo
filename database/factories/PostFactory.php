@@ -13,6 +13,9 @@ $factory->define(Post::class, function (Faker $faker) {
         'source_id'		=> function() {
             return factory('App\Schools')->create()->id;
         },
+        'user_id'     => function() {
+            return factory('App\User')->create()->id;
+        },
     ];
 });
 

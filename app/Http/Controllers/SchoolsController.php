@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\School;
+use App\Schools;
 use Illuminate\Http\Request;
 
-class SchoolController extends Controller
+class SchoolsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +36,39 @@ class SchoolController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'          => 'required', 
+            'description'   => 'required', 
+            'date_created'  => 'date',
+            // 'website'       => $faker->url, 
+            // 'portal-website'=> $faker->url,
+            'state'         => 'required',
+            'lga'           => 'required',
+            'address'       => 'required', 
+            'type'          => 'required', 
+            // 'phone'         => $faker->e164PhoneNumber, 
+            // 'email'         => $faker->email
+        ]);
+
+        $school = Schools::create([
+            'name'          => request('name'), 
+            'description'   => request('description'), 
+            'date_created'  => request('date_created'),
+            'website'       => request('website'), 
+            'portal-website'=> request('portal-website'),
+            'state'         => request('state'),
+            'lga'           => request('lga'),
+            'address'       => request('address'), 
+            'type'          => request('type'), 
+            'phone'         => request('phone'), 
+            'email'         => request('email')
+        ]);
+
+        if (request()->wantsJson()) {
+            return response($school, 201);
+        }
+
+
     }
 
     /**

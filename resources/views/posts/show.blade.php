@@ -18,7 +18,14 @@
 					</div>
 				</div>
 				<div class="column">
-					<h4 class="is-size-4">Related Posts</h4> 
+					<h4 class="is-size-4 mb-small">Related Posts</h4> 
+					<div>
+						@foreach ($relatedPosts as $relatedPost)
+							<div class="mb-small">
+								<a href="{{$relatedPost->path()}}">{{$relatedPost->title}}</a>
+							</div>
+						@endforeach
+					</div>
 				</div>
 			</div>
 		</div>
