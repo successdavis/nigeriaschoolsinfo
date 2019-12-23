@@ -23,4 +23,11 @@ Route::post('api/{exams}/attachlogo', 'ExamsLogoController@store')->name('exam.l
 Route::get('/', 'PostController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/posts/{post}', 'PostController@show')->name('post.show');
+
+Route::get('/exams', 'ExamsController@index')->name('exams.index');
+Route::get('/exams/{exams}', 'ExamsController@show')->name('exams.index');
+
+
+Route::get('/schools', 'SchoolsController@index')->name('schools.index');
+Route::get('/schools/{school}', 'SchoolsController@show')->name('schools.show');
 Route::post('/schools/createschool', 'SchoolsController@store')->name('schools.store');

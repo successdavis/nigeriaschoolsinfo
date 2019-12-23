@@ -13,9 +13,13 @@ class SchoolsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Schools $school)
     {
-        //
+        $schools = Schools::limit(20)->get();
+
+        // dd($schools);
+
+        return view('schools.index', compact('schools'));
     }
 
     /**
@@ -77,9 +81,9 @@ class SchoolsController extends Controller
      * @param  \App\School  $school
      * @return \Illuminate\Http\Response
      */
-    public function show(School $school)
+    public function show(Schools $school)
     {
-        //
+        return view('schools.show', compact('school'));
     }
 
     /**

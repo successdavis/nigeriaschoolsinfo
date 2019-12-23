@@ -14,7 +14,9 @@ class ExamsController extends Controller
      */
     public function index()
     {
-        //
+        $exams = Exams::limit(25)->get();
+
+        return view('exams.index', compact('exams'));
     }
 
     /**
@@ -46,7 +48,7 @@ class ExamsController extends Controller
      */
     public function show(Exams $exams)
     {
-        //
+        return view('exams.show', compact('exams'));
     }
 
     /**

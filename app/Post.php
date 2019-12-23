@@ -50,4 +50,11 @@ class Post extends Model
 
         $this->attributes['slug'] = $slug;
     }
+
+    public function excerpt()
+    {
+        $newbody = Str::words($this->body, 23, ' ...');
+
+        return $newbody;
+    }
 }
