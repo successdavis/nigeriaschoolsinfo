@@ -34,15 +34,15 @@ class ReadSChoolTest extends TestCase
             ->assertSee($this->school->description);
     }
 
-    //     /** @test */
-    // public function a_user_can_browse_schools_by_type()
-    // {
-    //     $type = create('App\SchoolType');
-    //     $schoolInType = create('App\Schools', ['school_type_id' => $type->id]);
-    //     $schoolNotInType = create('App\Schools');
+        /** @test */
+    public function a_user_can_browse_schools_by_type()
+    {
+        $type = create('App\SchoolType');
+        $schoolInType = create('App\Schools', ['school_type_id' => $type->id]);
+        $schoolNotInType = create('App\Schools');
 
-    //     $this->get('/schools/'. $type->slug)
-    //         ->assertSee($threadInChannel->title)
-    //         ->assertDontSee($threadNotInChannel);
-    // }
+        $this->get(route('schoolsInType',['schooltype' => $type->slug]))
+            ->assertSee($schoolInType->name)
+            ->assertDontSee($schoolNotInType->name);
+    }
 }

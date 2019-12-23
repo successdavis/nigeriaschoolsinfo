@@ -28,6 +28,11 @@ class SchoolType extends Model
         $this->attributes['slug'] = $slug;
     }
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function schools()
     {
     	return $this->hasMany('App\Schools');

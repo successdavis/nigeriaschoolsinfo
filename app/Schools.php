@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Support\Str;
+use Illuminate\SchoolFilters;
 use Illuminate\Database\Eloquent\Model;
 
 class Schools extends Model
@@ -63,5 +64,10 @@ class Schools extends Model
         }else {
             return asset('storage/schools/logos/default.jpg');
         }
+    }
+
+    public function scopeFilter($query, $filters)
+    {
+        return $filters->apply($query);
     }
 }

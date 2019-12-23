@@ -21,7 +21,7 @@ class ReadPostTest extends TestCase
     public function a_user_can_read_all_recent_published_post()
     {
         $post = create('App\Post');
-        
+
         $this->get('/')
             ->assertSee($post->title)
             ->assertSee($post->body);

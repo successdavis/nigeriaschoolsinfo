@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\SchoolFilters;
 use App\School;
+use App\SchoolType;
 use App\Schools;
 use Illuminate\Http\Request;
 
@@ -13,11 +15,13 @@ class SchoolsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Schools $school)
+    public function index(SchoolType $schooltype, SchoolFilters $filters)
     {
-        $schools = Schools::limit(20)->get();
+        $schools = $this->getSchools($schooltype, $filters);
 
-        // dd($schools);
+        if (request()->wantsJson()) {
+            return $schools;
+        }
 
         return view('schools.index', compact('schools'));
     }
@@ -118,5 +122,15 @@ class SchoolsController extends Controller
     public function destroy(School $school)
     {
         //
+    }
+
+    public function getSchools($schooltype, $filters)
+    {
+        $schools = Schools::latest()->filter($filters);
+        if ($schooltype->exists) {
+            $schools->where('school_type_id', $schooltype->id);
+        }
+
+        return $schools = $schools->paginate(25);
     }
 }
