@@ -37,11 +37,11 @@ class ReadSChoolTest extends TestCase
     //     /** @test */
     // public function a_user_can_browse_schools_by_type()
     // {
-    //     $channel = create('App\Schools', ['type' => 'University']);
-    //     $threadInChannel = create('App\Thread', ['channel_id' => $channel->id]);
-    //     $threadNotInChannel = create('App\Thread');
+    //     $type = create('App\SchoolType');
+    //     $schoolInType = create('App\Schools', ['school_type_id' => $type->id]);
+    //     $schoolNotInType = create('App\Schools');
 
-    //     $this->get('/threads/'. $channel->slug)
+    //     $this->get('/schools/'. $type->slug)
     //         ->assertSee($threadInChannel->title)
     //         ->assertDontSee($threadNotInChannel);
     // }
