@@ -18,6 +18,7 @@ class CreateSchoolsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('short_name')->nullable();
+            $table->string('cut-of points')->nullable();
             $table->date('date_created')->nullable();
             $table->string('logo_path')->nullable();
             $table->string('website')->nullable();
@@ -26,7 +27,9 @@ class CreateSchoolsTable extends Migration
             $table->unsignedInteger('lga');
             $table->text('address')->nullable();
             $table->boolean('admitting')->default(false);
-            $table->string('type'); // University, Polytechnics, Nurses School
+            $table->string('school_type_id'); // University, Polytechnics, Nurses School
+            $table->string('sponsored')->nullable(); // Federal, State, Private etc
+            $table->string('jamb_points')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('slug')->nullable();

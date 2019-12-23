@@ -21,7 +21,7 @@ class SchoolTest extends TestCase
     public function schools_database_has_expected_columns()
     {
         $this->assertTrue(Schema::hasColumns('schools', [
-            'id', "name", "description", "date_created", "logo_path", "website", "portal-website","state","lga","address", "admitting", "type", "phone", "email"
+            'id', "name", "description", "date_created", "logo_path", "website", "portal-website","state","lga","address", "admitting", "school_type_id", "phone", "email", 'sponsored', 'jamb_points'
           ]), 1);
     }
 
@@ -31,5 +31,14 @@ class SchoolTest extends TestCase
         $school = create('App\Schools');
 
         $this->assertEquals("/schools/{$school->slug}", $school->path());
+    }
+
+    /** @test */
+    public function it_belongs_to_a_type()
+    {
+        $school = create('App\Schools');
+
+        $this->assertInstanceOf('App\SchoolType', $school->SchoolType);
+
     }
 }

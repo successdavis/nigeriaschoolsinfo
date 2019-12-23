@@ -20,14 +20,13 @@ class CreateExamsTable extends Migration
             $table->string('description');
             $table->string('logo_path')->nullable();
             $table->string('website')->nullable();
-            $table->timestamps();
             $table->date('date_created')->nullable();
             $table->string('portal-website')->nullable();
             $table->boolean('admitting')->default(false);
-            $table->string('type'); // University, Polytechnics, Nurses School
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('slug')->nullable();
+            $table->timestamps();
         });
     }
 

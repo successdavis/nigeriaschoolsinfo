@@ -30,9 +30,19 @@ class Schools extends Model
         return '/schools/' . $this->slug;
     }
 
+    public function SchoolType()
+    {
+        return $this->belongsTo('App\SchoolType');
+    }
+
     public function getRecent()
     {
     	return $this->posts()->limit(20)->get();
+    }
+
+    public function TypeOf()
+    {
+        return $this->SchoolType->name;
     }
 
     public function setSlugAttribute($value)

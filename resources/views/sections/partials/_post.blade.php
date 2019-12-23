@@ -15,7 +15,9 @@
   </div>
   <figure class="media-right">
     <p class="pt-all">
-      {{$post->source->type}}
+      @if ($post->source_type === "App\Schools")
+        {{$post->source->TypeOf()}}
+      @endif
     </p>
   </figure>
 </article>

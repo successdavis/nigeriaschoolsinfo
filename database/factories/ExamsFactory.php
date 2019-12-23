@@ -13,7 +13,6 @@ $factory->define(Exams::class, function (Faker $faker) {
         'date_created' 	=> $faker->date($format = 'Y-m-d', $max = 'now'),
         'website'		=> $faker->url, 
         'portal-website'=> $faker->url,
-        'type'			=> 'JAMB', 
         'phone'			=> $faker->e164PhoneNumber, 
         'email'			=> $faker->email
     ];

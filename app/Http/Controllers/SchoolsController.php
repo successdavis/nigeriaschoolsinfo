@@ -49,7 +49,7 @@ class SchoolsController extends Controller
             'state'         => 'required',
             'lga'           => 'required',
             'address'       => 'required', 
-            'type'          => 'required', 
+            'school_type_id'   => 'required', 
             // 'phone'         => $faker->e164PhoneNumber, 
             // 'email'         => $faker->email
         ]);
@@ -63,7 +63,7 @@ class SchoolsController extends Controller
             'state'         => request('state'),
             'lga'           => request('lga'),
             'address'       => request('address'), 
-            'type'          => request('type'), 
+            'school_type_id'=> request('school_type_id'), 
             'phone'         => request('phone'), 
             'email'         => request('email')
         ]);
