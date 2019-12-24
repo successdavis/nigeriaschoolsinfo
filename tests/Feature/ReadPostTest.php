@@ -23,7 +23,6 @@ class ReadPostTest extends TestCase
         $post = create('App\Post');
 
         $this->get('/')
-            ->assertSee($post->title)
-            ->assertSee($post->body);
+            ->assertSee(e($post->title));
     }
 }

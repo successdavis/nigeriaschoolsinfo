@@ -24,25 +24,26 @@ class ReadCourseTest extends TestCase
     {
         $this->get('/courses')
             ->assertSee($this->course->name);
+
     }
 
-    // /** @test */
-    // public function a_user_can_view_a_single_course()
-    // {
-    //     $this->get('/schools/' .  $this->school->slug)
-    //         ->assertSee($this->school->name)
-    //         ->assertSee($this->school->description);
-    // }
+    /** @test */
+    public function a_user_can_view_a_single_course()
+    {
+        $this->get('/courses/' .  $this->course->slug)
+            ->assertSee($this->course->name)
+            ->assertSee($this->course->description);
+    }
 
-    //     /** @test */
-    // public function a_user_can_browse_schools_by_school_type()
-    // {
-    //     $type = create('App\SchoolType');
-    //     $schoolInType = create('App\Schools', ['school_type_id' => $type->id]);
-    //     $schoolNotInType = create('App\Schools');
+        /** @test */
+    public function a_user_can_browse_courses_by_school()
+    {
+        $school = create('App\Schools');
+        $courseInSchool = create('App\Courses');
+        $courseNotInSchool = create('App\Courses');
 
-    //     $this->get(route('schoolsInType',['schooltype' => $type->slug]))
-    //         ->assertSee($schoolInType->name)
-    //         ->assertDontSee($schoolNotInType->name);
-    // }
+        $school->addCourse($courseInSchool);
+
+        $this->assertCount(1, $school->courses);
+    }
 }

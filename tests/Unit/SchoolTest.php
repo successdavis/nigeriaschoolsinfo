@@ -15,6 +15,7 @@ class SchoolTest extends TestCase
         parent::setUp();
 
         $this->school = create('App\Schools');
+        $this->course = create('App\Courses');
     }
 
     /** @test */
@@ -40,5 +41,11 @@ class SchoolTest extends TestCase
 
         $this->assertInstanceOf('App\SchoolType', $school->SchoolType);
 
+    }
+
+    /** @test */
+    public function a_school_belongs_to_many_courses()
+    {
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->course->schools);
     }
 }

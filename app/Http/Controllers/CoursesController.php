@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Courses;
+use App\Filters\CourseFilters;
+use App\Schools;
 use Illuminate\Http\Request;
 
 class CoursesController extends Controller
@@ -12,9 +14,14 @@ class CoursesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Schools $schools, CourseFilters $filters)
     {
-        $courses = Courses::all();
+        $courses = $this->getCourses($schools, $filters);
+
+        if (request()->wantsJson()) {
+            return $courses;
+        }
+
         return view('courses.index', compact('courses'));
     }
 
@@ -47,7 +54,7 @@ class CoursesController extends Controller
      */
     public function show(Courses $courses)
     {
-        //
+        return view('courses.show', compact('courses'));
     }
 
     /**
@@ -82,5 +89,15 @@ class CoursesController extends Controller
     public function destroy(Courses $courses)
     {
         //
+    }
+
+    public function getCourses($schools, $filters)
+    {
+        $courses = Courses::latest()->filter($filters);
+        if ($schools->exists) {
+            $courses = $schools->courses();
+        }
+
+        return $courses = $courses->paginate(25);
     }
 }

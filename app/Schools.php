@@ -31,6 +31,16 @@ class Schools extends Model
         return $this->belongsTo('App\SchoolType');
     }
 
+    public function courses()
+    {
+        return $this->belongsToMany(Courses::class)->withPivot('cut_off_points');
+    }
+
+    public function addCourse($course, $cut_off_points = null)
+    {
+        $this->courses()->attach($course->id, ['cut_off_points' => $cut_off_points]);
+    }
+
     public function getRecent()
     {
     	return $this->posts()->limit(20)->get();

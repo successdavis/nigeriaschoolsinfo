@@ -33,4 +33,7 @@ Route::get('/schools/type/{schooltype}', 'SchoolsController@index')->name('schoo
 Route::get('/schools/{school}', 'SchoolsController@show')->name('schools.show');
 Route::post('/schools/createschool', 'SchoolsController@store')->name('schools.store');
 
+Route::get('/schools/{schools}/courses', 'CoursesController@index')->name('schoolCourses');
+
 Route::get('/courses', 'CoursesController@index')->name('courses.index');
+Route::get('/courses/{courses}', 'CoursesController@show')->name('courses.show');

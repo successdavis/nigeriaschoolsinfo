@@ -20,7 +20,7 @@ class CreateCoursesTable extends Migration
             $table->string('description');
             $table->string('logo_path')->nullable();
             $table->integer('salary')->default(0);
-            $table->integer('slug')->nullable();
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }
