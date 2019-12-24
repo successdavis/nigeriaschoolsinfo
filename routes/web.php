@@ -32,3 +32,5 @@ Route::get('/schools', 'SchoolsController@index')->name('schools.index');
 Route::get('/schools/type/{schooltype}', 'SchoolsController@index')->name('schoolsInType');
 Route::get('/schools/{school}', 'SchoolsController@show')->name('schools.show');
 Route::post('/schools/createschool', 'SchoolsController@store')->name('schools.store');
+
+Route::get('/courses', 'CoursesController@index')->name('courses.index');

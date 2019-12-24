@@ -2,14 +2,18 @@
 
 namespace App;
 
-use Illuminate\Support\Str;
+use App\Traits\ModelFunctions;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Exams extends Model
 {
     use Source;
+    use ModelFunctions;
 
-    protected $guarded = [];
+    protected $guarded  = [];
+    public $pathPrefix  = '/exams/';
+    public $findWith    =   'slug';
 
     protected static function boot()
     {
@@ -19,31 +23,10 @@ class Exams extends Model
             $exam->update(['slug' => $exam->name]);
         });
     }
-	
-	public function getRouteKeyName()
-	{
-		return 'slug';
-	}
-
-	public function path()
-    {
-        return '/exams/' . $this->slug;
-    }
 
     public function getRecent()
     {
     	return $this->posts()->limit(20)->get();
-    }
-
-    public function setSlugAttribute($value)
-    {
-        $slug = str::slug($value, '-');
-
-        if (static::whereSlug($slug)->exists()) {
-            $slug = "{$slug}-" . $this->id;
-        }
-
-        $this->attributes['slug'] = $slug;
     }
 
     public function getLogoPathAttribute($logo)
@@ -54,6 +37,4 @@ class Exams extends Model
             return asset('storage/exams/logos/default.jpg');
         }
     }
-
-
 }

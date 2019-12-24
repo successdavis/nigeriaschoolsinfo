@@ -2,15 +2,20 @@
 
 namespace App;
 
-use Illuminate\Support\Str;
-use Illuminate\SchoolFilters;
+use App\Traits\ModelFunctions;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\SchoolFilters;
+use Illuminate\Support\Str;
 
 class Schools extends Model
 {
     use Source;
+    use ModelFunctions;
 
     protected $guarded = [];
+
+    public $pathPrefix  = '/schools/';
+    public $findWith    =   'slug';
 
     protected static function boot()
     {
@@ -19,16 +24,6 @@ class Schools extends Model
         static::created(function ($school) {
             $school->update(['slug' => $school->name]);
         });
-    }
-
-	public function getRouteKeyName()
-    {
-        return 'slug';
-    }
-
-    public function path()
-    {
-        return '/schools/' . $this->slug;
     }
 
     public function SchoolType()
@@ -44,17 +39,6 @@ class Schools extends Model
     public function TypeOf()
     {
         return $this->SchoolType->name;
-    }
-
-    public function setSlugAttribute($value)
-    {
-        $slug = str::slug($value, '-');
-
-        if (static::whereSlug($slug)->exists()) {
-            $slug = "{$slug}-" . $this->id;
-        }
-
-        $this->attributes['slug'] = $slug;
     }
 
     public function getLogoPathAttribute($logo)

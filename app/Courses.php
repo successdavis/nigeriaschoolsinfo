@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Courses extends Model
 {
     protected $guarded = [];
+    public $pathPrefix = '/courses/';
+    public $findWith    =   'slug';
 
     use ModelFunctions;
 
@@ -18,10 +20,5 @@ class Courses extends Model
         static::created(function ($course) {
             $course->update(['slug' => $course->name]);
         });
-    }
-
-	public function path()
-    {
-        return '/courses/' . $this->slug;
     }
 }

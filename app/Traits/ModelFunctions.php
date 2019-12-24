@@ -17,4 +17,19 @@ trait ModelFunctions
 
         $this->attributes['slug'] = $slug;
     }
+
+    public function getRouteKeyName()
+	{
+		if (property_exists($this, 'findWith')) {
+			return $this->findWith;
+		}
+	}
+
+
+    public function path()
+    {
+    	if (property_exists($this, 'pathPrefix')) {
+	        return $this->pathPrefix . $this->slug;
+    	}
+    }
 }
