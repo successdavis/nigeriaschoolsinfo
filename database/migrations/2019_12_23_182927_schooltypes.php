@@ -30,6 +30,6 @@ class Schooltypes extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('school_types');
     }
 }

@@ -29,15 +29,11 @@
           </a>
 
           <div class="navbar-dropdown">
-            <a class="navbar-item">
-              Universities
-            </a>
-            <a class="navbar-item">
-              Polytechnics
-            </a>
-            <a class="navbar-item">
-              Colleges
-            </a>
+            @foreach ($schooltype as $type)
+              <a href="{{$type->path()}}" class="navbar-item">
+                {{$type->name}}
+              </a>
+            @endforeach
             <hr class="navbar-divider">
             <a class="navbar-item">
               Nursing Schools

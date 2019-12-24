@@ -41,6 +41,6 @@ class SchoolType extends Model
 
 	public function path()
     {
-        return '/schooltypes/' . $this->slug;
+        return '/schools/type/' . $this->slug;
     }
 }

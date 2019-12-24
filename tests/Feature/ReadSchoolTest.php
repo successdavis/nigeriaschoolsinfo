@@ -35,7 +35,7 @@ class ReadSChoolTest extends TestCase
     }
 
         /** @test */
-    public function a_user_can_browse_schools_by_type()
+    public function a_user_can_browse_schools_by_school_type()
     {
         $type = create('App\SchoolType');
         $schoolInType = create('App\Schools', ['school_type_id' => $type->id]);
