@@ -17,6 +17,6 @@ class SchoolTypeTest extends TestCase
     {
         $type = create('App\SchoolType');
 
-        $this->assertEquals("/schooltypes/{$type->slug}", $type->path());
+        $this->assertEquals("/schools/type/{$type->slug}", $type->path());
     }
 }
