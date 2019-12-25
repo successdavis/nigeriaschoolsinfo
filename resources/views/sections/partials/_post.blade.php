@@ -18,9 +18,7 @@
   </div>
   <figure class="media-right is-hidden-mobile">
     <p class="pt-all">
-      @if ($post->source_type === "App\Schools")
-        {{$post->source->TypeOf()}}
-      @endif
+        <span class="post_sh_name">{{$post->source->short_name}}</span>
     </p>
   </figure>
 </article>

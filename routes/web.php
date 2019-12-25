@@ -20,6 +20,9 @@ Auth::routes();
 Route::post('api/{school}/addlogo', 'SchoolLogoController@store')->name('school.logo')->middleware('auth');
 Route::post('api/{exams}/attachlogo', 'ExamsLogoController@store')->name('exam.logo')->middleware('admin');
 
+Route::get('api/advertisements', 'AdvertisementsController@index')->name('advertisements.index')->middleware('admin');
+
+
 Route::get('/', 'PostController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/posts/{post}', 'PostController@show')->name('post.show');
@@ -37,3 +40,6 @@ Route::get('/schools/{schools}/courses', 'CoursesController@index')->name('schoo
 
 Route::get('/courses', 'CoursesController@index')->name('courses.index');
 Route::get('/courses/{courses}', 'CoursesController@show')->name('courses.show');
+
+
+
