@@ -1833,9 +1833,11 @@ module.exports = {
 /*!**********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AskQuestion.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -1917,6 +1919,12 @@ module.exports = {
 //
 //
 //
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['name'],
+  data: function data() {
+    return {};
+  }
+});
 
 /***/ }),
 
@@ -1932,7 +1940,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      completeRate: 0
+      completeRate: 0,
+      drIsOpen: false
     };
   }
 });
@@ -20271,157 +20280,167 @@ var render = function() {
       _c(
         "a",
         {
-          staticClass: "button is-primary",
+          staticClass: "button is-primary is-fullwidth",
           on: {
             click: function($event) {
               return _vm.$modal.show("ask-a-question")
             }
           }
         },
-        [_c("strong", [_vm._v("ASK A QUESTION")])]
+        [
+          _c("strong", {
+            domProps: {
+              textContent: _vm._s(_vm.name ? _vm.name : "ASK A QUESTION")
+            }
+          })
+        ]
       ),
       _vm._v(" "),
-      _c("modal", { attrs: { name: "ask-a-question", height: "auto" } }, [
-        _c("div", { staticClass: "ps-container relative-body" }, [
-          _c(
-            "div",
-            {
-              staticClass: "top-right",
-              attrs: { slot: "top-right" },
-              slot: "top-right"
-            },
-            [
-              _c(
-                "button",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.$modal.hide("ask-a-question")
-                    }
-                  }
-                },
-                [_vm._v("\n\t\t        ❌\n\t\t      ")]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "field" }, [
-            _c("label", { staticClass: "label" }, [_vm._v("Name")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "control" }, [
-              _c("input", {
-                staticClass: "input",
-                attrs: { type: "text", placeholder: "Text input" }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "field" }, [
-            _c("label", { staticClass: "label" }, [_vm._v("Email")]),
-            _vm._v(" "),
+      _c(
+        "modal",
+        { attrs: { name: "ask-a-question", height: "auto", adaptive: "true" } },
+        [
+          _c("div", { staticClass: "ps-container relative-body" }, [
             _c(
               "div",
-              { staticClass: "control has-icons-left has-icons-right" },
+              {
+                staticClass: "top-right",
+                attrs: { slot: "top-right" },
+                slot: "top-right"
+              },
               [
+                _c(
+                  "button",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.$modal.hide("ask-a-question")
+                      }
+                    }
+                  },
+                  [_vm._v("\n\t\t        ❌\n\t\t      ")]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "field" }, [
+              _c("label", { staticClass: "label" }, [_vm._v("Name")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "control" }, [
                 _c("input", {
-                  staticClass: "input is-danger",
-                  attrs: {
-                    type: "email",
-                    placeholder: "Email input",
-                    value: "hello@"
-                  }
-                }),
-                _vm._v(" "),
-                _c("span", { staticClass: "icon is-small is-left" }, [
-                  _c("i", { staticClass: "fas fa-envelope" })
+                  staticClass: "input",
+                  attrs: { type: "text", placeholder: "Text input" }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "field" }, [
+              _c("label", { staticClass: "label" }, [_vm._v("Email")]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "control has-icons-left has-icons-right" },
+                [
+                  _c("input", {
+                    staticClass: "input is-danger",
+                    attrs: {
+                      type: "email",
+                      placeholder: "Email input",
+                      value: "hello@"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "icon is-small is-left" }, [
+                    _c("i", { staticClass: "fas fa-envelope" })
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "icon is-small is-right" }, [
+                    _c("i", { staticClass: "fas fa-exclamation-triangle" })
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "field" }, [
+              _c("label", { staticClass: "label" }, [_vm._v("Subject")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "control" }, [
+                _c("div", { staticClass: "select" }, [
+                  _c("select", [
+                    _c("option", [_vm._v("Select dropdown")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("General")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("Jamb")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("Neco")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("Waec")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("Nabteb")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("Other")])
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("span", { staticClass: "icon is-small is-right" }, [
-                  _c("i", { staticClass: "fas fa-exclamation-triangle" })
+                _c("p", { staticClass: "help is-danger" }, [
+                  _vm._v(
+                    "To ensure you get quick reply please pick appropriate subject"
+                  )
                 ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "field" }, [
-            _c("label", { staticClass: "label" }, [_vm._v("Subject")]),
+              ])
+            ]),
             _vm._v(" "),
-            _c("div", { staticClass: "control" }, [
-              _c("div", { staticClass: "select" }, [
-                _c("select", [
-                  _c("option", [_vm._v("Select dropdown")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("General")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("Jamb")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("Neco")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("Waec")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("Nabteb")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("Other")])
+            _c("div", { staticClass: "field" }, [
+              _c("label", { staticClass: "label" }, [
+                _vm._v("Ask Questions Here")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "control" }, [
+                _c("textarea", {
+                  staticClass: "textarea",
+                  attrs: { placeholder: "Textarea" }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "field" }, [
+              _c("div", { staticClass: "control" }, [
+                _c("label", { staticClass: "checkbox" }, [
+                  _c("input", { attrs: { type: "checkbox" } }),
+                  _vm._v("\n\t\t\t      I agree to the "),
+                  _c("a", { attrs: { href: "#" } }, [
+                    _vm._v("terms and conditions")
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "field is-grouped is-pulled-right" }, [
+              _c("div", { staticClass: "control" }, [
+                _c("button", { staticClass: "button is-link" }, [
+                  _vm._v("Submit")
                 ])
               ]),
               _vm._v(" "),
-              _c("p", { staticClass: "help is-danger" }, [
-                _vm._v(
-                  "To ensure you get quick reply please pick appropriate subject"
+              _c("div", { staticClass: "control" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "button is-link is-light",
+                    on: {
+                      click: function($event) {
+                        return _vm.$modal.hide("ask-a-question")
+                      }
+                    }
+                  },
+                  [_vm._v("Cancel")]
                 )
               ])
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "field" }, [
-            _c("label", { staticClass: "label" }, [
-              _vm._v("Ask Questions Here")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "control" }, [
-              _c("textarea", {
-                staticClass: "textarea",
-                attrs: { placeholder: "Textarea" }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "field" }, [
-            _c("div", { staticClass: "control" }, [
-              _c("label", { staticClass: "checkbox" }, [
-                _c("input", { attrs: { type: "checkbox" } }),
-                _vm._v("\n\t\t\t      I agree to the "),
-                _c("a", { attrs: { href: "#" } }, [
-                  _vm._v("terms and conditions")
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "field is-grouped is-pulled-right" }, [
-            _c("div", { staticClass: "control" }, [
-              _c("button", { staticClass: "button is-link" }, [
-                _vm._v("Submit")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "control" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "button is-link is-light",
-                  on: {
-                    click: function($event) {
-                      return _vm.$modal.hide("ask-a-question")
-                    }
-                  }
-                },
-                [_vm._v("Cancel")]
-              )
-            ])
           ])
-        ])
-      ])
+        ]
+      )
     ],
     1
   )
@@ -32717,9 +32736,7 @@ component.options.__file = "resources/js/components/AskQuestion.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AskQuestion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AskQuestion.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AskQuestion.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AskQuestion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AskQuestion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AskQuestion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AskQuestion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AskQuestion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AskQuestion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

@@ -25,7 +25,7 @@ class CoursesTest extends TestCase
     public function courses_database_has_expected_columns()
     {
         $this->assertTrue(Schema::hasColumns('courses', [
-            'id', "name", "description", "short_name", "logo_path", 'salary', 'slug'
+            'id', "name", "description", "short_name", "logo_path", 'salary', 'slug','duration'
           ]), 1);
     }
 

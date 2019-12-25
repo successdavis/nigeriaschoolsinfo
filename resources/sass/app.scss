@@ -5,6 +5,14 @@
 @import 'variables';
 @import 'main';
 @import 'spacing';
+@import '_navbar';
+@import '_post';
+
+$fa-font-path: "../webfonts";
 
 // Bulma
 @import './node_modules/bulma/bulma.sass';
+
+// Font Awesome
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';

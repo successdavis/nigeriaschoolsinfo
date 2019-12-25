@@ -41,3 +41,10 @@
 .pt-large {
 	padding-top: 2em;
 }
+
+
+@media(max-width: 1023px) {
+	.justify-content-touch {
+		justify-content: space-between;
+	}	
+}

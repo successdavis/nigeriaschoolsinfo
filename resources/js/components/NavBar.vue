@@ -2,7 +2,8 @@
     export default {
         data () {
         	return {
-        		completeRate: 0
+        		completeRate: 0,
+                drIsOpen: false,
         	}
         },
     }

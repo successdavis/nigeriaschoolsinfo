@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<a @click="$modal.show('ask-a-question')" class="button is-primary"><strong>ASK A QUESTION</strong></a>
-		<modal name="ask-a-question" height="auto">
-			<div class="ps-container relative-body">
+		<a @click="$modal.show('ask-a-question')" class="button is-primary is-fullwidth"><strong v-text="name ? name : 'ASK A QUESTION'"></strong></a>
+		<modal name="ask-a-question" height="auto" adaptive="true">
+			<div class="ps-container relative-body"> 
 				<div slot="top-right" class="top-right">
 			      <button @click="$modal.hide('ask-a-question')">
 			        ❌
@@ -80,6 +80,14 @@
 </template>
 
 <script>
+export default {
+	props: ['name'],
+	data () {
+		return {
+
+		}
+	}
+}
 	
 </script>
 

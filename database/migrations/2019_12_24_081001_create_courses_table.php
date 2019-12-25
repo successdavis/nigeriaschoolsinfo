@@ -21,6 +21,7 @@ class CreateCoursesTable extends Migration
             $table->string('logo_path')->nullable();
             $table->integer('salary')->default(0);
             $table->string('slug')->nullable();
+            $table->integer('duration')->nullable();
             $table->timestamps();
         });
     }
