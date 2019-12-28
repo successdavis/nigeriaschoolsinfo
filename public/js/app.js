@@ -2095,6 +2095,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2103,6 +2106,7 @@ __webpack_require__.r(__webpack_exports__);
       path: '',
       dataSet: '',
       pagination: '',
+      searchKey: '',
       page: ''
     };
   },
@@ -2113,6 +2117,11 @@ __webpack_require__.r(__webpack_exports__);
     getSchools: function getSchools() {
       axios.get('/schools/').then(this.refresh);
     },
+    search: lodash__WEBPACK_IMPORTED_MODULE_0___default.a.debounce(function (page) {
+      this.path = '';
+      this.isLoading = true;
+      this.fetch(this.page);
+    }, 700),
     fetch: function fetch(page) {
       axios.get(this.url(page)).then(this.refresh);
     },
@@ -2120,6 +2129,10 @@ __webpack_require__.r(__webpack_exports__);
       if (!page) {
         var query = location.search.match(/page=(\d+)/);
         page = query ? query[1] : 1;
+      }
+
+      if (this.searchKey != '') {
+        return "/schools?s=".concat(this.searchKey);
       }
 
       if (this.path) {
@@ -2130,6 +2143,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     refresh: function refresh(_ref) {
       var data = _ref.data;
+      this.isLoading = false;
       this.dataSet = {
         next_page_url: data.links.next,
         current_page: data.meta.current_page,
@@ -2144,6 +2158,7 @@ __webpack_require__.r(__webpack_exports__);
       window.scrollTo(0, 0);
     },
     sort: function sort() {
+      this.searchKey = '';
       this.fetch(this.page);
     }
   }

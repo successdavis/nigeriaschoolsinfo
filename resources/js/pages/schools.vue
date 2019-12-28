@@ -1,4 +1,5 @@
 <script>
+    import _ from 'lodash';
 	export default {
 		data () {
 			return {
@@ -7,6 +8,7 @@
 				path: '',
                 dataSet: '',
                 pagination: '',
+                searchKey: '',
                 page: '',
 			}
 		},
@@ -21,6 +23,12 @@
                     .then(this.refresh);
             },
 
+            search: _.debounce(function(page) {
+                this.path = '';
+                this.isLoading = true;
+                this.fetch(this.page);
+            }, 700),
+
             fetch(page) {
                 axios.get(this.url(page)).then(this.refresh);
             },
@@ -32,6 +40,10 @@
                     page = query ? query[1] : 1;
                 }
 
+                if (this.searchKey != '') {
+                    return `/schools?s=${this.searchKey}`;
+                }
+
                 if (this.path) {
                     return `${this.path}&page=${page}`;
                 }
@@ -40,6 +52,7 @@
             },
 
             refresh({data}) {
+                this.isLoading = false;
                 this.dataSet = {
                     next_page_url : data.links.next,
                     current_page: data.meta.current_page,
@@ -56,6 +69,7 @@
             },
 
             sort() {
+                this.searchKey = '';
                 this.fetch(this.page);
             },
 		}

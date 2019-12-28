@@ -27,7 +27,7 @@
 
 		<div class="field">
 		  <p class="control has-icons-left has-icons-right" :class="isLoading ? 'is-loading' : '' ">
-			<input class="input mb-medium" type="text" placeholder="Quick Search">
+			<input @keyUp="search" v-model="searchKey" class="input mb-medium" type="text" placeholder="Quick Search">
 		    <span class="icon is-small is-left">
 		      <i class="fas fa-search"></i>
 		    </span>

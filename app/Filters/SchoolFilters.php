@@ -12,7 +12,7 @@ class SchoolFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['q', 'a'];
+    protected $filters = ['q', 'a', 's'];
 
     /**
      * Filter the query by a given username.
@@ -51,5 +51,12 @@ class SchoolFilters extends Filters
         }
         $this->builder->getQuery()->orders = [];
         return $this->builder->where('admitting', true);
+    }
+
+    protected function s($s)
+    {
+        $this->builder->getQuery()->orders = [];
+        return $this->builder->where('name', 'LIKE', '%' . $s . '%')
+            ->orWhere('description', 'LIKE', '%' . $s . '%');
     }
 }
