@@ -71,4 +71,16 @@ class Schools extends Model
     {
         return $filters->apply($query);
     }
+
+    public function openAdmission()
+    {
+        return $this->update([
+            'admitting' => true
+        ]);
+    }
+
+    public function isAdmitting()
+    {
+        return !! $this->admitting;
+    }
 }

@@ -62,4 +62,17 @@ class ReadSChoolTest extends TestCase
 
         $this->assertCount(1, $schools['data']);
     }
+
+    /** @test */
+    public function a_user_can_browse_all_schools_still_offering_admission()
+    {
+        $type = $this->school->SchoolType;
+        $this->school->openAdmission();
+        $school = create('App\Schools',['school_type_id' => $type->id]);
+
+        $url = 'schools/type/' . $type->slug . '?a=admitting';
+
+        $schools = $this->json('GET', $url)->json();
+        $this->assertCount(1, $schools['data']);
+    }
 }

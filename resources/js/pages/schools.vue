@@ -7,6 +7,7 @@
 				path: '',
                 dataSet: '',
                 pagination: '',
+                page: '',
 			}
 		},
 
@@ -52,6 +53,10 @@
                 this.pagination = data;
 
                 window.scrollTo(0, 0);
+            },
+
+            sort() {
+                this.fetch(this.page);
             },
 		}
 	}

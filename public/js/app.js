@@ -2102,7 +2102,8 @@ __webpack_require__.r(__webpack_exports__);
       schools: '',
       path: '',
       dataSet: '',
-      pagination: ''
+      pagination: '',
+      page: ''
     };
   },
   created: function created() {
@@ -2141,6 +2142,9 @@ __webpack_require__.r(__webpack_exports__);
       this.schools = data.data;
       this.pagination = data;
       window.scrollTo(0, 0);
+    },
+    sort: function sort() {
+      this.fetch(this.page);
     }
   }
 });

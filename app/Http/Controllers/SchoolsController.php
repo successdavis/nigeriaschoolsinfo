@@ -77,8 +77,6 @@ class SchoolsController extends Controller
         if (request()->wantsJson()) {
             return response($school, 201);
         }
-
-
     }
 
     /**

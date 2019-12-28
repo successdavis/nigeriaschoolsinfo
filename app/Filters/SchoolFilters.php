@@ -12,7 +12,7 @@ class SchoolFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['q'];
+    protected $filters = ['q', 'a'];
 
     /**
      * Filter the query by a given username.
@@ -36,7 +36,20 @@ class SchoolFilters extends Filters
     protected function q($sponsored)
     {
         $this->builder->getQuery()->orders = [];
-        $sponsored = Sponsored::firstOrFail()->where('slug', $sponsored)->get();
-        return $this->builder->where('sponsored_id', $sponsored[0]['id']);
+        if (! Sponsored::where('slug', $sponsored)->exists()) {
+            abort(422, 'Bad Request');
+        }
+        $sponsored = Sponsored::where('slug', $sponsored)->get();
+        
+        return $this->builder->where('sponsored_id', $sponsored[0]['id']);  
+    }
+
+    protected function a($a)
+    {
+        if ($a !== 'admitting') {
+            abort(422, 'Bad Request');
+        }
+        $this->builder->getQuery()->orders = [];
+        return $this->builder->where('admitting', true);
     }
 }

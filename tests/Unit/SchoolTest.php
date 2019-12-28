@@ -55,4 +55,12 @@ class SchoolTest extends TestCase
     {
         $this->assertInstanceOf(Sponsored::class, $this->school->sponsored);
     }
+
+    /** @test */
+    public function a_school_admission_can_be_open()
+    {
+        $this->school->openAdmission();
+
+        $this->assertTrue($this->school->isAdmitting());
+    }
 }
