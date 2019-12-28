@@ -2,6 +2,7 @@
 
 namespace App\Filters;
 
+use App\Sponsored;
 use App\User;
 
 class SchoolFilters extends Filters
@@ -11,7 +12,7 @@ class SchoolFilters extends Filters
      *
      * @var array
      */
-    protected $filters = [];
+    protected $filters = ['q'];
 
     /**
      * Filter the query by a given username.
@@ -31,4 +32,11 @@ class SchoolFilters extends Filters
     //     $this->builder->getQuery()->orders = [];
     //     return $this->builder->orderBy('replies_count', 'desc');
     // }
+
+    protected function q($sponsored)
+    {
+        $this->builder->getQuery()->orders = [];
+        $sponsored = Sponsored::firstOrFail()->where('slug', $sponsored)->get();
+        return $this->builder->where('sponsored_id', $sponsored[0]['id']);
+    }
 }

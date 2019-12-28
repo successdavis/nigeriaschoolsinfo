@@ -5,18 +5,18 @@
 		<div class="field">
 		  <div class="control has-icons-left">
 		    <div class="select is-fullwidth">
-		      <select v-model="type">
+		      <select v-model="path" @change="fetch">
 			    <option value="" selected>All</option>
 			    <option>Still Admitting</option>
 			  	@foreach ($schooltype as $type)
-			    	<option>{{$type->name}}</option>
+			    	<option value="{{$type->path()}}?q=''">{{$type->name}}</option>
 	            @endforeach
-			    <option>Federal Universities</option>
-			    <option>State Universities</option>
-			    <option>Private Universities</option>
-			    <option>Federal Polytechnics</option>
-			    <option>State Polytechnics</option>
-			    <option>Private Polytechnics</option>
+			    <option value="/schools/type/university?q='federal'">Federal Universities</option>
+			    <option value="/schools/type/university?q='state'">State Universities</option>
+			    <option value="/schools/type/university?q='private'">Private Universities</option>
+			    <option value="/schools/type/polytechnic?q='federal'">Federal Polytechnics</option>
+			    <option value="/schools/type/polytechnic?q='state'">State Polytechnics</option>
+			    <option value="/schools/type/polytechnic?q='private'">Private Polytechnics</option>
 			  </select>
 		    </div>
 		    <div class="icon is-small is-left">
@@ -34,10 +34,10 @@
 		  </p>
 		</div>
 
-		<span v-for="(school, index) in schools.data">
+		<span v-for="(school, index) in schools">
 			@include('schools.partials.schoolCard')
 		</span>
-        <paginator :dataSet="dataSet" @changed.prevent="fetch"></paginator>
+        <paginator :dataSet="dataSet" @changed="fetch"></paginator>
 	</div>
 </shools-page>
 @endsection

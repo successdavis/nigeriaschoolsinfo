@@ -4,26 +4,22 @@
 			return {
 				isLoading: false,
 				schools: '',
-				type: '',
+				path: '',
+                dataSet: '',
+                pagination: '',
 			}
 		},
 
 		created () {
-			this.getSchools();
+			this.fetch();
 		},
 
 		methods: {
 			getSchools() {
                 axios.get('/schools/')
-                    .then(data => {
-                            this.schools = data.data;
-                        }
-                    );
+                    .then(this.refresh);
             },
 
-		}
-
-		methods: {
             fetch(page) {
                 axios.get(this.url(page)).then(this.refresh);
             },
@@ -34,18 +30,12 @@
 
                     page = query ? query[1] : 1;
                 }
-                return `${location.pathname}/${this.sort}?page=${page}&column=${this.sortedColumn}&order=${this.order}&per_page=${this.perPage}`;
-            },
 
-            sortByColumn(column) {
-                if (column === this.sortedColumn) {
-                    this.order = (this.order === 'asc') ? 'desc' : 'asc'
-                } else {
-                    this.sortedColumn = column;
-                    this.order = 'asc'
+                if (this.path) {
+                    return `${this.path}&page=${page}`;
                 }
+                return `${location.pathname}?page=${page}`;
 
-                this.fetch()
             },
 
             refresh({data}) {
@@ -54,13 +44,15 @@
                     current_page: data.meta.current_page,
                     per_page: data.meta.per_page,
                     total: data.meta.total,
+                    from: data.meta.from,
+                    last_page: data.meta.last_page,
                     prev_page_url: data.links.prev
                 };
-                this.items = data.data;
+                this.schools = data.data;
                 this.pagination = data;
 
                 window.scrollTo(0, 0);
             },
-        }
+		}
 	}
 </script>

@@ -45,4 +45,21 @@ class ReadSChoolTest extends TestCase
             ->assertSee($schoolInType->name)
             ->assertDontSee($schoolNotInType->name);
     }
+
+        /** @test */
+    public function a_user_can_browse_schools_by_school_sponsored()
+    {
+        $type = $this->school->SchoolType;
+        $sponsored = $this->school->sponsored;
+        
+        $schoolInType = create('App\Schools', ['school_type_id' => $type->id]);
+        $schoolInType2 = create('App\Schools', ['school_type_id' => $type->id]);
+
+        $url = 'schools/type/' . $type->slug . '?q=' . $sponsored->slug;
+
+        $schools = $this->json('GET', $url)->json();
+
+
+        $this->assertCount(1, $schools['data']);
+    }
 }

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Filters\SchoolFilters;
+use App\Http\Resources\SchoolResource;
 use App\School;
 use App\SchoolType;
 use App\Schools;
-use App\Http\Resources\SchoolResource;
+use App\Sponsored;
 use Illuminate\Http\Request;
 
 class SchoolsController extends Controller
@@ -128,10 +129,11 @@ class SchoolsController extends Controller
     public function getSchools($schooltype, $filters)
     {
         $schools = Schools::latest()->filter($filters);
+
         if ($schooltype->exists) {
             $schools->where('school_type_id', $schooltype->id);
         }
 
-        return $schools = $schools->paginate(25);
+        return $schools = $schools->paginate(5);
     }
 }

@@ -16,6 +16,7 @@ class CreateSponsoredsTable extends Migration
         Schema::create('sponsoreds', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }

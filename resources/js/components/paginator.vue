@@ -4,20 +4,20 @@
       <a class="pagination-previous" v-show="prevUrl" rel="Previous" @click.prevent="page--">Previous</a>
       <a class="pagination-next" v-show="nextUrl" @click.prevent="page++" rel="next">Next page</a>
       <ul class="pagination-list">
-        <li><a class="pagination-link" aria-label="Goto page 1" @click.prevent="page = 1">{{from}}</a></li>
+        <li><a class="pagination-link" aria-label="Goto page 1" @click.prevent="page = 1">1</a></li>
         <li><span class="pagination-ellipsis">&hellip;</span></li>
-        <li><a class="pagination-link" aria-label="Goto page 45" @click.prevent="page--">{{current_page - 1}}</a></li>
+        <li v-show="current_page > 1"><a class="pagination-link" aria-label="Goto page 45" @click.prevent="page--">{{current_page - 1}}</a></li>
         <li><a class="pagination-link is-current" aria-label="Page 46" aria-current="page"> {{current_page}}</a></li>
-        <li><a class="pagination-link" aria-label="Goto page 47" @click.prevent="page++">{{current_page + 1}}</a></li>
+        <li v-show="current_page != last_page"><a class="pagination-link" aria-label="Goto page 47" @click.prevent="page++">{{current_page + 1}}</a></li>
         <li><span class="pagination-ellipsis">&hellip;</span></li>
-        <li><a class="pagination-link" aria-label="Goto page 86" @click.prevent="page = total">{{total}}</a></li>
+        <li><a class="pagination-link" aria-label="Goto page 86" @click.prevent="page = last_page">{{last_page}}</a></li>
       </ul>
     </nav>
 </template>
 
 <script>
     export default {
-        props: ['dataSet'],
+        props: ['dataset'],
 
         data() {
             return {
@@ -27,19 +27,21 @@
                 current_page: 1,
                 per_page: '',
                 total: '',
-                from: ''
+                from: '',
+                last_page: ''
             }
         },
 
         watch: {
-            dataSet() {
-                this.page = this.dataSet.current_page;
-                this.prevUrl = this.dataSet.prev_page_url;
-                this.nextUrl = this.dataSet.next_page_url;
-                this.current_page = this.dataSet.current_page;
-                this.per_page = this.dataSet.per_page;
-                this.total = this.dataSet.total;
-                this.from = this.dataSet.from;
+            dataset() {
+                this.page = this.dataset.current_page;
+                this.prevUrl = this.dataset.prev_page_url;
+                this.nextUrl = this.dataset.next_page_url;
+                this.current_page = this.dataset.current_page;
+                this.per_page = this.dataset.per_page;
+                this.total = this.dataset.total;
+                this.from = this.dataset.from;
+                this.last_page = this.dataset.last_page;
             },
 
             page() {
