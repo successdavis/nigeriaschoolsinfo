@@ -19,6 +19,6 @@ class AdvertisementTest extends TestCase
     	$this->advertsiement = create('App\Advertisements');
     }
 
-
+    
 
 }

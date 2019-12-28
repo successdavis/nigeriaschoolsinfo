@@ -1,12 +1,18 @@
-<section class="hero is-medium is-primary is-bold">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">
-        ADVERT SPACE
-      </h1>
-      <h2 class="subtitle">
-        subtitle on advert
-      </h2>
-    </div>
-  </div>
-</section>
+<streamer-carousel inline-template >
+  @if (!empty($advertisements))
+    <image-carousel :wraparound="true" :autoplay="true" >
+      @foreach ($advertisements as $advert)
+          <div style="width: 100%">
+            <section class="hero is-medium is-primary is-bold" style="background-image: {{asset($advert->image_path)}}">
+              <div class="hero-body">
+                <div class="container">
+                  <h1 class="is-size-2">{{$advert->name}}</h1>
+                  <p>{{$advert->sypnosis}}</p>
+                </div>
+              </div>
+            </section>
+          </div>
+      @endforeach    
+   </image-carousel>
+  @endif
+</streamer-carousel>

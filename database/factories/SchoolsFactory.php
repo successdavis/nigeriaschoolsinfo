@@ -14,12 +14,15 @@ $factory->define(Schools::class, function (Faker $faker) {
         'date_created' 	=> $faker->date($format = 'Y-m-d', $max = 'now'),
         // 'logo_path'		=> $faker->imageUrl, 
         'website'		=> $faker->url, 
-        'portal-website'=> $faker->url,
+        'portal_website'=> $faker->url,
         'state'			=> '1',
         'lga'			=> '2',
         'address'		=> $faker->streetAddress, 
         'school_type_id'=> function(){
             return factory('App\SchoolType')->create()->id;
+        }, 
+        'sponsored_id'=> function(){
+            return factory('App\Sponsored')->create()->id;
         }, 
         'phone'			=> $faker->e164PhoneNumber, 
         'email'			=> $faker->email

@@ -6,3 +6,14 @@
 	    padding: .4em 1em;
 	    border-radius: 3px;
 }
+
+.post_header.is-flex-mobile {
+	line-height: .9em;
+    margin: .5em 0;
+}
+
+@media screen and (max-width: 768px){
+	.post_header.is-flex-mobile {
+	    align-items: center;
+	}
+}

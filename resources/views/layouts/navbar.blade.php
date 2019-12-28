@@ -26,7 +26,7 @@
         </a>
 
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
+          <a class="navbar-link" href="/schools">
             SCHOOLS
           </a>
 
@@ -44,7 +44,7 @@
         </div>
 
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
+          <a class="navbar-link" href="/exams">
             EXAMS
           </a>
 
@@ -84,7 +84,8 @@
       </div>
     </div>
 
-    <div v-if="drIsOpen" @click.prevent="drIsOpen = false" class="dr_overlay"></div>
+    <div v-if="drIsOpen" @click.prevent="drIsOpen = false" class="dr_overlay" v-cloak></div>
+
     <div :class="drIsOpen ? 'is-open' : 'not-open'" class="n_drawer open-left">
       <i @click.prevent="drIsOpen = false" class="fas fa-times n_drawer_close"></i>
       <div class="n_drawer-title">

@@ -2,13 +2,21 @@
 
 namespace App;
 
+use App\Traits\ModelFunctions;
 use App\User;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
+    use ModelFunctions;
     protected $guarded = [];
+
+    public $pathPrefix  = '/posts/';
+    public $findWith    =   'slug';
+    public $excerpt    =   ['body', 23];
+
+
     protected static function boot()
     {
         parent::boot();
@@ -24,37 +32,8 @@ class Post extends Model
         return $this->morphTo();
     }
 
-	public function getRouteKeyName()
-    {
-        return 'slug';
-    }
-
-
-    public function path()
-    {
-        return '/posts/' . $this->slug;
-    }
-
     public function publisher()
     {
         return $this->belongsTo('App\User', 'user_id');
-    }
-
-    public function setSlugAttribute($value)
-    {
-        $slug = str::slug($value, '-');
-
-        if (static::whereSlug($slug)->exists()) {
-            $slug = "{$slug}-" . $this->id;
-        }
-
-        $this->attributes['slug'] = $slug;
-    }
-
-    public function excerpt()
-    {
-        $newbody = Str::words($this->body, 23, ' ...');
-
-        return $newbody;
     }
 }

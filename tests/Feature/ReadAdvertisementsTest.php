@@ -20,16 +20,6 @@ class ReadAdvertisementsTest extends TestCase
     }
 
     /** @test */
-    public function it_a_non_admin_cannot_retrieve_advertisements()
-    {
-        $this->withExceptionHandling();
-
-        $this->json('GET', route('advertisements.index'))
-            ->assertStatus(403);
-
-    }
-
-    /** @test */
     public function an_admin_can_retrieve_all_active_advertisements()
     {
         $this->signIn(factory('App\User')->states('administrator')->create());

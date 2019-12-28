@@ -6,6 +6,7 @@ use App\Filters\SchoolFilters;
 use App\School;
 use App\SchoolType;
 use App\Schools;
+use App\Http\Resources\SchoolResource;
 use Illuminate\Http\Request;
 
 class SchoolsController extends Controller
@@ -20,7 +21,7 @@ class SchoolsController extends Controller
         $schools = $this->getSchools($schooltype, $filters);
 
         if (request()->wantsJson()) {
-            return $schools;
+            return SchoolResource::collection($schools);
         }
 
         return view('schools.index', compact('schools'));

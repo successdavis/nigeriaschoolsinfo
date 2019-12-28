@@ -3,7 +3,6 @@ window._ = require('lodash');
 window.Vue = require('vue');
 
 import VModal from 'vue-js-modal'
- 
 
 Vue.use(VModal)
 

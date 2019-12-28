@@ -5,6 +5,10 @@
   font-size: 4em;
 }
 
+.mg_left-auto {
+  margin-left: auto;
+}
+
 .relative-body {
   position: relative;
 }
@@ -166,6 +170,10 @@ a.navbar-burger.burger {
   font-size: 15px;
 }
 
+[v-cloak] {
+  display: none;
+}
+
 .post_sh_name {
   margin-left: auto;
   font-size: 14px;
@@ -173,6 +181,72 @@ a.navbar-burger.burger {
   border-bottom: 1px solid;
   padding: 0.4em 1em;
   border-radius: 3px;
+}
+
+.post_header.is-flex-mobile {
+  line-height: 0.9em;
+  margin: 0.5em 0;
+}
+
+@media screen and (max-width: 768px) {
+  .post_header.is-flex-mobile {
+    -webkit-box-align: center;
+            align-items: center;
+  }
+}
+
+.post_sh_name {
+  margin-left: auto;
+  font-size: 14px;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  padding: 0.4em 1em;
+  border-radius: 3px;
+}
+
+.post_header.is-flex-mobile {
+  line-height: 0.9em;
+  margin: 0.5em 0;
+}
+
+@media screen and (max-width: 768px) {
+  .post_header.is-flex-mobile {
+    -webkit-box-align: center;
+            align-items: center;
+  }
+}
+
+.school-card {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .post_header.is-flex-mobile {
+    -webkit-box-align: center;
+            align-items: center;
+  }
+
+  .school-card {
+    box-shadow: 0 3px 8px 0 rgba(36, 37, 38, 0.14);
+    border-radius: 0.5rem;
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+.image__favicon--small {
+  background: antiquewhite;
+  padding: 0.3em;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  /* text-align: center; */
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  color: brown;
 }
 
 /*! bulma.io v0.8.0 | MIT License | github.com/jgthms/bulma */

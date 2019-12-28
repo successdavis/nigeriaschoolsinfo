@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Sponsored;
 use App\Traits\ModelFunctions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\SchoolFilters;
@@ -16,6 +17,7 @@ class Schools extends Model
 
     public $pathPrefix  = '/schools/';
     public $findWith    =   'slug';
+    public $excerpt    =   ['description', 23];
 
     protected static function boot()
     {
@@ -34,6 +36,11 @@ class Schools extends Model
     public function courses()
     {
         return $this->belongsToMany(Courses::class)->withPivot('cut_off_points');
+    }
+
+    public function sponsored()
+    {
+        return $this->belongsTo(Sponsored::class);
     }
 
     public function addCourse($course, $cut_off_points = null)

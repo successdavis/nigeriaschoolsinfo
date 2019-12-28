@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Advertisements;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -12,11 +13,13 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::limit(20)->get();
-        
-        return view('welcome', compact('posts'));
+        $advertisements = Advertisements::activeAdverts();
+        // $posts = Post::where('title', 'LIKE', '%' . request('search') . '%')
+        //     ->orWhere('body', 'LIKE', '%' . request('search') . '%')->get();
+
+        return view('welcome', compact('advertisements'));
     }
 
     /**

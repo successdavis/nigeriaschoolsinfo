@@ -16,8 +16,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @livewireAssets
 </head>
 <body>
+    
     <div id="app">
         @include('layouts.navbar')
 
@@ -28,6 +30,6 @@
         @include('layouts.footer')
     </div>
     
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

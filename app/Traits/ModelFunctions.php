@@ -32,4 +32,13 @@ trait ModelFunctions
 	        return $this->pathPrefix . $this->slug;
     	}
     }
+
+
+    public function excerpt()
+    {
+        $word = $this->excerpt[0];
+        $newbody = Str::words($this->$word, $this->excerpt[1], ' ...');
+
+        return $newbody;
+    }
 }

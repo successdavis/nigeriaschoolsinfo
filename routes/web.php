@@ -20,10 +20,11 @@ Auth::routes();
 Route::post('api/{school}/addlogo', 'SchoolLogoController@store')->name('school.logo')->middleware('auth');
 Route::post('api/{exams}/attachlogo', 'ExamsLogoController@store')->name('exam.logo')->middleware('admin');
 
-Route::get('api/advertisements', 'AdvertisementsController@index')->name('advertisements.index')->middleware('admin');
+Route::get('api/advertisements', 'AdvertisementsController@index')->name('advertisements.index');
 
 
 Route::get('/', 'PostController@index');
+Route::get('/testpage', 'TestController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/posts/{post}', 'PostController@show')->name('post.show');
 
