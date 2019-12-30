@@ -10,3 +10,17 @@
     align-items: center;
     color: brown;
 }
+
+label.sort_school_options {
+    display: block;
+    margin: .5em;
+    padding: .3em;
+}
+
+label.sort_school_options:hover {
+    background: aliceblue;
+}
+
+.sort_school_options input {
+    margin-right: 1em;
+}

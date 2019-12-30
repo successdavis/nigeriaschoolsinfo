@@ -98,15 +98,15 @@
             </li>
             <li class="n_drawer_items--child">
               <span><i class="fas fa-pen"></i></span>
-              <a href="">Exams</a></li>
+              <a href="/exams">Exams</a></li>
 
             <li class="n_drawer_items--child">
                 <span><i class="fas fa-book"></i></span>
-                <a href="">Courses</a>
+                <a href="/courses">Courses</a>
             </li>
             <li class="n_drawer_items--child">
                 <span><i class="fas fa-graduation-cap"></i></span>
-                <a href="">Schools</a>
+                <a href="/schools">Schools</a>
             </li>
         </ul>
         {{-- <ask-question style="width: 100%"></ask-question> --}}

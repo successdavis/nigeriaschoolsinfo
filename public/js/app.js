@@ -1919,6 +1919,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['name'],
   data: function data() {
@@ -2101,19 +2102,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      sortLinks: [{
+        "name": "Federal Universities",
+        "value": "/schools/type/university?q=federal"
+      }, {
+        "name": "State Universities",
+        "value": "/schools/type/university?q=state"
+      }, {
+        "name": "Private Universities",
+        "value": "/schools/type/university?q=private"
+      }, {
+        "name": "Federal Polytechnics",
+        "value": "/schools/type/polytechnic?q=federal"
+      }, {
+        "name": "State Polytechnics",
+        "value": "/schools/type/polytechnic?q=state"
+      }, {
+        "name": "Private Polytechnics",
+        "value": "/schools/type/polytechnic?q=private"
+      }],
       isLoading: false,
       schools: '',
       path: '',
       dataSet: '',
       pagination: '',
       searchKey: '',
-      page: ''
+      page: '',
+      checkedNames: []
     };
   },
   created: function created() {
     this.fetch();
   },
   methods: {
+    setOptions: function setOptions(e) {
+      this.checkedNames = [e.target.value];
+      this.path = e.target.value;
+      this.fetch();
+    },
     getSchools: function getSchools() {
       axios.get('/schools/').then(this.refresh);
     },
@@ -24420,7 +24446,9 @@ var render = function() {
                 )
               ]
             ),
-            _vm._v(" "),
+            _vm._v(
+              "\n\t\t    Hi! Messages cannot be delivered at this time :) check back later\n\t\t  "
+            ),
             _c("div", { staticClass: "field" }, [
               _c("label", { staticClass: "label" }, [_vm._v("Name")]),
               _vm._v(" "),
@@ -24497,7 +24525,7 @@ var render = function() {
               _c("div", { staticClass: "control" }, [
                 _c("textarea", {
                   staticClass: "textarea",
-                  attrs: { placeholder: "Textarea" }
+                  attrs: { placeholder: "Type your message here" }
                 })
               ])
             ]),
@@ -37366,14 +37394,13 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************!*\
   !*** ./resources/js/pages/schools.vue ***!
   \****************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _schools_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./schools.vue?vue&type=script&lang=js& */ "./resources/js/pages/schools.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _schools_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _schools_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 var render, staticRenderFns
 
 
@@ -37403,7 +37430,7 @@ component.options.__file = "resources/js/pages/schools.vue"
 /*!*****************************************************************!*\
   !*** ./resources/js/pages/schools.vue?vue&type=script&lang=js& ***!
   \*****************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

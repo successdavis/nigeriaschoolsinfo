@@ -3,6 +3,14 @@
 	export default {
 		data () {
 			return {
+                sortLinks: [
+                    {"name" : "Federal Universities", "value" : "/schools/type/university?q=federal"},
+                    {"name" : "State Universities", "value" : "/schools/type/university?q=state"},
+                    {"name" : "Private Universities", "value" : "/schools/type/university?q=private"},
+                    {"name" : "Federal Polytechnics", "value" : "/schools/type/polytechnic?q=federal"},
+                    {"name" : "State Polytechnics", "value" : "/schools/type/polytechnic?q=state"},
+                    {"name" : "Private Polytechnics", "value" : "/schools/type/polytechnic?q=private"},
+                ],
 				isLoading: false,
 				schools: '',
 				path: '',
@@ -10,6 +18,7 @@
                 pagination: '',
                 searchKey: '',
                 page: '',
+                checkedNames: [],
 			}
 		},
 
@@ -18,6 +27,11 @@
 		},
 
 		methods: {
+            setOptions (e) {
+                this.checkedNames = [e.target.value];
+                this.path = e.target.value;
+                this.fetch();
+            },
 			getSchools() {
                 axios.get('/schools/')
                     .then(this.refresh);

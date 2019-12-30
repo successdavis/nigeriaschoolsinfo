@@ -68,6 +68,10 @@
   }
 }
 
+.remove-max-width .columns {
+  max-width: unset;
+}
+
 a.navbar-burger.burger {
   margin-left: unset;
 }
@@ -247,6 +251,20 @@ a.navbar-burger.burger {
   -webkit-box-align: center;
           align-items: center;
   color: brown;
+}
+
+label.sort_school_options {
+  display: block;
+  margin: 0.5em;
+  padding: 0.3em;
+}
+
+label.sort_school_options:hover {
+  background: aliceblue;
+}
+
+.sort_school_options input {
+  margin-right: 1em;
 }
 
 /*! bulma.io v0.8.0 | MIT License | github.com/jgthms/bulma */

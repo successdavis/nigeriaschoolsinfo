@@ -8,6 +8,7 @@
 			        ❌
 			      </button>
 			    </div>
+			    Hi! Messages cannot be delivered at this time :) check back later
 			  <div class="field">
 				  <label class="label">Name</label>
 				  <div class="control">
@@ -51,7 +52,7 @@
 				<div class="field">
 				  <label class="label">Ask Questions Here</label>
 				  <div class="control">
-				    <textarea class="textarea" placeholder="Textarea"></textarea>
+				    <textarea class="textarea" placeholder="Type your message here"></textarea>
 				  </div>
 				</div>
 
