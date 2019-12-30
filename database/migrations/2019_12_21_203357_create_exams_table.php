@@ -17,12 +17,14 @@ class CreateExamsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('short_name');
-            $table->string('description');
+            $table->text('description');
+            $table->string('sypnosis');
             $table->string('logo_path')->nullable();
             $table->string('website')->nullable();
             $table->date('date_created')->nullable();
             $table->string('portal-website')->nullable();
             $table->boolean('admitting')->default(false);
+            $table->date('ends_at')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('slug')->nullable();

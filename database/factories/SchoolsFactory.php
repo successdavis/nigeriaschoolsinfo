@@ -21,10 +21,10 @@ $factory->define(Schools::class, function (Faker $faker) {
         'school_type_id'=> function(){
             return factory('App\SchoolType')->create()->id;
         }, 
+        'phone'			=> $faker->e164PhoneNumber, 
         'sponsored_id'=> function(){
             return factory('App\Sponsored')->create()->id;
         }, 
-        'phone'			=> $faker->e164PhoneNumber, 
         'email'			=> $faker->email
     ];
 });

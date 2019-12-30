@@ -22,8 +22,8 @@ class ReadSChoolTest extends TestCase
     /** @test */
     public function a_user_can_browse_all_schools()
     {
-        $this->get('/schools')
-            ->assertSee($this->school->name);
+        $respond = $this->json('GET', '/schools')->json();
+            $this->assertCount(1, $respond['data']);
     }
 
     /** @test */
@@ -41,9 +41,8 @@ class ReadSChoolTest extends TestCase
         $schoolInType = create('App\Schools', ['school_type_id' => $type->id]);
         $schoolNotInType = create('App\Schools');
 
-        $this->get(route('schoolsInType',['schooltype' => $type->slug]))
-            ->assertSee($schoolInType->name)
-            ->assertDontSee($schoolNotInType->name);
+        $respond = $this->json('GET', route('schoolsInType',['schooltype' => $type->slug]));
+        $this->assertCount(1, $respond['data']);
     }
 
         /** @test */

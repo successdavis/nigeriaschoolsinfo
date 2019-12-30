@@ -42,6 +42,10 @@
 	padding-top: 2em;
 }
 
+.justify-content-all {
+	justify-content: space-between;
+}
+
 
 @media(max-width: 1023px) {
 	.justify-content-touch {
@@ -51,4 +55,8 @@
 
 .remove-max-width .columns {
 	max-width: unset;
+}
+
+.wrap-elements {
+	flex-wrap: wrap;
 }

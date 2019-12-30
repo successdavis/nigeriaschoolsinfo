@@ -26,6 +26,8 @@ class CreateSchoolTest extends TestCase
 
         $school = make('App\Schools');
 
+        // dd($school);
+
         $this->json('post', route('schools.store'), $school->toArray())
             ->assertStatus(201);
     }

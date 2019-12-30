@@ -23,7 +23,7 @@ class SchoolTest extends TestCase
     public function schools_database_has_expected_columns()
     {
         $this->assertTrue(Schema::hasColumns('schools', [
-            'id', "name", "description", "date_created", "logo_path", "website", "portal_website","state","lga","address", "admitting", "school_type_id", "phone", "email", 'sponsored', 'jamb_points', 'cut_of_points'
+            'id', "name", "description", "date_created", "logo_path", "website", "portal_website","state","lga","address", "admitting", "school_type_id", "phone", "email", 'sponsored_id', 'jamb_points', 'cut_of_points'
           ]), 1);
     }
 

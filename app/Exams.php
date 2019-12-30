@@ -14,6 +14,7 @@ class Exams extends Model
     protected $guarded  = [];
     public $pathPrefix  = '/exams/';
     public $findWith    =   'slug';
+    public $excerpt    =   ['description', 23];
 
     protected static function boot()
     {
@@ -37,4 +38,30 @@ class Exams extends Model
             return asset('storage/exams/logos/default.jpg');
         }
     }
+
+    public function openRegistration($endDate = null)
+    {
+        return $this->update([
+            'admitting' => true,
+            'ends_at'   => $endDate
+        ]);
+    }
+
+    public function registrationStatus()
+    {
+        return $this->admitting ? 'Open' : 'Closed';
+    }
+
+    public function closeRegistration()
+    {
+        return $this->update([
+            'admitting' => false,
+        ]);
+    }
+
+    public function registrationEndsAt()
+    {
+        return $this->ends_at ? $this->ends_at->diffForHumans() : 'Undefined';
+    }
+
 }

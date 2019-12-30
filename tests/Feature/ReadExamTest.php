@@ -23,7 +23,7 @@ class ReadExamTest extends TestCase
     public function a_user_can_browse_all_exams()
     {
         $this->get('/exams')
-            ->assertSee($this->exam->name);
+            ->assertSee($this->exam->short_name);
     }
 
     /** @test */

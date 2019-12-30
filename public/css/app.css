@@ -61,6 +61,11 @@
   padding-top: 2em;
 }
 
+.justify-content-all {
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+}
+
 @media (max-width: 1023px) {
   .justify-content-touch {
     -webkit-box-pack: justify;
@@ -70,6 +75,10 @@
 
 .remove-max-width .columns {
   max-width: unset;
+}
+
+.wrap-elements {
+  flex-wrap: wrap;
 }
 
 a.navbar-burger.burger {
@@ -265,6 +274,11 @@ label.sort_school_options:hover {
 
 .sort_school_options input {
   margin-right: 1em;
+}
+
+.exam.card-footer i {
+  padding-right: 0.5em;
+  color: #00ffff;
 }
 
 /*! bulma.io v0.8.0 | MIT License | github.com/jgthms/bulma */

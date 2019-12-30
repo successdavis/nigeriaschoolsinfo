@@ -50,14 +50,10 @@ class SchoolsController extends Controller
             'name'          => 'required', 
             'description'   => 'required', 
             'date_created'  => 'date',
-            // 'website'       => $faker->url, 
-            // 'portal-website'=> $faker->url,
             'state'         => 'required',
             'lga'           => 'required',
             'address'       => 'required', 
             'school_type_id'   => 'required', 
-            // 'phone'         => $faker->e164PhoneNumber, 
-            // 'email'         => $faker->email
         ]);
 
         $school = Schools::create([
@@ -65,11 +61,12 @@ class SchoolsController extends Controller
             'description'   => request('description'), 
             'date_created'  => request('date_created'),
             'website'       => request('website'), 
-            'portal-website'=> request('portal-website'),
+            'portal_website'=> request('portal_website'),
             'state'         => request('state'),
             'lga'           => request('lga'),
             'address'       => request('address'), 
             'school_type_id'=> request('school_type_id'), 
+            'sponsored_id'  => request('sponsored_id'), 
             'phone'         => request('phone'), 
             'email'         => request('email')
         ]);
