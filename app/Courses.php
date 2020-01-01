@@ -23,6 +23,11 @@ class Courses extends Model
         });
     }
 
+    public function faculty()
+    {
+        return $this->belongsTo(Faculty::class);
+    }
+
     public function schools()
     {
         return $this->belongsToMany(Schools::class)->withPivot('cut_off_points');

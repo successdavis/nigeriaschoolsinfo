@@ -22,7 +22,7 @@ class ExamsTest extends TestCase
     public function exams_database_has_expected_columns()
     {
         $this->assertTrue(Schema::hasColumns('exams', [
-            'id', "name", "description", "date_created", "logo_path", "website", "portal-website", "admitting", "phone", "email"
+            'id', "name", "description", "date_created", "logo_path", "website", "portal_website", "admitting", "phone", "email"
           ]), 1);
     }
 

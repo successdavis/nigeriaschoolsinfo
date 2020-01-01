@@ -13,7 +13,7 @@ $factory->define(Exams::class, function (Faker $faker) {
         'sypnosis'      => 'The quick brown fox jumps over the lazy dog and the lazy dog chase after it',
         'date_created' 	=> $faker->date($format = 'Y-m-d', $max = 'now'),
         'website'		=> $faker->url, 
-        'portal-website'=> $faker->url,
+        'portal_website'=> $faker->url,
         'phone'			=> $faker->e164PhoneNumber, 
         'email'			=> $faker->email
     ];

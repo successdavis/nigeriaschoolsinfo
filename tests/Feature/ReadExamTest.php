@@ -33,4 +33,31 @@ class ReadExamTest extends TestCase
             ->assertSee($this->exam->name)
             ->assertSee($this->exam->description);
     }
+
+    /** @test */
+    public function a_user_can_filter_exams_by_status()
+    {
+        $this->exam->openRegistration();
+        $examTwo = create('App\Exams');
+
+        $response = $this->json('GET', '/exams?status=open');
+        $this->assertCount(1, $response['data']);
+    }
+
+        /** @test */
+    public function a_user_can_search_exams_by_name_or_short_name()
+    {
+        $exam = create('App\Exams', ['name' => 'Joint Admission and Matriculation Board']);
+        $examTwo = create('App\Exams', ['short_name' => 'WAEC']);
+
+        $url = 'exams?s=Admission';
+
+        $exams = $this->json('GET', $url)->json();
+        $this->assertCount(1, $exams['data']);
+
+        $url = 'exams?s=WAEC';
+
+        $exams = $this->json('GET', $url)->json();
+        $this->assertCount(1, $exams['data']);
+    }
 }

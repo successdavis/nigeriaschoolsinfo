@@ -24,6 +24,7 @@ Vue.component('ask-question', require('./components/AskQuestion.vue').default);
 Vue.component('streamer-carousel', require('./components/StreamerCarousel.vue').default);
 Vue.component('image-carousel', require('./components/carousel.vue').default);
 Vue.component('shools-page', require('./pages/schools.vue').default);
+Vue.component('exams-page', require('./pages/exams.vue').default);
 Vue.component('paginator', require('./components/paginator.vue').default);
 
 /**

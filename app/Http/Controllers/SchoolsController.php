@@ -129,6 +129,6 @@ class SchoolsController extends Controller
             $schools->where('school_type_id', $schooltype->id);
         }
 
-        return $schools = $schools->paginate(5);
+        return $schools = $schools->paginate(20);
     }
 }

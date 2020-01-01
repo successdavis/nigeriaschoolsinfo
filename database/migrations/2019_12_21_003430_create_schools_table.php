@@ -18,7 +18,6 @@ class CreateSchoolsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('short_name')->nullable();
-            $table->string('cut_of_points')->nullable();
             $table->date('date_created')->nullable();
             $table->string('logo_path')->nullable();
             $table->string('website')->nullable();

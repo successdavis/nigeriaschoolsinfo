@@ -17,6 +17,7 @@ class CreateCoursesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('short_name');
+            $table->unsignedInteger('faculty_id');
             $table->string('description');
             $table->string('logo_path')->nullable();
             $table->integer('salary')->default(0);

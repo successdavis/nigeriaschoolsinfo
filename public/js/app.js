@@ -2087,6 +2087,79 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/exams.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/exams.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      exams: [],
+      isLoading: false,
+      pagination: '',
+      dataSet: '',
+      status: '',
+      searchKey: ''
+    };
+  },
+  created: function created() {
+    this.fetch();
+  },
+  methods: {
+    fetch: function fetch(page) {
+      axios.get(this.url(page)).then(this.refresh);
+    },
+    url: function url(page) {
+      if (!page) {
+        var query = location.search.match(/page=(\d+)/);
+        page = query ? query[1] : 1;
+      } // if (this.searchKey != '') {
+      //     return `/schools?s=${this.searchKey}`;
+      // }
+      // if (this.path) {
+      //     return `${this.path}&page=${page}`;
+      // }
+
+
+      return "".concat(location.pathname, "?page=").concat(page, "&status=").concat(this.status, "&s=").concat(this.searchKey);
+    },
+    refresh: function refresh(_ref) {
+      var data = _ref.data;
+      this.isLoading = false;
+      this.dataSet = {
+        next_page_url: data.links.next,
+        current_page: data.meta.current_page,
+        per_page: data.meta.per_page,
+        total: data.meta.total,
+        from: data.meta.from,
+        last_page: data.meta.last_page,
+        prev_page_url: data.links.prev
+      };
+      this.exams = data.data;
+      this.pagination = data;
+      window.scrollTo(0, 0);
+    },
+    sortItems: function sortItems() {
+      this.fetch();
+    },
+    search: lodash__WEBPACK_IMPORTED_MODULE_0___default.a.debounce(function (page) {
+      // this.sort = '';
+      this.isLoading = true;
+      this.fetch(this.page);
+    }, 700)
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/schools.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/schools.vue?vue&type=script&lang=js& ***!
@@ -36995,6 +37068,7 @@ Vue.component('ask-question', __webpack_require__(/*! ./components/AskQuestion.v
 Vue.component('streamer-carousel', __webpack_require__(/*! ./components/StreamerCarousel.vue */ "./resources/js/components/StreamerCarousel.vue")["default"]);
 Vue.component('image-carousel', __webpack_require__(/*! ./components/carousel.vue */ "./resources/js/components/carousel.vue")["default"]);
 Vue.component('shools-page', __webpack_require__(/*! ./pages/schools.vue */ "./resources/js/pages/schools.vue")["default"]);
+Vue.component('exams-page', __webpack_require__(/*! ./pages/exams.vue */ "./resources/js/pages/exams.vue")["default"]);
 Vue.component('paginator', __webpack_require__(/*! ./components/paginator.vue */ "./resources/js/components/paginator.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -37387,6 +37461,57 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_paginator_vue_vue_type_template_id_29c63dd6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/pages/exams.vue":
+/*!**************************************!*\
+  !*** ./resources/js/pages/exams.vue ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _exams_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./exams.vue?vue&type=script&lang=js& */ "./resources/js/pages/exams.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _exams_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _exams_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  _exams_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"],
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/exams.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/exams.vue?vue&type=script&lang=js&":
+/*!***************************************************************!*\
+  !*** ./resources/js/pages/exams.vue?vue&type=script&lang=js& ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_exams_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./exams.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/exams.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_exams_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

@@ -64,4 +64,9 @@ class Exams extends Model
         return $this->ends_at ? $this->ends_at->diffForHumans() : 'Undefined';
     }
 
+    public function scopeFilter($query, $filters)
+    {
+        return $filters->apply($query);
+    }
+
 }

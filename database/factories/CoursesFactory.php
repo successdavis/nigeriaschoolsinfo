@@ -11,5 +11,8 @@ $factory->define(Courses::class, function (Faker $faker) {
         'description'	=> $faker->sentence,
         'short_name'	=> $faker->word,
         'salary'		=> 200000,
+		'faculty_id'=> function(){
+            return factory('App\Faculty')->create()->id;
+        }, 
     ];
 });

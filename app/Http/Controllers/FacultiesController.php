@@ -2,27 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Exams;
-use App\Filters\ExamFilters;
-use App\Http\Resources\ExamsResource;
+use App\Faculties;
 use Illuminate\Http\Request;
 
-class ExamsController extends Controller
+class FacultiesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ExamFilters $filters)
+    public function index()
     {
-        $exams = $this->getExams($filters);
-
-        if (request()->wantsJson()) {
-            return ExamsResource::collection($exams);
-        }
-
-        return view('exams.index', compact('exams'));
+        //
     }
 
     /**
@@ -49,21 +41,21 @@ class ExamsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Exams  $exams
+     * @param  \App\Faculties  $faculties
      * @return \Illuminate\Http\Response
      */
-    public function show(Exams $exams)
+    public function show(Faculties $faculties)
     {
-        return view('exams.show', compact('exams'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Exams  $exams
+     * @param  \App\Faculties  $faculties
      * @return \Illuminate\Http\Response
      */
-    public function edit(Exams $exams)
+    public function edit(Faculties $faculties)
     {
         //
     }
@@ -72,10 +64,10 @@ class ExamsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Exams  $exams
+     * @param  \App\Faculties  $faculties
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Exams $exams)
+    public function update(Request $request, Faculties $faculties)
     {
         //
     }
@@ -83,18 +75,11 @@ class ExamsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Exams  $exams
+     * @param  \App\Faculties  $faculties
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Exams $exams)
+    public function destroy(Faculties $faculties)
     {
         //
-    }
-
-    public function getExams($filters)
-    {
-        $exams = Exams::latest()->filter($filters);
-        
-        return $exams = $exams->paginate(20);
     }
 }

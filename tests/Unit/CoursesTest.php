@@ -50,4 +50,10 @@ class CoursesTest extends TestCase
 
         $this->assertCount(1, $this->school->courses);
     }
+
+    /** @test */
+    public function a_course_can_be_attached_to_a_faculty()
+    {
+        $this->assertInstanceOf('App\Faculty', $this->course->faculty);
+    }
 }
