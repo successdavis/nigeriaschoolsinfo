@@ -2,6 +2,7 @@
 
 namespace App\Filters;
 
+use App\Faculty;
 use App\User;
 
 class CourseFilters extends Filters
@@ -11,7 +12,7 @@ class CourseFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['h'];
+    protected $filters = ['faculty'];
 
     /**
      * Filter the query by a given username.
@@ -19,16 +20,10 @@ class CourseFilters extends Filters
      * @param  string $username
      * @return Builder
      */
-    // protected function by($course)
-    // {
-    //     $user = Schools::where('email', $email)->firstOrFail();
+    protected function faculty($faculty)
+    {
+        $faculty = Faculty::where('slug', $faculty)->firstOrFail();
 
-    //     return $this->builder->where('user_id', $user->id);
-    // }
-
-    // protected function popular()
-    // {
-    //     $this->builder->getQuery()->orders = [];
-    //     return $this->builder->orderBy('replies_count', 'desc');
-    // }
+        return $this->builder->where('faculty_id', $faculty->id);
+    }
 }

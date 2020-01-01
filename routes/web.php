@@ -43,4 +43,7 @@ Route::get('/courses', 'CoursesController@index')->name('courses.index');
 Route::get('/courses/{courses}', 'CoursesController@show')->name('courses.show');
 
 
+Route::get('/faculty/{faculty}', 'FacultiesController@show')->name('faculty.show');
+
+
 

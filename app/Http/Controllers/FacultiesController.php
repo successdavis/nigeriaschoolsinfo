@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Faculties;
+use App\Faculty;
 use Illuminate\Http\Request;
 
 class FacultiesController extends Controller
@@ -44,9 +44,10 @@ class FacultiesController extends Controller
      * @param  \App\Faculties  $faculties
      * @return \Illuminate\Http\Response
      */
-    public function show(Faculties $faculties)
+    public function show(Faculty $faculty)
     {
-        //
+        $courses = $faculty->courses;
+        return view('faculties.show', compact('courses'));
     }
 
     /**
@@ -55,7 +56,7 @@ class FacultiesController extends Controller
      * @param  \App\Faculties  $faculties
      * @return \Illuminate\Http\Response
      */
-    public function edit(Faculties $faculties)
+    public function edit(Faculty $faculty)
     {
         //
     }

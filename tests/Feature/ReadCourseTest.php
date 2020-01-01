@@ -46,4 +46,14 @@ class ReadCourseTest extends TestCase
 
         $this->assertCount(1, $school->courses);
     }
+
+    /** @test */
+    public function a_user_can_sort_course_by_faculties()
+    {
+        $faculty    = create('App\Faculty');
+        $course     = create('App\Courses', ['faculty_id' => $faculty->id]);
+
+        $response = $this->json('GET', '/courses?faculty=' . $faculty->slug)->json();
+        $this->assertCount(1, $response['data']);
+    }
 }
