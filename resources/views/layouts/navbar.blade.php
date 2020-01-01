@@ -29,6 +29,9 @@
           <a class="navbar-link" href="/schools">
             SCHOOLS
           </a>
+          <a class="navbar-link" href="/schools">
+            COURSES
+          </a>
 
           <div class="navbar-dropdown">
             @foreach ($schooltype as $type)
@@ -66,10 +69,12 @@
               Other
             </a>
           </div>
+
           <div class="control navbar-item ps-full-width" >
             <input class="input ps-full-width" type="text" placeholder="Text input">
           </div>
         </div>
+        
       </div>
 
       <div class="navbar-end">

@@ -31,7 +31,7 @@ class FacultyTest extends TestCase
 	/** @test */
     public function a_faculty_can_generate_a_string_path()
     {
-        $this->assertEquals("/faculty/{$faculty->slug}", $this->faculty->path());
+        $this->assertEquals("/faculty/{$this->faculty->slug}", $this->faculty->path());
     }
 
 }

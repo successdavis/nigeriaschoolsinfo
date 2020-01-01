@@ -56,4 +56,15 @@ class CoursesTest extends TestCase
     {
         $this->assertInstanceOf('App\Faculty', $this->course->faculty);
     }
+
+    /** @test */
+    public function a_course_can_have_many_subjects()
+    {
+        $subject = create('App\Subject');
+
+        $this->course->attachSubject($subject);
+
+        $this->assertCount(1, $this->course->subjects);
+
+    }
 }
