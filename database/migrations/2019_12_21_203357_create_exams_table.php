@@ -24,7 +24,7 @@ class CreateExamsTable extends Migration
             $table->date('date_created')->nullable();
             $table->string('portal_website')->nullable();
             $table->boolean('admitting')->default(false);
-            $table->date('ends_at')->nullable();
+            $table->timestamp('ends_at')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('slug')->nullable();
