@@ -35,7 +35,7 @@ Route::get('/exams/{exams}', 'ExamsController@show')->name('exams.index');
 Route::get('/schools', 'SchoolsController@index')->name('schools.index');
 Route::get('/schools/type/{schooltype}', 'SchoolsController@index')->name('schoolsInType');
 Route::get('/schools/{school}', 'SchoolsController@show')->name('schools.show');
-Route::post('/schools/createschool', 'SchoolsController@store')->name('schools.store');
+Route::post('/schools/createschool', 'SchoolsController@store')->name('schools.store')->middleware('admin');
 
 Route::get('/schools/{schools}/courses', 'CoursesController@index')->name('schoolCourses');
 

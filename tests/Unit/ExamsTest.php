@@ -15,7 +15,7 @@ class ExamsTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->exam = create('App\Exams');
+        $this->exam = create('App\Exams',['ends_at' => null]);
     }
 
       /** @test */

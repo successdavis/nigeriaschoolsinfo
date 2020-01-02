@@ -32,8 +32,13 @@ class ExamLogoTest extends TestCase
     /** @test */
     public function a_valid_logo_must_be_provided()
     {
-        $this->withExceptionHandling()->signIn(factory('App\User')->states('administrator')->create());
+        $this->withExceptionHandling();
 
+        $user = create('App\User');
+        $role = create('App\Role',['name' => 'admin']);
+
+        $user->assignRole($role->id);
+        $this->signIn($user);
 
         $this->json('POST', route('exam.logo', ['exams' => $this->exam->slug]), ['logo' => 'not-an-image'])
             ->assertStatus(422);
@@ -52,7 +57,13 @@ class ExamLogoTest extends TestCase
     /** @test */
     public function an_admin_can_attach_an_exam_logo()
     {
-        $this->signIn(factory('App\User')->state('administrator')->create());
+        $this->withExceptionHandling();
+        
+        $user = create('App\User');
+        $role = create('App\Role',['name' => 'admin']);
+
+        $user->assignRole($role->id);
+        $this->signIn($user);
 
         Storage::fake('public');
 

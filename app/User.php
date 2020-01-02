@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Post;
+use App\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -41,8 +42,18 @@ class User extends Authenticatable
         return $this->hasMany('App\Post', 'user_id');
     }
 
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'users_roles');
+    }
+
+    public function assignRole($role)
+    {
+        $this->roles()->attach($role);
+    }
+
     public function isAdmin()
     {
-        return !! $this->admin;
+        return $this->roles()->where('name', 'admin')->exists();
     }
 }

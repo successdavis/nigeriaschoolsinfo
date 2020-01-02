@@ -69,9 +69,9 @@
             </a>
           </div>
 
-          <div class="control navbar-item ps-full-width" >
+          {{-- <div class="control navbar-item ps-full-width" >
             <input class="input ps-full-width" type="text" placeholder="Text input">
-          </div>
+          </div> --}}
         </div>
         
       </div>

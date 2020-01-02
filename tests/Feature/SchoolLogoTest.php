@@ -53,7 +53,11 @@ class SchoolLogoTest extends TestCase
     /** @test */
     public function an_admin_can_attach_a_school_logo()
     {
-        $this->signIn(factory('App\User')->state('administrator')->create());
+        $user = create('App\User');
+        $role = create('App\Role',['name' => 'admin']);
+
+        $user->assignRole($role->id);
+        $this->signIn($user);
 
         Storage::fake('public');
 

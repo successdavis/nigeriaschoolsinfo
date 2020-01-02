@@ -22,7 +22,11 @@ class ReadAdvertisementsTest extends TestCase
     /** @test */
     public function an_admin_can_retrieve_all_active_advertisements()
     {
-        $this->signIn(factory('App\User')->states('administrator')->create());
+        $user = create('App\User');
+        $role = create('App\Role',['name' => 'admin']);
+
+        $user->assignRole($role->id);
+        $this->signIn($user);
 
         $inAdvertisements = create('App\Advertisements');
 

@@ -22,15 +22,35 @@ class CreateSchoolTest extends TestCase
     /** @test */
     public function an_administrator_can_creat_a_new_school()
     {   
-        $admin = $this->signIn(factory('App\User')->states('administrator')->create());
+        $user = create('App\User');
+        $role = create('App\Role',['name' => 'admin']);
+
+        $user->assignRole($role->id);
+        $this->signIn($user);
 
         $school = make('App\Schools');
-
-        // dd($school);
 
         $this->json('post', route('schools.store'), $school->toArray())
             ->assertStatus(201);
     }
+
+    /** @test */
+    public function only_an_admin_can_create_a_new_school()
+    {   
+        $this->withExceptionHandling();
+        $user = create('App\User');
+        $role = create('App\Role', ['name' => 'publisher']);
+
+        $user->assignRole($role->id);
+        $this->signIn($user);
+
+        $school = make('App\Schools');
+
+        $this->json('post', route('schools.store'), $school->toArray())
+            ->assertStatus(403);
+    }
+
+
 
     /** @test */
     public function a_school_requires_a_unique_slug()
@@ -40,9 +60,5 @@ class CreateSchoolTest extends TestCase
         $school = create('App\Schools', ['name' => 'Foo Title']);
 
         $this->assertEquals($school->fresh()->slug, 'foo-title');
-
-        // $School = $this->postJson(route('posts.save'), $post->toArray())->json();
-
-        // $this->assertEquals("foo-title-{$post['id']}", $post['slug']);
     }
 }
