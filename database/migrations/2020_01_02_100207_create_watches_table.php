@@ -15,8 +15,8 @@ class CreateWatchesTable extends Migration
     {
         Schema::create('watches', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $this->unsignedInteger('watch_id');
-            $this->string('watch_type');
+            $table->unsignedInteger('watch_id');
+            $table->string('watch_type');
             $table->timestamps();
         });
     }
