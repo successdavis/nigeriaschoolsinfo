@@ -27,7 +27,8 @@ class ExamFilters extends Filters
     {
         $this->builder->getQuery()->orders = [];
         return $this->builder->where('name', 'LIKE', '%' . $s . '%')
-            ->orWhere('short_name', 'LIKE', '%' . $s . '%');
+            ->orWhere('short_name', 'LIKE', '%' . $s . '%')
+            ->orderBy('admitting', 'DESC');
     }
 
 }
