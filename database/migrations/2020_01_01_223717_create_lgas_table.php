@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CoursesSubject extends Migration
+class CreateLgasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CoursesSubject extends Migration
      */
     public function up()
     {
-        Schema::create('courses_subject', function(Blueprint $table) {
+        Schema::create('lgas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('courses_id');
-            $table->unsignedInteger('subject_id');
-            $table->boolean('required')->default(false);
+            $table->string('name');
+            $table->unsignedInteger('states_id');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +28,6 @@ class CoursesSubject extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('lgas');
     }
 }

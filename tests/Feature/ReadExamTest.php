@@ -22,8 +22,8 @@ class ReadExamTest extends TestCase
     /** @test */
     public function a_user_can_browse_all_exams()
     {
-        $this->get('/exams')
-            ->assertSee($this->exam->short_name);
+        $response = $this->json('GET', '/exams')->json();
+        $this->assertCount(1, $response['data']);
     }
 
     /** @test */

@@ -24,15 +24,14 @@
         <a class="navbar-item">
           STORE
         </a>
+        <a href="/courses" class="navbar-item">
+          COURSES
+        </a>
 
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="/schools">
             SCHOOLS
           </a>
-          <a class="navbar-link" href="/schools">
-            COURSES
-          </a>
-
           <div class="navbar-dropdown">
             @foreach ($schooltype as $type)
               <a href="{{$type->path()}}" class="navbar-item">

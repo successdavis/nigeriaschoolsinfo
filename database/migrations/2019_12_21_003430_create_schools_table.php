@@ -22,8 +22,8 @@ class CreateSchoolsTable extends Migration
             $table->string('logo_path')->nullable();
             $table->string('website')->nullable();
             $table->string('portal_website')->nullable();
-            $table->unsignedInteger('state');
-            $table->unsignedInteger('lga');
+            $table->unsignedInteger('states_id');
+            $table->unsignedInteger('lga_id');
             $table->text('address')->nullable();
             $table->boolean('admitting')->default(false);
             $table->string('school_type_id'); // University, Polytechnics, Nurses School

@@ -2,7 +2,9 @@
 
 namespace Tests\Unit;
 
+use App\Lga;
 use App\Sponsored;
+use App\States;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Schema;
@@ -23,7 +25,7 @@ class SchoolTest extends TestCase
     public function schools_database_has_expected_columns()
     {
         $this->assertTrue(Schema::hasColumns('schools', [
-            'id', "name", "description", "date_created", "logo_path", "website", "portal_website","state","lga","address", "admitting", "school_type_id", "phone", "email", 'sponsored_id', 'jamb_points',
+            'id', "name", "description", "date_created", "logo_path", "website", "portal_website","states_id","lga_id","address", "admitting", "school_type_id", "phone", "email", 'sponsored_id', 'jamb_points',
           ]), 1);
     }
 
@@ -54,6 +56,18 @@ class SchoolTest extends TestCase
     public function a_school_belongs_to_a_sponsor()
     {
         $this->assertInstanceOf(Sponsored::class, $this->school->sponsored);
+    }
+
+    /** @test */
+    public function a_school_belongs_to_a_state()
+    {
+        $this->assertInstanceOf(States::class, $this->school->state);
+    }
+
+    /** @test */
+    public function a_school_belongs_to_a_lga()
+    {
+        $this->assertInstanceOf(Lga::class, $this->school->lga);
     }
 
     /** @test */

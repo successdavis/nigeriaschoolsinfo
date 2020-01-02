@@ -3,7 +3,9 @@
 namespace App;
 
 use App\Faculties;
+use App\Lga;
 use App\Sponsored;
+use App\States;
 use App\Traits\ModelFunctions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\SchoolFilters;
@@ -42,6 +44,16 @@ class Schools extends Model
     public function sponsored()
     {
         return $this->belongsTo(Sponsored::class);
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(States::class, 'states_id');
+    }
+
+    public function lga()
+    {
+        return $this->belongsTo(Lga::class);
     }
 
     public function addCourse($course, $cut_off_points = null)

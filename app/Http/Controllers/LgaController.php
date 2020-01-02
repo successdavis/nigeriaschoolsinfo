@@ -2,29 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Courses;
-use App\Faculty;
-use App\Filters\CourseFilters;
-use App\Http\Resources\CourseResource;
-use App\Schools;
+use App\lga;
 use Illuminate\Http\Request;
 
-class CoursesController extends Controller
+class LgaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Schools $schools, CourseFilters $filters)
+    public function index()
     {
-        $courses = $this->getCourses($schools, $filters);
-
-        if (request()->wantsJson()) {
-            return CourseResource::collection($courses);
-        }
-        $faculties = Faculty::all();
-        return view('courses.index', compact('courses', 'faculties'));
+        //
     }
 
     /**
@@ -51,21 +41,21 @@ class CoursesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Courses  $courses
+     * @param  \App\lga  $lga
      * @return \Illuminate\Http\Response
      */
-    public function show(Courses $courses)
+    public function show(lga $lga)
     {
-        return view('courses.show', compact('courses'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Courses  $courses
+     * @param  \App\lga  $lga
      * @return \Illuminate\Http\Response
      */
-    public function edit(Courses $courses)
+    public function edit(lga $lga)
     {
         //
     }
@@ -74,10 +64,10 @@ class CoursesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Courses  $courses
+     * @param  \App\lga  $lga
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Courses $courses)
+    public function update(Request $request, lga $lga)
     {
         //
     }
@@ -85,21 +75,11 @@ class CoursesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Courses  $courses
+     * @param  \App\lga  $lga
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Courses $courses)
+    public function destroy(lga $lga)
     {
         //
-    }
-
-    public function getCourses($schools, $filters)
-    {
-        $courses = Courses::latest()->filter($filters);
-        if ($schools->exists) {
-            $courses = $schools->courses();
-        }
-
-        return $courses = $courses->paginate(25);
     }
 }

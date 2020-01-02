@@ -12,6 +12,8 @@ class Courses extends Model
     protected $guarded = [];
     public $pathPrefix = '/courses/';
     public $findWith    =   'slug';
+    public $excerpt    =   ['description', 23];
+    
 
     use ModelFunctions;
 
@@ -36,7 +38,7 @@ class Courses extends Model
 
     public function subjects()
     {
-        return $this->belongsToMany(Subject::class);
+        return $this->belongsToMany(Subject::class)->withPivot('required');
     }
 
     public function scopeFilter($query, $filters)

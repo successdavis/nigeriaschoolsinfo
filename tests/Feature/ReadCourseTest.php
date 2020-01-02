@@ -22,8 +22,8 @@ class ReadCourseTest extends TestCase
        /** @test */
     public function a_user_can_browse_all_courses()
     {
-        $this->get('/courses')
-            ->assertSee($this->course->name);
+        $response = $this->json('GET', '/courses')->json();
+        $this->assertCount(1, $response['data']);
 
     }
 
@@ -55,5 +55,22 @@ class ReadCourseTest extends TestCase
 
         $response = $this->json('GET', '/courses?faculty=' . $faculty->slug)->json();
         $this->assertCount(1, $response['data']);
+    }
+
+    /** @test */
+    public function a_user_can_search_courses_by_name_or_description()
+    {
+        $course = create('App\Courses', ['name' => 'Computer Sciences and farming']);
+        $courseTwo = create('App\Courses', ['description' => 'agriculture and farming']);
+
+        $url = 'courses?s=sciences';
+
+        $courses = $this->json('GET', $url)->json();
+        $this->assertCount(1, $courses['data']);
+
+        $url = 'courses?s=farming';
+
+        $courses = $this->json('GET', $url)->json();
+        $this->assertCount(2, $courses['data']);
     }
 }

@@ -11,6 +11,6 @@ class Subject extends Model
 
     public function courses()
     {
-    	$this->belongsToMany(Courses::class);
+    	$this->belongsToMany(Courses::class)->withPivot('required');
     }
 }

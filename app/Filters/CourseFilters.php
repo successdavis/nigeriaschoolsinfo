@@ -12,7 +12,7 @@ class CourseFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['faculty'];
+    protected $filters = ['faculty', 's'];
 
     /**
      * Filter the query by a given username.
@@ -25,5 +25,13 @@ class CourseFilters extends Filters
         $faculty = Faculty::where('slug', $faculty)->firstOrFail();
 
         return $this->builder->where('faculty_id', $faculty->id);
+    }
+
+    
+    protected function s($s)
+    {
+        $this->builder->getQuery()->orders = [];
+        return $this->builder->where('name', 'LIKE', '%' . $s . '%')
+            ->orWhere('description', 'LIKE', '%' . $s . '%');
     }
 }

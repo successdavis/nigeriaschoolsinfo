@@ -25,7 +25,9 @@ Vue.component('streamer-carousel', require('./components/StreamerCarousel.vue').
 Vue.component('image-carousel', require('./components/carousel.vue').default);
 Vue.component('shools-page', require('./pages/schools.vue').default);
 Vue.component('exams-page', require('./pages/exams.vue').default);
+Vue.component('courses-page', require('./pages/courses.vue').default);
 Vue.component('paginator', require('./components/paginator.vue').default);
+Vue.component('course_quick_view', require('./components/CourseQuickView.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
