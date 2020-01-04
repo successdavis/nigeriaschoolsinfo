@@ -2,76 +2,63 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+    <div class="section" style="max-width: 600px; margin: auto">
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
+            <div class="field">
+              <div class="control has-icons-left has-icons-right">
+                <input required class="input is-success" type="text" placeholder="Your name here" id="name" name="name" value="{{ old('name') }}">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
+                </span>
+              </div>
             </div>
-        </div>
+            <div class="field mt-medium">
+                <p class="control has-icons-left has-icons-right">
+                    <input name="email" class="input" type="email" placeholder="Email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-envelope"></i>
+                    </span>
+                    {{-- <span class="icon is-small is-right">
+                      <i class="fas fa-check"></i>
+                    </span> --}}
+                </p>
+                @error('email')
+                    <p role="alert" class="help is-danger"><strong>{{ $message }}</strong></p>
+                @enderror
+            </div>
+            <div class="field mt-medium">
+              <p class="control has-icons-left">
+                <input class="input" id="password" name="password" type="password" placeholder="Password" required autocomplete="current-password">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </p>
+                @error('password')
+                    <p role="alert" class="help is-danger"><strong>{{ $message }}</strong></p>
+                @enderror
+            </div>
+            <div class="field mt-medium">
+              <p class="control has-icons-left">
+                <input class="input" id="password-confirm" name="password_confirmation" type="password" placeholder="Password" required autocomplete="current-password">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </p>
+                @error('password-confirm')
+                    <p role="alert" class="help is-danger"><strong>{{ $message }}</strong></p>
+                @enderror
+            </div>
+            <div class="field mt-medium">
+              <p class="control">
+                <button class="button is-success is-fullwidth">
+                  Register
+                </button>
+              </p>
+            </div>
+            <div>Already have an account? <a href="/login">Login</a></div>
+
+        </form>
     </div>
 </div>
 @endsection

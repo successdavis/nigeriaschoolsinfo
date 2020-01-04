@@ -8,6 +8,7 @@ use App\School;
 use App\SchoolType;
 use App\Schools;
 use App\Sponsored;
+use App\States;
 use Illuminate\Http\Request;
 
 class SchoolsController extends Controller
@@ -46,14 +47,18 @@ class SchoolsController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
-            'name'          => 'required', 
-            'description'   => 'required', 
-            'date_created'  => 'date',
-            'states_id'         => 'required',
-            'lga_id'           => 'required',
-            'address'       => 'required', 
-            'school_type_id'   => 'required', 
+            'name'              => 'required|unique:schools|max:255|min:10', 
+            'description'       => 'required|min:300', 
+            'date_created'      => 'nullable|date',
+            'states_id'         => 'required|exists:states,id',
+            'lga_id'            => 'required|exists:lgas,id',
+            'address'           => 'required', 
+            'school_type_id'    => 'required|exists:school_types,id', 
+            'sponsored_id'      => 'required|exists:sponsoreds,id', 
+            'jamb_points'       => 'integer',
+            'phone'             => 'min:10|max:10', 
         ]);
 
         $school = Schools::create([
@@ -68,7 +73,8 @@ class SchoolsController extends Controller
             'school_type_id'=> request('school_type_id'), 
             'sponsored_id'  => request('sponsored_id'), 
             'phone'         => request('phone'), 
-            'email'         => request('email')
+            'email'         => request('email'),
+            'jamb_points'         => request('jamb_points')
         ]);
 
         if (request()->wantsJson()) {
@@ -129,6 +135,33 @@ class SchoolsController extends Controller
             $schools->where('school_type_id', $schooltype->id);
         }
 
+        dd($schools->get());
+
         return $schools = $schools->paginate(20);
+    }
+
+    public function findschool(Request $request)
+    {
+        if ($request->filled('s') && $request->filled('sn')) {
+             return Schools::where('name', 'LIKE', '%' . $request->s . '%')
+                        ->orWhere('short_name', 'LIKE', '%' . $request->sn . '%')->get();
+        }
+        if ($request->filled('s')) {
+            $schools = Schools::where('name', 'LIKE', '%' . $request->s . '%');
+        }
+        if ($request->filled('sn')) {
+            $schools = Schools::where('short_name', 'LIKE', '%' . $request->sn . '%');
+        }
+
+        return $schools->get();
+    }
+
+    public function cschoolrequirements()
+    {
+        $Types = SchoolType::all();
+        $Sponsored = Sponsored::all();
+        $States = States::all();
+
+        return compact('Types', 'Sponsored', 'States');
     }
 }

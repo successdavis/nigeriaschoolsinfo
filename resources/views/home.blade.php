@@ -2,22 +2,19 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
-        </div>
+    <div class="section">
+        <h3 class="is-size-4 is-centered">Hello! {{auth()->user()->name}}</h3>
+        <p class="mt-small">Welcome to your dashboard</p>
+        <p>Please note that this section is still under construction</p>
+        <h3 class="is-size-4 mt-medium">Quick Links</h3>
+        <a href="/courses">Browse Courses</a> <br>
+        <a href="/courses">Browse Schools</a> <br>
+        <a href="/courses">Browse Exams</a> <br>
     </div>
+
+    @if (auth()->user()->isAdmin())
+        feef
+        <new-school></new-school>
+    @endif
 </div>
 @endsection

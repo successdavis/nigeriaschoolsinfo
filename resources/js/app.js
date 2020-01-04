@@ -19,6 +19,7 @@ require('./bootstrap');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+Vue.component('Flash', require('./components/Flash.vue').default);
 Vue.component('nav-bar', require('./components/NavBar.vue').default);
 Vue.component('ask-question', require('./components/AskQuestion.vue').default);
 Vue.component('streamer-carousel', require('./components/StreamerCarousel.vue').default);
@@ -28,6 +29,7 @@ Vue.component('exams-page', require('./pages/exams.vue').default);
 Vue.component('courses-page', require('./pages/courses.vue').default);
 Vue.component('paginator', require('./components/paginator.vue').default);
 Vue.component('course_quick_view', require('./components/CourseQuickView.vue').default);
+Vue.component('new-school', require('./components/newSchool.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

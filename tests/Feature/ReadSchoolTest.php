@@ -91,4 +91,16 @@ class ReadSChoolTest extends TestCase
         $schools = $this->json('GET', $url)->json();
         $this->assertCount(2, $schools['data']);
     }
+
+    /** @test */
+    public function a_user_can_search_schools_by_short_name()
+    {
+        $school = create('App\Schools', ['name' => 'University of Calabar']);
+        $schoolTwo = create('App\Schools', ['short_name' => 'JAMB']);
+
+        $url = 'find/school?sn=JAMB';
+
+        $schools = $this->json('GET', $url)->json();
+        $this->assertCount(1, $schools['data']);
+    }
 }

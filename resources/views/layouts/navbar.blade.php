@@ -96,6 +96,19 @@
           SITE FUNCTIONS
       </div>
         <ul class="n_drawer_items">
+          @if (Route::has('login'))
+                <div class="mt-small">
+                    @auth
+                        <a class="button is-fullwidth mt-small" href="{{ url('/home') }}">Home</a>
+                    @else
+                        <a class="button is-fullwidth mt-small" href="{{ route('login') }}">Login</a>
+
+                        @if (Route::has('register'))
+                            <a class="button is-fullwidth mt-small" href="{{ route('register') }}">Register</a>
+                        @endif
+                    @endauth
+                </div>
+            @endif
             <li class="n_drawer_items--child">
                 <span><i class="fas fa-store-alt"></i></span>
                 <a href="">Store</a>
@@ -114,7 +127,17 @@
             </li>
         </ul>
         {{-- <ask-question style="width: 100%"></ask-question> --}}
-        <a class="button is-light is-fullwidth mt-small" href="">CONTACT</a>
+        @auth
+          <a class="button is-light is-fullwidth mt-small" href="">CONTACT</a>
+        <a class="button is-fullwidth mt-small" href="{{ route('logout') }}" 
+          onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();"
+
+        >{{ __('Logout') }}</a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+        @endauth
     </div>
   </nav>
 </nav-bar>

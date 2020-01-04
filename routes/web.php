@@ -21,6 +21,7 @@ Route::post('api/{school}/addlogo', 'SchoolLogoController@store')->name('school.
 Route::post('api/{exams}/attachlogo', 'ExamsLogoController@store')->name('exam.logo')->middleware('admin');
 
 Route::get('api/advertisements', 'AdvertisementsController@index')->name('advertisements.index');
+Route::get('/api/statelocalgovernments', 'LocationController@index')->name('advertisements.index');
 
 
 Route::get('/', 'PostController@index');
@@ -36,6 +37,8 @@ Route::get('/schools', 'SchoolsController@index')->name('schools.index');
 Route::get('/schools/type/{schooltype}', 'SchoolsController@index')->name('schoolsInType');
 Route::get('/schools/{school}', 'SchoolsController@show')->name('schools.show');
 Route::post('/schools/createschool', 'SchoolsController@store')->name('schools.store')->middleware('admin');
+Route::get('/find/school', 'SchoolsController@findschool')->name('schools.findschool');
+Route::get('/createSchoolRequirements', 'SchoolsController@cschoolrequirements')->name('schools.cschoolrequirements');
 
 Route::get('/schools/{schools}/courses', 'CoursesController@index')->name('schoolCourses');
 
