@@ -15,5 +15,12 @@
         View
       </span>
     </p>
+    @if (auth()->user()->isAdmin())
+      <p class="card-footer-item">
+        <span>
+          <a :href="'/courses/editcourse/' + course.slug">Edit</a>
+        </span>
+      </p>
+    @endif
   </footer>
 </div>

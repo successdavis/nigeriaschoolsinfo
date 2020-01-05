@@ -73,4 +73,26 @@ class ReadCourseTest extends TestCase
         $courses = $this->json('GET', $url)->json();
         $this->assertCount(2, $courses['data']);
     }
+
+    /** @test */
+    public function a_user_can_retreive_all_schools_offered_by_a_course()
+    {
+        $school = create('App\Schools');
+        $manySchools = factory('App\Schools', 20)->create();
+        $this->course->attachSchool($school->id, 120);
+
+        $response = $this->json('GET', '/courses/getschools/' . $this->course->slug . '?selected=attached')->json();
+        $this->assertCount(1, $response);
+    }
+
+    /** @test */
+    public function a_user_can_retreive_all_school_not_attached_to_a_course()
+    {
+        $school = create('App\Schools');
+        $manySchools = factory('App\Schools', 20)->create();
+        $this->course->attachSchool($school->id, 120);
+
+        $response = $this->json('GET', '/courses/getschools/' . $this->course->slug . '?selected=notattached')->json();
+        $this->assertCount(20, $response);
+    }
 }

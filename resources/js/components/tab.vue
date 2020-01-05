@@ -1,5 +1,5 @@
 <template>
-	<div class="section">
+	<div>
 		<slot v-if="isActive"></slot>
 	</div>
 </template>

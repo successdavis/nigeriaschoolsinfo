@@ -15,7 +15,6 @@
     @if (auth()->user()->isAdmin())
         <new-school></new-school>
         <new-course></new-course>
-        <attach-schools></attach-schools>
     @endif
 </div>
 @endsection

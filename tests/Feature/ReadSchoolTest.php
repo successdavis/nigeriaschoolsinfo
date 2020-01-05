@@ -103,4 +103,14 @@ class ReadSChoolTest extends TestCase
         $schools = $this->json('GET', $url)->json();
         $this->assertCount(1, $schools['data']);
     }
+
+    // /** @test */
+    // public function a_user_can_retreive_all_schools_offered_by_a_course()
+    // {
+    //     $course = create('App\Courses');
+    //     $course->attachSchool($this->school->id);
+
+    //     $response = $this->json('GET', '/schools/courses')->json();
+    //     $this->assertCount(1, $response['data']);
+    // }
 }

@@ -85,9 +85,9 @@ class CoursesController extends Controller
      * @param  \App\Courses  $courses
      * @return \Illuminate\Http\Response
      */
-    public function edit(Courses $courses)
+    public function edit(Courses $course)
     {
-        //
+        return view('courses.edit', compact('course'));
     }
 
     /**
@@ -137,5 +137,18 @@ class CoursesController extends Controller
         }
 
         return [];
+    }
+
+    public function getschools(Courses $course, Request $request)
+    {
+        if ($request->selected == 'attached') {
+            return $course->schools;
+        }
+
+        $modules = Schools::whereDoesntHave('courses', function($q) use ($course){
+            $q->where('courses_id', $course->id);
+        })->get();
+
+        return $modules;
     }
 }

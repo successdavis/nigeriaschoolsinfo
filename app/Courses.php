@@ -50,4 +50,9 @@ class Courses extends Model
     {
         $this->subjects()->attach($subject->id);
     }
+
+    public function attachSchool($school, $cut_off_points = null)
+    {
+        $this->schools()->attach($school, ['cut_off_points' => $cut_off_points]);
+    }
 }

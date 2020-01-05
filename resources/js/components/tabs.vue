@@ -3,7 +3,7 @@
 		<div class="tabs is-centered">
 		  <ul>
 		    <li v-for="tab in tabs" :class="{'is-active' : tab.isActive}">
-		    	<a @click="selectTab(tab)" v-text="tab.name"></a>
+		    	<a :href="tab.href" @click="selectTab(tab)" v-text="tab.name"></a>
 		    </li>
 		  </ul>
 		</div>

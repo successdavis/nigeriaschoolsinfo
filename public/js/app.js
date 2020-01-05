@@ -2161,19 +2161,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['course'],
+  props: {
+    course: {
+      required: true
+    }
+  },
   data: function data() {
     return {
-      schools: []
+      notAttachedSchools: [],
+      attachedSchools: []
     };
-  } // created () {
-  // 	axios.get('/getSchools')
-  //   		.then (data => {
-  //   			this.faculties = data.data;
-  // 	});
-  // }
+  },
+  created: function created() {
+    var _this = this;
 
+    // '/courses/getschools/' . $this->course->slug . '?selected=attached'
+    axios.get("/courses/getschools/".concat(this.course.slug, "?selected=attached")).then(function (data) {
+      _this.attachedSchools = data.data;
+    });
+  }
 });
 
 /***/ }),
@@ -26073,6 +26099,7 @@ var render = function() {
         [
           _c(
             "div",
+            { staticClass: "section" },
             [
               _c(
                 "tabs",
@@ -26080,7 +26107,43 @@ var render = function() {
                   _c(
                     "tab",
                     { attrs: { name: "Not Attached", selected: true } },
-                    [_c("p", [_vm._v("some dummy text")])]
+                    [
+                      _c("div", { staticClass: "columns" }, [
+                        _c("div", { staticClass: "column is-3" }, [
+                          _c("div", { staticClass: "field" }, [
+                            _c("div", { staticClass: "control " }, [
+                              _c("div", { staticClass: "select is-small" }, [
+                                _c("select", [
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "", selected: "" } },
+                                    [_vm._v("Types")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("option", [_vm._v("With options")])
+                                ])
+                              ])
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "column" }, [
+                          _c("input", {
+                            staticClass: "input is-rounded",
+                            attrs: {
+                              type: "text",
+                              placeholder: "Rounded input"
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "column is-2" }, [
+                          _c("span", { staticStyle: { cursor: "pointer" } }, [
+                            _vm._v("Select All")
+                          ])
+                        ])
+                      ])
+                    ]
                   ),
                   _vm._v(" "),
                   _c("tab", { attrs: { name: "attached" } }, [
@@ -28092,12 +28155,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "section" },
-    [_vm.isActive ? _vm._t("default") : _vm._e()],
-    2
-  )
+  return _c("div", [_vm.isActive ? _vm._t("default") : _vm._e()], 2)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -28128,6 +28186,7 @@ var render = function() {
         _vm._l(_vm.tabs, function(tab) {
           return _c("li", { class: { "is-active": tab.isActive } }, [
             _c("a", {
+              attrs: { href: tab.href },
               domProps: { textContent: _vm._s(tab.name) },
               on: {
                 click: function($event) {

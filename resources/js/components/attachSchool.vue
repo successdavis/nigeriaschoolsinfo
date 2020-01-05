@@ -12,10 +12,29 @@
 				<button class="button">Add Requirement</button>
 				<button class="button">Add or Remove Schools</button>
 			</div> -->
-			<div>
+			<div class="section">
 				<tabs>
 					<tab name="Not Attached" :selected="true">
-						<p>some dummy text</p>
+						<div class="columns">
+						  <div class="column is-3">
+						    <div class="field">
+							  <div class="control ">
+							    <div class="select is-small">
+							      <select>
+							        <option value="" selected>Types</option>
+							        <option>With options</option>
+							      </select>
+							    </div>
+							  </div>
+							</div>
+						  </div>
+						  <div class="column">
+						    <input class="input is-rounded" type="text" placeholder="Rounded input">
+						  </div>
+						  <div class="column is-2">
+						    <span style="cursor: pointer">Select All</span>
+						  </div>
+						</div>
 					</tab>
 					<tab name="attached">
 						<p>some other dummy text here</p>
@@ -28,18 +47,24 @@
 
 <script>
 	export default {
-		props: ['course'],
+		props: {
+			course: {
+				required: true
+			},
+		},
 		data() {
 			return {
-				schools: [],
+				notAttachedSchools: [],
+				attachedSchools: [],
 			}
 		},
 
-		// created () {
-		// 	axios.get('/getSchools')
-  //   		.then (data => {
-  //   			this.faculties = data.data;
-		// 	});
-		// }
+		created () {
+			// '/courses/getschools/' . $this->course->slug . '?selected=attached'
+			axios.get(`/courses/getschools/${this.course.slug}?selected=attached`)
+    		.then (data => {
+    			this.attachedSchools = data.data;
+			});
+		}
 	}
 </script>
