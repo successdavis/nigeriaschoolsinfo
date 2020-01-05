@@ -34,7 +34,7 @@
 						  <div class="field-body">
 						    <div class="field">
 						      <div class="control">
-						        <input v-model="schoolForm.name" @change="findSchool" required class="input" type="text" placeholder="Enter School Name">
+						        <input v-model="schoolForm.name" @change="findSchool" class="input" type="text" placeholder="Enter School Name">
 						      </div>
 						      <p class="help is-danger" v-if="schoolForm.errors.has('name')" v-text="schoolForm.errors.get('name')">
 						      </p>

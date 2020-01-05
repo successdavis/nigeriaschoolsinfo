@@ -63,6 +63,7 @@ class SchoolsController extends Controller
 
         $school = Schools::create([
             'name'          => request('name'), 
+            'short_name'    => request('short_name'), 
             'description'   => request('description'), 
             'date_created'  => request('date_created'),
             'website'       => request('website'), 

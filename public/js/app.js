@@ -2945,6 +2945,11 @@ __webpack_require__.r(__webpack_exports__);
       isActive: false
     };
   },
+  computed: {
+    href: function href() {
+      return '#' + this.name.toLowerCase().replace(/ /g, '_');
+    }
+  },
   mounted: function mounted() {
     this.isActive = this.selected;
   }
@@ -26978,7 +26983,6 @@ var render = function() {
                               ],
                               staticClass: "input",
                               attrs: {
-                                required: "",
                                 type: "text",
                                 placeholder: "Enter School Name"
                               },
