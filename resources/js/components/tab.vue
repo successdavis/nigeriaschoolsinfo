@@ -1,0 +1,24 @@
+<template>
+	<div class="section">
+		<slot v-if="isActive"></slot>
+	</div>
+</template>
+
+<script>
+export default {
+	props: {
+		name: { required: true},
+		selected: {default: false}	
+	},
+
+	data () {
+		return {
+			isActive: false,
+		}
+	},
+
+	mounted () {
+		this.isActive = this.selected;
+	}
+}
+</script>

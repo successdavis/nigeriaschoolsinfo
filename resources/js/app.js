@@ -32,6 +32,8 @@ Vue.component('course_quick_view', require('./components/CourseQuickView.vue').d
 Vue.component('new-school', require('./components/newSchool.vue').default);
 Vue.component('new-course', require('./components/newCourse.vue').default);
 Vue.component('attach-schools', require('./components/attachSchool.vue').default);
+Vue.component('tabs', require('./components/tabs.vue').default);
+Vue.component('tab', require('./components/tab.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

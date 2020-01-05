@@ -4,15 +4,23 @@
 		<modal
 			name="attach-school"
 			height="auto"
-			:adaptive="adaptive"
+			:adaptive="true"
 			scrollable="scrollable"
 		>
-			<div class="section">
+			<!-- <div class="section"> 	
 				<button class="button">Edit Course</button>
+				<button class="button">Add Requirement</button>
 				<button class="button">Add or Remove Schools</button>
-			</div>
-			<div v-show="transaction = attaching">
-				<div></div>
+			</div> -->
+			<div>
+				<tabs>
+					<tab name="Not Attached" :selected="true">
+						<p>some dummy text</p>
+					</tab>
+					<tab name="attached">
+						<p>some other dummy text here</p>
+					</tab>
+				</tabs>
 			</div>
 		</modal>
 	</div>
@@ -23,7 +31,6 @@
 		props: ['course'],
 		data() {
 			return {
-				adaptive: true,
 				schools: [],
 			}
 		},
