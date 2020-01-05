@@ -13,7 +13,6 @@
     </div>
 
     @if (auth()->user()->isAdmin())
-        feef
         <new-school></new-school>
         <new-course></new-course>
         <attach-schools></attach-schools>
