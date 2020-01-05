@@ -135,8 +135,6 @@ class SchoolsController extends Controller
             $schools->where('school_type_id', $schooltype->id);
         }
 
-        dd($schools->get());
-
         return $schools = $schools->paginate(20);
     }
 

@@ -7,8 +7,8 @@ use Faker\Generator as Faker;
 
 $factory->define(Courses::class, function (Faker $faker) {
     return [
-        'name' 			=> $faker->name,
-        'description'	=> $faker->sentence,
+        'name' 			=> $faker->sentence,
+        'description'	=> 'the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog ',
         'short_name'	=> $faker->word,
         'salary'		=> 200000,
 		'faculty_id'=> function(){

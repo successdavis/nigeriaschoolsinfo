@@ -32,6 +32,7 @@ Route::get('/posts/{post}', 'PostController@show')->name('post.show');
 Route::get('/exams', 'ExamsController@index')->name('exams.index');
 Route::get('/exams/{exams}', 'ExamsController@show')->name('exams.index');
 
+// /schools/type/university?a=admitting&page=1
 
 Route::get('/schools', 'SchoolsController@index')->name('schools.index');
 Route::get('/schools/type/{schooltype}', 'SchoolsController@index')->name('schoolsInType');
@@ -43,10 +44,13 @@ Route::get('/createSchoolRequirements', 'SchoolsController@cschoolrequirements')
 Route::get('/schools/{schools}/courses', 'CoursesController@index')->name('schoolCourses');
 
 Route::get('/courses', 'CoursesController@index')->name('courses.index');
+Route::get('/find/courses', 'CoursesController@findcourses')->name('courses.find');
 Route::get('/courses/{courses}', 'CoursesController@show')->name('courses.show');
-
+Route::post('/courses/createcourse', 'CoursesController@store')->name('courses.store');
 
 Route::get('/faculty/{faculty}', 'FacultiesController@show')->name('faculty.show');
+Route::get('/getfaculties', 'FacultiesController@getfaculties')->name('schoolCourses');
+
 
 
 

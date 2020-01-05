@@ -7,7 +7,13 @@
 			:adaptive="adaptive"
 			scrollable="scrollable"
 		>
-			<div class="section">
+		
+			<div class="section ">
+				<div slot="top-right" class="top-right relative-body">
+					<button @click="$modal.hide('ask-a-question')">
+			       		❌
+			     	</button>
+			    </div>
 				<div v-if="showMatchedWarning">
 					<span class="is-size-5">Wait! These schools are similar to your new school</span>
 					<ul>
@@ -347,3 +353,16 @@ export default {
 }
 
 </script>
+
+
+<style scoped>
+	.ps-container {
+		padding: 1.5em;
+	}
+
+	.top-right {
+		position: absolute;
+	    top: 5px;
+	    right: 5px;
+	}
+</style>

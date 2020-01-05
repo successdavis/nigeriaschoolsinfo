@@ -68,7 +68,7 @@ class FacultiesController extends Controller
      * @param  \App\Faculties  $faculties
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Faculties $faculties)
+    public function update(Request $request, Faculty $faculty)
     {
         //
     }
@@ -79,8 +79,14 @@ class FacultiesController extends Controller
      * @param  \App\Faculties  $faculties
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Faculties $faculties)
+    public function destroy(Faculty $faculty)
     {
         //
+    }
+
+    public function getfaculties()
+    {
+        $faculties = Faculty::all();
+        return $faculties;
     }
 }

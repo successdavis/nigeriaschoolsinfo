@@ -12,7 +12,7 @@ class SchoolFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['q', 'a', 's', 'sn'];
+    protected $filters = ['q', 'a', 's'];
 
     protected function q($sponsored)
     {
@@ -39,7 +39,7 @@ class SchoolFilters extends Filters
 
         $this->builder->getQuery()->orders = [];
         return $this->builder->where('name', 'LIKE', '%' . $s . '%')
-            ->orWhere('description', 'LIKE', '%' . $s . '%')
-            ->orWhere('short_name', 'LIKE', '%' . $s . '%');
+            ->orWhere('description', 'LIKE', '%' . $s . '%');
+            // ->orWhere('short_name', 'LIKE', '%' . $s . '%');
     }
 }

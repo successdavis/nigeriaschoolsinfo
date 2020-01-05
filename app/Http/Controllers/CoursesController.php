@@ -45,7 +45,27 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'            => 'required|unique:courses|max:255|min:10',
+            'description'     => 'required|min:300', 
+            'faculty_id'      => 'required|exists:faculties,id',
+            'salary'          => 'integer', 
+            'duration'          => 'integer', 
+
+
+        ]);
+        $course = Courses::create([
+            'name'              =>  $request->name,
+            'short_name'        =>  $request->short_name,
+            'faculty_id'        =>  $request->faculty_id,
+            'description'       =>  $request->description,
+            'salary'            =>  $request->salary,
+            'duration'          =>  $request->duration,
+        ]);
+
+        if (request()->wantsJson()) {
+            return response($course, 201);
+        }
     }
 
     /**
@@ -101,5 +121,21 @@ class CoursesController extends Controller
         }
 
         return $courses = $courses->paginate(25);
+    }
+
+    public function findcourses(Request $request)
+    {
+         if ($request->filled('name') && $request->filled('short_name')) {
+             return Courses::where('name', 'LIKE', '%' . $request->name . '%')
+                ->orWhere('short_name', 'LIKE', '%' . $request->short_name . '%')->get();
+        }
+        if ($request->filled('name')) {
+            return Courses::where('name', 'LIKE', '%' . $request->name . '%')->get();
+        }
+        if ($request->filled('short_name')) {
+            return Courses::where('short_name', 'LIKE', '%' . $request->short_name . '%')->get();
+        }
+
+        return [];
     }
 }
