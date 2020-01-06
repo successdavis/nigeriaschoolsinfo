@@ -34,7 +34,8 @@
 						  <infinite-loading @infinite="infiniteHandler"></infinite-loading>
 					</tab>
 					<tab name="attached">
-						<school v-for="(school, index) in attachedSchools" :key="index" :school="school" tagged="Unlink"></school>
+						<school v-for="(school, index) in attachedSchools" :key="index" :course="course" :school="school" tagged="Unlink"></school>
+						  <infinite-loading @infinite="getAttached"></infinite-loading>
 					</tab>
 				</tabs>
 			</div>
@@ -59,6 +60,7 @@ import InfiniteLoading from 'vue-infinite-loading';
 				notAttachedSchools: [],
 				attachedSchools: [],
 				page: 1,
+				attachedpage: 1,
 				type: '',
 				infiniteId: +new Date(),
 			}
@@ -81,6 +83,22 @@ import InfiniteLoading from 'vue-infinite-loading';
 		        }
 		      });
 		    },
+		    getAttached($state) {
+		      axios.get('/courses/getschools', {
+		        params: {
+		          page: this.attachedpage,
+		          attached: this.course.id,
+		        },
+		      }).then(({ data }) => {
+		        if (data.data.length) {
+		          this.attachedpage += 1;
+		          this.attachedSchools.push(...data.data);
+		          $state.loaded();
+		        } else {
+		          $state.complete();
+		        }
+		      });
+		    },
 		    changeType() {
 		      this.page = 1;
 		      this.notAttachedSchools = [];
@@ -92,10 +110,10 @@ import InfiniteLoading from 'vue-infinite-loading';
    //  		.then (data => {
    //  			this.attachedSchools = data.data.data;
 			// });
-			axios.get(`/courses/getschools`, {params: {notattached: this.course.id},})
-    		.then (data => {
-    			this.notAttachedSchools = data.data.data;
-			});
+			// axios.get(`/courses/getschools`, {params: {notattached: this.course.id},})
+   //  		.then (data => {
+   //  			this.notAttachedSchools = data.data.data;
+			// });
 		}
 	}
 </script>

@@ -2187,6 +2187,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2203,6 +2204,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       notAttachedSchools: [],
       attachedSchools: [],
       page: 1,
+      attachedpage: 1,
       type: '',
       infiniteId: +new Date()
     };
@@ -2232,26 +2234,44 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         }
       });
     },
+    getAttached: function getAttached($state) {
+      var _this2 = this;
+
+      axios.get('/courses/getschools', {
+        params: {
+          page: this.attachedpage,
+          attached: this.course.id
+        }
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+
+        if (data.data.length) {
+          var _this2$attachedSchool;
+
+          _this2.attachedpage += 1;
+
+          (_this2$attachedSchool = _this2.attachedSchools).push.apply(_this2$attachedSchool, _toConsumableArray(data.data));
+
+          $state.loaded();
+        } else {
+          $state.complete();
+        }
+      });
+    },
     changeType: function changeType() {
       this.page = 1;
       this.notAttachedSchools = [];
       this.infiniteId += 1;
     }
   },
-  created: function created() {
-    var _this2 = this;
-
-    // axios.get(`/courses/getschools`, {params: {attached: this.course.id},})
+  created: function created() {// axios.get(`/courses/getschools`, {params: {attached: this.course.id},})
     //  		.then (data => {
     //  			this.attachedSchools = data.data.data;
     // });
-    axios.get("/courses/getschools", {
-      params: {
-        notattached: this.course.id
-      }
-    }).then(function (data) {
-      _this2.notAttachedSchools = data.data.data;
-    });
+    // axios.get(`/courses/getschools`, {params: {notattached: this.course.id},})
+    //  		.then (data => {
+    //  			this.notAttachedSchools = data.data.data;
+    // });
   }
 });
 
@@ -26317,13 +26337,23 @@ var render = function() {
                   _c(
                     "tab",
                     { attrs: { name: "attached" } },
-                    _vm._l(_vm.attachedSchools, function(school, index) {
-                      return _c("school", {
-                        key: index,
-                        attrs: { school: school, tagged: "Unlink" }
+                    [
+                      _vm._l(_vm.attachedSchools, function(school, index) {
+                        return _c("school", {
+                          key: index,
+                          attrs: {
+                            course: _vm.course,
+                            school: school,
+                            tagged: "Unlink"
+                          }
+                        })
+                      }),
+                      _vm._v(" "),
+                      _c("infinite-loading", {
+                        on: { infinite: _vm.getAttached }
                       })
-                    }),
-                    1
+                    ],
+                    2
                   )
                 ],
                 1
