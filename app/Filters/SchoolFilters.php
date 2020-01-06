@@ -12,7 +12,7 @@ class SchoolFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['q', 'a', 's', 'attached'];
+    protected $filters = ['q', 'a', 's', 'attached', 'notattached', 'type'];
 
     protected function q($sponsored)
     {
@@ -45,6 +45,23 @@ class SchoolFilters extends Filters
 
     public function attached($course)
     {
-        
+        $this->builder->getQuery()->orders = [];
+        return $this->builder->whereHas('courses', function($q) use ($course) {
+            $q->where('courses_id', $course);
+        });
+    }
+
+    public function notattached($course)
+    {
+        $this->builder->getQuery()->orders = [];
+        return $this->builder->whereDoesntHave('courses', function($q) use ($course) {
+            $q->where('courses_id', $course);
+        });
+    }
+
+    public function type($type)
+    {
+        $this->builder->getQuery()->orders = [];
+        return $this->builder->where('school_type_id', $type);
     }
 }

@@ -18,6 +18,8 @@ class CoursesSchools extends Migration
             $table->unsignedInteger('courses_id');
             $table->unsignedInteger('schools_id');
             $table->integer('cut_off_points')->nullable();
+
+            $table->unique(['courses_id', 'schools_id'], 'Relationship a lready exists');
         });
     }
 

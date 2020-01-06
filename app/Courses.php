@@ -55,4 +55,9 @@ class Courses extends Model
     {
         $this->schools()->attach($school, ['cut_off_points' => $cut_off_points]);
     }
+
+    public function detachSchool($school)
+    {
+        return $this->schools()->detach($school);
+    }
 }

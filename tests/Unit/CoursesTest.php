@@ -67,4 +67,17 @@ class CoursesTest extends TestCase
         $this->assertCount(1, $this->course->subjects);
 
     }
+
+    /** @test */
+    public function a_course_can_be_detached_from_a_school()
+    {
+        $school = create('App\Schools');
+
+        $this->course->attachSchool($school->id);
+        $this->assertCount(1, $this->course->schools);
+
+        $this->course->detachSchool($school->id);
+        $this->assertCount(0, $this->course->fresh()->schools);
+
+    }
 }

@@ -22,6 +22,8 @@ Route::post('api/{exams}/attachlogo', 'ExamsLogoController@store')->name('exam.l
 
 Route::get('api/advertisements', 'AdvertisementsController@index')->name('advertisements.index');
 Route::get('/api/statelocalgovernments', 'LocationController@index')->name('advertisements.index');
+Route::post('/api/schoolcourseattachment', 'CourseSchoolController@store')->name('courseschool.store');
+Route::delete('/api/schoolcoursedetachment', 'CourseSchoolController@destroy')->name('courseschool.delete');
 
 
 Route::get('/', 'PostController@index');
@@ -40,12 +42,12 @@ Route::get('/schools/{school}', 'SchoolsController@show')->name('schools.show');
 Route::post('/schools/createschool', 'SchoolsController@store')->name('schools.store')->middleware('admin');
 Route::get('/find/school', 'SchoolsController@findschool')->name('schools.findschool');
 Route::get('/createSchoolRequirements', 'SchoolsController@cschoolrequirements')->name('schools.cschoolrequirements');
+Route::get('/courses/getschools', 'SchoolsController@index')->name('courses.getschools');
+
 
 Route::get('/schools/{schools}/courses', 'CoursesController@index')->name('schoolCourses');
 
 Route::get('/courses', 'CoursesController@index')->name('courses.index');
-Route::get('/find/courses', 'CoursesController@findcourses')->name('courses.find');
-Route::get('/courses/getschools/{course}', 'CoursesController@getschools')->name('courses.getschools');
 Route::get('/courses/editcourse/{course}', 'CoursesController@edit')->name('courses.edit')->middleware('admin');
 
 Route::get('/courses/{courses}', 'CoursesController@show')->name('courses.show');
