@@ -2188,6 +2188,17 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3051,16 +3062,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     school: {
       required: true
     },
-    tagged: {
-      required: true
+    check: {
+      "default": false
     },
     course: {
       required: false
@@ -3068,7 +3076,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      showChecked: false
+      showChecked: this.check
     };
   },
   methods: {
@@ -3079,7 +3087,7 @@ __webpack_require__.r(__webpack_exports__);
         course: this.course.id,
         school: this.school.id
       }).then(function (data) {
-        _this.showChecked = true;
+        _this.showChecked = false;
       })["catch"](function (error) {
         flash('There was a problem linking this school', 'failed');
       });
@@ -3093,7 +3101,7 @@ __webpack_require__.r(__webpack_exports__);
           school: this.school.id
         }
       }).then(function (data) {
-        _this2.showChecked = false;
+        _this2.showChecked = true;
       })["catch"](function (error) {
         flash('There was a problem linking this school', 'failed');
       });
@@ -26322,7 +26330,7 @@ var render = function() {
                           attrs: {
                             school: school,
                             course: _vm.course,
-                            tagged: "Attach"
+                            check: true
                           }
                         })
                       }),
@@ -26344,7 +26352,7 @@ var render = function() {
                           attrs: {
                             course: _vm.course,
                             school: school,
-                            tagged: "Unlink"
+                            check: false
                           }
                         })
                       }),
@@ -28376,65 +28384,43 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "media-right" }, [
-      _vm.tagged == "Attach"
-        ? _c("div", { staticClass: "is-danger" }, [
-            _c("span", { staticClass: "icon has-text-warning" }, [
-              _vm.showChecked
-                ? _c("i", { staticClass: "fas fa-check" })
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            !_vm.showChecked
-              ? _c(
-                  "span",
-                  {
-                    staticStyle: { cursor: "pointer" },
-                    on: { click: _vm.attachSchool }
-                  },
-                  [_vm._v("Attach")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.showChecked
-              ? _c(
-                  "span",
-                  {
-                    staticStyle: { cursor: "pointer" },
-                    on: { click: _vm.detachedSchool }
-                  },
-                  [_vm._v("Detached")]
-                )
-              : _vm._e()
-          ])
-        : _c("div", { staticClass: "is-danger" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
+      _c("div", { staticClass: "is-danger" }, [
+        _c("span", { staticClass: "icon has-text-warning" }, [
+          _vm.showChecked ? _c("i", { staticClass: "fas fa-check" }) : _vm._e()
+        ]),
+        _vm._v(" "),
+        !_vm.showChecked
+          ? _c("span", { staticClass: "icon has-text-warning" }, [
+              _c("i", { staticClass: "fas fa-exclamation-triangle" })
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.showChecked
+          ? _c(
               "span",
               {
                 staticStyle: { cursor: "pointer" },
-                on: {
-                  click: function($event) {
-                    return _vm.attachSchool(_vm.school)
-                  }
-                }
+                on: { click: _vm.attachSchool }
               },
-              [_vm._v("Unlink")]
+              [_vm._v("Attach")]
             )
-          ])
+          : _vm._e(),
+        _vm._v(" "),
+        !_vm.showChecked
+          ? _c(
+              "span",
+              {
+                staticStyle: { cursor: "pointer" },
+                on: { click: _vm.detachedSchool }
+              },
+              [_vm._v("Detached")]
+            )
+          : _vm._e()
+      ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon has-text-warning" }, [
-      _c("i", { staticClass: "fas fa-exclamation-triangle" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

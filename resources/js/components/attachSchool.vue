@@ -30,11 +30,22 @@
 				</div>
 				<tabs>
 					<tab name="Not Attached" :selected="true">
-						<school v-for="(school, index) in notAttachedSchools" :key="index" :school="school" :course="course" tagged="Attach"></school>
+						<school v-for="(school, index) in notAttachedSchools" :key="index" 
+							:school="school" 
+							:course="course" 
+							:check="true">
+								
+						</school>
 						  <infinite-loading @infinite="infiniteHandler"></infinite-loading>
 					</tab>
 					<tab name="attached">
-						<school v-for="(school, index) in attachedSchools" :key="index" :course="course" :school="school" tagged="Unlink"></school>
+						<school v-for="(school, index) in attachedSchools" 
+							:key="index" 
+							:course="course" 
+							:school="school" 
+							:check="false">
+						</school>
+
 						  <infinite-loading @infinite="getAttached"></infinite-loading>
 					</tab>
 				</tabs>
