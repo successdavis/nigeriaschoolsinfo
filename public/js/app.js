@@ -2216,7 +2216,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       attachedSchools: [],
       page: 1,
       attachedpage: 1,
-      type: '',
+      types: [],
+      sort: '',
       infiniteId: +new Date()
     };
   },
@@ -2227,7 +2228,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       axios.get('/courses/getschools', {
         params: {
           page: this.page,
-          notattached: this.course.id
+          notattached: this.course.id,
+          type: this.sort
         }
       }).then(function (_ref) {
         var data = _ref.data;
@@ -2275,14 +2277,12 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       this.infiniteId += 1;
     }
   },
-  created: function created() {// axios.get(`/courses/getschools`, {params: {attached: this.course.id},})
-    //  		.then (data => {
-    //  			this.attachedSchools = data.data.data;
-    // });
-    // axios.get(`/courses/getschools`, {params: {notattached: this.course.id},})
-    //  		.then (data => {
-    //  			this.notAttachedSchools = data.data.data;
-    // });
+  created: function created() {
+    var _this3 = this;
+
+    axios.get('/createSchoolRequirements/').then(function (data) {
+      _this3.types = data.data.Types;
+    });
   }
 });
 
@@ -26291,13 +26291,51 @@ var render = function() {
                   _c("div", { staticClass: "field" }, [
                     _c("div", { staticClass: "control " }, [
                       _c("div", { staticClass: "select is-small" }, [
-                        _c("select", [
-                          _c("option", { attrs: { value: "", selected: "" } }, [
-                            _vm._v("Types")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("With options")])
-                        ])
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.sort,
+                                expression: "sort"
+                              }
+                            ],
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.sort = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { value: "", selected: "" } },
+                              [_vm._v("Sort")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.types, function(type) {
+                              return _c("option", {
+                                domProps: {
+                                  value: type.id,
+                                  textContent: _vm._s(type.name)
+                                }
+                              })
+                            })
+                          ],
+                          2
+                        )
                       ])
                     ])
                   ])

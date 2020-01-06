@@ -13,9 +13,9 @@
 				    <div class="field">
 					  <div class="control ">
 					    <div class="select is-small">
-					      <select>
-					        <option value="" selected>Types</option>
-					        <option>With options</option>
+					      <select v-model="sort">
+					        <option value="" selected>Sort</option>
+					        <option v-for="type in types" v-text="type.name" :value="type.id"></option>
 					      </select>
 					    </div>
 					  </div>
@@ -72,7 +72,8 @@ import InfiniteLoading from 'vue-infinite-loading';
 				attachedSchools: [],
 				page: 1,
 				attachedpage: 1,
-				type: '',
+				types: [],
+				sort: '',
 				infiniteId: +new Date(),
 			}
 		},
@@ -83,6 +84,7 @@ import InfiniteLoading from 'vue-infinite-loading';
 		        params: {
 		          page: this.page,
 		          notattached: this.course.id,
+		          type: this.sort,
 		        },
 		      }).then(({ data }) => {
 		        if (data.data.length) {
@@ -117,14 +119,11 @@ import InfiniteLoading from 'vue-infinite-loading';
 		    },
 		  },
 		created () {
-			// axios.get(`/courses/getschools`, {params: {attached: this.course.id},})
-   //  		.then (data => {
-   //  			this.attachedSchools = data.data.data;
-			// });
-			// axios.get(`/courses/getschools`, {params: {notattached: this.course.id},})
-   //  		.then (data => {
-   //  			this.notAttachedSchools = data.data.data;
-			// });
+			axios.get('/createSchoolRequirements/')
+    		.then (data => {
+    			this.types = data.data.Types;
+			});
+			
 		}
 	}
 </script>
