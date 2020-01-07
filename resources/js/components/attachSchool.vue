@@ -14,7 +14,7 @@
 					  <div class="control ">
 					    <div class="select is-small">
 					      <select v-model="sort" @change="changeType">
-					        <option value="" selected>Sort</option>
+					        <option value="" selected>Sort By (All)</option>
 					        <option v-for="type in types" v-text="type.name" :value="type.id"></option>
 					      </select>
 					    </div>
@@ -25,7 +25,7 @@
 				    <input class="input is-rounded" type="text" placeholder="Rounded input">
 				  </div>
 				  <div class="column is-2">
-				    <span style="cursor: pointer">Select All</span>
+				    <span style="cursor: pointer" @click="selectall">Select All</span>
 				  </div>
 				</div>
 				<tabs>
@@ -76,17 +76,37 @@ import InfiniteLoading from 'vue-infinite-loading';
 				sort: '',
 				searchKey: '',
 				infiniteId: +new Date(),
+				selectallitems: [],
 			}
 		},
 
 		methods: {
+			selectall() {
+				this.notAttachedSchools.forEach(school => {
+					this.selectallitems.push(school.id);
+				})
+
+				this.attachMany();
+			},
+			attachMany(){
+				axios.post(`\\api/schoolcourseattachmany/${this.course.slug}`, {
+					schools: this.selectallitems
+				})
+	    		.then (data => {
+                    flash('Batch Schools Create.', 'success');
+                    this.resetnotattached();
+				})
+				.catch(error => {
+                    flash('Unable to attach Many, Please contact Admin.', 'failed');
+				});
+			},
+
 		    infiniteHandler($state) {
 		      axios.get('/courses/getschools', {
 		        params: {
 		          page: this.page,
 		          notattached: this.course.id,
 		          type: this.sort,
-		          // s: this.searchKey,
 		        },
 		      }).then(({ data }) => {
 		        if (data.data.length) {
@@ -117,14 +137,20 @@ import InfiniteLoading from 'vue-infinite-loading';
 		      });
 		    },
 		    changeType() {
-		      this.page = 1;
+		      this.resetnotattached();
 		      this.attachedpage = 1;
-		      this.notAttachedSchools = [];
 		      this.attachedSchools = [];
 		      this.infiniteId += 1;
-		      this.infiniteHandler();
 		      this.getAttached();
 		    },
+
+		    resetnotattached() {
+		     	this.page = 1;
+		      	this.notAttachedSchools = [];
+		      	this.infiniteId += 1;
+		      	this.infiniteHandler();
+                this.selectallitems = [];
+		    }
 		  },
 		created () {
 			axios.get('/createSchoolRequirements/')

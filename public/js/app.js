@@ -2219,29 +2219,50 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       types: [],
       sort: '',
       searchKey: '',
-      infiniteId: +new Date()
+      infiniteId: +new Date(),
+      selectallitems: []
     };
   },
   methods: {
-    infiniteHandler: function infiniteHandler($state) {
+    selectall: function selectall() {
       var _this = this;
+
+      this.notAttachedSchools.forEach(function (school) {
+        _this.selectallitems.push(school.id);
+      });
+      this.attachMany();
+    },
+    attachMany: function attachMany() {
+      var _this2 = this;
+
+      axios.post("\\api/schoolcourseattachmany/".concat(this.course.slug), {
+        schools: this.selectallitems
+      }).then(function (data) {
+        flash('Batch Schools Create.', 'success');
+
+        _this2.resetnotattached();
+      })["catch"](function (error) {
+        flash('Unable to attach Many, Please contact Admin.', 'failed');
+      });
+    },
+    infiniteHandler: function infiniteHandler($state) {
+      var _this3 = this;
 
       axios.get('/courses/getschools', {
         params: {
           page: this.page,
           notattached: this.course.id,
-          type: this.sort // s: this.searchKey,
-
+          type: this.sort
         }
       }).then(function (_ref) {
         var data = _ref.data;
 
         if (data.data.length) {
-          var _this$notAttachedScho;
+          var _this3$notAttachedSch;
 
-          _this.page += 1;
+          _this3.page += 1;
 
-          (_this$notAttachedScho = _this.notAttachedSchools).push.apply(_this$notAttachedScho, _toConsumableArray(data.data));
+          (_this3$notAttachedSch = _this3.notAttachedSchools).push.apply(_this3$notAttachedSch, _toConsumableArray(data.data));
 
           $state.loaded();
         } else {
@@ -2250,7 +2271,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       });
     },
     getAttached: function getAttached($state) {
-      var _this2 = this;
+      var _this4 = this;
 
       axios.get('/courses/getschools', {
         params: {
@@ -2263,11 +2284,11 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         var data = _ref2.data;
 
         if (data.data.length) {
-          var _this2$attachedSchool;
+          var _this4$attachedSchool;
 
-          _this2.attachedpage += 1;
+          _this4.attachedpage += 1;
 
-          (_this2$attachedSchool = _this2.attachedSchools).push.apply(_this2$attachedSchool, _toConsumableArray(data.data));
+          (_this4$attachedSchool = _this4.attachedSchools).push.apply(_this4$attachedSchool, _toConsumableArray(data.data));
 
           $state.loaded();
         } else {
@@ -2276,20 +2297,25 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       });
     },
     changeType: function changeType() {
-      this.page = 1;
+      this.resetnotattached();
       this.attachedpage = 1;
-      this.notAttachedSchools = [];
       this.attachedSchools = [];
       this.infiniteId += 1;
-      this.infiniteHandler();
       this.getAttached();
+    },
+    resetnotattached: function resetnotattached() {
+      this.page = 1;
+      this.notAttachedSchools = [];
+      this.infiniteId += 1;
+      this.infiniteHandler();
+      this.selectallitems = [];
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this5 = this;
 
     axios.get('/createSchoolRequirements/').then(function (data) {
-      _this3.types = data.data.Types;
+      _this5.types = data.data.Types;
     });
   }
 });
@@ -26334,7 +26360,7 @@ var render = function() {
                             _c(
                               "option",
                               { attrs: { value: "", selected: "" } },
-                              [_vm._v("Sort")]
+                              [_vm._v("Sort By (All)")]
                             ),
                             _vm._v(" "),
                             _vm._l(_vm.types, function(type) {
@@ -26361,9 +26387,14 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "column is-2" }, [
-                  _c("span", { staticStyle: { cursor: "pointer" } }, [
-                    _vm._v("Select All")
-                  ])
+                  _c(
+                    "span",
+                    {
+                      staticStyle: { cursor: "pointer" },
+                      on: { click: _vm.selectall }
+                    },
+                    [_vm._v("Select All")]
+                  )
                 ])
               ]),
               _vm._v(" "),
@@ -41191,14 +41222,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./resources/js/components/attachSchool.vue ***!
   \**************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _attachSchool_vue_vue_type_template_id_6c912964___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./attachSchool.vue?vue&type=template&id=6c912964& */ "./resources/js/components/attachSchool.vue?vue&type=template&id=6c912964&");
 /* harmony import */ var _attachSchool_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./attachSchool.vue?vue&type=script&lang=js& */ "./resources/js/components/attachSchool.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _attachSchool_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _attachSchool_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -41228,7 +41260,7 @@ component.options.__file = "resources/js/components/attachSchool.vue"
 /*!***************************************************************************!*\
   !*** ./resources/js/components/attachSchool.vue?vue&type=script&lang=js& ***!
   \***************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

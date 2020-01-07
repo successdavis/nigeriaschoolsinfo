@@ -22,8 +22,10 @@ Route::post('api/{exams}/attachlogo', 'ExamsLogoController@store')->name('exam.l
 
 Route::get('api/advertisements', 'AdvertisementsController@index')->name('advertisements.index');
 Route::get('/api/statelocalgovernments', 'LocationController@index')->name('advertisements.index');
+
 Route::post('/api/schoolcourseattachment', 'CourseSchoolController@store')->name('courseschool.store');
 Route::delete('/api/schoolcoursedetachment', 'CourseSchoolController@destroy')->name('courseschool.delete');
+Route::post('/api/schoolcourseattachmany/{course}', 'CourseSchoolController@storemany')->name('courseschool.storemany');
 
 
 Route::get('/', 'PostController@index');

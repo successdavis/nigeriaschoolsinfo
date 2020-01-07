@@ -41,6 +41,13 @@ class CourseSchoolController extends Controller
         return Response(201);
     }
 
+    public function storeMany(Courses $course, Request $request)
+    {
+        $course->schools()->attach($request->schools);
+
+        return Response(201);
+    }
+
     /**
      * Display the specified resource.
      *

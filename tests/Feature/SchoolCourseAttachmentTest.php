@@ -38,4 +38,17 @@ class SchoolCourseAttachmentTest extends TestCase
 
         $this->assertCount(0, $this->course->schools);
     }
+
+    /** @test */
+    public function an_admin_can_attach_many_school_at_a_time()
+    {
+        $schools = factory('App\Schools', 5)->create();
+        $schoolIds = ['1', '2', '3'];
+
+        $response = $this->json('POST', 
+            'api/schoolcourseattachmany/' . $this->course->slug, ['schools' => $schoolIds]
+        )->json();
+
+        $this->assertCount(3, $this->course->schools);
+    }
 }
