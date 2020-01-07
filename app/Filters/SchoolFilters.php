@@ -64,6 +64,7 @@ class SchoolFilters extends Filters
         if (empty($type)) {
             return $this->builder;
         }
+        
         $this->builder->getQuery()->orders = [];
         return $this->builder->where('school_type_id', $type);
     }

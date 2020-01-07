@@ -13,7 +13,7 @@
 				    <div class="field">
 					  <div class="control ">
 					    <div class="select is-small">
-					      <select v-model="sort">
+					      <select v-model="sort" @change="changeType">
 					        <option value="" selected>Sort</option>
 					        <option v-for="type in types" v-text="type.name" :value="type.id"></option>
 					      </select>
@@ -74,6 +74,7 @@ import InfiniteLoading from 'vue-infinite-loading';
 				attachedpage: 1,
 				types: [],
 				sort: '',
+				searchKey: '',
 				infiniteId: +new Date(),
 			}
 		},
@@ -85,6 +86,7 @@ import InfiniteLoading from 'vue-infinite-loading';
 		          page: this.page,
 		          notattached: this.course.id,
 		          type: this.sort,
+		          // s: this.searchKey,
 		        },
 		      }).then(({ data }) => {
 		        if (data.data.length) {
@@ -101,6 +103,8 @@ import InfiniteLoading from 'vue-infinite-loading';
 		        params: {
 		          page: this.attachedpage,
 		          attached: this.course.id,
+		          type: this.sort,
+		          // s: this.searchKey,
 		        },
 		      }).then(({ data }) => {
 		        if (data.data.length) {
@@ -114,8 +118,12 @@ import InfiniteLoading from 'vue-infinite-loading';
 		    },
 		    changeType() {
 		      this.page = 1;
+		      this.attachedpage = 1;
 		      this.notAttachedSchools = [];
+		      this.attachedSchools = [];
 		      this.infiniteId += 1;
+		      this.infiniteHandler();
+		      this.getAttached();
 		    },
 		  },
 		created () {

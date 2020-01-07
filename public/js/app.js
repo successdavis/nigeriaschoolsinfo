@@ -2218,6 +2218,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       attachedpage: 1,
       types: [],
       sort: '',
+      searchKey: '',
       infiniteId: +new Date()
     };
   },
@@ -2229,7 +2230,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         params: {
           page: this.page,
           notattached: this.course.id,
-          type: this.sort
+          type: this.sort // s: this.searchKey,
+
         }
       }).then(function (_ref) {
         var data = _ref.data;
@@ -2253,7 +2255,9 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       axios.get('/courses/getschools', {
         params: {
           page: this.attachedpage,
-          attached: this.course.id
+          attached: this.course.id,
+          type: this.sort // s: this.searchKey,
+
         }
       }).then(function (_ref2) {
         var data = _ref2.data;
@@ -2273,8 +2277,12 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     },
     changeType: function changeType() {
       this.page = 1;
+      this.attachedpage = 1;
       this.notAttachedSchools = [];
+      this.attachedSchools = [];
       this.infiniteId += 1;
+      this.infiniteHandler();
+      this.getAttached();
     }
   },
   created: function created() {
@@ -26303,19 +26311,23 @@ var render = function() {
                               }
                             ],
                             on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.sort = $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              }
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.sort = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                },
+                                _vm.changeType
+                              ]
                             }
                           },
                           [
