@@ -107,38 +107,84 @@
 							</div>
 					</div>
 					<div v-show="steps == 2">
-							<div class="is-size-4 has-text-centered	mb-small">Bio Data</div>
+						<div class="is-size-4 has-text-centered	mb-small">Bio Data</div>
 
-							<div class="field is-horizontal">
-							  <div class="field-label is-normal">
-							    <label class="label">*Description</label>
-							  </div>
-							  <div class="field-body">
-							    <div class="field">
-							      <div class="control">
-							        <textarea v-model="courseForm.description" required class="textarea" placeholder="Write all about the course here"></textarea>
-							      </div>
-							      <p class="help is-danger" v-if="courseForm.errors.has('description')" v-text="courseForm.errors.get('description')"></p>
+						<div class="field is-horizontal">
+						  <div class="field-label is-normal">
+						    <label class="label">*Description</label>
+						  </div>
+						  <div class="field-body">
+						    <div class="field">
+						      <div class="control">
+						        <textarea v-model="courseForm.description" required class="textarea" placeholder="Write all about the course here"></textarea>
+						      </div>
+						      <p class="help is-danger" v-if="courseForm.errors.has('description')" v-text="courseForm.errors.get('description')"></p>
 
-							    </div>
-							  </div>
-							</div>
-
-							<div class="field is-horizontal">
-							  <div class="field-label">
-							    <!-- Left empty for spacing -->
-							  </div>
-							  <div class="field-body">
-							    <div class="field is-fullwidth">
-							      <div class="control">
-							        <button type="submit" class="button is-primary">
-							          CREATE COURSE
-							        </button>
-							      </div>
-							    </div>
-							  </div>
-							</div>
+						    </div>
+						  </div>
 						</div>
+					</div>
+					<div v-show="steps == 3">
+
+						<div class="is-size-4 has-text-centered	mb-small">Jamb Specs</div>
+
+						<div class="field is-horizontal">
+						  <div class="field-label is-normal">
+						    <label class="label">Utme Comment</label>
+						  </div>
+						  <div class="field-body">
+						    <div class="field">
+						      <div class="control">
+						        <textarea v-model="courseForm.utme_comment" required class="textarea" placeholder="Please indicate which other subject(s) can be conbined here. Be brief"></textarea>
+						      </div>
+						      <p class="help is-danger" v-if="courseForm.errors.has('utme_comment')" v-text="courseForm.errors.get('utme_comment')"></p>
+						    </div>
+						  </div>
+						</div>
+						<div class="field is-horizontal">
+						  <div class="field-label is-normal">
+						    <label class="label">*Utme Requirement</label>
+						  </div>
+						  <div class="field-body">
+						    <div class="field">
+						      <div class="control">
+						        <textarea v-model="courseForm.utme_requirement" required class="textarea" placeholder="Write here the utme requirements for this course"></textarea>
+						      </div>
+						      <p class="help is-danger" v-if="courseForm.errors.has('utme_requirement')" v-text="courseForm.errors.get('utme_requirement')"></p>
+
+						    </div>
+						  </div>
+						</div>
+						<div class="field is-horizontal">
+						  <div class="field-label is-normal">
+						    <label class="label">*Direct Entry Requirement</label>
+						  </div>
+						  <div class="field-body">
+						    <div class="field">
+						      <div class="control">
+						        <textarea v-model="courseForm.direct_requirement" required class="textarea" placeholder="Write here the requirement for direct entry admission"></textarea>
+						      </div>
+						      <p class="help is-danger" v-if="courseForm.errors.has('direct_requirement')" v-text="courseForm.errors.get('direct_requirement')"></p>
+						    </div>
+						  </div>
+						</div>
+
+
+						<div class="field is-horizontal">
+						  <div class="field-label">
+						    <!-- Left empty for spacing -->
+						  </div>
+						  <div class="field-body">
+						    <div class="field is-fullwidth">
+						      <div class="control">
+						        <button type="submit" class="button is-primary">
+						          CREATE COURSE
+						        </button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					</div>
 				</form>
 					<div v-if="!showMatchedWarning" class="mt-medium buttons is-centered">
 						<button class="button" @click="steps --" :disabled="steps === 1">Prev</button>
@@ -170,7 +216,7 @@
 				matchedCourses: [],
 				adaptive: true,
 				steps: 1,
-				max_steps: 2,
+				max_steps: 3,
 				courseForm: new Form ({
 					name: '',
 					short_name: '',
@@ -179,6 +225,9 @@
 					logo_path: '',
 					salary: '',
 					duration: '',
+					utme_comment: '',
+					utme_requirement: '',
+					direct_requirement: '',
 				}),
 			}
 		},
@@ -221,7 +270,7 @@
 		created () {
 			axios.get('/newcourse/courserequirements')
     		.then (data => {
-    			this.subjects = data.data.subjects;
+    			this.faculties = data.data.faculties;
 			});
 		}
 	}

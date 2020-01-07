@@ -2667,6 +2667,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2679,7 +2725,7 @@ __webpack_require__.r(__webpack_exports__);
       matchedCourses: [],
       adaptive: true,
       steps: 1,
-      max_steps: 2,
+      max_steps: 3,
       courseForm: new Form({
         name: '',
         short_name: '',
@@ -2687,7 +2733,10 @@ __webpack_require__.r(__webpack_exports__);
         description: '',
         logo_path: '',
         salary: '',
-        duration: ''
+        duration: '',
+        utme_comment: '',
+        utme_requirement: '',
+        direct_requirement: ''
       })
     };
   },
@@ -2736,7 +2785,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this3 = this;
 
     axios.get('/newcourse/courserequirements').then(function (data) {
-      _this3.subjects = data.data.subjects;
+      _this3.faculties = data.data.faculties;
     });
   }
 });
@@ -27450,6 +27499,207 @@ var render = function() {
                                 : _vm._e()
                             ])
                           ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.steps == 3,
+                            expression: "steps == 3"
+                          }
+                        ]
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "is-size-4 has-text-centered\tmb-small"
+                          },
+                          [_vm._v("Jamb Specs")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "field is-horizontal" }, [
+                          _c("div", { staticClass: "field-label is-normal" }, [
+                            _c("label", { staticClass: "label" }, [
+                              _vm._v("Utme Comment")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "field-body" }, [
+                            _c("div", { staticClass: "field" }, [
+                              _c("div", { staticClass: "control" }, [
+                                _c("textarea", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.courseForm.utme_comment,
+                                      expression: "courseForm.utme_comment"
+                                    }
+                                  ],
+                                  staticClass: "textarea",
+                                  attrs: {
+                                    required: "",
+                                    placeholder:
+                                      "Please indicate which other subject(s) can be conbined here. Be brief"
+                                  },
+                                  domProps: {
+                                    value: _vm.courseForm.utme_comment
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.courseForm,
+                                        "utme_comment",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _vm.courseForm.errors.has("utme_comment")
+                                ? _c("p", {
+                                    staticClass: "help is-danger",
+                                    domProps: {
+                                      textContent: _vm._s(
+                                        _vm.courseForm.errors.get(
+                                          "utme_comment"
+                                        )
+                                      )
+                                    }
+                                  })
+                                : _vm._e()
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "field is-horizontal" }, [
+                          _c("div", { staticClass: "field-label is-normal" }, [
+                            _c("label", { staticClass: "label" }, [
+                              _vm._v("*Utme Requirement")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "field-body" }, [
+                            _c("div", { staticClass: "field" }, [
+                              _c("div", { staticClass: "control" }, [
+                                _c("textarea", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.courseForm.utme_requirement,
+                                      expression: "courseForm.utme_requirement"
+                                    }
+                                  ],
+                                  staticClass: "textarea",
+                                  attrs: {
+                                    required: "",
+                                    placeholder:
+                                      "Write here the utme requirements for this course"
+                                  },
+                                  domProps: {
+                                    value: _vm.courseForm.utme_requirement
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.courseForm,
+                                        "utme_requirement",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _vm.courseForm.errors.has("utme_requirement")
+                                ? _c("p", {
+                                    staticClass: "help is-danger",
+                                    domProps: {
+                                      textContent: _vm._s(
+                                        _vm.courseForm.errors.get(
+                                          "utme_requirement"
+                                        )
+                                      )
+                                    }
+                                  })
+                                : _vm._e()
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "field is-horizontal" }, [
+                          _c("div", { staticClass: "field-label is-normal" }, [
+                            _c("label", { staticClass: "label" }, [
+                              _vm._v("*Direct Entry Requirement")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "field-body" }, [
+                            _c("div", { staticClass: "field" }, [
+                              _c("div", { staticClass: "control" }, [
+                                _c("textarea", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.courseForm.direct_requirement,
+                                      expression:
+                                        "courseForm.direct_requirement"
+                                    }
+                                  ],
+                                  staticClass: "textarea",
+                                  attrs: {
+                                    required: "",
+                                    placeholder:
+                                      "Write here the requirement for direct entry admission"
+                                  },
+                                  domProps: {
+                                    value: _vm.courseForm.direct_requirement
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.courseForm,
+                                        "direct_requirement",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _vm.courseForm.errors.has("direct_requirement")
+                                ? _c("p", {
+                                    staticClass: "help is-danger",
+                                    domProps: {
+                                      textContent: _vm._s(
+                                        _vm.courseForm.errors.get(
+                                          "direct_requirement"
+                                        )
+                                      )
+                                    }
+                                  })
+                                : _vm._e()
+                            ])
+                          ])
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "field is-horizontal" }, [
@@ -27466,7 +27716,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n\t\t\t\t\t\t          CREATE COURSE\n\t\t\t\t\t\t        "
+                                      "\n\t\t\t\t\t          CREATE COURSE\n\t\t\t\t\t        "
                                     )
                                   ]
                                 )

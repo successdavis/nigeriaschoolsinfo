@@ -60,6 +60,7 @@ Route::get('/courses/editcourse/{course}', 'CoursesController@edit')->name('cour
 
 Route::get('/courses/{courses}', 'CoursesController@show')->name('courses.show');
 Route::post('/courses/createcourse', 'CoursesController@store')->name('courses.store');
+Route::get('/find/courses', 'CoursesController@findcourses')->name('courses.store');
 Route::get('/newcourse/courserequirements', 'CoursesController@getrequirements');
 
 

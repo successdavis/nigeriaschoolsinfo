@@ -51,7 +51,10 @@ class CoursesController extends Controller
             'description'     => 'required|min:300', 
             'faculty_id'      => 'required|exists:faculties,id',
             'salary'          => 'integer', 
-            'duration'          => 'integer', 
+            'duration'        => 'integer',
+            'utme_comment'      => 'nullable|string|max:255',
+            'utme_requirement'    => 'nullable|string|min:5|max:255',
+            'direct_requirement'    => 'nullable|string',
 
 
         ]);
@@ -62,6 +65,9 @@ class CoursesController extends Controller
             'description'       =>  $request->description,
             'salary'            =>  $request->salary,
             'duration'          =>  $request->duration,
+            'utme_comment'          =>  $request->utme_comment,
+            'utme_requirement'      =>  $request->utme_requirement,
+            'direct_requirement'    =>  $request->direct_requirement,
         ]);
 
         if (request()->wantsJson()) {
