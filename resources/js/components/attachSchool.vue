@@ -1,4 +1,4 @@
-<template>
+|<template>
 	<div> 
 		<button @click="$modal.show('attach-school')" class="button">Modify Course</button>
 		<modal

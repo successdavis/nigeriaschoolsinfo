@@ -13,6 +13,7 @@ class Courses extends Model
     public $pathPrefix = '/courses/';
     public $findWith    =   'slug';
     public $excerpt    =   ['description', 23];
+    protected $with     = ['subjects'];
     
 
     use ModelFunctions;
@@ -38,7 +39,7 @@ class Courses extends Model
 
     public function subjects()
     {
-        return $this->belongsToMany(Subject::class)->withPivot('required');
+        return $this->belongsToMany(Subject::class);
     }
 
     public function scopeFilter($query, $filters)
@@ -59,5 +60,14 @@ class Courses extends Model
     public function detachSchool($school)
     {
         return $this->schools()->detach($school);
+    }
+
+    public function attachSubjects($subjects)
+    {
+        $previousSubjects = $this->subjects->pluck('id');
+        
+        $this->subjects()->detach($previousSubjects);
+
+        $this->subjects()->attach($subjects);
     }
 }

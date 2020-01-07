@@ -219,9 +219,9 @@
 		},
 
 		created () {
-			axios.get('/getfaculties')
+			axios.get('/newcourse/courserequirements')
     		.then (data => {
-    			this.faculties = data.data;
+    			this.subjects = data.data.subjects;
 			});
 		}
 	}

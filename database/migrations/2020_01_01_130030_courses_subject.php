@@ -17,7 +17,8 @@ class CoursesSubject extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('courses_id');
             $table->unsignedInteger('subject_id');
-            $table->boolean('required')->default(false);
+
+            $table->unique(['courses_id', 'subject_id'], 'This Relationship a lready exists');
         });
     }
 

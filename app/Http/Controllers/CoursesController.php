@@ -7,6 +7,7 @@ use App\Faculty;
 use App\Filters\CourseFilters;
 use App\Http\Resources\CourseResource;
 use App\Schools;
+use App\Subject;
 use Illuminate\Http\Request;
 
 class CoursesController extends Controller
@@ -137,5 +138,13 @@ class CoursesController extends Controller
         }
 
         return [];
+    }
+
+    public function getrequirements()
+    {
+        $faculties = Faculty::all();
+        $subjects =  Subject::all();
+
+        return compact('faculties', 'subjects');
     }
 }

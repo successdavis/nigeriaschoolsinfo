@@ -27,6 +27,12 @@ Route::post('/api/schoolcourseattachment', 'CourseSchoolController@store')->name
 Route::delete('/api/schoolcoursedetachment', 'CourseSchoolController@destroy')->name('courseschool.delete');
 Route::post('/api/schoolcourseattachmany/{course}', 'CourseSchoolController@storemany')->name('courseschool.storemany');
 
+// '/course/' . $this->course->slug .'/attachSubject'
+Route::post('/api/{course}/attachSubject', 'AttachSubjectController@store')->name('attachsubject.store');
+Route::post('/api/{course}/attachManySubject', 'AttachSubjectController@storemany');
+Route::get('/api/{course}/getsubjects', 'AttachSubjectController@index');
+
+
 
 Route::get('/', 'PostController@index');
 Route::get('/testpage', 'TestController@index');
@@ -54,6 +60,8 @@ Route::get('/courses/editcourse/{course}', 'CoursesController@edit')->name('cour
 
 Route::get('/courses/{courses}', 'CoursesController@show')->name('courses.show');
 Route::post('/courses/createcourse', 'CoursesController@store')->name('courses.store');
+Route::get('/newcourse/courserequirements', 'CoursesController@getrequirements');
+
 
 Route::get('/faculty/{faculty}', 'FacultiesController@show')->name('faculty.show');
 Route::get('/getfaculties', 'FacultiesController@getfaculties')->name('schoolCourses');
