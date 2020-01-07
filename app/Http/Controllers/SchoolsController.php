@@ -57,8 +57,8 @@ class SchoolsController extends Controller
             'address'           => 'required', 
             'school_type_id'    => 'required|exists:school_types,id', 
             'sponsored_id'      => 'required|exists:sponsoreds,id', 
-            'jamb_points'       => 'integer',
-            'phone'             => 'min:10|max:10', 
+            'jamb_points'       => 'nullable|integer',
+            'phone'             => 'nullable|min:10|max:10', 
         ]);
 
         $school = Schools::create([

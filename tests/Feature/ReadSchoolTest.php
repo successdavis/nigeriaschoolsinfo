@@ -101,7 +101,8 @@ class ReadSChoolTest extends TestCase
         $url = 'find/school?sn=JAMB';
 
         $schools = $this->json('GET', $url)->json();
-        $this->assertCount(1, $schools['data']);
+
+        $this->assertCount(1, $schools);
     }
 
     // /** @test */

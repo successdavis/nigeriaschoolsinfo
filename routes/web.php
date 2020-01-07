@@ -21,7 +21,7 @@ Route::post('api/{school}/addlogo', 'SchoolLogoController@store')->name('school.
 Route::post('api/{exams}/attachlogo', 'ExamsLogoController@store')->name('exam.logo')->middleware('admin');
 
 Route::get('api/advertisements', 'AdvertisementsController@index')->name('advertisements.index');
-Route::get('/api/statelocalgovernments', 'LocationController@index')->name('advertisements.index');
+Route::get('/api/statelocalgovernments', 'LocationController@index')->name('statelocal.index');
 
 Route::post('/api/schoolcourseattachment', 'CourseSchoolController@store')->name('courseschool.store');
 Route::delete('/api/schoolcoursedetachment', 'CourseSchoolController@destroy')->name('courseschool.delete');
@@ -60,7 +60,7 @@ Route::get('/courses/editcourse/{course}', 'CoursesController@edit')->name('cour
 
 Route::get('/courses/{courses}', 'CoursesController@show')->name('courses.show');
 Route::post('/courses/createcourse', 'CoursesController@store')->name('courses.store');
-Route::get('/find/courses', 'CoursesController@findcourses')->name('courses.store');
+Route::get('/find/courses', 'CoursesController@findcourses')->name('courses.find');
 Route::get('/newcourse/courserequirements', 'CoursesController@getrequirements');
 
 

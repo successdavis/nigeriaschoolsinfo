@@ -58,6 +58,8 @@ class CoursesController extends Controller
 
 
         ]);
+        
+        // dd(request()->all());
         $course = Courses::create([
             'name'              =>  $request->name,
             'short_name'        =>  $request->short_name,

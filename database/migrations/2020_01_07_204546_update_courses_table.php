@@ -14,9 +14,9 @@ class UpdateCoursesTable extends Migration
     public function up()
     {
         Schema::table('courses', function (Blueprint $table){
-            $table->string('utme_comment');
-            $table->text('utme_requirement');
-            $table->text('direct_requirement');
+            $table->string('utme_comment')->nullable();
+            $table->text('utme_requirement')->nullable();
+            $table->text('direct_requirement')->nullable();
         });
     }
 
