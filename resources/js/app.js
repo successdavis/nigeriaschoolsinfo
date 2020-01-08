@@ -33,6 +33,7 @@ Vue.component('new-school', require('./components/newSchool.vue').default);
 Vue.component('new-course', require('./components/newCourse.vue').default);
 Vue.component('attach-schools', require('./components/attachSchool.vue').default);
 Vue.component('attach-subjects', require('./components/attachSubjects.vue').default);
+Vue.component('special-consideration', require('./components/SpecialConsideration.vue').default);
 Vue.component('tabs', require('./components/tabs.vue').default);
 Vue.component('tab', require('./components/tab.vue').default);
 Vue.component('school', require('./components/school.vue').default);

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Consideration;
 use App\Schools;
 use App\Subject;
 use App\Traits\ModelFunctions;
@@ -40,6 +41,11 @@ class Courses extends Model
     public function subjects()
     {
         return $this->belongsToMany(Subject::class);
+    }
+
+    public function considerations()
+    {
+        return $this->hasMany(Consideration::class, 'course_id');
     }
 
     public function scopeFilter($query, $filters)

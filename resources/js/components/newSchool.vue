@@ -317,7 +317,7 @@ export default {
                 	this.showErrors = true;
                     flash('We were unable to process your form', 'failed');
                 });
-        },
+        	},
 	    findSchool () {
 	    	axios.get('/find/school', {params: {s: this.schoolForm.name, sn: this.schoolForm.short_name}})
 	    		.then (data => {

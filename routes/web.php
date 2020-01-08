@@ -32,6 +32,10 @@ Route::post('/api/{course}/attachSubject', 'AttachSubjectController@store')->nam
 Route::post('/api/{course}/attachManySubject', 'AttachSubjectController@storemany');
 Route::get('/api/{course}/getsubjects', 'AttachSubjectController@index');
 
+Route::post('/api/{course}/addconsideration', 'ConsiderationController@store');
+Route::get('/api/{course}/getconsiderations', 'ConsiderationController@index');
+Route::delete('/api/{consideration}/delete', 'ConsiderationController@destroy');
+
 
 
 Route::get('/', 'PostController@index');
