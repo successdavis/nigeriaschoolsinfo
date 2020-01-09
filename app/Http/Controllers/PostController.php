@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Advertisements;
+use App\Courses;
+use App\Exams;
 use App\Post;
+use App\SchoolType;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -29,7 +32,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -40,7 +43,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+        $module = 'App\\' . ucwords(strtolower($request->module));
+        if(class_exists($module)) {
+            $handler = $module::find($request->module_id);
+            $params = ['title' => $request->title, 'body' => $request->body];
+            return $handler->publishPost($params);
+        }
+
+        abort('Something isn\'t right!', 400);
     }
 
     /**
@@ -76,7 +91,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        dd($post);
     }
 
     /**
@@ -88,5 +103,14 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    public function newpostrequirement()
+    {
+        $exams = Exams::all();
+        $courses = Courses::all();
+        $schooltype = SchoolType::all();
+
+        return compact('exams', 'courses', 'schooltype');
     }
 }

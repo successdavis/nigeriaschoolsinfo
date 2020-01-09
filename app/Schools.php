@@ -17,6 +17,7 @@ class Schools extends Model
     use ModelFunctions;
 
     protected $guarded = [];
+    protected $with = ['courses'];
 
     public $pathPrefix  = '/schools/';
     public $findWith    =   'slug';

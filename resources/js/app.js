@@ -27,6 +27,7 @@ Vue.component('image-carousel', require('./components/carousel.vue').default);
 Vue.component('shools-page', require('./pages/schools.vue').default);
 Vue.component('exams-page', require('./pages/exams.vue').default);
 Vue.component('courses-page', require('./pages/courses.vue').default);
+Vue.component('new-post', require('./pages/NewPost.vue').default);
 Vue.component('paginator', require('./components/paginator.vue').default);
 Vue.component('course_quick_view', require('./components/CourseQuickView.vue').default);
 Vue.component('new-school', require('./components/newSchool.vue').default);
@@ -37,6 +38,7 @@ Vue.component('special-consideration', require('./components/SpecialConsideratio
 Vue.component('tabs', require('./components/tabs.vue').default);
 Vue.component('tab', require('./components/tab.vue').default);
 Vue.component('school', require('./components/school.vue').default);
+Vue.component('school-quickview', require('./components/schoolQuickView.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

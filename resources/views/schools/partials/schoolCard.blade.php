@@ -9,6 +9,9 @@
           {{-- 23 --}}
           <span class="school_sh_name is-hidden-tablet mg_left-auto image__favicon--small">23</span>
         </p>
+        <p class="image is-32x32 mt-small">
+          <school-quickview :school="school" :name="school.name"></school-quickview>
+        </p>
       </figure>
       <div class="media-content">
         <div class="field">

@@ -15,6 +15,7 @@
     @if (auth()->user()->isAdmin())
         <new-school></new-school>
         <new-course></new-course>
+        <a class="button" href="/posts/newpost">Create Post</a>
     @endif
 </div>
 @endsection
