@@ -12,7 +12,7 @@
     </p>
     <p class="card-footer-item">
       <span>
-        View
+        <a :href="course.path">View</a>
       </span>
     </p>
     @auth

@@ -64,6 +64,8 @@ Route::get('/find/school', 'SchoolsController@findschool')->name('schools.findsc
 Route::get('/createSchoolRequirements', 'SchoolsController@cschoolrequirements')->name('schools.cschoolrequirements');
 Route::get('/courses/getschools', 'SchoolsController@index')->name('courses.getschools');
 
+Route::get('/schoolsofferedby/{course}', 'CoursesController@getschools');
+
 
 Route::get('/schools/{schools}/courses', 'CoursesController@index')->name('schoolCourses');
 

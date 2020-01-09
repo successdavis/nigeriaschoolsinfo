@@ -14,7 +14,7 @@ class Courses extends Model
     public $pathPrefix = '/courses/';
     public $findWith    =   'slug';
     public $excerpt    =   ['description', 23];
-    protected $with     = ['subjects'];
+    protected $with     = ['subjects', 'considerations'];
     
 
     use ModelFunctions;

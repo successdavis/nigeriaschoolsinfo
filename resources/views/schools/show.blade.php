@@ -46,7 +46,7 @@
 					<div class="is-size-4">{{$school->short_name}} Admission Info: </div>
 					@if ($school->isAdmitting())
 						<div>{{$school->short_name}} is open for application to new intake</div>
-						<div>Interested candidates can find below the website address and portal for application, if you have trouble applying, please find below the school contacts information in the contact section below or visit <a href="sleettech.com">www.sleettech.com</a> for documented steps and procedures to successfully complete your application.</div>
+						<div>Interested candidates can find below the website address and portal for application, if you have trouble applying, please find below the school contacts information in the contact section below or visit <a target="_blank" href="https://www.sleettech.com">www.sleettech.com</a> for documented steps and procedures to successfully complete your application.</div>
 					@else
 						<div>{{$school->short_name }} is not open for registration at the moment, Please check back later</div>
 						{{-- put a subscription button here later --}}
@@ -60,8 +60,8 @@
 					<div class="mt-small"><strong>School Address:</strong> {{$school->address}}</div>
 					<div><strong>Phone Number: </strong> +234{{$school->phone}} </div>
 					<div><strong>Email: </strong> {{$school->email}} </div>
-					<div><strong>Website: </strong> {{$school->website}}</div>
-					<div><strong>Portal: </strong> {{$school->website}}</div> 
+					<div><strong>Website:</strong><a href="https://{{$school->website}}" target="_blank"> {{$school->website}}</a></div>
+					<div><strong>Portal: </strong><a href="https://{{$school->portal_website}}" target="_blank"> {{$school->portal_website}}</a></div> 
 				{{-- <p>{!! nl2br(str_replace(" ", "&nbsp;", $school->description)) !!}</p> --}}
 				</div>
 				<div class="mt-small">

@@ -16,20 +16,30 @@
 					  <thead>
 					    <tr>
 					      <th><abbr title="Position">Subject</abbr></th>
-					      <th>Required</th>
 					    </tr>
 					  </thead>
 					  <tbody>
+					  	<tr>
+					  		<td>English Language</td>
+					  	</tr>
 					    <tr v-for="subject in course.subjects">
 					      <td v-text="subject.name"></td>
-					      <td v-text="subject.required"></td>
 					    </tr>
 					  </tbody>
 					</table>
 
-				<h3 class="is-size-5 has-text-centered">Schools offering <span v-text="course.name"></span></h3>
+				<!-- <h3 class="is-size-5 has-text-centered">:</span></h3> -->
+				<div class="mb-small" v-text="course.utme_comment"></div>
 
-				<table class="table">
+				<h3 class="is-size-5 has-text-centered">UTME Requirements</span></h3>
+				<div class="mb-small" v-text="course.utme_requirement"></div>
+
+				<h3 class="is-size-5 has-text-centered">Direct Requirements</span></h3>
+				<div class="mb-small" v-text="course.direct_requirement"></div>
+
+				<!-- <h3 class="is-size-5 has-text-centered">Schools offering <span v-text="course.name"></span></h3> -->
+
+				<!-- <table class="table">
 				  <thead>
 				    <tr>
 				      <th><abbr title="Position">Name</abbr></th>
@@ -42,7 +52,7 @@
 				      <td v-text="school.jamb_points"></td>
 				    </tr>
 				  </tbody>
-				</table>
+				</table> -->
 				<div @click="$modal.hide(name)" class="back_to_course"><i class="fas fa-long-arrow-alt-left"></i> Back to Courses</div>
 			</div>
 			

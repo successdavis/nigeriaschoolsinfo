@@ -26,7 +26,11 @@ class CourseResource extends JsonResource
             'duration'      => $this->duration,
             'excerpt'       => $this->excerpt(),
             'schools'       => $this->schools()->limit(40)->get(),
+            'utme_comment'  => $this->utme_comment,
+            'utme_requirement'  => $this->utme_requirement,
+            'direc_requirement'  => $this->direc_requirement,
             'subjects'       => $this->subjects,
+            'path'           => $this->path(),
 
         ];
     }

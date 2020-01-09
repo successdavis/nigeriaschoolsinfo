@@ -11,7 +11,7 @@
 						      <p class="title">{{$post->title}}</p>
 						      <p class="subtitle">{{$post->source->name}}</p>
 						      <div class="content">
-						        <p>{{$post->body}}</p>
+						        <p>{!! nl2br($post->body) !!}</p>
 						      </div>
 						    </article>
 						</div>

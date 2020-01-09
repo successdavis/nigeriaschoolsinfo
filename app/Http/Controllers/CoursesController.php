@@ -155,4 +155,11 @@ class CoursesController extends Controller
 
         return compact('faculties', 'subjects');
     }
+
+    public function getschools(Courses $course)
+    {
+        $schools = $course->schools()->orderBy('name')->get();
+
+        return view('courses.schools', compact('course','schools'));
+    }
 }
