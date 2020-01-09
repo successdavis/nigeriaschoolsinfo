@@ -19,7 +19,7 @@ class CreateCourseTest extends TestCase
     }
 
         /** @test */
-    public function an_administrator_can_creat_a_new_course()
+    public function an_administrator_can_create_a_new_course()
     {   
         $this->withExceptionHandling();
         $user = create('App\User');

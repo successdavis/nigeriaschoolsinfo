@@ -99,9 +99,10 @@ class PostController extends Controller
         ]);
 
         $module = 'App\\' . ucwords(strtolower($request->module));
+
         if ($post->source_type !== $module) {
             if(!class_exists($module)) {
-                abort('Bad Request', 400);
+                abort(400, 'Bad Request');
             }
         }
 

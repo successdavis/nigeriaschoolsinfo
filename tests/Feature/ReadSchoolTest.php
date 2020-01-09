@@ -31,7 +31,7 @@ class ReadSChoolTest extends TestCase
     {
         $this->get('/schools/' .  $this->school->slug)
             ->assertSee($this->school->name)
-            ->assertSee($this->school->description);
+            ->assertSee(nl2br($this->school->description));
     }
 
         /** @test */

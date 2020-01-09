@@ -15,7 +15,7 @@ $factory->define(Courses::class, function (Faker $faker) {
             return factory('App\Faculty')->create()->id;
         },
         'utme_comment'	=> 'plus any Social Science subject.',
-        'utme_requirement'	=> 'Five SSCE credit passes including English Language, Mathematics, Economics and any other two relevant subjects. For NBC holders, the other two relevant subjectscould be from any of Accounting, Principles of Accounts, Commerce, Office  Practice and Secretarial Duties. .',
-        'direct_requirement' => 'Two ‘A’ level passes chosen from Economics, Accounting, Business Management, Government and Geography',
+        'utme_requirement'	=> 'the other two relevant subjectscould be from any of Accounting, Principles of Accounts, Commerce, Office  Practice and Secretarial Duties. .',
+        'direct_requirement' => 'Two a level passes chosen from Economics, Accounting, Business Management, Government and Geography',
     ];
 });

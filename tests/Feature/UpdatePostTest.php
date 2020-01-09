@@ -27,11 +27,12 @@ class UpdatePostTest extends TestCase
         $user->assignRole($role->id);
         $this->signIn($user);
 
+
         $this->json('patch', '/posts/updatepost/' . $this->post->slug, [
             'title'     => 'hello world', 
             'body'      => 'The quick brown fox',
-            'module'    => $this->post->source_type,
-            'module_id' => $this->post->source_id
+            'module'    => 'Schools',
+            'module_id' => '1'
         ])->json();
 
         $this->assertEquals($this->post->fresh()->title, 'hello world');
