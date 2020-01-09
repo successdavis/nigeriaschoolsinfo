@@ -91,7 +91,28 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        dd($post);
+        $request->validate([
+            'title'     => 'required',
+            'body'      => 'required',
+            'module'    => 'required',
+            'module_id' => 'required'
+        ]);
+
+        $module = 'App\\' . ucwords(strtolower($request->module));
+        if ($post->source_type !== $module) {
+            if(!class_exists($module)) {
+                abort('Bad Request', 400);
+            }
+        }
+
+        $post->update([
+            'title'         => $request->title,
+            'body'          => $request->body,
+            'source_type'   => $module,
+            'source_id'     => $request->module_id
+        ]);
+
+        return Response(200);
     }
 
     /**

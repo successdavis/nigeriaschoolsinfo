@@ -3597,6 +3597,7 @@ __webpack_require__.r(__webpack_exports__);
       schools: '',
       courses: '',
       exams: '',
+      disabled: false,
       PostForm: new Form({
         body: '',
         title: '',
@@ -3609,17 +3610,24 @@ __webpack_require__.r(__webpack_exports__);
     publishPost: function publishPost() {
       var _this = this;
 
-      if (this.posthandle) {
+      this.disabled = true;
+
+      if (!this.posthandle) {
         this.PostForm.post('/posts/publishpost').then(function (data) {
           flash('Your new post has been published', 'success');
           _this.posthandle = data;
+          _this.disabled = false;
         })["catch"](function (error) {
           flash('Your Form Has errors', 'failed');
+          _this.disabled = false;
         });
       } else {
-        this.PostForm.update('/posts/updatepost').then(function (data) {
-          console.log(data);
-          _this.posthandle = data;
+        this.PostForm.patch("/posts/updatepost/".concat(this.posthandle.slug)).then(function (data) {
+          flash('Post Updated', 'success');
+          _this.disabled = false;
+        })["catch"](function (error) {
+          flash('Update Failed', 'failed');
+          _this.disabled = false;
         });
       }
     },

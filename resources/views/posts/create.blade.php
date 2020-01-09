@@ -85,8 +85,8 @@
 
 					<div class="field is-grouped">
 					  <div class="control">
-					    <button type="submit" class="button is-link" v-if="posthandle">Publish Now</button>
-					    <button type="submit" class="button is-link" v-else>Update Post</button>
+					    <button :disabled="disabled" type="submit" class="button is-link" v-if="!posthandle">Publish Now</button>
+					    <button :disabled="disabled" type="submit" class="button is-link" v-if="posthandle">Update Post</button>
 					  </div>
 					</div>
 				</form>

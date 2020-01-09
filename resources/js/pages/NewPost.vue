@@ -8,6 +8,7 @@
 				schools: '',
 				courses: '',
 				exams: '', 
+				disabled: false,
 				PostForm: new Form({
 					body: '',
 					title: '',
@@ -19,20 +20,27 @@
 
 		methods: {
 			publishPost () {
-				if (this.posthandle) {
+				this.disabled = true;
+				if (!this.posthandle) {
 					this.PostForm.post('/posts/publishpost')
 					.then(data => {
 						flash('Your new post has been published', 'success')
 						this.posthandle = data;
+						this.disabled = false;
 					})
 					.catch(error => {
 						flash('Your Form Has errors', 'failed')
+						this.disabled = false;
 					});
 				}else {
-					this.PostForm.update('/posts/updatepost')
+					this.PostForm.patch(`/posts/updatepost/${this.posthandle.slug}`)
 					.then(data => {
-						console.log(data);
-						this.posthandle = data;
+						flash('Post Updated', 'success')
+						this.disabled = false;
+					})
+					.catch(error => {
+						flash('Update Failed', 'failed');
+						this.disabled = false;
 					})
 				}
 			},
