@@ -64,7 +64,7 @@ class Schools extends Model
 
     public function getRecent()
     {
-    	return $this->posts()->limit(20)->get();
+    	return $this->posts()->limit(10)->get();
     }
 
     public function TypeOf()

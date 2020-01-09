@@ -46,6 +46,7 @@ Route::get('/testpage', 'TestController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/posts/newpost', 'PostController@create')->name('post.create')->middleware('admin');
 Route::get('/posts/newpostrequirements', 'PostController@newpostrequirement')->middleware('admin');
+Route::get('/posts/relatedpost', 'PostController@relatedpost');
 Route::post('/posts/publishpost', 'PostController@store')->name('post.store')->middleware('admin');
 Route::patch('/posts/updatepost/{post}', 'PostController@update')->name('post.update')->middleware('admin');
 Route::get('/posts/{post}', 'PostController@show')->name('post.show');

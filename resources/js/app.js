@@ -39,6 +39,7 @@ Vue.component('tabs', require('./components/tabs.vue').default);
 Vue.component('tab', require('./components/tab.vue').default);
 Vue.component('school', require('./components/school.vue').default);
 Vue.component('school-quickview', require('./components/schoolQuickView.vue').default);
+Vue.component('related-post', require('./components/relatedPost.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

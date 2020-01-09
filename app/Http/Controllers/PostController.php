@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Advertisements;
 use App\Courses;
 use App\Exams;
+use App\Http\Resources\PostResource;
 use App\Post;
 use App\SchoolType;
 use Illuminate\Http\Request;
@@ -134,5 +135,23 @@ class PostController extends Controller
         $schooltype = SchoolType::all();
 
         return compact('exams', 'courses', 'schooltype');
+    }
+
+    public function relatedpost(Request $request)
+    {
+        $request->validate([
+            'module_id' => 'required',
+            'module' => 'required',
+        ]);
+
+        $module = 'App\\' . ucwords(strtolower($request->module));
+        if(class_exists($module)) {
+            $handler = $module::find($request->module_id);
+
+            $posts = $handler->posts()->limit(10)->get();
+            return PostResource::collection($posts);
+        }
+
+        abort('Something isn\'t right!', 400);
     }
 }

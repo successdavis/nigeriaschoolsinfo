@@ -73,7 +73,8 @@
 			</div>
 		</div>
 		<div class="column">
-			<div class="mt-large">{{$school->short_name}} News</div>
+			<div class="mt-large mb-medium">{{$school->short_name}} News</div>
+			<related-post :module="'Schools'" :module_id="{{$school->id}}"></related-post>
 		</div>
 		
 	</div>
