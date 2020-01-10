@@ -36,6 +36,7 @@ class SchoolResource extends JsonResource
             'slug'              => $this->slug,
             'path'              => $this->path(),
             'excerpt'              => $this->excerpt(),
+            'courses_count'     => $this->courses->count(),
 
         ];
     }
