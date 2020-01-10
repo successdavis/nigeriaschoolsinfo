@@ -17,7 +17,7 @@ class PostsPage extends Component
         		'title', 'LIKE', '%' . $this->search . '%'
         	)->orWhere(
         		'body', 'LIKE', '%' . $this->search . '%'
-        	)->get()
+        	)->latest()->get()
         ]);
     }
 

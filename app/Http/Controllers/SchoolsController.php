@@ -130,7 +130,7 @@ class SchoolsController extends Controller
 
     public function getSchools($schooltype, $filters)
     {
-        $schools = Schools::latest()->filter($filters);
+        $schools = Schools::orderBy('name')->filter($filters);
 
         if ($schooltype->exists) {
             $schools->where('school_type_id', $schooltype->id);

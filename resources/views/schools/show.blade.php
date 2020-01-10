@@ -56,7 +56,7 @@
 					<div class="is-size-3 ">Description</div>
 					<p class="is-size-5-desktop">{!! nl2br($school->description) !!}</p>
 					<div class="is-size-3 mt-small">Contact Information</div>
-					<div class="is-size-5-desktop">{{$school->name }} is school located in {{$school->state->name}} State, {{$school->lga->name}} Local Government Area.</div>
+					<div class="is-size-5-desktop">{{$school->name }} is located in {{$school->state->name}} State, {{$school->lga->name}} Local Government Area.</div>
 					<div class="is-size-5-desktop">
 						<div class="mt-small"><strong>School Address:</strong> {{$school->address}}</div>
 						<div><strong>Phone Number: </strong> +234{{$school->phone}} </div>
