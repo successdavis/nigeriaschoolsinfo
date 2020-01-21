@@ -50,10 +50,10 @@ class CoursesController extends Controller
             'name'            => 'required|unique:courses|max:255|min:10',
             'description'     => 'required|min:300', 
             'faculty_id'      => 'required|exists:faculties,id',
-            'salary'          => 'integer', 
-            'duration'        => 'integer',
+            'salary'          => 'nullable|integer', 
+            'duration'        => 'nullable|integer',
             'utme_comment'      => 'nullable|string|max:255',
-            'utme_requirement'    => 'nullable|string|min:5|max:255',
+            'utme_requirement'    => 'nullable|string',
             'direct_requirement'    => 'nullable|string',
 
 

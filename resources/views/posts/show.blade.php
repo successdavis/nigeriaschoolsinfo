@@ -11,6 +11,11 @@
 						      <p class="title">{{$post->title}}</p>
 						      <p class="subtitle">{{$post->source->name}}</p>
 						      <div class="content">
+						      	<div class="has-text-center">
+							      	<p class="image is-64x64">
+							      		<img class="is-rounded" src="{{asset($post->source->logo_path)}}">
+							    	</p>
+						      	</div>
 						        <p>{!! nl2br($post->body) !!}</p>
 						      </div>
 						    </article>
