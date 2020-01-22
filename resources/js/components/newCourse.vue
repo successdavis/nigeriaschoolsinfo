@@ -168,6 +168,19 @@
 						    </div>
 						  </div>
 						</div>
+						<div class="field is-horizontal">
+						  <div class="field-label is-normal">
+						    <label class="label">*Special Considerations</label>
+						  </div>
+						  <div class="field-body">
+						    <div class="field">
+						      <div class="control">
+						        <textarea v-model="courseForm.considerations" required class="textarea" placeholder="Please state the considerations for each school"></textarea>
+						      </div>
+						      <p class="help is-danger" v-if="courseForm.errors.has('considerations')" v-text="courseForm.errors.get('considerations')"></p>
+						    </div>
+						  </div>
+						</div>
 
 
 						<div class="field is-horizontal">
@@ -228,6 +241,7 @@
 					utme_comment: '',
 					utme_requirement: '',
 					direct_requirement: '',
+					considerations: '',
 				}),
 			}
 		},
