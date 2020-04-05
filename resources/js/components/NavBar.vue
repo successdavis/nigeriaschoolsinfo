@@ -6,7 +6,7 @@
                 drIsOpen: false,
         	}
         },
-    }
+    };
 </script>
 
 <style scoped>

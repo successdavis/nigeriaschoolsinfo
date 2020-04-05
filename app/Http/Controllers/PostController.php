@@ -158,10 +158,14 @@ class PostController extends Controller
     public function addimage(Request $request)
     {
         $request->validate([
-            'image' => ['required', 'image']
+            'file' => ['required', 'image']
         ]);
 
-        $path = request()->file('image')->store('posts', 'public');
+        $name = pathinfo(request()->file('file')->getClientOriginalName(), PATHINFO_FILENAME);
+
+        $newName = str_replace(' ', '-', $name).'.'.request()->file('file')->getClientOriginalExtension();
+
+        $path = request()->file('file')->storeAs('posts', $newName, 'public');
 
         $src =  asset('storage/'.$path);
 
