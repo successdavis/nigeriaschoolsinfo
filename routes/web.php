@@ -72,7 +72,7 @@ Route::get('/schools/{schools}/courses', 'CoursesController@index')->name('schoo
 Route::get('/courses', 'CoursesController@index')->name('courses.index');
 Route::get('/courses/editcourse/{course}', 'CoursesController@edit')->name('courses.edit')->middleware('admin');
 
-Route::get('/courses/{courses}', 'CoursesController@show')->name('courses.show');
+Route::get('/course/{courses}', 'CoursesController@show')->name('courses.show');
 Route::post('/courses/createcourse', 'CoursesController@store')->name('courses.store');
 Route::get('/find/courses', 'CoursesController@findcourses')->name('courses.find');
 Route::get('/newcourse/courserequirements', 'CoursesController@getrequirements');

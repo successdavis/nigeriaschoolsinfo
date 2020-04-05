@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@section('title')
+    Your personal dashboard
+@endsection
+
+@section('head')
+    <link rel="stylesheet" type="text/css" href="trix.css">
+    <script type="text/javascript" src="trix.js"></script> 
+@endsection
+
 @section('content')
 <div class="container">
     <div class="section">
@@ -11,6 +20,7 @@
         <a href="/courses">Browse Schools</a> <br>
         <a href="/courses">Browse Exams</a> <br>
     </div>
+
 
     @if (auth()->user()->isAdmin())
         <new-school></new-school>

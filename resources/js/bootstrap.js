@@ -3,6 +3,8 @@
 window._ = require('lodash');
 
 window.Vue = require('vue');
+// window.trix = require('trix');
+
 
 import VModal from 'vue-js-modal'
 import Form from './utilities/Form';

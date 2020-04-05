@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Courses extends Model
 {
     protected $guarded = [];
-    public $pathPrefix = '/courses/';
+    public $pathPrefix = '/course/';
     public $findWith    =   'slug';
     public $excerpt    =   ['description', 23];
     protected $with     = ['subjects', 'considerations'];

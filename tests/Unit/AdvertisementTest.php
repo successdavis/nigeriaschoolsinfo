@@ -59,7 +59,7 @@ class AdvertisementTest extends TestCase
     }
 
     /** @test */
-    public function all_in_active_advertisements_can_be_retrieved()
+    public function all_inactive_advertisements_can_be_retrieved()
     {
         $advertisementAll = factory('App\Advertisements', 3)->states('active')->create();
 

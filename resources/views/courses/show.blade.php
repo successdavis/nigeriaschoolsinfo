@@ -20,9 +20,9 @@
 				<p class="is-size-5">{!! nl2br($courses->description) !!}</p>
 
 				<h2 class="is-size-3 mt-medium">{{$courses->short_name}} Special Consideration</h2>
-				@foreach ($courses->considerations as $consideration)
+				{{-- @foreach ($courses->considerations as $consideration)
 					<div>{!! nl2br($consideration->consideration) !!}</div>
-				@endforeach
+				@endforeach --}}
 
 				<h2 class="is-size-3 mt-medium">Click the link below to view List of schools offering {{$courses->name}}</h2>
 				<div><a href="/schoolsofferedby/{{$courses->slug}}">Click to View Schools</a></div>

@@ -30,7 +30,7 @@ class ReadCourseTest extends TestCase
     /** @test */
     public function a_user_can_view_a_single_course()
     {
-        $this->get('/courses/' .  $this->course->slug)
+        $this->get('/course/' .  $this->course->slug)
             ->assertSee($this->course->name)
             ->assertSee($this->course->description);
     }

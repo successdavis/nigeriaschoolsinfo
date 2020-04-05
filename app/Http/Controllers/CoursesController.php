@@ -56,8 +56,6 @@ class CoursesController extends Controller
             'utme_requirement'    => 'nullable|string',
             'direct_requirement'    => 'nullable|string',
             'considerations'    => 'nullable|string',
-
-
         ]);
         
         // dd(request()->all());

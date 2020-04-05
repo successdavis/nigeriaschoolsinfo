@@ -8,17 +8,18 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Nigeria Schools Info') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <script data-ad-client="ca-pub-3146034280624513" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
+    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    @yield('head')
     @livewireAssets
 </head>
 <body>
@@ -36,5 +37,6 @@
     </div>
     
     <script src="{{ asset('js/app.js') }}"></script>
+
 </body>
 </html>

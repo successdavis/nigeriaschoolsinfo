@@ -1,6 +1,12 @@
 @extends('layouts.app')
+
+@section('title')
+	Publish a new blog Article 
+@endsection
+
 @section('content')
-	<new-post inline-template>
+
+	<new-post inline-template v-cloak>
 		<div class="container">
 			<div class="section">
 				<form @submit.prevent="publishPost">
@@ -79,7 +85,10 @@
 					<div class="field">
 					  <label class="label">Body</label>
 					  <div class="control">
-					    <textarea v-model="PostForm.body" class="textarea" placeholder="Start Typing something cool"></textarea>
+					  	{{-- <input v-model="PostForm.body" id="trix" type="text" name=""> --}}
+					  	<trix-vue v-model="PostForm.body"></trix-vue>
+
+					  	{{-- <wysiwyg name="body"></wysiwyg> --}}
 					  </div>
 					</div>
 
@@ -93,4 +102,6 @@
 			</div>
 		</div>
 	</new-post>
+
+	
 @endsection

@@ -59,7 +59,7 @@ import InfiniteLoading from 'vue-infinite-loading';
 	export default {
 		 components: {
 		    InfiniteLoading,
-		  },
+		 },
 		props: {
 			course: {
 				required: true

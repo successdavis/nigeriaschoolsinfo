@@ -1,5 +1,7 @@
 <script>
+	import TrixVue from '@dymantic/vue-trix-editor';
 	export default {
+		components: {TrixVue},
 		data () {
 			return {
 				posthandle: '',
