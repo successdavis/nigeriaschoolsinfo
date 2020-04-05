@@ -46,6 +46,7 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
+        // dd(request()->all());
         $request->validate([
             'name'            => 'required|unique:courses|max:255|min:10',
             'description'     => 'required|min:300', 

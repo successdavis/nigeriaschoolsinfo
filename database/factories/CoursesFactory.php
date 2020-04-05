@@ -14,6 +14,7 @@ $factory->define(Courses::class, function (Faker $faker) {
 		'faculty_id'=> function(){
             return factory('App\Faculty')->create()->id;
         },
+        'duration'  => 3,
         'utme_comment'	=> 'plus any Social Science subject.',
         'utme_requirement'	=> 'the other two relevant subjectscould be from any of Accounting, Principles of Accounts, Commerce, Office  Practice and Secretarial Duties. .',
         'direct_requirement' => 'Two a level passes chosen from Economics, Accounting, Business Management, Government and Geography',

@@ -86,9 +86,7 @@
 					  <label class="label">Body</label>
 					  <div class="control">
 					  	{{-- <input v-model="PostForm.body" id="trix" type="text" name=""> --}}
-					  	<trix-vue v-model="PostForm.body"></trix-vue>
-
-					  	{{-- <wysiwyg name="body"></wysiwyg> --}}
+					  	<trix-vue v-model="PostForm.body" image-upload-path="/posts/postimages"></trix-vue>
 					  </div>
 					</div>
 

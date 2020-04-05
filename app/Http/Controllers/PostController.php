@@ -154,4 +154,18 @@ class PostController extends Controller
 
         abort('Something isn\'t right!', 400);
     }
+
+    public function addimage(Request $request)
+    {
+        $request->validate([
+            'image' => ['required', 'image']
+        ]);
+
+        $path = request()->file('image')->store('posts', 'public');
+
+        $src =  asset('storage/'.$path);
+
+        return response()
+            ->json(['src' => $src]);
+    }
 }

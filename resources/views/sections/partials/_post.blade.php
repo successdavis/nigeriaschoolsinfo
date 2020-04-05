@@ -14,7 +14,7 @@
             </span>
             <span class="post_sh_name is-hidden-tablet">{{$post->source->short_name}}</span>
         </div>
-        <span class="has-text-black ">{{$post->excerpt()}}</span>
+        <span class="has-text-black ">{!! nl2br($post->excerpt()) !!}</span>
         <span ><strong>Read More</strong></span>
       </a>
     </div>

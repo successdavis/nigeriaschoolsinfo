@@ -30,6 +30,8 @@ class CreateCourseTest extends TestCase
 
         $course = make('App\Courses');
 
+        // dd($course);
+
         $this->json('post', route('courses.store'), $course->toArray())
             ->assertStatus(201);
     }

@@ -34,7 +34,7 @@ class CoursesTest extends TestCase
     {
         $course = create('App\Courses');
 
-        $this->assertEquals("/courses/{$course->slug}", $course->path());
+        $this->assertEquals("/course/{$course->slug}", $course->path());
     }
 
     /** @test */
