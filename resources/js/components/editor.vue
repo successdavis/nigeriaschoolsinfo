@@ -2,7 +2,7 @@
   <div class="example">
     <div class="file">
       <label class="file-label">
-        <input @change="persistFile" class="file-input" type="file" id="file" ref="file" >
+        <input :disabled="! canUpload" @change="persistFile" class="file-input" type="file" id="file" ref="file" >
         <span class="file-cta">
           <span class="file-icon">
             <i class="fas fa-upload"></i>
@@ -28,12 +28,13 @@
 
     <!-- for debuging puporses only -->
 
-    <div class="output code">
+<!--     <div class="output code">
       <code class="hljs" v-html="contentCode"></code>
     </div>
     <div class="output ql-snow">
       <div class="ql-editor" v-html="content"></div>
-    </div>
+    </div> -->
+
   </div>
 </template>
 
@@ -74,6 +75,11 @@ Quill.register(ImageBlot);
 
 
   export default {
+    props: {
+      value: {
+        default: ''
+      }
+    },
     name: 'quill-example-snow',
     title: 'Theme: snow',
     components: {
@@ -81,6 +87,7 @@ Quill.register(ImageBlot);
     },
     data() {
       return {
+        canUpload: false,
         editorOption: {
           modules: {
             toolbar: [
@@ -113,7 +120,7 @@ Quill.register(ImageBlot);
     },
     methods: {
       persistFile() {
-        // if(! this.$refs.file.length) return;
+        if(! this.$refs.file.files[0]) return;
         let file = this.$refs.file.files[0];
 
         let data = new FormData();
@@ -140,9 +147,11 @@ Quill.register(ImageBlot);
       }, 466),
       onEditorBlur(editor) {
         console.log('editor blur!', editor)
+        this.canUpload = false;
       },
       onEditorFocus(editor) {
         console.log('editor focus!', editor)
+        this.canUpload = true;
       },
       onEditorReady(editor) {
         console.log('editor ready!', editor)
@@ -152,12 +161,14 @@ Quill.register(ImageBlot);
       editor() {
         return this.$refs.myTextEditor.quill
       },
+
       contentCode() {
         return hljs.highlightAuto(this.content).value
       }
     },
     mounted() {
       console.log('this is Quill instance:', this.editor)
+      this.content = this.value
     }
   };
 </script>

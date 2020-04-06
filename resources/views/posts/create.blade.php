@@ -5,13 +5,6 @@
 @endsection
 
 @section('content')
-
-	<div id="editor">
-	  <p>Hello World!</p>
-	  <p>Some initial <strong>bold</strong> text</p>
-	  <p><br></p>
-	</div>
-
 	<new-post inline-template v-cloak>
 		<div class="container">
 			<div class="section">
@@ -92,8 +85,7 @@
 					  <label class="label">Body</label>
 					  <div class="control">
 					  	{{-- <input v-model="PostForm.body" id="trix" type="text" name=""> --}}
-					  	<editor @content="setPostBody"></editor>
-					  	{{-- <my-editor v-model="PostForm.body"></my-editor> --}}
+					  	<editor :value="PostForm.body" @content="setPostBody"></editor>
 					  </div>
 					</div>
 

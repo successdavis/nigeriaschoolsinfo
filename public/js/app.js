@@ -2869,6 +2869,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 //
 //
 //
+//
 
 
 
@@ -2915,6 +2916,11 @@ quill__WEBPACK_IMPORTED_MODULE_3___default.a.register(ImageBlot);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    value: {
+      "default": ''
+    }
+  },
   name: 'quill-example-snow',
   title: 'Theme: snow',
   components: {
@@ -2922,6 +2928,7 @@ quill__WEBPACK_IMPORTED_MODULE_3___default.a.register(ImageBlot);
   },
   data: function data() {
     return {
+      canUpload: false,
       editorOption: {
         modules: {
           toolbar: [['bold', 'italic', 'underline', 'strike'], ['blockquote', 'code-block'], [{
@@ -2971,7 +2978,7 @@ quill__WEBPACK_IMPORTED_MODULE_3___default.a.register(ImageBlot);
     persistFile: function persistFile() {
       var _this = this;
 
-      // if(! this.$refs.file.length) return;
+      if (!this.$refs.file.files[0]) return;
       var file = this.$refs.file.files[0];
       var data = new FormData();
       data.append('file', file);
@@ -2994,9 +3001,11 @@ quill__WEBPACK_IMPORTED_MODULE_3___default.a.register(ImageBlot);
     }, 466),
     onEditorBlur: function onEditorBlur(editor) {
       console.log('editor blur!', editor);
+      this.canUpload = false;
     },
     onEditorFocus: function onEditorFocus(editor) {
       console.log('editor focus!', editor);
+      this.canUpload = true;
     },
     onEditorReady: function onEditorReady(editor) {
       console.log('editor ready!', editor);
@@ -3012,6 +3021,7 @@ quill__WEBPACK_IMPORTED_MODULE_3___default.a.register(ImageBlot);
   },
   mounted: function mounted() {
     console.log('this is Quill instance:', this.editor);
+    this.content = this.value;
   }
 });
 
@@ -4097,7 +4107,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    setPostBody: function setPostBody(value) {
+    setPostBody: function setPostBody(valjpue) {
       this.PostForm.body = value;
     },
     publishPost: function publishPost() {
@@ -67608,7 +67618,7 @@ var render = function() {
           _c("input", {
             ref: "file",
             staticClass: "file-input",
-            attrs: { type: "file", id: "file" },
+            attrs: { disabled: !_vm.canUpload, type: "file", id: "file" },
             on: { change: _vm.persistFile }
           }),
           _vm._v(" "),
@@ -67632,21 +67642,7 @@ var render = function() {
             return _vm.onEditorReady($event)
           }
         }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "output code" }, [
-        _c("code", {
-          staticClass: "hljs",
-          domProps: { innerHTML: _vm._s(_vm.contentCode) }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "output ql-snow" }, [
-        _c("div", {
-          staticClass: "ql-editor",
-          domProps: { innerHTML: _vm._s(_vm.content) }
-        })
-      ])
+      })
     ],
     1
   )
@@ -67662,7 +67658,7 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("span", { staticClass: "file-label" }, [
-        _vm._v("\n          Choose a file…\n        ")
+        _vm._v("\n            Choose a file…\n          ")
       ])
     ])
   }
@@ -83171,14 +83167,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************************!*\
   !*** ./resources/js/components/editor.vue ***!
   \********************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _editor_vue_vue_type_template_id_b22d1610_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./editor.vue?vue&type=template&id=b22d1610&scoped=true& */ "./resources/js/components/editor.vue?vue&type=template&id=b22d1610&scoped=true&");
 /* harmony import */ var _editor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editor.vue?vue&type=script&lang=js& */ "./resources/js/components/editor.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _editor_vue_vue_type_style_index_0_id_b22d1610_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editor.vue?vue&type=style&index=0&id=b22d1610&lang=scss&scoped=true& */ "./resources/js/components/editor.vue?vue&type=style&index=0&id=b22d1610&lang=scss&scoped=true&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _editor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _editor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _editor_vue_vue_type_style_index_0_id_b22d1610_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editor.vue?vue&type=style&index=0&id=b22d1610&lang=scss&scoped=true& */ "./resources/js/components/editor.vue?vue&type=style&index=0&id=b22d1610&lang=scss&scoped=true&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -83210,7 +83207,7 @@ component.options.__file = "resources/js/components/editor.vue"
 /*!*********************************************************************!*\
   !*** ./resources/js/components/editor.vue?vue&type=script&lang=js& ***!
   \*********************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
