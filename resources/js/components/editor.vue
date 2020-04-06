@@ -41,14 +41,37 @@
   import dedent from 'dedent'
   import hljs from 'highlight.js'
   import debounce from 'lodash/debounce'
+  import Quill from 'quill'
+
+let BlockEmbed = Quill.import('blots/block/embed');
+
+class ImageBlot extends BlockEmbed {
+  static create(value) {
+    let node = super.create();
+    node.setAttribute('alt', value.alt);
+    node.setAttribute('src', value.url);
+    return node;
+  }
+
+  static value(node) {
+    return {
+      alt: node.getAttribute('alt'),
+      url: node.getAttribute('src')
+    };
+  }
+}
+ImageBlot.blotName = 'image';
+ImageBlot.tagName = 'img';
+
+Quill.register(ImageBlot);
+
+
   import { quillEditor } from 'vue-quill-editor'
 
   // highlight.js style
   import 'highlight.js/styles/tomorrow.css'
 
-  // import theme style
-  import 'quill/dist/quill.core.css'
-  import 'quill/dist/quill.snow.css'
+
 
   export default {
     name: 'quill-example-snow',
@@ -81,6 +104,7 @@
               highlight: text => hljs.highlightAuto(text).value
             }
           }
+
         },
         content: dedent`
           
@@ -105,10 +129,14 @@
 
       insertIntoEditor(data) {
         let range = this.editor.getSelection();
-        this.editor.insertEmbed(range.index,'image', data.data.src);
+        this.editor.insertEmbed(range.index, 'image', {
+          alt: 'some-text-here',
+          url: data.data.src,
+        });
       },
       onEditorChange: debounce(function(value) {
-        this.content = value.html
+        this.content = value.html;
+        this.$emit('content', value.html);
       }, 466),
       onEditorBlur(editor) {
         console.log('editor blur!', editor)
@@ -131,7 +159,7 @@
     mounted() {
       console.log('this is Quill instance:', this.editor)
     }
-  }
+  };
 </script>
 
 <style lang="scss" scoped>

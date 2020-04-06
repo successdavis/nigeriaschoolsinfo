@@ -17,7 +17,9 @@ $fa-font-path: "../webfonts";
 // Bulma
 @import './node_modules/bulma/bulma.sass';
 @import "./node_modules/bulma-o-steps/bulma-steps.sass";
-
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
 
 // Font Awesome
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';

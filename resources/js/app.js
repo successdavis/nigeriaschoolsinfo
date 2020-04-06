@@ -40,7 +40,8 @@ Vue.component('tab', require('./components/tab.vue').default);
 Vue.component('school', require('./components/school.vue').default);
 Vue.component('school-quickview', require('./components/schoolQuickView.vue').default);
 Vue.component('related-post', require('./components/relatedPost.vue').default);
-Vue.component('wysiwyg', require('./components/Wysiwyg.vue').default);
+// Vue.component('wysiwyg', require('./components/Wysiwyg.vue').default);
+Vue.component('my-editor', require('./components/MyEditor.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

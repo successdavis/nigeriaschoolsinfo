@@ -170,6 +170,9 @@ class PostController extends Controller
         $src =  asset('storage/'.$path);
 
         return response()
-            ->json(['src' => $src]);
+            ->json([
+                'src' => $src,
+                'alt' => $name
+            ]);
     }
 }

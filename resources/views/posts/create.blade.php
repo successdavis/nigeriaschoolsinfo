@@ -92,7 +92,8 @@
 					  <label class="label">Body</label>
 					  <div class="control">
 					  	{{-- <input v-model="PostForm.body" id="trix" type="text" name=""> --}}
-					  	<editor></editor>
+					  	<editor @content="setPostBody"></editor>
+					  	{{-- <my-editor v-model="PostForm.body"></my-editor> --}}
 					  </div>
 					</div>
 

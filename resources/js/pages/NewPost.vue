@@ -23,7 +23,11 @@
 		},
 
 		methods: {
+			setPostBody (vaue) {
+				this.PostForm.body = value;
+			},
 			publishPost () {
+
 				this.disabled = true;
 				if (!this.posthandle) {
 					this.PostForm.post('/posts/publishpost')
