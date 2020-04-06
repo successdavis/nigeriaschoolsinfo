@@ -23,7 +23,7 @@
 		},
 
 		methods: {
-			setPostBody (vaue) {
+			setPostBody (value) {
 				this.PostForm.body = value;
 			},
 			publishPost () {

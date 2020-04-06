@@ -23,13 +23,14 @@
       @ready="onEditorReady($event)"
     />
 
+<!-- 
     <div class="output code">
       <code class="hljs" v-html="contentCode"></code>
     </div>
     <div class="output ql-snow">
       <div class="ql-editor" v-html="content"></div>
     </div>
-
+-->
   </div>
 </template>
 

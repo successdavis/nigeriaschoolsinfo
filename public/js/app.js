@@ -2168,6 +2168,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 //
 //
 //
+//
 
 
 var BlockEmbed = quill__WEBPACK_IMPORTED_MODULE_0___default.a["import"]('blots/block/embed');
@@ -4096,7 +4097,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    setPostBody: function setPostBody(vaue) {
+    setPostBody: function setPostBody(value) {
       this.PostForm.body = value;
     },
     publishPost: function publishPost() {
@@ -66936,21 +66937,7 @@ var render = function() {
           },
           expression: "content"
         }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "output code" }, [
-        _c("code", {
-          staticClass: "hljs",
-          domProps: { innerHTML: _vm._s(_vm.contentCode) }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "output ql-snow" }, [
-        _c("div", {
-          staticClass: "ql-editor",
-          domProps: { innerHTML: _vm._s(_vm.content) }
-        })
-      ])
+      })
     ],
     1
   )
@@ -66966,7 +66953,7 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("span", { staticClass: "file-label" }, [
-        _vm._v("\n          Choose a file…\n        ")
+        _vm._v("\n            Choose a file…\n          ")
       ])
     ])
   }
