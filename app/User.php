@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->roles()->where('name', 'admin')->exists();
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }

@@ -49,7 +49,7 @@ class UploadPostImagesTest extends TestCase
     }
 
     /** @test */
-    public function an_admin_can_attach_an_exam_logo()
+    public function an_admin_can_upload_post_images()
     {
         $this->withExceptionHandling();
         
@@ -61,9 +61,9 @@ class UploadPostImagesTest extends TestCase
 
         Storage::fake('public');
 
-        $responds = $this->json('POST', route('posts.images'), ['logo' => $file = UploadedFile::fake()->image('logo.jpg')]);
+        $responds = $this->json('POST', route('posts.images'), ['file' => $file = UploadedFile::fake()->image('logo.jpg')]);
 
-        Storage::disk('public')->assertExists('posts/' . $file->hashName());
+        Storage::disk('public')->assertExists('posts/' . 'logo.jpg');
     }
 
 }

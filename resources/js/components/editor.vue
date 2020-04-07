@@ -168,7 +168,9 @@ Quill.register(ImageBlot);
     },
     mounted() {
       console.log('this is Quill instance:', this.editor)
-      this.content = this.value
+      if (this.value) {
+        this.content = this.value
+      }
     }
   };
 </script>

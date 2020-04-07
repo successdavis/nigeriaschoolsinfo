@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\Commentable;
 use App\Traits\ModelFunctions;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +11,7 @@ use Illuminate\Support\Str;
 class Post extends Model
 {
     use ModelFunctions;
+    use Commentable;
     protected $guarded = [];
 
     public $pathPrefix  = '/posts/';

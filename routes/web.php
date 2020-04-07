@@ -83,6 +83,7 @@ Route::get('/newcourse/courserequirements', 'CoursesController@getrequirements')
 Route::get('/faculty/{faculty}', 'FacultiesController@show')->name('faculty.show');
 Route::get('/getfaculties', 'FacultiesController@getfaculties')->name('schoolCourses');
 
+Route::post('/comments/{post}/newcomment', 'CommentController@store')->name('comment.create');
 
 
 
