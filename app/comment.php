@@ -2,14 +2,17 @@
 
 namespace App;
 
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class comment extends Model
 {
+    protected $with = ['owner'];
+    
     public function owner()
     {
-    	return $this->belongsTo('App\User');
+    	return $this->belongsTo(User::class, 'user_id');
     }
 
     public function path()

@@ -26,7 +26,7 @@ class CreateCommentTest extends TestCase
 
         $comment = make('App\Comment');
 
-        $responds = $this->json('POST', route('comment.create', ['post' => $this->post->slug]), $comment->toArray());
+        $responds = $this->json('POST', route('comment.store', ['post' => $this->post->slug]), $comment->toArray());
 
         $this->assertCount(1, comment::all());
     }

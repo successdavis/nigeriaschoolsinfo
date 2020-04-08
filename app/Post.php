@@ -18,6 +18,9 @@ class Post extends Model
     public $findWith    =   'slug';
     public $excerpt    =   ['body', 23];
 
+    protected $casts = [
+        'locked' => 'boolean'
+    ];
 
     protected static function boot()
     {
@@ -37,5 +40,15 @@ class Post extends Model
     public function publisher()
     {
         return $this->belongsTo('App\User', 'user_id');
+    }
+
+    public function lock()
+    {
+        $this->update(['locked' => true]);
+    }
+
+    public function unlock()
+    {
+        $this->update(['locked' => false]);
     }
 }

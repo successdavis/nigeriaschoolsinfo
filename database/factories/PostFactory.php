@@ -10,6 +10,7 @@ $factory->define(Post::class, function (Faker $faker) {
         'title' 		=> $faker->name,
         'body' 			=> $faker->paragraph,
         'source_type' 	=> 'App\Schools',
+        'locked'        => false,
         'source_id'		=> function() {
             return factory('App\Schools')->create()->id;
         },

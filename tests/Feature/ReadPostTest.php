@@ -42,4 +42,16 @@ class ReadPostTest extends TestCase
 
         $this->assertCount(10, $response['data']);
     }
+
+    // /** @test */
+    // public function a_user_can_request_all_comments_for_a_given_post()
+    // {
+    //     $post = create('App\Post');
+    //     create('App\Comment', ['commentable_id' => $post->id], 2);
+
+    //     $response = $this->getJson($post->path() . '/comments')->json();
+
+    //     $this->assertCount(2, $response['data']);
+    //     $this->assertEquals(2, $response['total']);
+    // }
 }

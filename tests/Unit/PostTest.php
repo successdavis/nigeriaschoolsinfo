@@ -10,18 +10,16 @@ class PostTest extends TestCase
 {
     use DatabaseMigrations;
 
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
-    /** @test */
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->post = create('App\Post');
+        
+    }
 
     public function a_post_can_be_morphed_to_a_school_model()
     {
-    	$post = factory('App\Post')->create();
-
-    	$this->assertInstanceOf('App\Schools', $post->source);
+    	$this->assertInstanceOf('App\Schools', $this->post->source);
     }
 
     /** @test */
@@ -35,16 +33,22 @@ class PostTest extends TestCase
     /** @test */
     public function it_is_an_instance_of_user()
     {
-        $post = create('App\Post');
-
-        $this->assertInstanceOf('App\User', $post->publisher);
+        $this->assertInstanceOf('App\User', $this->post->publisher);
     }
 
 	/** @test */
     public function it_generate_a_string_path()
     {
-        $post = create('App\Post');
+        $this->assertEquals("/posts/{$post->slug}", $this->post->path());
+    }
 
-        $this->assertEquals("/posts/{$post->slug}", $post->path());
+    /** @test */
+    public function a_post_may_be_lock()
+    {
+        $this->assertFalse($this->post->locked);
+
+        $this->post->lock();
+
+        $this->assertTrue($this->post->locked);
     }
 }

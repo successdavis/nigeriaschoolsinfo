@@ -33,7 +33,7 @@ class CommentTest extends TestCase
     /** @test */
     public function a_comment_is_associated_to_a_user()
     {
-        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->user->comments);
+        $this->assertInstanceOf('App\User', $this->comment->owner);
     }
 
     /** @test */

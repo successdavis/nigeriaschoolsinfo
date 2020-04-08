@@ -4,6 +4,7 @@ window._ = require('lodash');
 
 window.Vue = require('vue');
 
+Vue.prototype.signedIn = window.App.signedIn;
 
 import VModal from 'vue-js-modal'
 import Form from './utilities/Form';

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
-	@include ('sections/streamer')
+	{{-- @include ('sections/streamer') --}}
 	<div class="mt-large">
 		<div class="container">
-			<div class="columns">
+			<div class="columns" style="margin-left: 0;">
 				<div class="column is-three-quarters">
 					<div class="tile is-ancestor">
 						<div class="tile is-parent">
@@ -21,6 +21,7 @@
 						    </article>
 						</div>
 					</div>
+					<comments></comments>
 				</div>
 				<div class="column">
 					<h4 class="is-size-4 mb-small">Related Posts</h4> 

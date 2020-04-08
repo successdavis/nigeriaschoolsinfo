@@ -8,20 +8,21 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Post $post)
     {
-        //
+        $post->load('comments.owner');
+        $comments = $post->comments->groupBy('parent_id');
+        if (isset($comments[''])) {
+            $comments['root'] = $comments[''];
+            unset($comments['']);
+        }
+
+        return $comments;
     }
 
     /**
@@ -45,8 +46,11 @@ class CommentController extends Controller
         $comment = new comment;
         $comment->body = $request->body;
         $comment->user_id = Auth()->user()->id;
+        $comment->parent_id = $request->parent_id;
 
-        return $post->comments()->save($comment);
+        $post->comments()->save($comment);
+
+        return $comment = comment::find($comment->id);
     }
 
     /**
