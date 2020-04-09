@@ -21,7 +21,9 @@
  
         mixins: [collection],
         data() {
-            return { dataSet: false };
+            return { 
+                dataSet: false,
+            };
         },
 
         created() {
@@ -39,7 +41,11 @@
             },
 
             add(item) {
-                this.items['root'].push(item);
+                if (this.items.hasOwnProperty('root')) {
+                    this.items['root'].push(item);
+                }else {
+                    this.items = {root: [item]};
+                }
             },
         }
     }

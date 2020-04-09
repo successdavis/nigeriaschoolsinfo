@@ -25,6 +25,7 @@ Vue.component('school-quickview', require('./components/schoolQuickView.vue').de
 Vue.component('related-post', require('./components/relatedPost.vue').default);
 Vue.component('comments', require('./components/comments.vue').default);
 Vue.component('comment', require('./components/comment.vue').default);
+Vue.component('reactivity', require('./components/Reactivity.vue').default);
 
 const app = new Vue({
     el: '#app',

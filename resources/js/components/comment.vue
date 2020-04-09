@@ -37,7 +37,7 @@
             </nav>
             <comment v-for="(comment, index) in items[id]" :key="comment.id" :comment="comment" :items="items" @deleted="remove(index)"></comment>
             
-            <!-- <new-comment :comment_id="id"></new-comment> -->
+            <new-comment :comment_id="id"></new-comment>
 
           </div>
         </article>
