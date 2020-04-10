@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use Carbon\Carbon;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -100,6 +101,36 @@ class CommentTest extends TestCase
         $this->assertDatabaseHas('comments', [
             'body' => $this->comment->body,
         ]);
+    }
+
+    /** @test */
+    public function it_can_be_edited_by_its_creator()
+    {
+        $this->signIn($user = create('App\User'));
+        $comment = create('App\Comment', ['user_id' => $user->id]);
+
+        $body = 'Some new body';
+
+        $this->json(
+            'PATCH', 
+            route('comment.update', ['comment' => $comment->id]), 
+            ['body' => $body]
+        );
+
+        $this->assertEquals($body, $comment->fresh()->body);
+    }
+
+    /** @test */
+    public function unauthorized_user_cannot_update_a_comment()
+    {
+        $this->signIn();
+
+        $this->expectException(AuthorizationException::class);
+        $this->json(
+            'PATCH', 
+            route('comment.update', ['comment' => $this->comment->id]));
+
+
     }
 
     // /** @test */

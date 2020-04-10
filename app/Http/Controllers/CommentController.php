@@ -24,7 +24,7 @@ class CommentController extends Controller
     public function index(Post $post)
     {
         $post->load('comments.owner');
-        $comments = $post->comments->groupBy('parent_id');
+        $comments = $post->comments()->paginate(25)->groupBy('parent_id');
         if (isset($comments[''])) {
             $comments['root'] = $comments[''];
             unset($comments['']);
@@ -92,7 +92,18 @@ class CommentController extends Controller
      */
     public function update(Request $request, comment $comment)
     {
-        //
+        $this->authorize('update', $comment);
+        
+        $comment->body = $request->body;
+
+        $comment->save();
+
+        if (request()->expectsJson()) {
+            return response(['status' => 'Comment updated']);
+        }
+
+        return back()
+            ->with('flash', 'Comment Updated');
     }
 
     /**
@@ -109,10 +120,10 @@ class CommentController extends Controller
 
 
         if (request()->expectsJson()) {
-            return response(['status' => 'Reply Deleted']);
+            return response(['status' => 'Comment Deleted']);
         }
 
         return back()
-            ->with('flash', 'Reply Deleted');
+            ->with('flash', 'Comment Deleted');
     }
 }

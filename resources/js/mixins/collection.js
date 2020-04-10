@@ -15,6 +15,7 @@ export default {
             this.items.splice(index, 1);
 
             this.$emit('removed');
+            console.log('I was called');
         }    
     }
 

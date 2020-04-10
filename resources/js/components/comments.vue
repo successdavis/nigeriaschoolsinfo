@@ -2,7 +2,7 @@
 <template>
     <div>
         <div v-for="(comment, index) in items.root" :key="comment.id">
-            <comment :comment="comment" :items="items" @deleted="remove(index)"></comment>
+            <comment :comment="comment" :data="items" @deleted="remove(index)"></comment>
         </div>
         <paginator :dataSet="dataSet" @changed="fetch"></paginator>
         <p v-if="locked">
@@ -63,6 +63,13 @@
                     this.items = {root: [item]};
                 }
             },
+
+            remove(index) {
+                this.items['root'].splice(index, 1);
+
+                this.$emit('removed');
+                console.log('I was called');
+            }  
         }
     }
 </script>

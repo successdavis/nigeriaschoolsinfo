@@ -28,22 +28,35 @@
             <nav class="level is-mobile">
               <div class="level-left">
                 <a class="level-item">
-                  <span class="icon is-small" @click="showcomment = !showcomment"><i class="fas fa-reply"></i></span>
+                  <span class="icon is-small" @click="newcomment = !newcomment"><i class="fas fa-reply"></i></span>
                 </a>
                 <a class="level-item">
                   <span class="icon is-small"><i class="fas fa-heart"></i></span>
                 </a>
-                <a class="level-item" @click="destroy" v-if="authorize('owns', comment)">
+              </div>
+              <div class="level-right">
+                <a class="level-item" @click="smd = true" v-if="authorize('owns', comment)">
                     <span class="icon is-small"><i class="fas fa-trash"></i></span>
                 </a>
+               <a class="level-item" @click="editing = !editing" v-if="authorize('owns', comment)">
+                    <span class="icon is-small"><i class="fas fa-edit"></i></span>
+                </a>
+                  
               </div>
             </nav>
-            <new-comment :comment_id="id" @created="add" v-show="showcomment"></new-comment>
-            <comment class="is-hidden-mobile" v-for="(comment, index) in getItems" :key="comment.id" :comment="comment" :items="items" @deleted="remove(index)"></comment>
+            <div>
+                <span 
+                    v-if="smd">sure about this? 
+                    <input type="button" class="button" @click="destroy" value="Yes">
+                    <input type="button" class="button" @click="smd = false" value="No">
+                </span>
+            </div>
+            <new-comment :comment_id="id" @created="add" v-show="newcomment"></new-comment>
+            <comment class="is-hidden-mobile" v-for="(comment, index) in getItems" :key="comment.id" :comment="comment" :data="data" @deleted="remove(index)"></comment>
           </div>
 
         </article>
-        <comment class="is-hidden-tablet" v-for="(comment, index) in items[id]" :key="comment.id" :comment="comment" :items="items" @deleted="remove(index)"></comment>
+        <comment class="is-hidden-tablet" v-for="(comment, index) in getItems" :key="comment.id" :comment="comment" :data="data" @deleted="remove(index)"></comment>
     </div>
 </template>
 
@@ -53,27 +66,28 @@
 
     // import Favorite from './Favorite.vue';
     export default {
-        props: ['comment','items'],
+        props: ['comment','data'],
 
         components: { comment, NewComment },
 
         data() {
             return {
-                showcomment: false,
+                smd: false,
+                newcomment: false,
                 editing: false,
                 id: this.comment.id,
                 body: this.comment.body,
                 isBest: this.comment.isBest,
-                commentItems: this.items[this.comment.id],
+                items: this.data[this.comment.id],
             };
         },
 
         computed: {
             getItems() {
-                return this.commentItems;
+                return this.items;
             },
             hasData() {
-                return this.commentItems != null;
+                return this.items != null;
             },
         },
 
@@ -85,32 +99,34 @@
 
         methods: {
             add(item) {
+                this.newcomment = false;
                 // window.events.$emit('childcomment', item);
                 if (this.hasData) {
-                    this.commentItems.push(item);
+                    this.items.unshift(item);
                 }else {
                     let newComment = [];
                     newComment.push(item);
-                    this.commentItems = newComment;
+                    this.items = newComment;
                 }
             },
 
-            // update() {
-            //     axios.patch(
-            //         '/replies/' + this.id, {
-            //         body: this.body
-            //     })
+            update() {
+                axios.patch(
+                    '/comment/' + this.id + '/update', {
+                    body: this.body
+                })
 
-            //     .catch(error => {
-            //         flash(error.response.reply, 'danger');
-            //     });
+                .catch(error => {
+                    flash(error.response.comment, 'danger');
+                });
 
-            //     this.editing = false;
+                this.editing = false;
 
-            //     flash('updated!');
-            // },
+                flash('updated!');
+            },
 
             destroy() {
+                this.smd = false;
                 axios.delete('/comment/' + this.comment.id + '/destroy');
 
                 this.$emit('deleted', this.comment.id);
@@ -118,7 +134,7 @@
 
             remove(index) {
                 console.log(index)
-                this.commentItems.splice(index, 1);
+                this.items.splice(index, 1);
 
                 this.$emit('removed');
             }

@@ -2751,31 +2751,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import Favorite from './Favorite.vue';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['comment', 'items'],
+  props: ['comment', 'data'],
   components: {
     comment: _comment_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     NewComment: _NewComment_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
-      showcomment: false,
+      smd: false,
+      newcomment: false,
       editing: false,
       id: this.comment.id,
       body: this.comment.body,
       isBest: this.comment.isBest,
-      commentItems: this.items[this.comment.id]
+      items: this.data[this.comment.id]
     };
   },
   computed: {
     getItems: function getItems() {
-      return this.commentItems;
+      return this.items;
     },
     hasData: function hasData() {
-      return this.commentItems != null;
+      return this.items != null;
     }
   },
   // created () {
@@ -2785,33 +2799,33 @@ __webpack_require__.r(__webpack_exports__);
   // },
   methods: {
     add: function add(item) {
-      // window.events.$emit('childcomment', item);
+      this.newcomment = false; // window.events.$emit('childcomment', item);
+
       if (this.hasData) {
-        this.commentItems.push(item);
+        this.items.unshift(item);
       } else {
         var newComment = [];
         newComment.push(item);
-        this.commentItems = newComment;
+        this.items = newComment;
       }
     },
-    // update() {
-    //     axios.patch(
-    //         '/replies/' + this.id, {
-    //         body: this.body
-    //     })
-    //     .catch(error => {
-    //         flash(error.response.reply, 'danger');
-    //     });
-    //     this.editing = false;
-    //     flash('updated!');
-    // },
+    update: function update() {
+      axios.patch('/comment/' + this.id + '/update', {
+        body: this.body
+      })["catch"](function (error) {
+        flash(error.response.comment, 'danger');
+      });
+      this.editing = false;
+      flash('updated!');
+    },
     destroy: function destroy() {
+      this.smd = false;
       axios["delete"]('/comment/' + this.comment.id + '/destroy');
       this.$emit('deleted', this.comment.id);
     },
     remove: function remove(index) {
       console.log(index);
-      this.commentItems.splice(index, 1);
+      this.items.splice(index, 1);
       this.$emit('removed');
     } // markBestReply() {
     //     axios.post('/replies/' + this.reply.id + '/best');
@@ -2893,6 +2907,11 @@ __webpack_require__.r(__webpack_exports__);
           root: [item]
         };
       }
+    },
+    remove: function remove(index) {
+      this.items['root'].splice(index, 1);
+      this.$emit('removed');
+      console.log('I was called');
     }
   }
 });
@@ -67935,7 +67954,7 @@ var render = function() {
                       staticClass: "icon is-small",
                       on: {
                         click: function($event) {
-                          _vm.showcomment = !_vm.showcomment
+                          _vm.newcomment = !_vm.newcomment
                         }
                       }
                     },
@@ -67943,16 +67962,63 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _vm._m(1),
+                _vm._m(1)
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "level-right" }, [
+                _vm.authorize("owns", _vm.comment)
+                  ? _c(
+                      "a",
+                      {
+                        staticClass: "level-item",
+                        on: {
+                          click: function($event) {
+                            _vm.smd = true
+                          }
+                        }
+                      },
+                      [_vm._m(2)]
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
                 _vm.authorize("owns", _vm.comment)
                   ? _c(
                       "a",
-                      { staticClass: "level-item", on: { click: _vm.destroy } },
-                      [_vm._m(2)]
+                      {
+                        staticClass: "level-item",
+                        on: {
+                          click: function($event) {
+                            _vm.editing = !_vm.editing
+                          }
+                        }
+                      },
+                      [_vm._m(3)]
                     )
                   : _vm._e()
               ])
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.smd
+                ? _c("span", [
+                    _vm._v("sure about this? \n                "),
+                    _c("input", {
+                      staticClass: "button",
+                      attrs: { type: "button", value: "Yes" },
+                      on: { click: _vm.destroy }
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "button",
+                      attrs: { type: "button", value: "No" },
+                      on: {
+                        click: function($event) {
+                          _vm.smd = false
+                        }
+                      }
+                    })
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c("new-comment", {
@@ -67960,8 +68026,8 @@ var render = function() {
                 {
                   name: "show",
                   rawName: "v-show",
-                  value: _vm.showcomment,
-                  expression: "showcomment"
+                  value: _vm.newcomment,
+                  expression: "newcomment"
                 }
               ],
               attrs: { comment_id: _vm.id },
@@ -67972,7 +68038,7 @@ var render = function() {
               return _c("comment", {
                 key: comment.id,
                 staticClass: "is-hidden-mobile",
-                attrs: { comment: comment, items: _vm.items },
+                attrs: { comment: comment, data: _vm.data },
                 on: {
                   deleted: function($event) {
                     return _vm.remove(index)
@@ -67985,11 +68051,11 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _vm._l(_vm.items[_vm.id], function(comment, index) {
+      _vm._l(_vm.getItems, function(comment, index) {
         return _c("comment", {
           key: comment.id,
           staticClass: "is-hidden-tablet",
-          attrs: { comment: comment, items: _vm.items },
+          attrs: { comment: comment, data: _vm.data },
           on: {
             deleted: function($event) {
               return _vm.remove(index)
@@ -68032,6 +68098,14 @@ var staticRenderFns = [
     return _c("span", { staticClass: "icon is-small" }, [
       _c("i", { staticClass: "fas fa-trash" })
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-small" }, [
+      _c("i", { staticClass: "fas fa-edit" })
+    ])
   }
 ]
 render._withStripped = true
@@ -68064,7 +68138,7 @@ var render = function() {
           { key: comment.id },
           [
             _c("comment", {
-              attrs: { comment: comment, items: _vm.items },
+              attrs: { comment: comment, data: _vm.items },
               on: {
                 deleted: function($event) {
                   return _vm.remove(index)
@@ -84621,6 +84695,7 @@ __webpack_require__.r(__webpack_exports__);
     remove: function remove(index) {
       this.items.splice(index, 1);
       this.$emit('removed');
+      console.log('I was called');
     }
   }
 });
