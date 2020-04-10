@@ -10,6 +10,20 @@ class comment extends Model
 {
     protected $with = ['owner'];
     
+    public static function boot ()
+    {
+        parent::boot();
+
+        static::deleting(function ($comment) {
+            $comment->comments->each->delete();
+        });
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(comment::class, 'parent_id');
+    }
+
     public function owner()
     {
     	return $this->belongsTo(User::class, 'user_id');
@@ -39,4 +53,5 @@ class comment extends Model
     {
         return $this->isBest();
     }
+
 }

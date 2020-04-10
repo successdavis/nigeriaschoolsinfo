@@ -107,6 +107,7 @@ class CommentController extends Controller
 
         $comment->delete();
 
+
         if (request()->expectsJson()) {
             return response(['status' => 'Reply Deleted']);
         }

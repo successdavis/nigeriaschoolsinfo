@@ -71,6 +71,26 @@ class CommentTest extends TestCase
     }
 
     /** @test */
+    public function all_children_comments_gets_deleted_when_a_parent_comment_is_deleted()
+    {
+        $user = create('App\User');
+        $this->signIn($user);
+        $comment = create('App\Comment', ['user_id' => $user->id]);
+
+        $childcomment = create('App\Comment', ['parent_id' => $comment->id]);
+        $childcomment2 = create('App\Comment', ['parent_id' => $childcomment->id]);
+        // $secondchild = create('App\')
+
+        $this->json('DELETE', route('comment.destroy', ['comment' => $comment->id]));
+
+        $this->assertDatabaseMissing('comments', [
+            'body' => $childcomment->body,
+            'body' => $childcomment2->body,
+        ]);
+        
+    }
+
+    /** @test */
     public function it_cannot_be_deleted_by_a_guest_or_any_user_except_its_owner()
     {
         $this->signIn()->withExceptionHandling();
