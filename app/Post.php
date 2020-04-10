@@ -51,4 +51,5 @@ class Post extends Model
     {
         $this->update(['locked' => false]);
     }
+    
 }

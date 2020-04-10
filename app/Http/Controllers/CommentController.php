@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => 'index']);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -95,6 +103,15 @@ class CommentController extends Controller
      */
     public function destroy(comment $comment)
     {
-        //
+        $this->authorize('update', $comment);
+
+        $comment->delete();
+
+        if (request()->expectsJson()) {
+            return response(['status' => 'Reply Deleted']);
+        }
+
+        return back()
+            ->with('flash', 'Reply Deleted');
     }
 }

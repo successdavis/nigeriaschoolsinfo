@@ -1,20 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Auth::routes();
 
 Route::post('api/{school}/addlogo', 'SchoolLogoController@store')->name('school.logo')->middleware('auth');
@@ -52,6 +37,8 @@ Route::patch('/posts/updatepost/{post}', 'PostController@update')->name('post.up
 Route::get('/posts/{post}', 'PostController@show')->name('post.show');
 
 Route::post('/posts/postimages', 'PostController@addimage')->name('posts.images')->middleware('admin');
+Route::post('/posts/{post}/lock', 'PostController@lock')->name('post.lock')->middleware('admin');
+Route::post('/posts/{post}/unlock', 'PostController@unlock')->name('post.unlock')->middleware('admin');
 
 Route::get('/exams', 'ExamsController@index')->name('exams.index');
 Route::get('/exams/{exams}', 'ExamsController@show')->name('exams.index');
@@ -85,6 +72,7 @@ Route::get('/getfaculties', 'FacultiesController@getfaculties')->name('schoolCou
 
 Route::post('/posts/{post}/newcomment', 'CommentController@store')->name('comment.store')->middleware('auth');
 Route::get('/posts/{post}/comments', 'CommentController@index')->name('comment.index');
+Route::delete('/comment/{comment}/destroy', 'CommentController@destroy')->name('comment.destroy');
 
 
 

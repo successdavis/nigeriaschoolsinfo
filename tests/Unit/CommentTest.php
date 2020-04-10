@@ -55,6 +55,33 @@ class CommentTest extends TestCase
         $this->assertFalse($comment->wasJustPublished());
     }
 
+    /** @test */
+    public function it_can_be_deleted()
+    {
+        $user = create('App\User');
+        $this->signIn($user);
+        $comment = create('App\Comment', ['user_id' => $user->id]);
+
+        $this->json('DELETE', route('comment.destroy', ['comment' => $comment->id]));
+
+        $this->assertDatabaseMissing('comments', [
+            'body' => $comment->body,
+        ]);
+        
+    }
+
+    /** @test */
+    public function it_cannot_be_deleted_by_a_guest_or_any_user_except_its_owner()
+    {
+        $this->signIn()->withExceptionHandling();
+
+        $this->json('DESTROY', route('comment.destroy', ['comment' => $this->comment->id]));
+
+        $this->assertDatabaseHas('comments', [
+            'body' => $this->comment->body,
+        ]);
+    }
+
     // /** @test */
     // public function it_knows_if_it_is_the_best_comment()
     // {

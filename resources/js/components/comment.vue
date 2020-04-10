@@ -28,19 +28,22 @@
             <nav class="level is-mobile">
               <div class="level-left">
                 <a class="level-item">
-                  <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                  <span class="icon is-small" @click="showcomment = !showcomment"><i class="fas fa-reply"></i></span>
                 </a>
                 <a class="level-item">
                   <span class="icon is-small"><i class="fas fa-heart"></i></span>
                 </a>
+                <a class="level-item" @click="destroy" v-if="authorize('owns', comment)">
+                    <span class="icon is-small"><i class="fas fa-trash"></i></span>
+                </a>
               </div>
             </nav>
-            <comment v-for="(comment, index) in items[id]" :key="comment.id" :comment="comment" :items="items" @deleted="remove(index)"></comment>
-            
-            <new-comment :comment_id="id"></new-comment>
-
+            <new-comment :comment_id="id" @created="add" v-show="showcomment"></new-comment>
+            <comment class="is-hidden-mobile" v-for="(comment, index) in getItems" :key="comment.id" :comment="comment" :items="items" @deleted="remove(index)"></comment>
           </div>
+
         </article>
+        <comment class="is-hidden-tablet" v-for="(comment, index) in items[id]" :key="comment.id" :comment="comment" :items="items" @deleted="remove(index)"></comment>
     </div>
 </template>
 
@@ -56,11 +59,22 @@
 
         data() {
             return {
+                showcomment: false,
                 editing: false,
                 id: this.comment.id,
                 body: this.comment.body,
                 isBest: this.comment.isBest,
+                commentItems: this.items[this.comment.id],
             };
+        },
+
+        computed: {
+            getItems() {
+                return this.commentItems;
+            },
+            hasData() {
+                return this.commentItems != null;
+            },
         },
 
         // created () {
@@ -71,10 +85,16 @@
 
         methods: {
             add(item) {
-                this.items[this.id].push(item);
-
-                this.$emit('added');
+                // window.events.$emit('childcomment', item);
+                if (this.hasData) {
+                    this.commentItems.push(item);
+                }else {
+                    let newComment = [];
+                    newComment.push(item);
+                    this.commentItems = newComment;
+                }
             },
+
             // update() {
             //     axios.patch(
             //         '/replies/' + this.id, {
@@ -90,11 +110,18 @@
             //     flash('updated!');
             // },
 
-            // destroy() {
-            //     axios.delete('/replies/' + this.reply.id);
+            destroy() {
+                axios.delete('/comment/' + this.comment.id + '/destroy');
 
-            //     this.$emit('deleted', this.reply.id);
-            // },
+                this.$emit('deleted', this.comment.id);
+            },
+
+            remove(index) {
+                console.log(index)
+                this.commentItems.splice(index, 1);
+
+                this.$emit('removed');
+            }
 
             // markBestReply() {
             //     axios.post('/replies/' + this.reply.id + '/best');

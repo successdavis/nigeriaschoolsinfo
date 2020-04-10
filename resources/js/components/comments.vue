@@ -5,10 +5,10 @@
             <comment :comment="comment" :items="items" @deleted="remove(index)"></comment>
         </div>
         <paginator :dataSet="dataSet" @changed="fetch"></paginator>
-<!--         <p v-if="$parent.locked">
+        <p v-if="locked">
             This thread has been locked. No more replies are allowed.
-        </p> -->
-        <new-comment @created="add" ></new-comment>
+        </p>
+        <new-comment @created="add" v-else></new-comment>
     </div>
 </template>
 
@@ -18,16 +18,32 @@
 
     export  default {
         components: {NewComment},
- 
+        
+        props: ['post'],
+
         mixins: [collection],
         data() {
             return { 
+                locked: this.post.locked,
                 dataSet: false,
             };
         },
 
         created() {
             this.fetch();
+        },
+
+        mounted() {
+             window.events.$on(
+                'childcomment', data => {
+                    if (this.items.hasOwnProperty(data.parent_id)) {
+                        this.items[data.parent_id].push(data)
+                    }else {
+                  window.location.replace(window.location.pathname + window.location.search + window.location.hash);
+
+                    }
+                }
+            );
         },
 
         methods: {

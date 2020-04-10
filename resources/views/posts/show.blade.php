@@ -8,7 +8,22 @@
 					<div class="tile is-ancestor">
 						<div class="tile is-parent">
 						    <article class="tile is-child box">
-						      <p class="title">{{$post->title}}</p>
+						      <p class="title">{{$post->title}}</p> 
+
+							     @if ($post->locked)
+						     		<form action="{{ route('post.unlock', ['post' => $post->slug]) }}" method="POST">
+								    	@csrf
+								 		<input type="hidden" name="unlock" value="unlock">
+							      		<button class="button">Unlock</button>
+								    </form>
+								 @else
+								    <form action="{{ route('post.lock', ['post' => $post->slug]) }}" method="POST">
+								    	@csrf
+								 		<input type="hidden" name="lock" value="lock">
+							      		<button class="button">Lock</button>
+								    </form>
+							     @endif
+
 						      <p class="subtitle">{{$post->source->name}}</p>
 						      <div class="content">
 						      	<div class="has-text-center">
@@ -21,7 +36,7 @@
 						    </article>
 						</div>
 					</div>
-					<comments></comments>
+					<comments :post="{{$post}}"></comments>
 				</div>
 				<div class="column">
 					<h4 class="is-size-4 mb-small">Related Posts</h4> 

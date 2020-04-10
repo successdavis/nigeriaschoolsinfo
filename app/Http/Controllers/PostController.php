@@ -128,6 +128,20 @@ class PostController extends Controller
         //
     }
 
+    public function lock(Post $post)
+    {
+        $post->lock();
+
+        return back()->with('flash', 'This post is now lock');
+    }
+
+    public function unlock(Post $post)
+    {
+        $post->unlock();
+
+        return back()->with('flash', 'This post is now unlock');
+    }
+
     public function newpostrequirement()
     {
         $exams = Exams::all();

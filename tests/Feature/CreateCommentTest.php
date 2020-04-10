@@ -37,7 +37,7 @@ class CreateCommentTest extends TestCase
         $this->withExceptionHandling();
         $comment = make('App\Comment');
 
-        $responds = $this->post(route('comment.create', ['post' => $this->post->slug]), $comment->toArray())
+        $responds = $this->post(route('comment.store', ['post' => $this->post->slug]), $comment->toArray())
             ->assertStatus(302);
     }
 }

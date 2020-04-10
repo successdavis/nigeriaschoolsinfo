@@ -4,6 +4,19 @@ window._ = require('lodash');
 
 window.Vue = require('vue');
 
+let authorizations = require('./authorizations');
+
+window.Vue.prototype.authorize = function (...params) {
+    if (! window.App.signedIn) return false;
+
+    if (typeof params[0] === 'string') {
+        return authorizations[params[0]](params[1]);
+    }
+
+    return params[0](window.App.user);
+};
+
+
 Vue.prototype.signedIn = window.App.signedIn;
 
 import VModal from 'vue-js-modal'
@@ -12,14 +25,6 @@ import Form from './utilities/Form';
 window.Form = Form;
 
 Vue.use(VModal)
-
-
-
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
 
 window.axios = require('axios');
 

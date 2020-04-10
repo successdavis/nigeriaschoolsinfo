@@ -2748,6 +2748,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
  // import Favorite from './Favorite.vue';
 
@@ -2759,11 +2762,21 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      showcomment: false,
       editing: false,
       id: this.comment.id,
       body: this.comment.body,
-      isBest: this.comment.isBest
+      isBest: this.comment.isBest,
+      commentItems: this.items[this.comment.id]
     };
+  },
+  computed: {
+    getItems: function getItems() {
+      return this.commentItems;
+    },
+    hasData: function hasData() {
+      return this.commentItems != null;
+    }
   },
   // created () {
   //     window.events.$on('best-reply-selected', id => {
@@ -2772,9 +2785,16 @@ __webpack_require__.r(__webpack_exports__);
   // },
   methods: {
     add: function add(item) {
-      this.items[this.id].push(item);
-      this.$emit('added');
-    } // update() {
+      // window.events.$emit('childcomment', item);
+      if (this.hasData) {
+        this.commentItems.push(item);
+      } else {
+        var newComment = [];
+        newComment.push(item);
+        this.commentItems = newComment;
+      }
+    },
+    // update() {
     //     axios.patch(
     //         '/replies/' + this.id, {
     //         body: this.body
@@ -2785,11 +2805,15 @@ __webpack_require__.r(__webpack_exports__);
     //     this.editing = false;
     //     flash('updated!');
     // },
-    // destroy() {
-    //     axios.delete('/replies/' + this.reply.id);
-    //     this.$emit('deleted', this.reply.id);
-    // },
-    // markBestReply() {
+    destroy: function destroy() {
+      axios["delete"]('/comment/' + this.comment.id + '/destroy');
+      this.$emit('deleted', this.comment.id);
+    },
+    remove: function remove(index) {
+      console.log(index);
+      this.commentItems.splice(index, 1);
+      this.$emit('removed');
+    } // markBestReply() {
     //     axios.post('/replies/' + this.reply.id + '/best');
     //     window.events.$emit('best-reply-selected', this.reply.id);
     // }
@@ -2830,14 +2854,27 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     NewComment: _NewComment_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  props: ['post'],
   mixins: [_mixins_collection__WEBPACK_IMPORTED_MODULE_1__["default"]],
   data: function data() {
     return {
+      locked: this.post.locked,
       dataSet: false
     };
   },
   created: function created() {
     this.fetch();
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    window.events.$on('childcomment', function (data) {
+      if (_this.items.hasOwnProperty(data.parent_id)) {
+        _this.items[data.parent_id].push(data);
+      } else {
+        window.location.replace(window.location.pathname + window.location.search + window.location.hash);
+      }
+    });
   },
   methods: {
     fetch: function fetch(page) {
@@ -67804,107 +67841,165 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("article", { staticClass: "media" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "media-content" },
-        [
-          _c("div", { staticClass: "content" }, [
-            _c("p", [
-              _c("strong", [
-                _c(
-                  "a",
-                  {
-                    staticClass: "has-text-black",
-                    attrs: { href: "/profiles/" + _vm.comment.owner.username }
-                  },
-                  [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(_vm.comment.owner.name) +
-                        "\n                "
-                    )
-                  ]
-                ),
-                _vm._v(
-                  "  said: " + _vm._s(_vm.comment.created_at) + "\n            "
-                )
+  return _c(
+    "div",
+    [
+      _c("article", { staticClass: "media" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "media-content" },
+          [
+            _c("div", { staticClass: "content" }, [
+              _c("p", [
+                _c("strong", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "has-text-black",
+                      attrs: { href: "/profiles/" + _vm.comment.owner.username }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.comment.owner.name) +
+                          "\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(
+                    "  said: " +
+                      _vm._s(_vm.comment.created_at) +
+                      "\n            "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("br")
               ]),
-              _vm._v(" "),
-              _c("br")
-            ]),
-            _vm.editing
-              ? _c("div", [
-                  _c("form", { on: { submit: _vm.update } }, [
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.body,
-                          expression: "body"
-                        }
-                      ],
-                      staticClass: "textarea",
-                      attrs: { required: "" },
-                      domProps: { value: _vm.body },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+              _vm.editing
+                ? _c("div", [
+                    _c("form", { on: { submit: _vm.update } }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.body,
+                            expression: "body"
                           }
-                          _vm.body = $event.target.value
+                        ],
+                        staticClass: "textarea",
+                        attrs: { required: "" },
+                        domProps: { value: _vm.body },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.body = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("button", { staticClass: "small button" }, [
+                        _vm._v("Update")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "small button",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              _vm.editing = false
+                            }
+                          }
+                        },
+                        [_vm._v("Cancel")]
+                      )
+                    ])
+                  ])
+                : _c("div", { domProps: { textContent: _vm._s(_vm.body) } }),
+              _vm._v(" "),
+              _c("p")
+            ]),
+            _vm._v(" "),
+            _c("nav", { staticClass: "level is-mobile" }, [
+              _c("div", { staticClass: "level-left" }, [
+                _c("a", { staticClass: "level-item" }, [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "icon is-small",
+                      on: {
+                        click: function($event) {
+                          _vm.showcomment = !_vm.showcomment
                         }
                       }
-                    }),
-                    _vm._v(" "),
-                    _c("button", { staticClass: "small button" }, [
-                      _vm._v("Update")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "small button",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            _vm.editing = false
-                          }
-                        }
-                      },
-                      [_vm._v("Cancel")]
+                    },
+                    [_c("i", { staticClass: "fas fa-reply" })]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(1),
+                _vm._v(" "),
+                _vm.authorize("owns", _vm.comment)
+                  ? _c(
+                      "a",
+                      { staticClass: "level-item", on: { click: _vm.destroy } },
+                      [_vm._m(2)]
                     )
-                  ])
-                ])
-              : _c("div", { domProps: { textContent: _vm._s(_vm.body) } }),
+                  : _vm._e()
+              ])
+            ]),
             _vm._v(" "),
-            _c("p")
-          ]),
-          _vm._v(" "),
-          _vm._m(1),
-          _vm._v(" "),
-          _vm._l(_vm.items[_vm.id], function(comment, index) {
-            return _c("comment", {
-              key: comment.id,
-              attrs: { comment: comment, items: _vm.items },
-              on: {
-                deleted: function($event) {
-                  return _vm.remove(index)
+            _c("new-comment", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.showcomment,
+                  expression: "showcomment"
                 }
-              }
+              ],
+              attrs: { comment_id: _vm.id },
+              on: { created: _vm.add }
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.getItems, function(comment, index) {
+              return _c("comment", {
+                key: comment.id,
+                staticClass: "is-hidden-mobile",
+                attrs: { comment: comment, items: _vm.items },
+                on: {
+                  deleted: function($event) {
+                    return _vm.remove(index)
+                  }
+                }
+              })
             })
-          }),
-          _vm._v(" "),
-          _c("new-comment", { attrs: { comment_id: _vm.id } })
-        ],
-        2
-      )
-    ])
-  ])
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.items[_vm.id], function(comment, index) {
+        return _c("comment", {
+          key: comment.id,
+          staticClass: "is-hidden-tablet",
+          attrs: { comment: comment, items: _vm.items },
+          on: {
+            deleted: function($event) {
+              return _vm.remove(index)
+            }
+          }
+        })
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = [
   function() {
@@ -67924,20 +68019,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("nav", { staticClass: "level is-mobile" }, [
-      _c("div", { staticClass: "level-left" }, [
-        _c("a", { staticClass: "level-item" }, [
-          _c("span", { staticClass: "icon is-small" }, [
-            _c("i", { staticClass: "fas fa-reply" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "level-item" }, [
-          _c("span", { staticClass: "icon is-small" }, [
-            _c("i", { staticClass: "fas fa-heart" })
-          ])
-        ])
+    return _c("a", { staticClass: "level-item" }, [
+      _c("span", { staticClass: "icon is-small" }, [
+        _c("i", { staticClass: "fas fa-heart" })
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-small" }, [
+      _c("i", { staticClass: "fas fa-trash" })
     ])
   }
 ]
@@ -67988,7 +68081,13 @@ var render = function() {
         on: { changed: _vm.fetch }
       }),
       _vm._v(" "),
-      _c("new-comment", { on: { created: _vm.add } })
+      _vm.locked
+        ? _c("p", [
+            _vm._v(
+              "\n        This thread has been locked. No more replies are allowed.\n    "
+            )
+          ])
+        : _c("new-comment", { on: { created: _vm.add } })
     ],
     2
   )
@@ -82773,6 +82872,26 @@ var app = new Vue({
 
 /***/ }),
 
+/***/ "./resources/js/authorizations.js":
+/*!****************************************!*\
+  !*** ./resources/js/authorizations.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var user = window.App.user;
+module.exports = {
+  owns: function owns(model) {
+    var prop = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'user_id';
+    return model[prop] === user.id;
+  },
+  isAdmin: function isAdmin() {
+    return user.admin;
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/js/bootstrap.js":
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
@@ -82787,17 +82906,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utilities_Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utilities/Form */ "./resources/js/utilities/Form.js");
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
+var authorizations = __webpack_require__(/*! ./authorizations */ "./resources/js/authorizations.js");
+
+window.Vue.prototype.authorize = function () {
+  if (!window.App.signedIn) return false;
+
+  for (var _len = arguments.length, params = new Array(_len), _key = 0; _key < _len; _key++) {
+    params[_key] = arguments[_key];
+  }
+
+  if (typeof params[0] === 'string') {
+    return authorizations[params[0]](params[1]);
+  }
+
+  return params[0](window.App.user);
+};
+
 Vue.prototype.signedIn = window.App.signedIn;
 
 
 window.Form = _utilities_Form__WEBPACK_IMPORTED_MODULE_1__["default"];
 Vue.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_0___default.a);
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
-
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /**

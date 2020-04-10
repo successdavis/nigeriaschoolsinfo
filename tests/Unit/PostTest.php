@@ -39,11 +39,11 @@ class PostTest extends TestCase
 	/** @test */
     public function it_generate_a_string_path()
     {
-        $this->assertEquals("/posts/{$post->slug}", $this->post->path());
+        $this->assertEquals("/posts/{$this->post->slug}", $this->post->path());
     }
 
     /** @test */
-    public function a_post_may_be_lock()
+    public function a_post_may_be_lock_and_unlocked()
     {
         $this->assertFalse($this->post->locked);
 
