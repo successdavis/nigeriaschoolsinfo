@@ -7,9 +7,9 @@
         </p>
         <p class="image is-32x32 mt-small">
           {{-- 23 --}}
-          <span class="school_sh_name is-hidden-tablet mg_left-auto image__favicon--small" v-text="school.courses_count"></span>
+          <span class="school_sh_name  mg_left-auto image__favicon--small" v-text="school.courses_count"></span>
         </p>
-        <p class="image is-32x32 mt-small">
+        <p class="image is-32x32 mt-small is-hidden-tablet ">
           <school-quickview :school="school" :name="school.name"></school-quickview>
         </p>
       </figure>
@@ -21,12 +21,14 @@
             </div>
             <span class="has-text-black" v-text="school.excerpt"></span>
             <span ><strong>Read More</strong></span>
+
           </a>
         </div>
       </div>
     </article>
   </div>
-{{--   <div class="column is-3 is-hidden-touch">
-    sdsds
-  </div> --}}
+  <div class="column is-3 is-hidden-touch">
+        <school-quickview :school="school" :name="school.name"></school-quickview>
+        {{-- <button @click="$modal.show(school.name)">Show Courses</button> --}}
+  </div>
 </div>

@@ -4050,7 +4050,11 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     infiniteHandler: function infiniteHandler($state) {
       var _this = this;
 
-      axios.get("/coursesattached/".concat(this.school.slug)).then(function (_ref) {
+      axios.get("/coursesattached/".concat(this.school.slug), {
+        params: {
+          page: this.page
+        }
+      }).then(function (_ref) {
         var data = _ref.data;
 
         if (data.data.length) {
@@ -69718,7 +69722,7 @@ var render = function() {
       _c(
         "span",
         {
-          staticClass: "is-hidden-tablet mg_left-auto image__favicon--small",
+          staticClass: "mg_left-auto image__favicon--small",
           on: {
             click: function($event) {
               return _vm.$modal.show(_vm.name)

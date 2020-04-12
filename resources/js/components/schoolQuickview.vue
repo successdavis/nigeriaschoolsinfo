@@ -1,6 +1,6 @@
 <template>	
 	<div>	
-		<span @click="$modal.show(name)" class="is-hidden-tablet mg_left-auto image__favicon--small"><i class="fas fa-eye"></i></span>
+		<span @click="$modal.show(name)" class="mg_left-auto image__favicon--small"><i class="fas fa-eye"></i></span>
 			<modal
 				:name="name"
 				height="auto"
@@ -39,7 +39,11 @@
 
 		methods: {
 			infiniteHandler($state) {
-		      axios.get(`/schools/${this.school.slug}/courses`).then(({ data }) => {
+		      axios.get(`/coursesattached/${this.school.slug}`, {
+		        params: {
+		          page: this.page,
+		        }, 
+		      }).then(({ data }) => {
 		        if (data.data.length) {
 		          this.page += 1;
 		          this.courses.push(...data.data);
