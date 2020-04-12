@@ -1,8 +1,8 @@
-|<template>
+<template>
 	<div> 
-		<button @click="$modal.show('attach-school')" class="button">Modify Course</button>
+		<button @click="$modal.show('attach-courses')" class="button">Attach Courses</button>
 		<modal
-			name="attach-school"
+			name="attach-courses"
 			height="auto"
 			:adaptive="true"
 			scrollable="scrollable"
@@ -30,21 +30,21 @@
 				</div>
 				<tabs>
 					<tab name="Not Attached" :selected="true">
-						<school v-for="(school, index) in notAttachedSchools" :key="index" 
+						<course v-for="(course, index) in notAttachedCourses" :key="index" 
 							:school="school" 
 							:course="course" 
 							:check="true">
-								
-						</school>
-						  <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+						</course>
+
+						<infinite-loading @infinite="infiniteHandler"></infinite-loading>
 					</tab>
 					<tab name="attached">
-						<school v-for="(school, index) in attachedSchools" 
+						<course v-for="(course, index) in attachedCourses" 
 							:key="index" 
 							:course="course" 
 							:school="school" 
 							:check="false">
-						</school>
+						</course>
 
 						  <infinite-loading @infinite="getAttached"></infinite-loading>
 					</tab>
@@ -61,15 +61,15 @@ import InfiniteLoading from 'vue-infinite-loading';
 		    InfiniteLoading,
 		 },
 		props: {
-			course: {
+			school: {
 				required: true
 			},
 		},
 		data() {
 			return {
 				attached: [],
-				notAttachedSchools: [],
-				attachedSchools: [],
+				notAttachedCourses: [],
+				attachedCourses: [],
 				page: 1,
 				attachedpage: 1,
 				types: [],
@@ -82,7 +82,7 @@ import InfiniteLoading from 'vue-infinite-loading';
 
 		methods: {
 			selectall() {
-				this.notAttachedSchools.forEach(school => {
+				this.notAttachedCourses.forEach(school => {
 					this.selectallitems.push(school.id);
 				})
 
@@ -101,8 +101,9 @@ import InfiniteLoading from 'vue-infinite-loading';
 				});
 			},
 
+			// This method retrieve all the courses that are not attached to a school
 		    infiniteHandler($state) {
-		      axios.get(`/schoolsnotattached/${this.course.slug}`, {
+		      axios.get(`/coursesnotattached/${this.school.slug}`, {
 		        params: {
 		          page: this.page,
 		          type: this.sort,
@@ -110,15 +111,16 @@ import InfiniteLoading from 'vue-infinite-loading';
 		      }).then(({ data }) => {
 		        if (data.data.length) {
 		          this.page += 1;
-		          this.notAttachedSchools.push(...data.data);
+		          this.notAttachedCourses.push(...data.data);
 		          $state.loaded();
 		        } else {
 		          $state.complete();
 		        }
 		      });
 		    },
+
 		    getAttached($state) {
-		      axios.get(`/schoolsattached/${this.course.slug}`, {
+		      axios.get(`/coursesattached/${this.school.slug}`, {
 		        params: {
 		          page: this.attachedpage,
 		          type: this.sort,
@@ -127,24 +129,25 @@ import InfiniteLoading from 'vue-infinite-loading';
 		      }).then(({ data }) => {
 		        if (data.data.length) {
 		          this.attachedpage += 1;
-		          this.attachedSchools.push(...data.data);
+		          this.attachedCourses.push(...data.data);
 		          $state.loaded();
 		        } else {
 		          $state.complete();
 		        }
 		      });
 		    },
+
 		    changeType() {
 		      this.resetnotattached();
 		      this.attachedpage = 1;
-		      this.attachedSchools = [];
+		      this.attachedCourses = [];
 		      this.infiniteId += 1;
 		      this.getAttached();
 		    },
 
 		    resetnotattached() {
 		     	this.page = 1;
-		      	this.notAttachedSchools = [];
+		      	this.notAttachedCourses = [];
 		      	this.infiniteId += 1;
 		      	this.infiniteHandler();
                 this.selectallitems = [];
@@ -157,5 +160,5 @@ import InfiniteLoading from 'vue-infinite-loading';
 			});
 			
 		}
-	}
+	};
 </script>

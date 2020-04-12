@@ -51,13 +51,14 @@ class SchoolFilters extends Filters
         });
     }
 
-    public function notattached($course)
-    {
-        $this->builder->getQuery()->orders = [];
-        return $this->builder->whereDoesntHave('courses', function($q) use ($course) {
-            $q->where('courses_id', $course);
-        });
-    }
+    // get all schools not attached to this course 
+    // public function notattached($course)
+    // {
+    //     $this->builder->getQuery()->orders = [];
+    //     return $this->builder->whereDoesntHave('courses', function($q) use ($course) {
+    //         $q->where('courses_id', $course);
+    //     });
+    // }
 
     public function type($type)
     {

@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Courses;
+use App\Filters\CourseFilters;
+use App\Http\Resources\CourseResource;
+use App\Http\Resources\SchoolResource;
+use App\Schools;
 use Illuminate\Http\Request;
 
-class CourseSchoolController extends Controller
+class CourseSchoolAttachmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -94,5 +98,67 @@ class CourseSchoolController extends Controller
         $course->detachSchool($request->school);
 
         return Response(201);
+    }
+
+
+    public function getNotLinkedSchools(Courses $course)
+    {
+        $schooltype = request('type');
+
+        $schools =  Schools::whereDoesntHave('courses', function($q) use ($course) {
+            $q->where('courses_id', $course->id);
+        })->orderBy('name');
+
+        if ($schooltype) {
+            $schools->where('school_type_id', $schooltype->id);
+        }
+
+        $schools = $schools->paginate(20);
+
+        if (request()->wantsJson()) {
+            return SchoolResource::collection($schools);
+        }
+    }
+
+    public function getLinkedSchools(Courses $course)
+    {
+        $schooltype = request('type');
+
+        $schools = $course->schools()->orderBy('name');
+
+        if ($schooltype) {
+            $schools->where('school_type_id', $schooltype->id);
+        }
+
+        $schools = $schools->paginate(20);
+
+        if (request()->wantsJson()) {
+            return SchoolResource::collection($schools);
+        }
+    }
+
+    public function getNotLinkedCourses(Schools $school)
+    {
+        $courses = Courses::whereDoesntHave('schools', function($q) use ($school) {
+            $q->where('schools_id', $school->id);
+        })->orderBy('name');
+
+        $courses = $courses->paginate(20);
+
+        if (request()->wantsJson()) {
+            return CourseResource::collection($courses);
+        }   
+    }
+
+    public function getLinkedCourses(Schools $school)
+    {
+
+        $courses = $school->courses()->orderBy('name');
+
+        $courses = $courses->paginate(20);
+
+        if (request()->wantsJson()) {
+            return CourseResource::collection($courses);
+        }   
     }
 }

@@ -8,9 +8,9 @@ Route::post('api/{exams}/attachlogo', 'ExamsLogoController@store')->name('exam.l
 Route::get('api/advertisements', 'AdvertisementsController@index')->name('advertisements.index');
 Route::get('/api/statelocalgovernments', 'LocationController@index')->name('statelocal.index');
 
-Route::post('/api/schoolcourseattachment', 'CourseSchoolController@store')->name('courseschool.store');
-Route::delete('/api/schoolcoursedetachment', 'CourseSchoolController@destroy')->name('courseschool.delete');
-Route::post('/api/schoolcourseattachmany/{course}', 'CourseSchoolController@storemany')->name('courseschool.storemany');
+Route::post('/api/schoolcourseattachment', 'CourseSchoolAttachmentController@store')->name('courseschool.store');
+Route::delete('/api/schoolcoursedetachment', 'CourseSchoolAttachmentController@destroy')->name('courseschool.delete');
+Route::post('/api/schoolcourseattachmany/{course}', 'CourseSchoolAttachmentController@storemany')->name('courseschool.storemany');
 
 // '/course/' . $this->course->slug .'/attachSubject'
 Route::post('/api/{course}/attachSubject', 'AttachSubjectController@store')->name('attachsubject.store');
@@ -48,15 +48,25 @@ Route::get('/exams/{exams}', 'ExamsController@show')->name('exams.index');
 Route::get('/schools', 'SchoolsController@index')->name('schools.index');
 Route::get('/schools/type/{schooltype}', 'SchoolsController@index')->name('schoolsInType');
 Route::get('/schools/{school}', 'SchoolsController@show')->name('schools.show');
-Route::post('/schools/createschool', 'SchoolsController@store')->name('schools.store')->middleware('admin');
+
 Route::get('/find/school', 'SchoolsController@findschool')->name('schools.findschool');
+
+Route::get('/createnewschool', 'SchoolsController@create')->name('schools.create')->middleware('admin');
+Route::post('/schools/createschool', 'SchoolsController@store')->name('schools.store')->middleware('admin');
+
+// return the requirement needed to create a new school
 Route::get('/createSchoolRequirements', 'SchoolsController@cschoolrequirements')->name('schools.cschoolrequirements');
-Route::get('/courses/getschools', 'SchoolsController@index')->name('courses.getschools');
+
+Route::get('/schoolsnotattached/{course}', 'CourseSchoolAttachmentController@getNotLinkedSchools')->name('courses.getNotLinkedSchools');
+Route::get('/schoolsattached/{course}', 'CourseSchoolAttachmentController@getLinkedSchools')->name('courses.getLinkedSchools');
+
+Route::get('/coursesnotattached/{school}', 'CourseSchoolAttachmentController@getNotLinkedCourses')->name('courses.getNotLinkedCourses');
+Route::get('/coursesattached/{school}', 'CourseSchoolAttachmentController@getLinkedCourses')->name('courses.getLinkedCourses');
 
 Route::get('/schoolsofferedby/{course}', 'CoursesController@getschools');
 
-
 Route::get('/schools/{schools}/courses', 'CoursesController@index')->name('schoolCourses');
+Route::get('/schools/{schools}/coursesnotoffered', 'CourseSchoolAttachmentController@coursesnotoffered');
 
 Route::get('/courses', 'CoursesController@index')->name('courses.index');
 Route::get('/courses/editcourse/{course}', 'CoursesController@edit')->name('courses.edit')->middleware('admin');

@@ -81,7 +81,7 @@ class ReadCourseTest extends TestCase
         $manySchools = factory('App\Schools', 20)->create();
         $this->course->attachSchool($school->id, 120);
         $response = $this->json('GET', 
-            '/courses/getschools?attached='. $this->course->id
+            '/schoolsattached/'. $this->course->slug
         )->json();
         $this->assertCount(1, $response['data']);
     }
@@ -94,7 +94,7 @@ class ReadCourseTest extends TestCase
         $this->course->attachSchool($school->id, 120);
 
         $response = $this->json('GET', 
-            '/courses/getschools?notattached='. $this->course->id
+            '/schoolsnotattached/'.$this->course->slug
         )->json();
         $this->assertCount(20, $response['data']);
     }

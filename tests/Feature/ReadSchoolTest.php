@@ -113,7 +113,21 @@ class ReadSChoolTest extends TestCase
 
         $course->attachSchool($this->school->id);
 
-        $response = $this->json('GET', '/schools/' . $this->school->slug . '/courses')->json();
+        $response = $this->json('GET', '/coursesattached/' . $this->school->slug)->json();
         $this->assertCount(1, $response['data']);
+    }
+
+    /** @test */
+    public function a_user_can_read_all_courses_not_attached_to_a_school()
+    {
+        $course = create('App\Courses');
+        $course2 = create('App\Courses');
+        $courses = create('App\Courses',[], 5);
+
+        $course->attachSchool($this->school->id);
+        $course2->attachSchool($this->school->id);
+
+        $response = $this->json('GET', '/coursesnotattached/' . $this->school->slug)->json();
+        $this->assertCount(5, $response['data']);
     }
 }

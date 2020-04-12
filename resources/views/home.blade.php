@@ -23,7 +23,8 @@
 
 
     @if (auth()->user()->isAdmin())
-        <new-school></new-school>
+        {{-- <new-school></new-school> --}}
+        <a href="{{ route('schools.create') }}" class="button">Create School</a>
         <new-course></new-course>
         <a class="button" href="/posts/newpost">Create Post</a>
     @endif

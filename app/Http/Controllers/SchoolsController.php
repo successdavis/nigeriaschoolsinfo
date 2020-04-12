@@ -36,7 +36,7 @@ class SchoolsController extends Controller
      */
     public function create()
     {
-        //
+        return view('schools.create');
     }
 
     /**
@@ -155,6 +155,10 @@ class SchoolsController extends Controller
         return $schools->get();
     }
 
+
+    /**
+     * Return the requirements needed to create a new schools
+     */
     public function cschoolrequirements()
     {
         $Types = SchoolType::all();

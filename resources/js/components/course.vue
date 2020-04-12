@@ -2,11 +2,11 @@
 	<article class="media">
 	  <figure class="media-left">
 	    <p class="image is-32x32">
-	      <img :src="school.logo_path">
+	      <img :src="course.logo_path">
 	    </p>
 	  </figure>
 	  <div class="media-content">
-	    <div class="content"v-text="school.name">
+	    <div class="content"v-text="course.name">
 	    	
 	    </div>
 	  </div>

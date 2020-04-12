@@ -9,6 +9,7 @@
 						<div class="tile is-parent">
 						    <article class="tile is-child box">
 						      <p class="title">{{$post->title}}</p> 
+							    @if (auth()->user()->isAdmin())
 
 							     @if ($post->locked)
 						     		<form action="{{ route('post.unlock', ['post' => $post->slug]) }}" method="POST">
@@ -23,6 +24,8 @@
 							      		<button class="button">Lock</button>
 								    </form>
 							     @endif
+
+							    @endif
 
 						      <p class="subtitle">{{$post->source->name}}</p>
 						      <div class="content">

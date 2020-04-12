@@ -12,7 +12,7 @@ class CourseFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['faculty', 's'];
+    protected $filters = ['faculty', 's', 'notattached'];
 
     /**
      * Filter the query by a given username.
