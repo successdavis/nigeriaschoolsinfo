@@ -25,8 +25,10 @@ Route::delete('/api/{consideration}/delete', 'ConsiderationController@destroy');
 Route::get('/api/schools/{type}', 'ApiController@getschools');
 
 
+Route::get('/latest-nigeria-education-news', 'PostController@index')->name('news.education');
 
 Route::get('/', 'PostController@index');
+
 Route::get('/testpage', 'TestController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/posts/newpost', 'PostController@create')->name('post.create')->middleware('admin');

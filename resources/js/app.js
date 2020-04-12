@@ -1,7 +1,6 @@
 require('./bootstrap'); 
 
 
-
 Vue.component('Flash', require('./components/Flash.vue').default);
 Vue.component('nav-bar', require('./components/NavBar.vue').default);
 Vue.component('ask-question', require('./components/AskQuestion.vue').default);

@@ -37,6 +37,11 @@ class Post extends Model
         return $this->morphTo();
     }
 
+    public function scopeFilter($query, $filters)
+    {
+        return $filters->apply($query);
+    }
+
     public function publisher()
     {
         return $this->belongsTo('App\User', 'user_id');

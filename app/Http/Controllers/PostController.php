@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Advertisements;
 use App\Courses;
 use App\Exams;
+use App\Filters\PostFilters;
 use App\Http\Resources\PostResource;
 use App\Post;
 use App\SchoolType;
@@ -17,13 +18,24 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, PostFilters $filters)
     {
-        $advertisements = Advertisements::activeAdverts();
-        // $posts = Post::where('title', 'LIKE', '%' . request('search') . '%')
-        //     ->orWhere('body', 'LIKE', '%' . request('search') . '%')->get();
+        $request->validate([
+            'q' => 'nullable|string'
+        ]);
 
-        return view('welcome', compact('advertisements'));
+        $q = request('q');
+        $posts = Post::filter($filters)->latest();
+
+        $trending = Post::orderBy('visits','desc')->limit(10)->get();
+
+        $posts = $posts->paginate(50);
+
+        if (request()->wantsJson()) {
+            return $posts;
+        }
+
+        return view('posts.index', compact('posts','q','trending'));
     }
 
     /**
@@ -67,6 +79,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $post->increment('visits');
         $relatedPosts = $post->source->getRecent();
         // dd($relatedPosts);
         return view('posts.show', compact('post','relatedPosts'));

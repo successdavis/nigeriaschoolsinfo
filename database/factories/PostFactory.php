@@ -11,6 +11,7 @@ $factory->define(Post::class, function (Faker $faker) {
         'body' 			=> $faker->paragraph,
         'source_type' 	=> 'App\Schools',
         'locked'        => false,
+        'visits'        => 0,
         'source_id'		=> function() {
             return factory('App\Schools')->create()->id;
         },

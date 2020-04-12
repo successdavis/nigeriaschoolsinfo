@@ -15,6 +15,7 @@ class AddLockToPostsTable extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             $table->unsignedInteger('locked')->default(false)->nullable();
+            $table->unsignedInteger('visits')->default(0);
         });
     }
 

@@ -21,6 +21,9 @@
           FIND OUT
         </a> --}}
 
+        <a href="{{ route('news.education') }}" class="navbar-item">
+          NEWS
+        </a>
         <a class="navbar-item">
           STORE
         </a>

@@ -22,8 +22,8 @@ class ReadPostTest extends TestCase
     {
         $post = create('App\Post');
 
-        $this->get('/')
-            ->assertSee(e($post->title));
+        $this->get('/latest-nigeria-education-news')
+            ->assertSee($post->title);
     }
 
     /** @test */
@@ -43,15 +43,31 @@ class ReadPostTest extends TestCase
         $this->assertCount(10, $response['data']);
     }
 
-    // /** @test */
-    // public function a_user_can_request_all_comments_for_a_given_post()
-    // {
-    //     $post = create('App\Post');
-    //     create('App\Comment', ['commentable_id' => $post->id], 2);
+    /** @test */
+    public function a_user_can_search_through_posts()
+    {
+        $this->signIn(create('App\User'));
+        $inSearchQuery = create('App\Post', ['title' => 'user searched term']);
+        $posts = create('App\Post', [], 10);
 
-    //     $response = $this->getJson($post->path() . '/comments')->json();
+        $response = $this->json('GET', '/latest-nigeria-education-news', [
+            'q'    => 'searched',
+        ])->json();
 
-    //     $this->assertCount(2, $response['data']);
-    //     $this->assertEquals(2, $response['total']);
-    // }
+        $this->assertCount(1, $response['data']);
+    }
+
+    /** @test */
+    public function it_record_a_new_visit_each_time_the_post_is_read()
+    {
+        $this->signIn(create('App\User'));
+
+        $post = create('App\Post');
+
+        $this->assertSame(0, $post->visits);
+
+        $this->call('GET', $post->path());
+
+        $this->assertEquals(1, $post->fresh()->visits);
+    }
 }

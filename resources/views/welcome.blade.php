@@ -2,6 +2,6 @@
 @section('content')
 	{{-- @include ('sections/streamer') --}}
 
-	@include ('sections/displaypost')
+	{{-- @include ('sections/displaypost') --}}
 
 @endsection
