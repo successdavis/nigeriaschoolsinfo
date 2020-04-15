@@ -88,5 +88,9 @@ Route::delete('/comment/{comment}/destroy', 'CommentController@destroy')->name('
 Route::patch('/comment/{comment}/update', 'CommentController@update')->name('comment.update');
 
 
+Route::post('projects/{project}/uploadmaterial', 'UploadProjectController@store')->name('project.upload');
+Route::post('projects/newproject', 'ProjectController@store')->name('project.store');
+
+
 
 

@@ -38,6 +38,11 @@ class SchoolType extends Model
     	return $this->hasMany('App\Schools');
     }
 
+    public function projects()
+    {
+        return $this->hasMany('App\Project');
+    }
+
 
 	public function path()
     {

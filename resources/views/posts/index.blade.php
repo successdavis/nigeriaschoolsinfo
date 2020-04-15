@@ -1,4 +1,14 @@
 @extends('layouts.app')
+
+@section('title')
+	Latest Nigeria Education News | Nigeria Schools Info
+@endsection
+
+@section('head')
+	<meta name="description" content="Stay up to date with latest Nigeria Educational News on all Universities, Polytechnic, Colleges, Nurses School, JAMB, WAEC Etc.">
+  	<meta name="keywords" content="HTML,CSS,XML,JavaScript">
+@endsection
+
 @section('content')
 	<div class="container">
 		<div class="section">
@@ -27,7 +37,7 @@
 							</form>
 						</div>
 
-{{-- 						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 						<ins class="adsbygoogle"
 						     style="display:block"
 						     data-ad-format="fluid"
@@ -36,7 +46,7 @@
 						     data-ad-slot="4383575674"></ins>
 						<script>
 						     (adsbygoogle = window.adsbygoogle || []).push({});
-						</script> --}}
+						</script>
 
 						@foreach ($posts as $post)
 							@include('sections/partials/_post')
@@ -58,11 +68,11 @@
 					              <span class="is-size-7">posted: {{$trend->created_at->diffForHumans()}}</span>
 						      </a>
 						  </div>
-						  <figure class="media-right" style="margin-top: 10px">
+						  {{-- <figure class="media-right" style="margin-top: 10px">
 						    <p class="image is-32x32">
 						      <img src="{{asset($trend->source->logo_path)}}">
 						    </p>
-						  </figure>
+						  </figure> --}}
 						</article>
 					@endforeach	
 				</div>
