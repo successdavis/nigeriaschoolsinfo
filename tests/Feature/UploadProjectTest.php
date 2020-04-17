@@ -21,6 +21,15 @@ class UploadProjectTest extends TestCase
     }
 
     /** @test */
+    public function an_unauthenticated_user_cannot_upload_projects()
+    {
+        $this->withExceptionHandling();
+
+        $this->json('POST', route('project.upload', ['project' => $this->project->slug]))
+            ->assertStatus(401);
+    }
+
+    /** @test */
     public function a_material_can_be_uploaded_to_a_project()
     {
         // $this->withExceptionHandling();

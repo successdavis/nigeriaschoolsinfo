@@ -11,7 +11,7 @@ class Project extends Model
 
     protected $fillable = ['slug'];
 
-    public $pathPrefix  = '/projects/';
+    public $pathPrefix  = '/project/';
     public $findWith    =   'slug';
     public $excerpt    =   ['description', 23];
 

@@ -90,6 +90,8 @@ Route::patch('/comment/{comment}/update', 'CommentController@update')->name('com
 
 Route::post('projects/{project}/uploadmaterial', 'UploadProjectController@store')->name('project.upload');
 Route::post('projects/newproject', 'ProjectController@store')->name('project.store');
+Route::get('projects', 'ProjectController@index')->name('project.index');
+Route::get('project/{project}', 'ProjectController@show')->name('project.index');
 
 
 

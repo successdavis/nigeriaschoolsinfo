@@ -30,7 +30,7 @@ class ProjectTest extends TestCase
     /** @test */
     public function it_generate_a_string_path()
     {
-        $this->assertEquals("/projects/{$this->project->slug}", $this->project->path());
+        $this->assertEquals("/project/{$this->project->slug}", $this->project->path());
     }
 
     /** @test */
