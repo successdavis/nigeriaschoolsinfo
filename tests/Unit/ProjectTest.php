@@ -23,7 +23,7 @@ class ProjectTest extends TestCase
     public function projects_database_has_expected_columns()
     {
         $this->assertTrue(Schema::hasColumns('projects', [
-            'id', "title", "description", 'slug','user_id','category_id','schooltype_id','amount','visits'
+            'id', "title", "description", 'slug','user_id','course_id','schooltype_id','amount','visits'
           ]), 1);
     }
 
@@ -41,9 +41,9 @@ class ProjectTest extends TestCase
     }
 
     /** @test */
-    public function it_belongs_to_a_project_category()
+    public function it_belongs_to_a_course()
     {
-        $this->assertInstanceOf('App\Projectcategory', $this->project->category);
+        $this->assertInstanceOf('App\Courses', $this->project->course);
 
     }
 }

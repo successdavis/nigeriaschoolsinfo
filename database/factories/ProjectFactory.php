@@ -12,12 +12,13 @@ $factory->define(Project::class, function (Faker $faker) {
         'user_id'		=> function () {
         	return factory('App\User')->create()->id;
         },
-        'category_id'	=> function () {
-        	return factory('App\Projectcategory')->create()->id;
+        'course_id'	=> function () {
+        	return factory('App\Courses')->create()->id;
         },
         'schooltype_id'	=> function () {
         	return factory('App\SchoolType')->create()->id;
         },
-        'amount'		=> 2000
+        'amount'		=> 2000,
+        'visits'        => 0,
     ];
 });

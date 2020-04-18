@@ -27,6 +27,10 @@
         <a class="navbar-item">
           STORE
         </a>
+        <a class="navbar-item" href="/projects">
+          PROJECTS
+        </a>
+
         <a href="/courses" class="navbar-item">
           COURSES
         </a>

@@ -19,7 +19,7 @@ class CreateProjectsTable extends Migration
             $table->string('slug')->nullable();
             $table->text('description');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('category_id')->nullable();
+            $table->unsignedInteger('course_id')->nullable();
             $table->unsignedInteger('schooltype_id');
             $table->unsignedInteger('amount');
             $table->unsignedInteger('visits')->default(0);

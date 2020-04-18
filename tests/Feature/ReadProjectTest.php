@@ -34,4 +34,15 @@ class ReadProjectTest extends TestCase
             ->assertSee($this->project->title)
             ->assertSee($this->project->description);
     }
+
+    /** @test */
+    public function it_record_a_new_visit_each_time_the_project_is_read()
+    {
+
+        $this->assertSame(0, $this->project->visits);
+
+        $this->call('GET', $this->project->path());
+
+        $this->assertEquals(1, $this->project->fresh()->visits);
+    }
 }

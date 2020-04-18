@@ -28,6 +28,7 @@ Vue.component('related-post', require('./components/relatedPost.vue').default);
 Vue.component('comments', require('./components/comments.vue').default);
 Vue.component('comment', require('./components/comment.vue').default);
 Vue.component('reactivity', require('./components/Reactivity.vue').default);
+Vue.component('project-material', require('./pages/ProjectMaterial.vue').default);
 
 const app = new Vue({
     el: '#app',

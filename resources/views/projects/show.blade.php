@@ -5,11 +5,41 @@
 @endsection
 
 @section('head')
-    <meta name="description" content="{{$project->category->title}} project. {{$project->title}} . {{$project->excerpt()}}">
-  	<meta name="keywords" content="{{$project->category->title}} project"> 
+    <meta name="description" content="{{$project->course->name}} project. {{$project->title}} . {{$project->excerpt()}}">
+  	<meta name="keywords" content="{{$project->course->name}} project"> 
 @endsection
 
 @section('content')
-	<h1>{{$project->title}}</h1>
-	<p>{{$project->description}}</p>
+	<div class="container">
+		<div class="columns">
+			<div class="column is-9">
+				<div class="section">
+					<h1 class="is-size-2">{{$project->title}}</h1>
+				</div>
+				<p class="section">{!! nl2br($project->description) !!}</p>
+			</div>
+			<div class="column is-3">
+
+				{{-- show the project Edit Button if you are an admin --}}
+				@if (auth()->user()->isAdmin())
+			        <a class="button" href="{{ route('project.edit',['project' => $project->slug]) }}">Edit</a>
+			    @endif
+
+
+				<div class="section">
+					<h3 class="is-size-3">Similar Projects</h3>
+				</div>
+				<article class="media">
+					@foreach ($relatedProjects as $project)
+						<div class="media-content">
+							<a href="{{$project->path()}}" class="has-text-black">{{$project->title}}</a>
+						</div>
+					@endforeach
+				</article>
+
+			</div>
+		</div>
+	</div>
+	
+	
 @endsection

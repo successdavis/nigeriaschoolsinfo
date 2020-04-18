@@ -29,9 +29,9 @@ class Project extends Model
         return $this->belongsTo('App\SchoolType', 'schooltype_id');
     }
 
-    public function category()
+    public function course()
     {
-        return $this->belongsTo('App\Projectcategory', 'category_id');
+        return $this->belongsTo('App\Courses', 'course_id');
     }
 
     public function getDownloadPathAttribute($downloadpath)
@@ -43,4 +43,8 @@ class Project extends Model
         }
     }
 
+    public function scopeFilter($query, $filters)
+    {
+        return $filters->apply($query);
+    }
 }

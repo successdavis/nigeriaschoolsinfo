@@ -91,8 +91,18 @@ Route::patch('/comment/{comment}/update', 'CommentController@update')->name('com
 Route::post('projects/{project}/uploadmaterial', 'UploadProjectController@store')->name('project.upload');
 Route::post('projects/newproject', 'ProjectController@store')->name('project.store');
 Route::get('projects', 'ProjectController@index')->name('project.index');
-Route::get('project/{project}', 'ProjectController@show')->name('project.index');
+Route::get('project/{project}', 'ProjectController@show')->name('project.show');
+Route::patch('project/{project}/update', 'ProjectController@update')->name('project.update');
+Route::get('/editproject/{project}', 'ProjectController@edit')->name('project.edit');
 
+Route::get('download-{course}/projects-and-topics', 'ProjectController@index')->name('project.courses');
+Route::get('/addprojectmaterial', 'ProjectController@create')->name('project.create');
+
+Route::get('/projectscategories', 'ProjectcategoryController@index')->name('projectcategory.index');
+
+// This method retrieve all the school types, 
+// that's the level of education, nurse, nce, degree etc
+Route::get('/educationlevels', 'EducationLevelController@index')->name('schooltype.index');
 
 
 

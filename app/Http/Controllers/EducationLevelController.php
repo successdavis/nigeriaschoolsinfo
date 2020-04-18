@@ -2,18 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Project;
+use App\SchoolType;
 use Illuminate\Http\Request;
 
-class UploadProjectController extends Controller
+class EducationLevelController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth')->except(['index','show']);
-    }
-
-
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +14,7 @@ class UploadProjectController extends Controller
      */
     public function index()
     {
-        //
+        return $levels = SchoolType::all();
     }
 
     /**
@@ -34,18 +27,15 @@ class UploadProjectController extends Controller
         //
     }
 
-    public function store(Request $request, Project $project)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-        $request->validate([
-            'file' => 'mimes:doc,docx,zip'
-        ]);
-        $name = $project->slug.'.'.request()->file('file')->getClientOriginalExtension();
-
-        $project->download_path = request()->file('file')->storeAs('projects', $name, 'public');
-
-        $project->save();
-
-        return response($project, 200);
+        //
     }
 
     /**

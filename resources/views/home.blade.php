@@ -19,6 +19,7 @@
         <a href="/courses">Browse Courses</a> <br>
         <a href="/courses">Browse Schools</a> <br>
         <a href="/courses">Browse Exams</a> <br>
+        <a href="/projects">Browse Projects</a> <br>
     </div>
 
 
@@ -27,6 +28,7 @@
         <a href="{{ route('schools.create') }}" class="button">Create School</a>
         <new-course></new-course>
         <a class="button" href="/posts/newpost">Create Post</a>
+        <a class="button" href="/addprojectmaterial">Add Project Material</a>
     @endif
 </div>
 @endsection

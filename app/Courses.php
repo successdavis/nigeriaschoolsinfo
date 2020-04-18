@@ -76,4 +76,14 @@ class Courses extends Model
 
         $this->subjects()->attach($subjects);
     }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class,'course_id');
+    }
+
+    public function categoryPath()
+    {
+        return '/download-'.$this->slug.'/projects-and-topics';
+    }
 }
