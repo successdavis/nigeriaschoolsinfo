@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\JobFilters;
+use App\Http\Resources\JobResource;
 use App\Job;
 use Illuminate\Http\Request;
 
@@ -12,9 +14,15 @@ class JobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(JobFilters $filters)
     {
-        //
+        $jobs = $this->getJobs($filters);
+
+        if (request()->wantsJson()) {
+            return JobResource::collection($jobs);
+        }
+
+        return view('jobs.index', compact('jobs'));
     }
 
     /**
@@ -46,7 +54,7 @@ class JobController extends Controller
      */
     public function show(Job $job)
     {
-        //
+        return view('jobs.show', compact('job'));
     }
 
     /**
@@ -81,5 +89,12 @@ class JobController extends Controller
     public function destroy(Job $job)
     {
         //
+    }
+
+    public function getJobs($filters)
+    {
+        $jobs = Job::latest()->filter($filters);
+        
+        return $jobs = $jobs->paginate(30);
     }
 }

@@ -107,3 +107,6 @@ Route::get('/educationlevels', 'EducationLevelController@index')->name('schoolty
 
 Route::post('/initializepayment', 'PaymentController@create')->name('payment.create');
 Route::post('/payment/{payment}', 'PaymentController@store')->name('payment.store');
+
+Route::get('/jobs-opportunities-in-nigeria', 'JobController@index')->name('jobs.index');
+Route::get('/jobs/{job}', 'JobController@show')->name('jobs.show');
