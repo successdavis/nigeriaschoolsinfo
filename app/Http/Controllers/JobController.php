@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
+
+    public function __construct() 
+    {
+        return $this->Middleware(['auth'])->except(['index','show']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -43,7 +49,30 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title'         => 'required|string|max:50',
+            'description'   => 'required|min:100',
+            'location'      => 'required|string',
+            'ends_at'       =>  'required'
+        ]);
+
+        $job = new Job;
+
+        $job->title             = $request->title;
+        $job->description       = $request->description;
+        $job->meta_description  = $request->meta_description;
+        $job->portal_website    = $request->portal_website;
+        $job->user_id           = Auth()->user()->id;
+        $job->phone             = $request->phone;
+        $job->location          = $request->location;
+        $job->employer          = $request->employer;
+        $job->ends_at           = $request->ends_at;
+
+        $job->save();
+
+        if (request()->wantsJson()) {
+            return $job;
+        }
     }
 
     /**
@@ -77,7 +106,27 @@ class JobController extends Controller
      */
     public function update(Request $request, Job $job)
     {
-        //
+        $request->validate([
+            'title'         => 'required|string|max:50',
+            'description'   => 'required|min:100',
+            'location'      => 'required|string',
+            'ends_at'       =>  'required'
+        ]);
+
+        $job->title             = $request->title;
+        $job->description       = $request->description;
+        $job->meta_description  = $request->meta_description;
+        $job->portal_website    = $request->portal_website;
+        $job->phone             = $request->phone;
+        $job->location          = $request->location;
+        $job->employer          = $request->employer;
+        $job->ends_at           = $request->ends_at;
+
+        $job->save();
+
+        if (request()->wantsJson()) {
+            return $job;
+        }   
     }
 
     /**

@@ -109,4 +109,6 @@ Route::post('/initializepayment', 'PaymentController@create')->name('payment.cre
 Route::post('/payment/{payment}', 'PaymentController@store')->name('payment.store');
 
 Route::get('/jobs-opportunities-in-nigeria', 'JobController@index')->name('jobs.index');
+Route::post('jobs/create', 'JobController@store')->name('jobs.store');
+Route::patch('/jobs/{job}/update', 'JobController@update')->name('jobs.update');
 Route::get('/jobs/{job}', 'JobController@show')->name('jobs.show');
