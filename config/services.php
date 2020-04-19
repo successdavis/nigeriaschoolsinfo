@@ -30,4 +30,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'paystack' => [
+        'secret' => env('PAYSTACK_SECRET_KEY')
+    ],
 ];

@@ -1,4 +1,4 @@
-<streamer-carousel inline-template >
+<div>
   @if (!empty($advertisements))
     <image-carousel :wraparound="true" :autoplay="true" >
       @foreach ($advertisements as $advert)
@@ -15,4 +15,4 @@
       @endforeach    
    </image-carousel>
   @endif
-</streamer-carousel>
+</div>

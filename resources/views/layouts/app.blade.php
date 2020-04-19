@@ -14,7 +14,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    <script data-ad-client="ca-pub-3146034280624513" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    {{-- <script data-ad-client="ca-pub-3146034280624513" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> --}}
     
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -26,7 +26,6 @@
             'signedIn'  => Auth::check()      
         ]) !!};
     </script>
-    @livewireAssets
 </head>
 <body>
     
@@ -43,7 +42,6 @@
     </div>
     
     <script src="{{ asset('js/app.js') }}"></script>
-
     @yield('footer')
 </body>
 </html>

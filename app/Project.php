@@ -2,17 +2,19 @@
 
 namespace App;
 
+use App\Traits\Billable;
 use App\Traits\ModelFunctions;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
+    use Billable;
     use ModelFunctions;
 
     protected $fillable = ['slug'];
 
     public $pathPrefix  = '/project/';
-    public $findWith    =   'slug';
+    public $findWith    = 'slug';
     public $excerpt    =   ['description', 23];
 
     protected static function boot()

@@ -17,7 +17,8 @@ window.Vue.prototype.authorize = function (...params) {
 };
 
 
-Vue.prototype.signedIn = window.App.signedIn;
+Vue.prototype.signedIn 	= window.App.signedIn;
+Vue.prototype.user 		= window.App.user;
 
 import VModal from 'vue-js-modal'
 import Form from './utilities/Form';

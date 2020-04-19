@@ -2172,6 +2172,104 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PaystackInlinePayment.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PaystackInlinePayment.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['id', 'type', 'description', 'button', 'email'],
+  data: function data() {
+    return {
+      success: false,
+      processing: false,
+      billable_type: this.type,
+      billable_id: this.id,
+      transaction_ref: '',
+      amount: ''
+    };
+  },
+  mounted: function mounted() {
+    this.initialize();
+  },
+  methods: {
+    initialize: function initialize() {
+      var _this = this;
+
+      this.processing = true;
+      axios.post('/initializepayment', {
+        module: this.billable_type,
+        id: this.billable_id,
+        description: this.description
+      }).then(function (data) {
+        console.log(data.data);
+        _this.amount = data.data.amount, _this.transaction_ref = data.data.transaction_ref;
+        _this.processing = false;
+
+        _this.payWithPaystack();
+      });
+    },
+    payWithPaystack: function payWithPaystack() {
+      var handler = PaystackPop.setup({
+        key: 'pk_test_28408f469c8cab977b6440f21cfc4e171beefc00',
+        email: this.email,
+        amount: this.amount,
+        currency: "NGN",
+        ref: this.transaction_ref,
+        metadata: {
+          custom_fields: [{
+            secret: "Dummy Text"
+          }]
+        },
+        callback: function callback(response) {
+          var _this2 = this;
+
+          flash('Thank you for choosing NSIS, We are verifying your payment');
+          axios.post('/payment/' + response.reference).then(function (data) {
+            console.log(data);
+            flash('Payment Verified Successfully');
+            _this2.success = true;
+          })["catch"](function (error) {
+            console.log(error);
+            flash("Sorry! we couldn't verify this payment", 'failed');
+          });
+        },
+        onClose: function onClose() {
+          alert('Sure about this?');
+        }
+      });
+      handler.openIframe();
+    },
+    completePayment: function completePayment(response) {
+      console.log(response);
+      console.log('=============');
+      console.log(this.transaction_ref); // axios.post('/payment/' + this.transaction_ref,{
+      //     		data: response
+      //     	}).then ({
+      // });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Reactivity.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Reactivity.vue?vue&type=script&lang=js& ***!
@@ -2291,26 +2389,6 @@ __webpack_require__.r(__webpack_exports__);
         flash('We were unable to process your form', 'failed');
       });
     }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StreamerCarousel.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/StreamerCarousel.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      carousels: ''
-    };
   }
 });
 
@@ -67203,6 +67281,53 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PaystackInlinePayment.vue?vue&type=template&id=bbed8b5c&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PaystackInlinePayment.vue?vue&type=template&id=bbed8b5c& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.initialize($event)
+          }
+        }
+      },
+      [
+        _c("button", {
+          staticClass: "button",
+          class: _vm.processing ? "loading" : "",
+          attrs: { type: "button" },
+          domProps: {
+            textContent: _vm._s(_vm.button ? _vm.button : "Purchase")
+          },
+          on: { click: _vm.initialize }
+        })
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Reactivity.vue?vue&type=template&id=c9a64c26&":
 /*!*************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Reactivity.vue?vue&type=template&id=c9a64c26& ***!
@@ -82151,7 +82276,6 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 Vue.component('Flash', __webpack_require__(/*! ./components/Flash.vue */ "./resources/js/components/Flash.vue")["default"]);
 Vue.component('nav-bar', __webpack_require__(/*! ./components/NavBar.vue */ "./resources/js/components/NavBar.vue")["default"]);
 Vue.component('ask-question', __webpack_require__(/*! ./components/AskQuestion.vue */ "./resources/js/components/AskQuestion.vue")["default"]);
-Vue.component('streamer-carousel', __webpack_require__(/*! ./components/StreamerCarousel.vue */ "./resources/js/components/StreamerCarousel.vue")["default"]);
 Vue.component('image-carousel', __webpack_require__(/*! ./components/carousel.vue */ "./resources/js/components/carousel.vue")["default"]);
 Vue.component('shools-page', __webpack_require__(/*! ./pages/schools.vue */ "./resources/js/pages/schools.vue")["default"]);
 Vue.component('exams-page', __webpack_require__(/*! ./pages/exams.vue */ "./resources/js/pages/exams.vue")["default"]);
@@ -82176,6 +82300,7 @@ Vue.component('comments', __webpack_require__(/*! ./components/comments.vue */ "
 Vue.component('comment', __webpack_require__(/*! ./components/comment.vue */ "./resources/js/components/comment.vue")["default"]);
 Vue.component('reactivity', __webpack_require__(/*! ./components/Reactivity.vue */ "./resources/js/components/Reactivity.vue")["default"]);
 Vue.component('project-material', __webpack_require__(/*! ./pages/ProjectMaterial.vue */ "./resources/js/pages/ProjectMaterial.vue")["default"]);
+Vue.component('paystack-payment', __webpack_require__(/*! ./components/PaystackInlinePayment.vue */ "./resources/js/components/PaystackInlinePayment.vue")["default"]);
 var app = new Vue({
   el: '#app'
 });
@@ -82234,6 +82359,7 @@ window.Vue.prototype.authorize = function () {
 };
 
 Vue.prototype.signedIn = window.App.signedIn;
+Vue.prototype.user = window.App.user;
 
 
 window.Form = _utilities_Form__WEBPACK_IMPORTED_MODULE_1__["default"];
@@ -82664,6 +82790,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/PaystackInlinePayment.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/PaystackInlinePayment.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PaystackInlinePayment_vue_vue_type_template_id_bbed8b5c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PaystackInlinePayment.vue?vue&type=template&id=bbed8b5c& */ "./resources/js/components/PaystackInlinePayment.vue?vue&type=template&id=bbed8b5c&");
+/* harmony import */ var _PaystackInlinePayment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PaystackInlinePayment.vue?vue&type=script&lang=js& */ "./resources/js/components/PaystackInlinePayment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PaystackInlinePayment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PaystackInlinePayment_vue_vue_type_template_id_bbed8b5c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PaystackInlinePayment_vue_vue_type_template_id_bbed8b5c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/PaystackInlinePayment.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/PaystackInlinePayment.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/PaystackInlinePayment.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PaystackInlinePayment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PaystackInlinePayment.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PaystackInlinePayment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PaystackInlinePayment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/PaystackInlinePayment.vue?vue&type=template&id=bbed8b5c&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/PaystackInlinePayment.vue?vue&type=template&id=bbed8b5c& ***!
+  \******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaystackInlinePayment_vue_vue_type_template_id_bbed8b5c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PaystackInlinePayment.vue?vue&type=template&id=bbed8b5c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PaystackInlinePayment.vue?vue&type=template&id=bbed8b5c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaystackInlinePayment_vue_vue_type_template_id_bbed8b5c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaystackInlinePayment_vue_vue_type_template_id_bbed8b5c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Reactivity.vue":
 /*!************************************************!*\
   !*** ./resources/js/components/Reactivity.vue ***!
@@ -82799,56 +82994,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpecialConsideration_vue_vue_type_template_id_0129040e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
-
-/***/ }),
-
-/***/ "./resources/js/components/StreamerCarousel.vue":
-/*!******************************************************!*\
-  !*** ./resources/js/components/StreamerCarousel.vue ***!
-  \******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _StreamerCarousel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StreamerCarousel.vue?vue&type=script&lang=js& */ "./resources/js/components/StreamerCarousel.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-var render, staticRenderFns
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  _StreamerCarousel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"],
-  render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/StreamerCarousel.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/StreamerCarousel.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/components/StreamerCarousel.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StreamerCarousel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./StreamerCarousel.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StreamerCarousel.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StreamerCarousel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

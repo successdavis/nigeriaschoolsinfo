@@ -27,7 +27,7 @@ Route::get('/api/schools/{type}', 'ApiController@getschools');
 
 Route::get('/latest-nigeria-education-news', 'PostController@index')->name('news.education');
 
-Route::get('/', 'PostController@index');
+Route::get('/', 'ApplicationController@index');
 
 Route::get('/testpage', 'TestController@index');
 Route::get('/home', 'HomeController@index')->name('home');
@@ -105,4 +105,5 @@ Route::get('/projectscategories', 'ProjectcategoryController@index')->name('proj
 Route::get('/educationlevels', 'EducationLevelController@index')->name('schooltype.index');
 
 
-
+Route::post('/initializepayment', 'PaymentController@create')->name('payment.create');
+Route::post('/payment/{payment}', 'PaymentController@store')->name('payment.store');

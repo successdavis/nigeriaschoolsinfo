@@ -38,10 +38,10 @@ class UploadProjectTest extends TestCase
 
         Storage::fake('public');
 
-        $responds = $this->json('POST', route('project.upload', ['project' => $this->project->slug]), ['file' => $file = UploadedFile::fake()->image('logo.jpg')]);
+        $responds = $this->json('POST', route('project.upload', ['project' => $this->project->slug]), ['file' => $file = UploadedFile::fake()->image('doc.doc')]);
 
-        $this->assertEquals(asset('storage/projects/'.$this->project->slug.'.jpg'), $this->project->fresh()->download_path);
+        $this->assertEquals(asset('storage/projects/'.$this->project->slug.'.doc'), $this->project->fresh()->download_path);
 
-        Storage::disk('public')->assertExists('projects/' . $this->project->slug . '.jpg');
+        Storage::disk('public')->assertExists('projects/' . $this->project->slug . '.doc');
     }
 }

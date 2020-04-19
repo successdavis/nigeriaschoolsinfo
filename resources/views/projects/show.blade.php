@@ -11,6 +11,11 @@
 
 @section('content')
 	<div class="container">
+		@auth()
+			<paystack-payment email="{{auth()->user()->email}}" description="Project Purchasing" type="Project" id="{{$project->id}}"></paystack-payment>
+		@else
+			<a href="/login" class="button">Purchase</a>
+		@endauth
 		<div class="columns">
 			<div class="column is-9">
 				<div class="section">
@@ -21,9 +26,11 @@
 			<div class="column is-3">
 
 				{{-- show the project Edit Button if you are an admin --}}
-				@if (auth()->user()->isAdmin())
-			        <a class="button" href="{{ route('project.edit',['project' => $project->slug]) }}">Edit</a>
-			    @endif
+				@auth()
+					@if (auth()->user()->isAdmin())
+				        <a class="button" href="{{ route('project.edit',['project' => $project->slug]) }}">Edit</a>
+				    @endif
+				@endauth
 
 
 				<div class="section">
@@ -42,4 +49,8 @@
 	</div>
 	
 	
+@endsection
+
+@section('footer')
+	<script src="https://js.paystack.co/v1/inline.js"></script>
 @endsection
