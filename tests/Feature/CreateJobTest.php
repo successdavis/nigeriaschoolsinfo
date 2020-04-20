@@ -30,4 +30,20 @@ class CreateJobTest extends TestCase
 
         $this->assertDatabaseHas('jobs', ['title' => $data['title']]);
     }
+
+    /** @test */
+    public function you_must_wait_for_atleast_5min_to_create_a_new_job()
+    {
+        $this->withExceptionHandling();
+        $user = create('App\User');
+        $this->signIn($user);
+
+        $job = create('App\Job',['user_id' => $user->id]);
+        
+        $data = $this->job->toArray();
+        unset($data['id']);
+
+        $this->post('jobs/create',$data)
+            ->assertStatus(403);
+    }
 }

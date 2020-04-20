@@ -19,9 +19,12 @@ class UpdateJobTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_update_a_job()
+    public function a_job_can_be_updated()
     {
-        $this->signIn();
+        $user = create('App\User');
+        $this->job = $job = create('App\Job',['user_id' => $user->id]);
+
+        $this->signIn($user);
         $data = $this->job->toArray();
         $data['title'] = 'Changed Title';
 
@@ -29,4 +32,14 @@ class UpdateJobTest extends TestCase
 
         $this->assertEquals('Changed Title', $this->job->fresh()->title);
     }
+
+    /** @test */
+    public function it_can_be_updated_only_by_its_creator()
+    {
+        $this->signIn()->withExceptionHandling();
+
+        $this->patch(route('jobs.update',['job' => $this->job->slug]), $this->job->toArray())
+            ->assertStatus(403);
+    }
+
 }

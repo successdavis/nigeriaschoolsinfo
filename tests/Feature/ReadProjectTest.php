@@ -21,7 +21,7 @@ class ReadProjectTest extends TestCase
     /** @test */
     public function a_user_can_read_all_projects()
     {
-        $responds = $this->get('/projects')
+        $responds = $this->get('/nigeria-education-project-topics-and-materials')
             ->assertSee($this->project->title)
             ->assertSee($this->project->description);
     }

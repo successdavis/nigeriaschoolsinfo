@@ -38,7 +38,7 @@ class JobController extends Controller
      */
     public function create()
     {
-        //
+        return view('jobs.create');
     }
 
     /**
@@ -49,6 +49,10 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
+        if (! $this->authorize('create', new Job)) {
+            return response('Please wait atleast 5min before trying again', 429);
+        };
+
         $request->validate([
             'title'         => 'required|string|max:50',
             'description'   => 'required|min:100',
@@ -83,6 +87,7 @@ class JobController extends Controller
      */
     public function show(Job $job)
     {
+        $job->increment('visits');
         return view('jobs.show', compact('job'));
     }
 
@@ -94,7 +99,7 @@ class JobController extends Controller
      */
     public function edit(Job $job)
     {
-        //
+        return view('jobs.create', compact('job'));
     }
 
     /**
@@ -106,8 +111,10 @@ class JobController extends Controller
      */
     public function update(Request $request, Job $job)
     {
+        $this->authorize('update', $job);
+        
         $request->validate([
-            'title'         => 'required|string|max:50',
+            'title'         => 'required|string|max:100',
             'description'   => 'required|min:100',
             'location'      => 'required|string',
             'ends_at'       =>  'required'
@@ -142,7 +149,7 @@ class JobController extends Controller
 
     public function getJobs($filters)
     {
-        $jobs = Job::latest()->filter($filters);
+        $jobs = Job::orderBy('updated_at','DESC')->filter($filters);
         
         return $jobs = $jobs->paginate(30);
     }

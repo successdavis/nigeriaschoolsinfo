@@ -63,4 +63,15 @@ class JobTest extends TestCase
 
         $this->assertEquals($date->diffForHumans(), $this->job->recuritmentEndsAt());
     }
+        /** @test */
+    public function it_knows_if_it_was_just_publish()
+    {
+        $job = create('App\Job');
+
+        $this->assertTrue($job->wasJustPublished());
+
+        $job->created_at = Carbon::now()->subMonth();
+
+        $this->assertFalse($job->wasJustPublished());
+    }
 }

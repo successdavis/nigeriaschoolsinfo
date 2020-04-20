@@ -27,7 +27,7 @@
         <a class="navbar-item">
           STORE
         </a>
-        <a class="navbar-item" href="/projects">
+        <a class="navbar-item" href="/nigeria-education-project-topics-and-materials">
           PROJECTS
         </a>
 

@@ -61,4 +61,9 @@ class Job extends Model
     {
         return $filters->apply($query);
     }
+
+    public function wasJustPublished()
+    {
+        return $this->created_at->gt(Carbon::now()->subMinute());
+    }
 }

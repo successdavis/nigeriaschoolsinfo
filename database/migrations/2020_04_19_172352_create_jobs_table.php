@@ -27,6 +27,7 @@ class CreateJobsTable extends Migration
             $table->string('meta_description')->nullable();
             $table->timestamp('ends_at')->nullable();
             $table->boolean('recruiting')->default(false);
+            $table->unsignedInteger('visits')->default(0);
             $table->timestamps();
         });
     }

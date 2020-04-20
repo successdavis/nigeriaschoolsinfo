@@ -88,10 +88,10 @@ Route::delete('/comment/{comment}/destroy', 'CommentController@destroy')->name('
 Route::patch('/comment/{comment}/update', 'CommentController@update')->name('comment.update');
 
 
-Route::post('projects/{project}/uploadmaterial', 'UploadProjectController@store')->name('project.upload');
-Route::post('projects/newproject', 'ProjectController@store')->name('project.store');
-Route::get('projects', 'ProjectController@index')->name('project.index');
-Route::get('project/{project}', 'ProjectController@show')->name('project.show');
+Route::post('/projects/{project}/uploadmaterial', 'UploadProjectController@store')->name('project.upload');
+Route::post('/projects/newproject', 'ProjectController@store')->name('project.store');
+Route::get('/nigeria-education-project-topics-and-materials', 'ProjectController@index')->name('project.index');
+Route::get('/project/{project}', 'ProjectController@show')->name('project.show');
 Route::patch('project/{project}/update', 'ProjectController@update')->name('project.update');
 Route::get('/editproject/{project}', 'ProjectController@edit')->name('project.edit');
 
@@ -108,7 +108,9 @@ Route::get('/educationlevels', 'EducationLevelController@index')->name('schoolty
 Route::post('/initializepayment', 'PaymentController@create')->name('payment.create');
 Route::post('/payment/{payment}', 'PaymentController@store')->name('payment.store');
 
-Route::get('/jobs-opportunities-in-nigeria', 'JobController@index')->name('jobs.index');
-Route::post('jobs/create', 'JobController@store')->name('jobs.store');
+Route::get('/latest-job-opportunities-and-application', 'JobController@index')->name('jobs.index');
+Route::get('/create-a-new-job', 'JobController@create')->name('jobs.create');
+Route::get('/edit-job/{job}', 'JobController@edit')->name('jobs.create');
+Route::post('/jobs/create', 'JobController@store')->name('jobs.store');
 Route::patch('/jobs/{job}/update', 'JobController@update')->name('jobs.update');
 Route::get('/jobs/{job}', 'JobController@show')->name('jobs.show');

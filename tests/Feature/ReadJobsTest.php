@@ -22,7 +22,7 @@ class ReadJobsTest extends TestCase
     /** @test */
     public function a_user_can_browse_all_jobs()
     {
-        $response = $this->json('GET', '/jobs-opportunities-in-nigeria')->json();
+        $response = $this->json('GET', '/latest-job-opportunities-and-application')->json();
         $this->assertCount(1, $response['data']);
     }
 
@@ -40,7 +40,7 @@ class ReadJobsTest extends TestCase
         $this->job->openRecruitment();
         $jobTwo = create('App\Job');
 
-        $response = $this->json('GET', '/jobs-opportunities-in-nigeria?status=open');
+        $response = $this->json('GET', '/latest-job-opportunities-and-application?status=open');
         $this->assertCount(1, $response['data']);
     }
 
@@ -50,12 +50,12 @@ class ReadJobsTest extends TestCase
         $job = create('App\Job', ['title' => 'Stechmax Offering Admission']);
         $jobTwo = create('App\Job', ['description' => 'some really long description here']);
 
-        $url = 'jobs-opportunities-in-nigeria?s=Stechmax';
+        $url = 'latest-job-opportunities-and-application?s=Stechmax';
 
         $jobs = $this->json('GET', $url)->json();
         $this->assertCount(1, $jobs['data']);
 
-        $url = 'jobs-opportunities-in-nigeria?s=description';
+        $url = 'latest-job-opportunities-and-application?s=description';
 
         $jobs = $this->json('GET', $url)->json();
         $this->assertCount(1, $jobs['data']);

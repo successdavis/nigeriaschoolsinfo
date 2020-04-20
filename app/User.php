@@ -42,6 +42,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Post', 'user_id');
     }
 
+    public function lastjob()
+    {
+        return $this->hasOne(Job::class)->latest();
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'users_roles');
