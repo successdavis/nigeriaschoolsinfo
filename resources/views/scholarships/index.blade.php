@@ -36,7 +36,7 @@
 				</div>
 			</div>
 			<div class="column is-4">
-				<a class="button" href="create-a-new-job">Create a new Job</a>
+				{{-- <a class="button" href="create-a-new-job">Create a new Job</a> --}}
 				<h4>Sponsored Content</h4>
 			</div>
 		</div>

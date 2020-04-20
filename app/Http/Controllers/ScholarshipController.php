@@ -64,7 +64,6 @@ class ScholarshipController extends Controller
         $scholarship->meta_description  = $request->meta_description;
         $scholarship->portal_website    = $request->portal_website;
         $scholarship->user_id           = Auth()->user()->id;
-        $scholarship->phone             = $request->phone;
         $scholarship->location          = $request->location;
         $scholarship->institution       = $request->employer;
         $scholarship->ends_at           = $request->ends_at;
