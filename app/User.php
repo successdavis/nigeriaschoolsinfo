@@ -4,6 +4,7 @@ namespace App;
 
 use App\Post;
 use App\Role;
+use App\Scholarship;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -45,6 +46,11 @@ class User extends Authenticatable
     public function lastjob()
     {
         return $this->hasOne(Job::class)->latest();
+    }
+
+    public function lastScholarship()
+    {
+        return $this->hasOne(Scholarship::class)->latest();
     }
 
     public function roles()

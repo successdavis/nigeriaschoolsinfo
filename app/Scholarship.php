@@ -2,6 +2,7 @@
 
 namespace App;
 use App\Traits\ModelFunctions;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Scholarship extends Model
@@ -63,5 +64,10 @@ class Scholarship extends Model
     public function applicationEndsAt()
     {
         return $this->ends_at ? $this->ends_at->diffForHumans() : 'Undefined';
+    }
+
+    public function wasJustPublished()
+    {
+        return $this->created_at->gt(Carbon::now()->subMinute());
     }
 }
