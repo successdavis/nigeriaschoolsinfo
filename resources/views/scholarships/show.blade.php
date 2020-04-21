@@ -16,7 +16,7 @@
 				<div class="section">
 					<div>
 						<a class="button" href="/latest-scholarships-opportunities-for-application">View all Scholarships</a>
-						<a class="button" href="/create-a-new-scholarship">Create a new Scholarship</a>
+						<a class="button" href="/scholarships/create-a-new-scholarship">Create a new Scholarship</a>
 						@can('update', $scholarship)
 							<a class="button" href="/edit-scholarship/{{$scholarship->slug}}">Update Scholarship</a>
 						@endcan

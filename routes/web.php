@@ -117,5 +117,7 @@ Route::get('/jobs/{job}', 'JobController@show')->name('jobs.show');
 
 Route::get('/latest-scholarships-opportunities-for-application', 'ScholarshipController@index');
 Route::post('/scholarships/create', 'ScholarshipController@store');
-Route::get('/scholarships/{scholarship}', 'ScholarshipController@show');
+Route::get('/scholarships/create-a-new-scholarship', 'ScholarshipController@create');
+Route::get('/scholarship/{scholarship}', 'ScholarshipController@show');
+Route::get('/edit-scholarship/{scholarship}', 'ScholarshipController@edit');
 Route::patch('/updatescholarship/{scholarship}', 'ScholarshipController@update')->name('scholarship.update');

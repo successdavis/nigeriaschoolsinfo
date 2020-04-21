@@ -51,11 +51,12 @@ class ScholarshipController extends Controller
         $this->authorize('create', new Scholarship);
 
         $request->validate([
-            'title'         => 'required|string|max:50',
+            'title'         => 'required|string|max:70',
             'description'   => 'required|min:100',
             'location'      => 'required|string',
-            'ends_at'       =>  'required'
+            // 'ends_at'       =>  'required'
         ]);
+
 
         $scholarship = new Scholarship;
 
@@ -65,12 +66,11 @@ class ScholarshipController extends Controller
         $scholarship->portal_website    = $request->portal_website;
         $scholarship->user_id           = Auth()->user()->id;
         $scholarship->location          = $request->location;
-        $scholarship->institution       = $request->employer;
+        $scholarship->institution       = $request->institution;
         $scholarship->ends_at           = $request->ends_at;
+        $scholarship->admitting         = true;
 
         $scholarship->save();
-
-        $scholarship->openApplication();
 
         if (request()->wantsJson()) {
             return $scholarship;

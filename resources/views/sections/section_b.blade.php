@@ -14,12 +14,11 @@
 				@endforeach
 			</div>
 			<div class="has-text-centered section">
-				<a class="button" class="has-text-black" href="/jobs-opportunities-in-nigeria">See All Jobs and Recruitment</a>
+				<a class="button" class="has-text-black" href="/create-a-new-job">See All Jobs and Recruitment</a>
 			</div>
 		</div>
 		<div class="column is-4">
 			<h4 class="is-size-4 section">Apply for a Schorlarship</h4>
-		</div>
-		
+		</div>	
 	</div>
 </div>

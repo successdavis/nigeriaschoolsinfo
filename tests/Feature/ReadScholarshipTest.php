@@ -28,7 +28,7 @@ class ReadScholarshipTest extends TestCase
     /** @test */
     public function a_user_can_view_a_single_scholarship()
     {
-        $this->get('/scholarships/' .  $this->scholarship->slug)
+        $this->get('/scholarship/' .  $this->scholarship->slug)
             ->assertSee($this->scholarship->name)
             ->assertSee($this->scholarship->description);
     }

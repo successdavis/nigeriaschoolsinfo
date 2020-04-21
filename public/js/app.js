@@ -2262,7 +2262,7 @@ __webpack_require__.r(__webpack_exports__);
         portal_website: this.scholarship != null ? this.scholarship.portal_website : '',
         phone: this.scholarship != null ? this.scholarship.phone : '',
         location: this.scholarship != null ? this.scholarship.location : '',
-        employer: this.scholarship != null ? this.scholarship.employer : '',
+        institution: this.scholarship != null ? this.scholarship.employer : '',
         ends_at: this.scholarship != null ? this.scholarship.ends_at : ''
       })
     };
