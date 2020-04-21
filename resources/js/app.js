@@ -30,6 +30,7 @@ Vue.component('reactivity', require('./components/Reactivity.vue').default);
 Vue.component('project-material', require('./pages/ProjectMaterial.vue').default);
 Vue.component('paystack-payment', require('./components/PaystackInlinePayment.vue').default);
 Vue.component('new-job', require('./components/NewJob.vue').default);
+Vue.component('new-scholarship', require('./components/NewScholarship.vue').default);
 
 const app = new Vue({
     el: '#app',
