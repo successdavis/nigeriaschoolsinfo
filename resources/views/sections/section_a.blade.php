@@ -20,7 +20,19 @@
 			</div>
 			<div class="column is-4">
 				<div class="has-text-centered">
-					<p class="is-size-4"><strong>Research Papers</strong></p>
+					<p class="is-size-4"><strong>Schorlarship</strong></p>
+				</div>
+				<div class="section">
+					@foreach ($scholarships as $scholarship)
+						<article class="media">
+							<div class="media-content">
+								<h3><a class="has-text-black" href="{{$scholarship->path()}}">{{$scholarship->title}}<strong> Click to Read</strong></a></h3>
+							</div>
+						</article>
+					@endforeach
+				</div>	
+				<div class="has-text-centered section">
+					<a class="button" class="has-text-black" href="/latest-scholarships-opportunities-for-application">See All Scholarships</a>
 				</div>
 			</div>
 			<div class="column is-4 ">

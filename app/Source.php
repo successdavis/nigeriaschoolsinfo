@@ -16,9 +16,10 @@ trait Source
     {
         $post = $this->posts()->save(
                 new Post([
-                    'user_id'       => auth()->id(),
-                    'body'    		=> $params['body'],
-                    'title'         => $params['title'],  
+                    'user_id'           => auth()->id(),
+                    'body'    		    => $params['body'],
+                    'meta_description'  => $params['meta_description'],  
+                    'title'             => $params['title'],  
                 ])
         );
 

@@ -56,5 +56,9 @@ class Post extends Model
     {
         $this->update(['locked' => false]);
     }
-    
+
+    public function hasFeaturedImage()
+    {
+        return isset($this->featured_image);
+    }
 }

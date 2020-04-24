@@ -18,7 +18,7 @@
 			</div>
 		</div>
 		<div class="column is-4">
-			<h4 class="is-size-4 section">Apply for a Schorlarship</h4>
-		</div>	
+			
+		</div>
 	</div>
 </div>

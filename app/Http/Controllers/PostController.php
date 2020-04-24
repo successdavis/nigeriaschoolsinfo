@@ -59,12 +59,17 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required',
             'body' => 'required',
+            'meta_description' => 'required|max:150|min:140',
         ]);
 
         $module = 'App\\' . ucwords(strtolower($request->module));
         if(class_exists($module)) {
             $handler = $module::find($request->module_id);
-            $params = ['title' => $request->title, 'body' => $request->body];
+            $params = [
+                'title' => $request->title, 
+                'body' => $request->body,
+                'meta_description' => $request->meta_description
+            ];
             return $handler->publishPost($params);
         }
 
@@ -93,7 +98,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.create', compact('post'));
     }
 
     /**
@@ -108,6 +113,7 @@ class PostController extends Controller
         $request->validate([
             'title'     => 'required',
             'body'      => 'required',
+            'meta_description'      => 'required|max:150|min:140',
             'module'    => 'required',
             'module_id' => 'required'
         ]);
@@ -121,10 +127,11 @@ class PostController extends Controller
         }
 
         $post->update([
-            'title'         => $request->title,
-            'body'          => $request->body,
-            'source_type'   => $module,
-            'source_id'     => $request->module_id
+            'title'             => $request->title,
+            'body'              => $request->body,
+            'source_type'       => $module,
+            'source_id'         => $request->module_id,
+            'meta_description'  => $request->meta_description
         ]);
 
         return Response(200);
@@ -184,6 +191,7 @@ class PostController extends Controller
 
     public function addimage(Request $request)
     {
+
         $request->validate([
             'file' => ['required', 'image']
         ]);
@@ -201,5 +209,20 @@ class PostController extends Controller
                 'src' => $src,
                 'alt' => $name
             ]);
+    }
+
+    public function featured_image(Request $request, Post $post)
+    {
+        $request->validate([
+            'file' => ['required', 'image']
+        ]);
+
+        $name = $post->title .'.'.request()->file('file')->getClientOriginalExtension();
+
+        $post->update([
+            'featured_image' => request()->file('file')->storeAs('posts', $name, 'public')
+        ]);
+
+        return response($post, 200);
     }
 }

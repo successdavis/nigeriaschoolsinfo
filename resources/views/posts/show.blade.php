@@ -1,4 +1,15 @@
 @extends('layouts.app')
+
+@section('title')
+    {{$post->title}} | NSIS News
+@endsection
+
+@section('head')
+    <meta name="description" content="
+     {{$post->meta_description}}
+     ">
+@endsection
+
 @section('content')
 	{{-- @include ('sections/streamer') --}}
 	<div class="mt-large">
@@ -9,32 +20,42 @@
 						<div class="tile is-parent">
 						    <article class="tile is-child box">
 						      <p class="title">{{$post->title}}</p> 
+						      @auth()
 							    @if (auth()->user()->isAdmin())
-
-							     @if ($post->locked)
-						     		<form action="{{ route('post.unlock', ['post' => $post->slug]) }}" method="POST">
-								    	@csrf
-								 		<input type="hidden" name="unlock" value="unlock">
-							      		<button class="button">Unlock</button>
-								    </form>
-								 @else
-								    <form action="{{ route('post.lock', ['post' => $post->slug]) }}" method="POST">
-								    	@csrf
-								 		<input type="hidden" name="lock" value="lock">
-							      		<button class="button">Lock</button>
-								    </form>
-							     @endif
+							    	<a href="/editpost/{{$post->slug}}" class="button">Edit</a>
+								    @if ($post->locked)
+							     		<form action="{{ route('post.unlock', ['post' => $post->slug]) }}" method="POST">
+									    	@csrf
+									 		<input type="hidden" name="unlock" value="unlock">
+								      		<button class="button">Unlock</button>
+									    </form>
+									@else
+									    <form action="{{ route('post.lock', ['post' => $post->slug]) }}" method="POST">
+									    	@csrf
+									 		<input type="hidden" name="lock" value="lock">
+								      		<button class="button">Lock</button>
+									    </form>
+								     @endif
 
 							    @endif
-
+							  @endauth
 						      <p class="subtitle">{{$post->source->name}}</p>
 						      <div class="content">
 						      	<div class="has-text-center">
-							      	<p class="image is-64x64">
-							      		<img class="is-rounded" src="{{asset($post->source->logo_path)}}">
-							    	</p>
+						      		@isset ($post->source->logo_path)
+								      	<p class="image is-64x64">
+								      		<img class="is-rounded" src="{{asset($post->source->logo_path)}}">
+								    	</p>
+						      		@endisset
 						      	</div>
-						        <p>{!! nl2br($post->body) !!}</p>
+						        <p>
+						        	@if ($post->hasFeaturedImage())
+								      	<p class="image" style="display: flex; justify-content: center;">
+								      		<img style="width: 320px" class="" src="{{asset('storage/'.$post->featured_image)}}">
+								    	</p>
+						      		@endif
+						        	{!! nl2br($post->body) !!}
+						        </p>
 						      </div>
 						    </article>
 						</div>

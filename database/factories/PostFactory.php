@@ -29,3 +29,22 @@ $factory->state(Post::class, 'exams', function (Faker $faker) {
         },
     ];
 });
+
+$factory->state(Post::class, 'course', function (Faker $faker) {
+    return [
+        'source_type'   => 'App\Courses',
+        'source_id'     => function() {
+            return factory('App\Courses')->create()->id;
+        },
+    ];
+});
+
+$factory->state(Post::class, 'category', function (Faker $faker) {
+    return [
+        'source_type'    => 'App\Postcategory',
+        'featured_image' => $faker->image('public/storage/posts',400,300,null,false),
+        'source_id'      => function() {
+            return factory('App\Postcategory')->create()->id;
+        },
+    ];
+});

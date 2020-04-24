@@ -1,31 +1,62 @@
 <script>
-  import Editor from '../components/editor';
+  	import Editor from '../components/editor';
+	import ImageUpload from '../components/ImageUpload';
 	export default {
-    components: {
-      Editor
-    },
+	    components: {
+	      Editor,
+	      ImageUpload
+	    },
+	    props: ['post','image'],
 		data () {
 			return {
-				posthandle: '',
+                featuredimage: this.image,
+				posthandle: this.post,
 				schooltypes: '',
 				type: '',
 				schools: '',
 				courses: '',
+				categories: '',
 				exams: '', 
 				disabled: false,
 				PostForm: new Form({
-					body: '',
-					title: '',
-					module: '',
-					module_id: ''
+					body: this.post != null ? this.post.body : '',
+					title: this.post != null ? this.post.title : '',
+					meta_description: this.post != null ? this.post.meta_description : '',
+					module: this.module,
+					module_id: this.post != null ? this.post.source_id : ''
 				}),
 			}
 		},
 
+		computed: {
+			meta_length () {
+				let char = this.PostForm.meta_description.length,
+	            limit = 150;
+	        	return (limit - char);
+			}
+		},
+
 		methods: {
+			onLoad(image) {
+	            this.featuredimage = image.src;
+
+	            this.persist(image.file);
+	        },
+	        persist(file) {
+                let data = new FormData();
+
+                data.append('file', file);
+
+                console.log(data);
+
+                axios.post(`/posts/${this.posthandle.slug}/featured_image`, data)
+                    .then(() => flash('Post Cover Image Uploaded! '))
+                    .catch(() => flash('Cover Image Upload Failed','failed'));
+            },
 			setPostBody (value) {
 				this.PostForm.body = value;
 			},
+
 			publishPost () {
 
 				this.disabled = true;
@@ -67,11 +98,15 @@
 		},
 
 		created () {
-		axios.get('/posts/newpostrequirements')
-    		.then (data => {
-    			this.exams = data.data.exams;
-    			this.courses = data.data.courses;
-    			this.schooltypes = data.data.schooltype;
+			axios.get('/posts/newpostrequirements')
+	    		.then (data => {
+	    			this.exams = data.data.exams;
+	    			this.courses = data.data.courses;
+	    			this.schooltypes = data.data.schooltype;
+			});
+			axios.get('/categories')
+	    		.then (data => {
+	    			this.categories = data.data;
 			});
 		},
 	}

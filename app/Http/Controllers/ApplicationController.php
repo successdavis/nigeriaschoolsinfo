@@ -6,6 +6,7 @@ use App\Advertisements;
 use App\Post;
 use App\Job;
 use App\Project;
+use App\Scholarship;
 use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
@@ -16,7 +17,8 @@ class ApplicationController extends Controller
     	$posts = Post::latest()->orderBy('visits', 'DESC')->limit(10)->get();
     	$projects = Project::latest()->orderBy('visits', 'DESC')->limit(10)->get();
     	$jobs = Job::latest()->limit(20)->get();
+    	$scholarships = Scholarship::latest()->limit(20)->get();
 
-    	return view('welcome', compact('advertisements','posts','projects','jobs'));
+    	return view('welcome', compact('advertisements','posts','projects','jobs','scholarships'));
     }
 }

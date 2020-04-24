@@ -33,12 +33,18 @@ trait ModelFunctions
     	}
     }
 
-
     public function excerpt()
     {
         $word = $this->excerpt[0];
         $newbody = Str::words($this->$word, $this->excerpt[1], ' ...');
 
         return $newbody;
+    }
+
+    public function getShortName()
+    {
+        $type = strtolower((new \ReflectionClass($this))->getShortName());
+        return $type;
+        // return "{$event}_{$type}";
     }
 }

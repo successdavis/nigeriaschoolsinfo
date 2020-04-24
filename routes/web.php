@@ -2,6 +2,9 @@
 
 Auth::routes();
 
+Route::get('/post-category/{category}', 'PostcategoryController@show')->name('category.show');
+
+
 Route::post('api/{school}/addlogo', 'SchoolLogoController@store')->name('school.logo')->middleware('auth');
 Route::post('api/{exams}/attachlogo', 'ExamsLogoController@store')->name('exam.logo')->middleware('admin');
 
@@ -34,9 +37,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/posts/newpost', 'PostController@create')->name('post.create')->middleware('admin');
 Route::get('/posts/newpostrequirements', 'PostController@newpostrequirement')->middleware('admin');
 Route::get('/posts/relatedpost', 'PostController@relatedpost');
+Route::get('/editpost/{post}', 'PostController@edit');
 Route::post('/posts/publishpost', 'PostController@store')->name('post.store')->middleware('admin');
 Route::patch('/posts/updatepost/{post}', 'PostController@update')->name('post.update')->middleware('admin');
 Route::get('/posts/{post}', 'PostController@show')->name('post.show');
+Route::post('/posts/{post}/featured_image', 'PostController@featured_image')->name('posts.featured_image');
+
 
 Route::post('/posts/postimages', 'PostController@addimage')->name('posts.images')->middleware('admin');
 Route::post('/posts/{post}/lock', 'PostController@lock')->name('post.lock')->middleware('admin');
@@ -121,3 +127,6 @@ Route::get('/scholarships/create-a-new-scholarship', 'ScholarshipController@crea
 Route::get('/scholarship/{scholarship}', 'ScholarshipController@show');
 Route::get('/edit-scholarship/{scholarship}', 'ScholarshipController@edit');
 Route::patch('/updatescholarship/{scholarship}', 'ScholarshipController@update')->name('scholarship.update');
+
+Route::post('/categories/newcategory', 'PostcategoryController@store')->name('category.store')->middleware('admin');
+Route::get('/categories', 'PostcategoryController@index')->name('category.index');

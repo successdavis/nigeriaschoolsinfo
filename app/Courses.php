@@ -4,6 +4,7 @@ namespace App;
 
 use App\Consideration;
 use App\Schools;
+use App\Source;
 use App\Subject;
 use App\Traits\ModelFunctions;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +17,7 @@ class Courses extends Model
     public $excerpt    =   ['description', 23];
     protected $with     = ['subjects', 'considerations'];
     
-
+    use Source;
     use ModelFunctions;
 
     protected static function boot()
@@ -85,5 +86,9 @@ class Courses extends Model
     public function categoryPath()
     {
         return '/download-'.$this->slug.'/projects-and-topics';
+    }
+    public function getRecent()
+    {
+        return $this->posts()->limit(10)->get();
     }
 }

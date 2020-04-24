@@ -24,11 +24,7 @@
 				amount: '',
 			}
 		},
-
-		mounted() {
-			this.initialize();
-		},
-
+		
 		methods: {
 			initialize() {
 				this.processing = true;

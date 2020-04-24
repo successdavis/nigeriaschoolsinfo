@@ -49,8 +49,14 @@
 						</script>
 
 						@foreach ($posts as $post)
-							@include('sections/partials/_post')
+							{{-- @include('sections/partials/_post') --}}
 						@endforeach
+
+						@foreach ($posts as $post)
+			                @if (view()->exists("posts.partials.{$post->source->getShortName()}"))
+			                    @include ("posts.partials.{$post->source->getShortName()}")
+			                @endif
+			            @endforeach
 
 						<div class="section">
 							{{ $posts->links() }}

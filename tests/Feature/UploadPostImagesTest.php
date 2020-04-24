@@ -60,10 +60,31 @@ class UploadPostImagesTest extends TestCase
         $this->signIn($user);
 
         Storage::fake('public');
-
+ 
         $responds = $this->json('POST', route('posts.images'), ['file' => $file = UploadedFile::fake()->image('logo.jpg')]);
 
         Storage::disk('public')->assertExists('posts/' . 'logo.jpg');
+    }
+
+    /** @test */
+    public function an_admin_can_upload_post_featured_image()
+    {        
+        $user = create('App\User');
+        $role = create('App\Role',['name' => 'admin']);
+
+        $user->assignRole($role->id);
+        $this->signIn($user);
+
+        $post = create('App\Post');
+
+        Storage::fake('public');
+
+        $responds = $this->json('POST', 
+            route('posts.featured_image',['post' => $post->slug]), 
+            ['file' => $file = UploadedFile::fake()->image('logo.jpg')]
+        );
+
+        Storage::disk('public')->assertExists($post->fresh()->featured_image);
     }
 
 }

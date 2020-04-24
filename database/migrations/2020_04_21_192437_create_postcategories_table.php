@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddLockToPostsTable extends Migration
+class CreatePostcategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class AddLockToPostsTable extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->unsignedInteger('locked')->default(false)->nullable();
+        Schema::create('postcategories', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('title');
+            $table->text('description');
+            $table->string('slug')->nullable();
+            $table->string('meta_description');
             $table->unsignedInteger('visits')->default(0);
-            $table->string('featured_image')->nullable();
-            $table->string('meta_description')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -28,8 +31,6 @@ class AddLockToPostsTable extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('postcategories');
     }
 }
