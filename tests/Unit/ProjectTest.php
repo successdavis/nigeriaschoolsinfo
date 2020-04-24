@@ -46,4 +46,14 @@ class ProjectTest extends TestCase
         $this->assertInstanceOf('App\Courses', $this->project->course);
 
     }
+
+    /** @test */
+    public function it_determine_if_a_user_has_paid_for_it()
+    {
+        $this->signIn();
+        $payment = $this->project->initializePayment('Project Purchase');
+        $payment->markSuccessful();
+
+        $this->assertTrue($this->project->isBilled());
+    }
 }

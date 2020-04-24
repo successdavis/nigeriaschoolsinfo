@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Payment;
+use Illuminate\Http\Request;
 
 trait Billable
 {
@@ -32,5 +33,30 @@ trait Billable
                 'transaction_ref'   => $trans,
             ])
         );
+    }
+
+    public function initializePayment($description)
+    {
+        $payment = new Payment;
+        $payment->transaction_ref  = hexdec(uniqid());
+        $payment->description      = $description;
+        $payment->amount           = $this->amount;
+        $payment->user_id          = auth()->id();
+
+        return $this->payments()->save($payment);
+    }
+
+    public function isBilled($userId = null)
+    {
+        $user = $userId ?: auth()->id();
+        return $this->payments()->where('user_id', $user)
+                ->where('paid', true)->exists();
+    }
+
+    public function getUserPayment($userId = null)
+    {
+        $user = $userId ?: auth()->id();
+        return $this->payments()->where('user_id', $user)
+            ->where('paid', true)->orderBy('id','desc')->first();
     }
 }

@@ -18,6 +18,7 @@ $factory->define(Post::class, function (Faker $faker) {
         'user_id'     => function() {
             return factory('App\User')->create()->id;
         },
+        'meta_description' => 'Proin faucibus arcu quis ante. Morbi mattis ullamcorper velit. Curabitur a felis in nunc fringilla tristique. Suspendisse enim turpis, dictum sed, id'
     ];
 });
 

@@ -21,7 +21,8 @@ class CreatePaymentsTable extends Migration
             $table->string('transaction_ref'); // The transaction references generated from the payment
             $table->boolean('paid')->default(false); // 0 => Initialized, 1 => Paid
             $table->integer('billable_id');
-            $table->string('billable_type'); // get the Model this invoice is created for e.g. Course, Certificates, etc.
+            $table->unsignedInteger('user_id');
+            $table->string('billable_type'); // get the Model this payment is created for e.g. Course, Certificates, etc.
             $table->timestamps();
         });
     }

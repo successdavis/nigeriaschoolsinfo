@@ -58,6 +58,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'users_roles');
     }
 
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
     public function assignRole($role)
     {
         $this->roles()->attach($role);

@@ -3,19 +3,24 @@
 namespace App;
 
 use App\Traits\Billable;
+use App\Traits\Downloadable;
 use App\Traits\ModelFunctions;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Project extends Model
 {
     use Billable;
     use ModelFunctions;
+    use Downloadable;
 
     protected $fillable = ['slug'];
 
     public $pathPrefix  = '/project/';
     public $findWith    = 'slug';
     public $excerpt    =   ['description', 23];
+
+    public $maxDownloadAllowed = 5;
 
     protected static function boot()
     {
@@ -40,9 +45,10 @@ class Project extends Model
     {
         if ($downloadpath) {
             return asset('storage/' . $downloadpath);
-        }else {
-            return asset('storage/projects/default.jpg');
         }
+
+        // for testing purposes only, else return null is no download path is set
+        return Storage::url('projects/accusamus-qui-eius-quia-doloremque-officia-deleniti-qui-iste.docx');
     }
 
     public function scopeFilter($query, $filters)

@@ -59,7 +59,7 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required',
             'body' => 'required',
-            'meta_description' => 'required|max:150|min:140',
+            // 'meta_description' => 'required|max:150|min:140',
         ]);
 
         $module = 'App\\' . ucwords(strtolower($request->module));

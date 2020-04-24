@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Download;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Zttp\Zttp;
@@ -49,11 +50,26 @@ class Payment extends Model
 		return $this->paymentData['amount'] == $this->amount;
 	}
 
-	public function updatePayment()
+	public function markSuccessful()
 	{
 		$this->method 	= $this->paymentData['channel'];
 		$this->paid 	= true;
 		$this->save();
 		return true;
+	}
+
+	public function status()
+	{
+		return !! $this->paid;
+	}
+
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
+
+	public function downloads()
+	{
+		return $this->hasMany(Download::class);
 	}
 }

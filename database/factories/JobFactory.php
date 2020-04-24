@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Job::class, function (Faker $faker) {
     return [
-        "title"				=> $faker->sentence, 
+        "title"				=> $faker->word, 
         "description"		=> 'the quick brown fox jumps over the lazy dog and the lazy dog chase after it and so the story keeps going on and on and on', 
         "portal_website" 	=> $faker->url,
         "ends_at"			=> $faker->dateTime($max = 'now', $timezone = null), 

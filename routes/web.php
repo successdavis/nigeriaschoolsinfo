@@ -103,6 +103,7 @@ Route::get('/editproject/{project}', 'ProjectController@edit')->name('project.ed
 
 Route::get('download-{course}/projects-and-topics', 'ProjectController@index')->name('project.courses');
 Route::get('/addprojectmaterial', 'ProjectController@create')->name('project.create');
+Route::get('/download/{project}/file', 'ProjectController@download')->name('project.download');
 
 Route::get('/projectscategories', 'ProjectcategoryController@index')->name('projectcategory.index');
 

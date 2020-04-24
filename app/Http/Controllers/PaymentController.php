@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -24,6 +31,12 @@ class PaymentController extends Controller
      */
     public function create(Request $request)
     {
+        $request->validate([
+            'description'   => 'required|string',
+            'module'        => 'required|string',
+            'id'            => 'required|integer',
+        ]);
+
         $module = 'App\\' . ucwords(strtolower($request->module));
         if(class_exists($module)) {
             if (!$module::where('id', $request->id)->exists()) {
@@ -32,23 +45,16 @@ class PaymentController extends Controller
 
             $handler = $module::find(1);
 
-            $paymentparam = new Payment;
-            $paymentparam->transaction_ref  = hexdec(uniqid());
-            $paymentparam->description      = $request->description;
-            $paymentparam->amount           = $handler->amount;
-            $paymentparam->billable_id      = $request->id;
-            $paymentparam->billable_type    = $module;
+            $handler->initializePayment($request->description);
 
-            $paymentparam->save();
-
-            return $paymentparam;
+            return $handler;
         }
 
         abort(400, "Hmm! You should'nt be seeing this. Please contact admin");
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Update an already initialized payment.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -59,13 +65,12 @@ class PaymentController extends Controller
             return response("Something went wrong with payment verification", 400);
         }else {
             if ($payment->verifyAmount()) {
-                $payment->updatePayment();
+                $payment->markSuccessful();
                 return response('Payment Verified', 200);
             }else {
                 return response("Amount you paid does not corresponds to our transaction record", 400);
             }
-        }
-        
+        }   
     }
 
     /**

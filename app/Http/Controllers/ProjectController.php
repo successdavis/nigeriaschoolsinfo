@@ -6,6 +6,7 @@ use App\Courses;
 use App\Filters\ProjectFilters;
 use App\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -146,5 +147,18 @@ class ProjectController extends Controller
         }
 
         return $projects = $projects->paginate(20);
+    }
+
+    public function download(Project $project)
+    {
+        if (!$project->isBilled()) {
+            abort(402, "You don't have an active payment for this project");
+        }
+
+        if ($project->downloadsAccessLeft() <= 0) {
+            abort(401, "Sorry you have exausted your download limits");
+        }
+        // return response(200);
+        return Storage::download($project->downloadPath);
     }
 }

@@ -26,7 +26,7 @@ class CreateJobTest extends TestCase
         $data = $this->job->toArray();
         unset($data['id']);
 
-        $this->json('POST','jobs/create',$data)->json();
+        $this->json('POST','/jobs/create',$data)->json();
 
         $this->assertDatabaseHas('jobs', ['title' => $data['title']]);
     }

@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\Payment;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Payment::class, function (Faker $faker) {
     return [
     	"amount"			=> 3000, 
     	"method"			=> 'Master Card', 
@@ -14,6 +14,9 @@ $factory->define(Model::class, function (Faker $faker) {
     	'billable_id'		=> function(){
     		return factory('App\Project')->create()->id;
     	}, 
-    	'billable_type'		=> 'App\Project'
+    	'billable_type'		=> 'App\Project',
+        'user_id'           => function(){
+            return factory('App\User')->create()->id;
+        }
     ];
 });

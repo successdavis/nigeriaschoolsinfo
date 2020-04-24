@@ -31,6 +31,7 @@ class UpdatePostTest extends TestCase
         $this->json('patch', '/posts/updatepost/' . $this->post->slug, [
             'title'     => 'hello world', 
             'body'      => 'The quick brown fox',
+            'meta_description'  => 'Proin faucibus arcu quis ante. Morbi mattis ullamcorper velit. Curabitur a felis in nunc fringilla tristique. Suspendisse enim turpis, dictum sed, id',
             'module'    => 'Schools',
             'module_id' => '1'
         ])->json();
@@ -52,6 +53,7 @@ class UpdatePostTest extends TestCase
         $this->json('patch', '/posts/updatepost/' . $this->post->slug, [
             'title'       => 'hello world', 
             'body'        => 'The quick brown fox',
+            'meta_description'  => 'Proin faucibus arcu quis ante. Morbi mattis ullamcorper velit. Curabitur a felis in nunc fringilla tristique. Suspendisse enim turpis, dictum sed, id',
             'module'      => 'Courses',
             'module_id'   => '1'
         ])->json();

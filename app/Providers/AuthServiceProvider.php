@@ -16,6 +16,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Schools' => 'App\Policies\SchoolLogoPolicy',
         'App\Job' => 'App\Policies\JobPolicy',
         'App\Scholarship' => 'App\Policies\ScholarshipPolicy',
+        'App\Project' => 'App\Policies\ProjectPolicy',
     ];
 
     /**
