@@ -6,6 +6,7 @@ use App\Faculties;
 use App\Lga;
 use App\Sponsored;
 use App\States;
+use App\Traits\Insertinbetweentext;
 use App\Traits\ModelFunctions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\SchoolFilters;
@@ -15,6 +16,7 @@ class Schools extends Model
 {
     use Source;
     use ModelFunctions;
+    use Insertinbetweentext;
 
     protected $guarded = [];
     protected $with = ['courses'];

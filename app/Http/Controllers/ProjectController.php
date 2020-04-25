@@ -158,7 +158,8 @@ class ProjectController extends Controller
         if ($project->downloadsAccessLeft() <= 0) {
             abort(401, "Sorry you have exausted your download limits");
         }
-        // return response(200);
-        return Storage::download($project->downloadPath);
+        $payment = $project->getUserPayment();
+        $project->recordDownload($payment->id);
+        return response()->download(storage_path("app/public/" . $project->download_path));
     }
 }

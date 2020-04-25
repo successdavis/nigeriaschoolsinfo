@@ -11,17 +11,17 @@
 
 @section('content')
 	<div class="container">
-		@auth()
-			<paystack-payment email="{{auth()->user()->email}}" description="Project Purchasing" type="Project" id="{{$project->id}}"></paystack-payment>
-		@else
-			<a href="/login" class="button">Purchase</a>
-		@endauth
+		@include('/projects/partials/purchase_btn')
+			
 		<div class="columns">
 			<div class="column is-9">
 				<div class="section">
 					<h1 class="is-size-2">{{$project->title}}</h1>
 				</div>
 				<p class="section">{!! nl2br($project->description) !!}</p>
+
+				@includ('/projects/partials/purchase_btn')
+
 			</div>
 			<div class="column is-3">
 

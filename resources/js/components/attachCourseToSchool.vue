@@ -120,7 +120,7 @@ import InfiniteLoading from 'vue-infinite-loading';
 		    },
 
 		    getAttached($state) {
-		      axios.get(`/coursesattached/${this.school.slug}`, {
+		      axios.get(`/courses-offered-in/${this.school.slug}`, {
 		        params: {
 		          page: this.attachedpage,
 		          type: this.sort,

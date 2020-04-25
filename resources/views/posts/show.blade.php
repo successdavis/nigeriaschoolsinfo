@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-	{{-- @include ('sections/streamer') --}}
+	@include ('sections/ads/horitalal_banner')
 	<div class="mt-large">
 		<div class="container">
 			<div class="columns" style="margin-left: 0;">

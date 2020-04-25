@@ -37,17 +37,18 @@ class PaymentController extends Controller
             'id'            => 'required|integer',
         ]);
 
+
         $module = 'App\\' . ucwords(strtolower($request->module));
         if(class_exists($module)) {
             if (!$module::where('id', $request->id)->exists()) {
                 abort(400,"Something isn't right!");
             }
 
-            $handler = $module::find(1);
+            $handler = $module::find($request->id);
 
-            $handler->initializePayment($request->description);
+            $payment = $handler->initializePayment($request->description);
 
-            return $handler;
+            return $payment;
         }
 
         abort(400, "Hmm! You should'nt be seeing this. Please contact admin");

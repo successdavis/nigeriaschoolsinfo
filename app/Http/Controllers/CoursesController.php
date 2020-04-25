@@ -85,6 +85,7 @@ class CoursesController extends Controller
      */
     public function show(Courses $courses)
     {
+        $courses->increment('visits');
         return view('courses.show', compact('courses'));
     }
 

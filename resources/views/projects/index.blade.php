@@ -13,6 +13,8 @@
 @endsection
 
 @section('content')
+{{-- ==========Display Google Ads ====== --}}
+@include ('sections/ads/horitalal_banner')
 
 <div class="section">
 	<div class="columns">

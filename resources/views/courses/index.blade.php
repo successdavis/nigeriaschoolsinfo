@@ -1,8 +1,27 @@
 @extends('layouts.app')
+
+
+@section('title')
+    Complete List of courses offered in Schools | NSIS
+@endsection
+
+@section('head')
+    <meta name="description" content="Here is a complete list of courses offered in Nigeria Universities, Polytechnics, Colleges, Nurses etc.">
+  	<meta name="keywords" content="Nigeria Education Courses Offered"> 
+@endsection
+
+
 @section('content')
+
+	{{-- ==== Google Adsense Display Ads ===== --}}
+    @include ('sections/ads/horitalal_banner')
+    
 <courses-page inline-template>
 	<div class="container">
 		<div class="mt-medium remove-max-width">
+			<div class="section">
+				<h1 class="is-size-3">Here is a complete list of courses offered in Nigeria Universities, Polytechnics, Colleges, Nurses etc.</h1>
+			</div>
 			<div class="columns">
 				<div class="column is-hidden-touch section">
 					@include('courses.partials.sortCourses')

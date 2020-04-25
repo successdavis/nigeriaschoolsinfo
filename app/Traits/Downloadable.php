@@ -26,22 +26,25 @@ trait Downloadable
     {
         // auth()->id()
         $user = $userId ?: auth()->user();
-
         $payment = $this->getUserPayment();
 
-        return $payment->downloads()->get();
-
+        if ($payment) {
+            return $payment->downloads()->get();
+        }
+        return null;
     }
 
     public function userDownloadCounts()
     {
-
+        if ($this->userDownloads() === null) {
+            return 0;
+        }
         return $this->userDownloads()->count();
     }
 
     public function downloadsAccessLeft()
     {
-        if ($this->userDownloadCounts() <= 0) {
+        if ($this->userDownloadCounts() < 0) {
             return 0;
         }
         

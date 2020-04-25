@@ -10,6 +10,8 @@
 @endsection
 
 @section('content')
+	@include ('sections/ads/horitalal_banner')
+	
 	<div class="container">
 		<div class="section">
 			<div class="mb-medium">
@@ -37,6 +39,7 @@
 							</form>
 						</div>
 
+						{{-- Adsense Infeed Code --}}
 						<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 						<ins class="adsbygoogle"
 						     style="display:block"

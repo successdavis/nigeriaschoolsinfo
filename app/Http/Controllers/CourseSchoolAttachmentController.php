@@ -160,5 +160,7 @@ class CourseSchoolAttachmentController extends Controller
         if (request()->wantsJson()) {
             return CourseResource::collection($courses);
         }   
+
+        return view('schools.coursesoffered', compact('courses','school'));
     }
 }

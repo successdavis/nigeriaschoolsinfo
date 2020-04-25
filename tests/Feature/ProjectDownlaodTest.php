@@ -18,14 +18,16 @@ class ProjectDownlaodTest extends TestCase
         $this->project = create('App\Project');
     }
 
-    // /** @test */
-    // public function a_user_can_download_a_project()
-    // {
-    //     $this->signIn();
+    /** @test */
+    public function a_user_can_download_a_project()
+    {
+        $this->signIn();
+        $payment = $this->project->initializePayment('Purchase Project');
+        $payment->markSuccessful();
 
-    //     $this->get(route('project.download',['project' => $this->project->slug]))
-    //         ->assertStatus(200);
-    // }
+        $this->get(route('project.download',['project' => $this->project->slug]))
+            ->assertStatus(200);
+    }
 
     /** @test */
     public function a_user_must_have_a_valid_payment()

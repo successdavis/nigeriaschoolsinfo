@@ -1,5 +1,19 @@
 @extends('layouts.app')
+@section('title')
+    List of Universities, Polytechnic, and Collegs in Nigeria
+@endsection
+
+@section('head')
+    <meta name="description" content="Browse the complete list of Universites, Polytechnics, Colleges, Nurses and other degree awarding institutions in Nigeria use the sort and search">
+  	<meta name="keywords" content="Project Topics, Education projects"> 
+@endsection
+
+
 @section('content')
+
+{{-- ====Google Adsense Banner Ads --}}
+@include ('sections/ads/horitalal_banner')
+
 <shools-page inline-template>
 	<div class="container">
 		<div class="mt-medium remove-max-width">

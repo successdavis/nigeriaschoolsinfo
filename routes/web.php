@@ -69,9 +69,10 @@ Route::get('/schoolsnotattached/{course}', 'CourseSchoolAttachmentController@get
 Route::get('/schoolsattached/{course}', 'CourseSchoolAttachmentController@getLinkedSchools')->name('courses.getLinkedSchools');
 
 Route::get('/coursesnotattached/{school}', 'CourseSchoolAttachmentController@getNotLinkedCourses')->name('courses.getNotLinkedCourses');
-Route::get('/coursesattached/{school}', 'CourseSchoolAttachmentController@getLinkedCourses')->name('courses.getLinkedCourses');
+// This url change from /coursesattached/{school}
+Route::get('/courses-offered-in/{school}', 'CourseSchoolAttachmentController@getLinkedCourses')->name('courses.getLinkedCourses');
 
-Route::get('/schoolsofferedby/{course}', 'CoursesController@getschools');
+Route::get('/schools-offering/{course}', 'CoursesController@getschools');
 
 Route::get('/schools/{schools}/courses', 'CoursesController@index')->name('schoolCourses');
 Route::get('/schools/{schools}/coursesnotoffered', 'CourseSchoolAttachmentController@coursesnotoffered');

@@ -39,7 +39,7 @@
 
 		methods: {
 			infiniteHandler($state) {
-		      axios.get(`/coursesattached/${this.school.slug}`, {
+		      axios.get(`/courses-offered-in/${this.school.slug}`, {
 		        params: {
 		          page: this.page,
 		        }, 

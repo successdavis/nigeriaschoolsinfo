@@ -1,5 +1,18 @@
 @extends('layouts.app')
+
+@section('title')
+    {{$school->name}}
+@endsection
+
+@section('head')
+    <meta name="description" content="All you need to know about {{$school->name}}, cut-of-point, courses offered, location and photos of {{$school->short_name}}">
+  	<meta name="keywords" content="{{$school->name}} project"> 
+@endsection
+
+
 @section('content')
+    @include ('sections/ads/horitalal_banner')
+
 <div class="container">
 	<div class="columns">
 		<div class="column is-three-quarters">
@@ -55,7 +68,8 @@
 				<div class="mb-small">
 					<div class="is-size-3 ">Description</div>
 					<p class="is-size-5-desktop">{!! nl2br($school->description) !!}</p>
-					<div class="is-size-3 mt-small">Contact Information</div>
+
+					<div class="is-size-3 mt-small">Where is {{$school->short_name}} located?</div>
 					<div class="is-size-5-desktop">{{$school->name }} is located in {{$school->state->name}} State, {{$school->lga->name}} Local Government Area.</div>
 					<div class="is-size-5-desktop">
 						<div class="mt-small"><strong>School Address:</strong> {{$school->address}}</div>
@@ -67,11 +81,12 @@
 				{{-- <p>{!! nl2br(str_replace(" ", "&nbsp;", $school->description)) !!}</p> --}}
 				</div>
 				<div class="mt-small">
-					<div class="is-size-3 ">{{$school->name}} list of courses offered:</div>
+					<div class="is-size-3">{{$school->name}} courses and departments:</div>
 					<div class="is-size-5-desktop mb-small">The following is a list of courses offered in {{$school->short_name}} </div>
-					@foreach ($school->courses as $course)
+					@foreach ($courses as $course)
 						<div class="is-size-5-desktop">{{$course->name}}</div>
 					@endforeach
+					<a href="/courses-offered-in/{{$school->slug}}">View All</a>
 				</div>
 			</div>
 		</div>

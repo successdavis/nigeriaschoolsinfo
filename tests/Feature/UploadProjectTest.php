@@ -40,8 +40,6 @@ class UploadProjectTest extends TestCase
 
         $responds = $this->json('POST', route('project.upload', ['project' => $this->project->slug]), ['file' => $file = UploadedFile::fake()->image('doc.doc')]);
 
-        $this->assertEquals(asset('storage/projects/'.$this->project->slug.'.doc'), $this->project->fresh()->download_path);
-
         Storage::disk('public')->assertExists('projects/' . $this->project->slug . '.doc');
     }
 }

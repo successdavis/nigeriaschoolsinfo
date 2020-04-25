@@ -2723,7 +2723,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     getAttached: function getAttached($state) {
       var _this4 = this;
 
-      axios.get("/coursesattached/".concat(this.school.slug), {
+      axios.get("/courses-offered-in/".concat(this.school.slug), {
         params: {
           page: this.attachedpage,
           type: this.sort // s: this.searchKey,
@@ -4308,7 +4308,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     infiniteHandler: function infiniteHandler($state) {
       var _this = this;
 
-      axios.get("/coursesattached/".concat(this.school.slug), {
+      axios.get("/courses-offered-in/".concat(this.school.slug), {
         params: {
           page: this.page
         }

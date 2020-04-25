@@ -27,8 +27,7 @@
         ]) !!};
     </script>
 </head>
-<body>
-    
+<body>    
     <div id="app">
         @include('layouts.navbar')
 

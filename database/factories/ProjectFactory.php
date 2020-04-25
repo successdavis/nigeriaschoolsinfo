@@ -20,5 +20,6 @@ $factory->define(Project::class, function (Faker $faker) {
         },
         'amount'		=> 2000,
         'visits'        => 0,
+        'download_path' => 'projects/et-deleniti-et-non-id-ut-magni.docx'
     ];
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Courses;
 use App\Filters\SchoolFilters;
 use App\Http\Resources\SchoolResource;
 use App\School;
@@ -91,7 +92,9 @@ class SchoolsController extends Controller
      */
     public function show(Schools $school)
     {
-        return view('schools.show', compact('school'));
+        $courses = Courses::orderBy('visits','desc')->limit(10);
+        $school->increment('visits');
+        return view('schools.show', compact('school','courses'));
     }
 
     /**

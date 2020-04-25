@@ -41,15 +41,15 @@ class Project extends Model
         return $this->belongsTo('App\Courses', 'course_id');
     }
 
-    public function getDownloadPathAttribute($downloadpath)
-    {
-        if ($downloadpath) {
-            return asset('storage/' . $downloadpath);
-        }
+    // public function getDownloadPathAttribute($downloadpath)
+    // {
+    //     if ($downloadpath) {
+    //         return asset('storage/' . $downloadpath);
+    //     }
 
-        // for testing purposes only, else return null is no download path is set
-        return Storage::url('projects/accusamus-qui-eius-quia-doloremque-officia-deleniti-qui-iste.docx');
-    }
+    //     // for testing purposes only, else return null is no download path is set
+    //     // return Storage::url('projects/accusamus-qui-eius-quia-doloremque-officia-deleniti-qui-iste.docx');
+    // }
 
     public function scopeFilter($query, $filters)
     {
