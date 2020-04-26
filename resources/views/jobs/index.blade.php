@@ -10,6 +10,7 @@
 @endsection
 
 @section('content')
+	@include ('sections/ads/horitalal_banner')
 	<div class="container">
 		<div class="columns">
 			<div class="column is-8">
@@ -17,6 +18,8 @@
 					<h1 class="is-size-3">Latest Job and Recruitment Opportunities in Nigeria</h1>
 				</div>
 				<div>
+					@include ('sections/ads/in-feed')
+
 					@foreach ($jobs as $job)
 						<article class="media">
 							<div class="media-content">

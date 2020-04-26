@@ -6,6 +6,16 @@
 					<h1 class="is-size-3">Latest Education News</h1>
 				</div>
 				<div class="section">
+					<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<ins class="adsbygoogle"
+					     style="display:block"
+					     data-ad-format="fluid"
+					     data-ad-layout-key="-fq-1p+61-mh+dq"
+					     data-ad-client="ca-pub-3146034280624513"
+					     data-ad-slot="4383575674"></ins>
+					<script>
+					     (adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
 					@foreach ($posts as $post)
 						<article class="media">
 							<div class="media-content">
@@ -23,6 +33,16 @@
 					<p class="is-size-4"><strong>Schorlarship</strong></p>
 				</div>
 				<div class="section">
+					<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<ins class="adsbygoogle"
+					     style="display:block"
+					     data-ad-format="fluid"
+					     data-ad-layout-key="-fq-1p+61-mh+dq"
+					     data-ad-client="ca-pub-3146034280624513"
+					     data-ad-slot="4383575674"></ins>
+					<script>
+					     (adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
 					@foreach ($scholarships as $scholarship)
 						<article class="media">
 							<div class="media-content">

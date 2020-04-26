@@ -10,6 +10,8 @@
 @endsection
 
 @section('content')
+	@include ('sections/ads/horitalal_banner')
+
 	<div class="container">
 		<div class="columns">
 			<div class="column is-8">
@@ -17,6 +19,8 @@
 					<h1 class="is-size-4">Looking for a Scholarship? you have arrived. Find latest and available scholarships opportunities here, this is your opportunity, take it</h1>
 				</div>
 				<div>
+				@include ('sections/ads/in-feed')
+
 					@foreach ($scholarships as $scholarship)
 						<article class="media">
 							<div class="media-content">
@@ -30,6 +34,9 @@
 							</div>
 						</article>
 					@endforeach
+					
+					@include ('sections/ads/horitalal_banner')
+
 				</div>
 				<div class="section">
 					{{ $scholarships->links() }}

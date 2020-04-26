@@ -16,7 +16,7 @@ class Schools extends Model
 {
     use Source;
     use ModelFunctions;
-    use Insertinbetweentext;
+    // use Insertinbetweentext;
 
     protected $guarded = [];
     protected $with = ['courses'];

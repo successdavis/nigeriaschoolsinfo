@@ -10,6 +10,8 @@
 @endsection
 
 @section('content')
+	@include ('sections/ads/horitalal_banner')
+
 	<div class="container">
 		<div class="columns">
 			<div class="column is-8">
@@ -27,10 +29,14 @@
 					<div>
 						<p>{!! nl2br($scholarship->description) !!}</p>
 					</div>
+					
+					@include ('sections/ads/in-article')
+
 				</div>				
 			</div>
 			<div class="column is-4">
 				<h4>Sponsored Content</h4>
+				@include ('sections/ads/v-banner')			
 			</div>
 		</div>
 	</div>

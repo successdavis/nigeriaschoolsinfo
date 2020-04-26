@@ -19,6 +19,8 @@
 					<h1 class="is-size-2">{{$project->title}}</h1>
 				</div>
 				<p class="section">{!! nl2br($project->description) !!}</p>
+			    
+			    @include ('sections/ads/in-article')
 
 				@includ('/projects/partials/purchase_btn')
 

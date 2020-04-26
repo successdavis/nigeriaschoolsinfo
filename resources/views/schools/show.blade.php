@@ -59,16 +59,18 @@
 					<div class="is-size-3">{{$school->short_name}} Admission Info: </div>
 					@if ($school->isAdmitting())
 						<div class="is-size-5-desktop">{{$school->short_name}} is open for application to new intake</div>
-						<div class="is-size-5-desktop">Interested candidates can find below the website address and portal for application, if you have trouble applying, please also find below the school's contact information in the contact section or visit <a target="_blank" href="https://www.sleettech.com">www.sleettech.com</a> for documented steps and procedures to successfully complete your application.</div>
+						<div class="is-size-5-desktop">Interested candidates can find below the website address and portal for application, if you have trouble applying, use the contact information provided here <a target="_blank" href="https://www.sleettech.com">www.sleettech.com</a> for documented steps and procedures to successfully complete your application.</div>
 					@else
 						<div class="is-size-5-desktop">{{$school->short_name }} is not open for registration at the moment, Please check back later</div>
 						{{-- put a subscription button here later --}}
 					@endif
 				</div>
+			    @include ('sections/ads/in-article')
+
 				<div class="mb-small">
 					<div class="is-size-3 ">Description</div>
 					<p class="is-size-5-desktop">{!! nl2br($school->description) !!}</p>
-
+				    
 					<div class="is-size-3 mt-small">Where is {{$school->short_name}} located?</div>
 					<div class="is-size-5-desktop">{{$school->name }} is located in {{$school->state->name}} State, {{$school->lga->name}} Local Government Area.</div>
 					<div class="is-size-5-desktop">
@@ -93,6 +95,7 @@
 		<div class="column">
 			<div class="mt-large mb-medium">{{$school->short_name}} News</div>
 			<related-post :module="'Schools'" :module_id="{{$school->id}}"></related-post>
+			@include ('sections/ads/v-banner')
 		</div>
 		
 	</div>

@@ -27,6 +27,9 @@
 				<div class="mb-medium">{{$courses->utme_requirements}}</div>
 				<h2 class="is-size-3">{{$courses->short_name}} Direct Entry Requirements</h2>
 				<div class="mb-small">{{$courses->direct_requirements}}</div>
+			    
+			    @include ('sections/ads/in-article')
+
 				{{$courses->short_name}} job description
 				<p class="is-size-5">{!! nl2br($courses->description) !!}</p>
 
@@ -37,11 +40,15 @@
 
 				<h2 class="is-size-3 mt-medium">Click here to view List of schools offering {{$courses->name}}</h2>
 				<div><a href="/schools-offering/{{$courses->slug}}">Click to View Schools</a></div>
-
+				@include ('sections/ads/horitalal_banner')
 			</div>
 		</div>
 		<div class="column">
-			
+			<div class="section">
+				<h3 class="is-size-5">Sponsored</h3>
+				@include ('sections/ads/v-banner')
+			</div>
+
 		</div>
 	</div>
 </div>

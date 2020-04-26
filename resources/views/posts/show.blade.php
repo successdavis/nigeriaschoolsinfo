@@ -54,10 +54,17 @@
 								      		<img style="width: 320px" class="" src="{{asset('storage/'.$post->featured_image)}}">
 								    	</p>
 						      		@endif
+
+								    @include ('sections/ads/in-article')
+
+
 						        	{!! nl2br($post->body) !!}
 						        </p>
 						      </div>
 						    </article>
+						    
+							@include ('sections/ads/horitalal_banner')
+
 						</div>
 					</div>
 					<comments :post="{{$post}}"></comments>
