@@ -16,6 +16,9 @@
 		<p class="is-size-4">"be right at home <i class="fas fa-mug-hot"></i>"</p>
 	</div>
 	@include ('sections/section_a')
+	<div class="container">
+		@include ('sections/ads/horizontal_banner')
+	</div>
 	@include ('sections/section_b')
 	
 @endsection

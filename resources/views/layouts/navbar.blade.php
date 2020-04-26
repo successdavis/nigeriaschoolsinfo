@@ -121,6 +121,18 @@
                 <a href="">Store</a>
             </li>
             <li class="n_drawer_items--child">
+                <span><i class="fas fa-store-alt"></i></span>
+                <a href="/nigeria-education-project-topics-and-materials">Projects</a>
+            </li>
+            <li class="n_drawer_items--child">
+                <span><i class="fas fa-store-alt"></i></span>
+                <a href="/latest-job-opportunities-and-application">Find a Job</a>
+            </li>
+            <li class="n_drawer_items--child">
+                <span><i class="fas fa-store-alt"></i></span>
+                <a href="/latest-scholarships-opportunities-for-application">Scholarships</a>
+            </li>
+            <li class="n_drawer_items--child">
               <span><i class="fas fa-pen"></i></span>
               <a href="/exams">Exams</a></li>
 

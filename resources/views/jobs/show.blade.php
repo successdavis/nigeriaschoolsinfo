@@ -10,8 +10,8 @@
 @endsection
 
 @section('content')
-	@include ('sections/ads/horitalal_banner')
 	<div class="container">
+	@include ('sections/ads/horizontal_banner')
 		<div class="columns">
 			<div class="column is-8">
 				<div class="section">
@@ -29,7 +29,7 @@
 						@include ('sections/ads/in-article')
 						<p>{!! nl2br($job->description) !!}</p>
 						
-						@include ('sections/ads/horitalal_banner')
+						@include ('sections/ads/horizontal_banner')
 
 					</div>
 				</div>				

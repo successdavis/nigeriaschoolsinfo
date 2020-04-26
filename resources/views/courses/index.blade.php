@@ -12,9 +12,10 @@
 
 
 @section('content')
-
+<div class="container">
 	{{-- ==== Google Adsense Display Ads ===== --}}
-    @include ('sections/ads/horitalal_banner')
+    @include ('sections/ads/horizontal_banner')
+</div>
     
 <courses-page inline-template>
 	<div class="container">

@@ -10,9 +10,9 @@
 @endsection
 
 @section('content')
-	@include ('sections/ads/horitalal_banner')
 
 	<div class="container">
+	@include ('sections/ads/horizontal_banner')
 		<div class="columns">
 			<div class="column is-8">
 				<div class="section">
@@ -35,7 +35,7 @@
 						</article>
 					@endforeach
 					
-					@include ('sections/ads/horitalal_banner')
+					@include ('sections/ads/horizontal_banner')
 
 				</div>
 				<div class="section">

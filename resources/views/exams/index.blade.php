@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
 	{{-- ==== Google Adsense Display Ads ===== --}}
-    @include ('sections/ads/horitalal_banner')
+    @include ('sections/ads/horizontal_banner')
+</div>
 
 <exams-page inline-template>
 	<div class="container">		

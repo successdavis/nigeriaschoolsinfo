@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-	@include ('sections/ads/horitalal_banner')
+	@include ('sections/ads/horizontal_banner')
 	<div class="mt-large">
 		<div class="container">
 			<div class="columns" style="margin-left: 0;">
@@ -63,7 +63,7 @@
 						      </div>
 						    </article>
 						    
-							@include ('sections/ads/horitalal_banner')
+							@include ('sections/ads/horizontal_banner')
 
 						</div>
 					</div>

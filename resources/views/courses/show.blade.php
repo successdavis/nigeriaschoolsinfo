@@ -11,6 +11,8 @@
 
 @section('content')
 <div class="container">
+    @include ('sections/ads/horizontal_banner')
+	
 	<div class="columns">
 		<div class="column is-three-quarters">
 			<div class="section">

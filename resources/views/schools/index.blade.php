@@ -12,7 +12,7 @@
 @section('content')
 
 {{-- ====Google Adsense Banner Ads --}}
-@include ('sections/ads/horitalal_banner')
+@include ('sections/ads/horizontal_banner')
 
 <shools-page inline-template>
 	<div class="container">

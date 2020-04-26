@@ -14,11 +14,11 @@
 				@endforeach
 			</div>
 			<div class="has-text-centered section">
-				<a class="button" class="has-text-black" href="/create-a-new-job">See All Jobs and Recruitment</a>
+				<a class="button" class="has-text-black" href="/latest-job-opportunities-and-application">See All Jobs and Recruitment</a>
 			</div>
 		</div>
 		<div class="column is-4">
-			
+			@include('sections/ads/horizontal_banner')			
 		</div>
 	</div>
 </div>

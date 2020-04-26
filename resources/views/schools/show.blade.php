@@ -11,7 +11,7 @@
 
 
 @section('content')
-    @include ('sections/ads/horitalal_banner')
+    @include ('sections/ads/horizontal_banner')
 
 <div class="container">
 	<div class="columns">

@@ -13,10 +13,12 @@
 @endsection
 
 @section('content')
-{{-- ==========Display Google Ads ====== --}}
-@include ('sections/ads/horitalal_banner')
 
 <div class="section">
+
+{{-- ==========Display Google Ads ====== --}}
+@include ('sections/ads/horizontal_banner')
+
 	<div class="columns">
 		<div class="column is-3 is-hidden-mobile">
 			<div class="section">

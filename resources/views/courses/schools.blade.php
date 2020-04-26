@@ -8,11 +8,12 @@
   	<meta name="keywords" content="Schools offering {{$course->short_name}}"> 
 @endsection
 @section('content')
-
-	{{-- ==== Google Adsense Display Ads ===== --}}
-    @include ('sections/ads/horitalal_banner')
     
 	<div class="container">
+
+	{{-- ==== Google Adsense Display Ads ===== --}}
+    @include ('sections/ads/horizontal_banner')
+    
 		<div class="columns mt-medium">
 			<div class="column is-three-quarters">
 				<div class="section">
