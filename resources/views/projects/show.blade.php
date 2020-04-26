@@ -18,7 +18,7 @@
 				<div class="section">
 					<h1 class="is-size-2">{{$project->title}}</h1>
 				</div>
-				<p class="section">{!! nl2br($project->description) !!}</p>
+				<p class="section content">{!! nl2br($project->description) !!}</p>
 			    
 			    @include ('sections/ads/in-article')
 

@@ -25,7 +25,7 @@
 					<div class="section">
 						<h1 class="is-size-3">{{$scholarship->title}}</h1>
 					</div>
-					<div>
+					<div class="content">
 						<p>{!! nl2br($scholarship->description) !!}</p>
 					</div>
 					

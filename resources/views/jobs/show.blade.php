@@ -14,7 +14,7 @@
 	@include ('sections/ads/horizontal_banner')
 		<div class="columns">
 			<div class="column is-8">
-				<div class="section">
+				<div class="section content">
 					<div>
 						<a class="button" href="/latest-job-opportunities-and-application">View all Avaiable Jobs</a>
 						<a class="button" href="/create-a-new-job">Create a new Job</a>

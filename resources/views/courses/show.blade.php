@@ -15,7 +15,7 @@
 	
 	<div class="columns">
 		<div class="column is-three-quarters">
-			<div class="section">
+			<div class="section content">
 				
 				<h1 class="is-size-3 mb-medium">{{$courses->name}}</h1>
 				<h2 class="is-size-3">{{$courses->short_name}} JAMB Subjects</h2>
