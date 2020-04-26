@@ -3,6 +3,7 @@
     <p class="image is-64x64">
       {{$image}}
     </p>
+    {{-- {{$source}} --}}
   </figure>
   <div class="media-content">
     <div class="field">
@@ -11,7 +12,6 @@
             <span class="post_header--title">
               {{$title}}
             </span>
-            {{-- {{$source}} --}}
         </div>
         {{$body}}
       </a>

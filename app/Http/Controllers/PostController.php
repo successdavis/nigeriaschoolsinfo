@@ -217,7 +217,7 @@ class PostController extends Controller
             'file' => ['required', 'image']
         ]);
 
-        $name = $post->title .'.'.request()->file('file')->getClientOriginalExtension();
+        $name = $post->slug .'.'.request()->file('file')->getClientOriginalExtension();
 
         $post->update([
             'featured_image' => request()->file('file')->storeAs('posts', $name, 'public')
