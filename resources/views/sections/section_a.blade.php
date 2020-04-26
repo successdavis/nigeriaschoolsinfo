@@ -25,7 +25,7 @@
 					@endforeach
 				</div>
 				<div class="has-text-centered">
-					<a class="button" href="/latest-nigeria-education-news">View All Projects</a>
+					<a class="button" href="/latest-nigeria-education-news">More News</a>
 				</div>
 			</div>
 			<div class="column is-4">

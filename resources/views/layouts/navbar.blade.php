@@ -118,6 +118,10 @@
             @endif
             <li class="n_drawer_items--child">
                 <span><i class="fas fa-store-alt"></i></span>
+                <a href="{{ route('news.education') }}">News Update</a>
+            </li>
+            <li class="n_drawer_items--child">
+                <span><i class="fas fa-store-alt"></i></span>
                 <a href="">Store</a>
             </li>
             <li class="n_drawer_items--child">
