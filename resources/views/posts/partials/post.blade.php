@@ -11,7 +11,7 @@
             <span class="post_header--title">
               {{$title}}
             </span>
-            {{$source}}
+            {{-- {{$source}} --}}
         </div>
         {{$body}}
       </a>
