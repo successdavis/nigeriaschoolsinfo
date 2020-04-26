@@ -54,10 +54,11 @@ class JobController extends Controller
         };
 
         $request->validate([
-            'title'         => 'required|string|max:70',
-            'description'   => 'required|min:100',
-            'location'      => 'required|string',
-            'ends_at'       =>  'required'
+            'title'             => 'required|string|max:70',
+            'description'       => 'required|min:100',
+            'location'          => 'required|string',
+            'ends_at'           =>  'required',
+            'meta_description'  =>  'required'
         ]);
 
         $job = new Job;
@@ -152,5 +153,22 @@ class JobController extends Controller
         $jobs = Job::orderBy('updated_at','DESC')->filter($filters);
         
         return $jobs = $jobs->paginate(30);
+    }
+
+    public function featured_image(Request $request, Job $job)
+    {
+        $this->authorize('update', $job);
+
+        $request->validate([
+            'file' => ['required', 'image']
+        ]);
+
+        $name = $job->slug .'.'.request()->file('file')->getClientOriginalExtension();
+
+        $job->update([
+            'featured_image' => request()->file('file')->storeAs('jobs', $name, 'public')
+        ]);
+
+        return response($job, 200);
     }
 }

@@ -42,7 +42,7 @@
 
 				<h2 class="is-size-3 mt-medium">Click here to view List of schools offering {{$courses->name}}</h2>
 				<div><a href="/schools-offering/{{$courses->slug}}">Click to View Schools</a></div>
-				@include ('sections/ads/horitalal_banner')
+				@include ('sections/ads/horizontal_banner')
 			</div>
 		</div>
 		<div class="column">

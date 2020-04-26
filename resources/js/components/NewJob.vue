@@ -1,12 +1,15 @@
 <script>
-  import Editor from '../components/editor';
+  	import Editor from '../components/editor';
+	import ImageUpload from '../components/ImageUpload';
 	export default {
 		components: {
-	      Editor
+	      Editor,
+	      ImageUpload
 	    },
-	    props: ['job'],
+	    props: ['job','image'],
 		data () {
 			return {
+                featuredimage: this.image,
 				jobhandler: this.job,
 				processing: false,
 				postData: new Form({
@@ -17,12 +20,37 @@
 					location: this.job != null ? this.job.location : '',
 					employer:this.job != null ? this.job.employer : '',
 					ends_at:this.job != null ? this.job.ends_at : '',
+					meta_description:this.job != null ? this.job.meta_description : '',
 
 				}),
 			}
 		},
 
+		computed: {
+			meta_length () {
+				let char = this.postData.meta_description.length,
+	            limit = 150;
+	        	return (limit - char);
+			}
+		},
+
 		methods: {
+			onLoad(image) {
+	            this.featuredimage = image.src;
+
+	            this.persist(image.file);
+	        },
+	        persist(file) {
+                let data = new FormData();
+
+                data.append('file', file);
+
+                console.log(data);
+
+                axios.post(`/jobs/${this.jobhandler.slug}/featured_image`, data)
+                    .then(() => flash('Job Cover Image Uploaded! '))
+                    .catch(() => flash('Job Cover Upload Failed','failed'));
+            },
 			setPostBody (value) {
 				this.postData.description = value;
 			},
@@ -36,8 +64,8 @@
 						this.processing = false;
 					})
 					.catch(error => {
-						flash('Something went wrong submitting your data', 'failed')
 						this.processing = false;
+						flash('Something went wrong submitting your data', 'failed')
 					});
 				}else {
 					this.postData.patch(`/jobs/${this.jobhandler.slug}/update`)

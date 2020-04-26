@@ -21,7 +21,7 @@ class CreateJobsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->text('description');
             $table->string('portal_website')->nullable();
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->string('location');
             $table->string('employer')->nullable();
             $table->string('meta_description')->nullable();

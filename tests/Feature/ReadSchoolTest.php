@@ -113,7 +113,7 @@ class ReadSChoolTest extends TestCase
 
         $course->attachSchool($this->school->id);
 
-        $response = $this->json('GET', '/coursesattached/' . $this->school->slug)->json();
+        $response = $this->json('GET', '/courses-offered-in/' . $this->school->slug)->json();
         $this->assertCount(1, $response['data']);
     }
 

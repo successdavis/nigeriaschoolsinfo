@@ -12,7 +12,7 @@ class Job extends Model
     use Source;
     use ModelFunctions;
 
-    protected $fillable = ['slug','recruiting','ends_at'];
+    protected $fillable = ['slug','recruiting','ends_at','featured_image'];
     public $pathPrefix  = '/jobs/';
     public $findWith    =   'slug';
     public $excerpt    =   ['description', 23];
