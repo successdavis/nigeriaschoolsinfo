@@ -6,7 +6,12 @@
 
 @section('head')
     <meta name="description" content="{{$job->meta_description}}">
-  	<meta name="keywords" content="Project Topics, Education projects"> 
+  	<meta name="keywords" content="Project Topics, Education projects">
+  	<meta property="og:title" content="{{$job->title}}" />
+  	<meta property="og:url" content="{{ url($job->path()) }}" />
+  	<meta property="og:description" content="{{$job->meta_description}}">
+  	<meta property="og:image" content="{{ asset('storage/'.$job->featured_image) }}">
+  	<meta property="og:type" content="article" />
 @endsection
 
 @section('content')

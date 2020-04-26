@@ -112,7 +112,7 @@ class ScholarshipController extends Controller
         $this->authorize('update', $scholarship);
         
         $request->validate([
-            'title'         => 'required|string|max:100',
+            'title'         => 'required|string|max:70',
             'description'   => 'required|min:100',
             'location'      => 'required|string',
             'ends_at'       =>  'required'

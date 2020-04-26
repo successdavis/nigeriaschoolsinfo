@@ -57,7 +57,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
+            'title' => 'required|max:70',
             'body' => 'required',
             // 'meta_description' => 'required|max:150|min:140',
         ]);
@@ -111,7 +111,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $request->validate([
-            'title'     => 'required',
+            'title'     => 'required|max:70',
             'body'      => 'required',
             'meta_description'      => 'required|max:150|min:140',
             'module'    => 'required',
