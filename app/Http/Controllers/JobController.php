@@ -54,7 +54,7 @@ class JobController extends Controller
         };
 
         $request->validate([
-            'title'         => 'required|string|max:50',
+            'title'         => 'required|string|max:70',
             'description'   => 'required|min:100',
             'location'      => 'required|string',
             'ends_at'       =>  'required'
@@ -114,7 +114,7 @@ class JobController extends Controller
         $this->authorize('update', $job);
         
         $request->validate([
-            'title'         => 'required|string|max:100',
+            'title'         => 'required|string|max:70',
             'description'   => 'required|min:100',
             'location'      => 'required|string',
             'ends_at'       =>  'required'
