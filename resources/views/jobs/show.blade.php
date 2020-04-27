@@ -12,6 +12,7 @@
   	<meta property="og:description" content="{{$job->meta_description}}">
   	<meta property="og:image" content="{{ asset('storage/'.$job->featured_image) }}">
   	<meta property="og:type" content="article" />
+  	<link rel="canonical" href="{{ url($job->path()) }}" />
 @endsection
 
 @section('content')
