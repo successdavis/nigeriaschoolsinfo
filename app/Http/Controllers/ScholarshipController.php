@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Filters\ScholarshipFilters;
 use App\Http\Resources\ScholarshipResource;
-use App\scholarship;
+use App\Scholarship;
 use Illuminate\Http\Request;
 
 class ScholarshipController extends Controller
