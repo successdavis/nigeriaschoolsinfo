@@ -49,7 +49,7 @@
 						@endforeach
 					</div>
 				</div>
-				<comments commentable_type="Job" :commentable_id="{{$job->id}}" :post="{{$post}}"></comments>				
+				<comments commentable_type="Job" :commentable_id="{{$job->id}}" :post="{{$job}}"></comments>				
 			</div>
 			<div class="column is-4">
 				<h4 class="is-size-3">Related Jobs</h4>
