@@ -23,7 +23,7 @@
 					body: this.post != null ? this.post.body : '',
 					title: this.post != null ? this.post.title : '',
 					meta_description: this.post != null ? this.post.meta_description : '',
-					module: this.module != null ? this.module : '',
+					module: this.post !=null ? this.post.source_type.split('\\')['1'] : '',
 					module_id: this.post != null ? this.post.source_id : ''
 				}),
 			}
@@ -34,6 +34,10 @@
 				let char = this.PostForm.meta_description.length,
 	            limit = 150;
 	        	return (limit - char);
+			},
+
+			PostModule() {
+				return this.post !=null ? this.post.source_type.split('\\')['1'] : '';
 			}
 		},
 

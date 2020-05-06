@@ -118,6 +118,8 @@ class PostController extends Controller
             'module_id' => 'required'
         ]);
 
+        // Validate the module and module_id if the user happens to change the post type
+
         $module = 'App\\' . ucwords(strtolower($request->module));
 
         if ($post->source_type !== $module) {
