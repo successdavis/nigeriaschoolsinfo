@@ -17,6 +17,6 @@ $factory->define(Job::class, function (Faker $faker) {
         "user_id"			=> function () {
         	return factory('App\User')->create()->id;
         },
-        'meta_description'  => 'Nullam cursus lacinia erat. Praesent blandit laoreet nibh. Phasellus blandit leo ut odio.Vestibulum turpis sem, aliquet eget, lobortis pellentesque, rutrum eu, nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Sed a libero.'
+        'meta_description'  => 'Nullam cursus lacinia erat. Praesent blandit laoreet nibh. Phasellus blandit leo ut odio.Vestibulum turpis sem,'
     ];
 });

@@ -36,12 +36,30 @@
 						<p>{!! nl2br($job->description) !!}</p>
 						
 						@include ('sections/ads/horizontal_banner')
-
 					</div>
-				</div>				
+					<div>
+						<h3 class="is-size-3">Latest News on {{$job->title}}</h3>
+						@foreach ($posts as $post)
+							<article class="media">
+								<div class="media-content">
+									<h3 class="is-size-4">{{$post->title}}</h3>
+									<div>{{ $post->excerpt() }}</div>
+								</div>
+							</article>
+						@endforeach
+					</div>
+				</div>
+				<comments commentable_type="Job" :commentable_id="{{$job->id}}" :post="{{$post}}"></comments>				
 			</div>
 			<div class="column is-4">
-				<h4>Sponsored Content</h4>
+				<h4 class="is-size-3">Related Jobs</h4>
+				@foreach ($relatedJobs as $job)
+					<article class="media">
+						<div class="media-content">
+							<h3><strong>{{$job->title}}</strong></h3>
+						</div>
+					</article>
+				@endforeach
 				@include ('sections/ads/v-banner')
 			</div>
 		</div>

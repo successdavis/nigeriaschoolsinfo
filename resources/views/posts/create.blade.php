@@ -32,6 +32,7 @@
 							        <option>Schools</option>
 							        <option>Courses</option>
 							        <option>Exams</option>
+							        <option>Job</option>
 							        <option value="Postcategory">Category Post</option>
 							      </select>
 							    </div>
@@ -96,6 +97,19 @@
 								      <select v-model="PostForm.module_id">
 								        <option value="">Please Pick a course</option>
 								        <option v-for="category in categories" v-text="category.title" :value="category.id"></option>
+								      </select>
+								    </div>
+								  </div>
+								</div>
+							</div>
+							<div v-if="PostForm.module == 'Job'">
+								<div class="field" >
+								  <label class="label">Pick A Job</label>
+								  <div class="control">
+								    <div class="select">
+								      <select v-model="PostForm.module_id">
+								        <option value="">Please Pick a job</option>
+								        <option v-for="job in jobs" v-text="job.title" :value="job.id"></option>
 								      </select>
 								    </div>
 								  </div>

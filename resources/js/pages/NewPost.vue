@@ -16,13 +16,14 @@
 				schools: '',
 				courses: '',
 				categories: '',
+				jobs: '',
 				exams: '', 
 				disabled: false,
 				PostForm: new Form({
 					body: this.post != null ? this.post.body : '',
 					title: this.post != null ? this.post.title : '',
 					meta_description: this.post != null ? this.post.meta_description : '',
-					module: this.module,
+					module: this.module != null ? this.module : '',
 					module_id: this.post != null ? this.post.source_id : ''
 				}),
 			}
@@ -107,6 +108,10 @@
 			axios.get('/categories')
 	    		.then (data => {
 	    			this.categories = data.data;
+			});
+			axios.get('/latest-job-opportunities-and-application')
+	    		.then (data => {
+	    			this.jobs = data.data.data;
 			});
 		},
 	}

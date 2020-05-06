@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Job;
 use App\Post;
 use App\comment;
 use Illuminate\Http\Request;
@@ -21,15 +22,35 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Post $post)
+    public function index(Request $request)
     {
-        $post->load('comments.owner');
-        $comments = $post->comments()->paginate(25)->groupBy('parent_id');
+        $request->validate([
+            'commentable_id'    => 'required|int',
+            'commentable_type'  => 'required|string'
+        ]);
+
+        $module = 'App\\' . ucwords(strtolower($request->commentable_type));
+        if (!class_exists($module)) {
+            abort(400, 'Something isn\'t right!');
+        }
+
+        if (!$module::where('id',$request->commentable_id)->exists()) {
+            abort(400, 'Please provide a valid module id');
+        }
+
+        $id     = $request->commentable_id;
+        $comments = Comment::where('commentable_type', $module)
+            ->where('commentable_id', $id);
+
+        // $post->load('comments.owner');
+
+        $comments = $comments->paginate(25)->groupBy('parent_id');
+
         if (isset($comments[''])) {
             $comments['root'] = $comments[''];
             unset($comments['']);
         }
-
+        
         return $comments;
     }
 
@@ -49,17 +70,36 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Post $post)
+    public function store(Request $request)
     {
+        $request->validate([
+            'body'              => 'required|string',
+            'parent_id'         => 'nullable|int',
+            'commentable_id'    => 'required|int',
+            'commentable_type'  => 'required|string'
+        ]);
+
+        $module = 'App\\' . ucwords(strtolower($request->commentable_type));
+        if (!class_exists($module)) {
+            abort(400, 'Something isn\'t right!');
+        }
+
+        if (!$module::where('id',$request->commentable_id)->exists()) {
+            abort(400, 'Please provide a valid module id');
+        }
+
+        $handler = $module::find($request->commentable_id);
+
         $comment = new comment;
         $comment->body = $request->body;
         $comment->user_id = Auth()->user()->id;
         $comment->parent_id = $request->parent_id;
 
-        $post->comments()->save($comment);
+        $handler->comments()->save($comment);
 
         return $comment = comment::find($comment->id);
     }
+
 
     /**
      * Display the specified resource.

@@ -89,7 +89,9 @@ class JobController extends Controller
     public function show(Job $job)
     {
         $job->increment('visits');
-        return view('jobs.show', compact('job'));
+        $posts = $job->posts()->orderBy('created_at', 'DESC')->limit(10)->get();
+        $relatedJobs = Job::orderBy('visits', 'DESC')->limit(8)->get();
+        return view('jobs.show', compact('job','relatedJobs','posts'));
     }
 
     /**

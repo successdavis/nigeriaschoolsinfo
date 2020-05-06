@@ -54,4 +54,8 @@ class comment extends Model
         return $this->isBest();
     }
 
+    public function scopeFilter($query, $filters)
+    {
+        return $filters->apply($query);
+    }
 }

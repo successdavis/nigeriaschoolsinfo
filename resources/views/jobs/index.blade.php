@@ -17,16 +17,16 @@
 				<div class="section">
 					<h1 class="is-size-3">Latest Job and Recruitment Opportunities in Nigeria</h1>
 				</div>
-				<div>
-					@include ('sections/ads/in-feed')
-
+				@include ('sections/ads/in-feed')
+				
+				<div class="section">
 					@foreach ($jobs as $job)
 						<article class="media">
 							<div class="media-content">
 								<h3 class="is-size-4">
 									<a class="has-text-black" href="{{$job->path()}}">{{$job->title}}</a>
 								</h3>
-								<p>{!! nl2br($job->excerpt()) !!}</p>
+								<p>{{ $job->excerpt() }}</p>
 							<div>
 								<strong>Offered by: </strong>{{$job->employer}}
 							</div>

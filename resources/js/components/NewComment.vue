@@ -14,7 +14,7 @@
 
 <script>
     export default {
-        props: ['comment_id'],
+        props: ['comment_id','commentable_type','commentable_id'],
         data() {
             return {
                 processing: false,
@@ -27,9 +27,11 @@
         methods: {
             addComment() {
                 this.processing = true;
-                axios.post(location.pathname + '/newcomment', { 
-                    body: this.body,  
-                    parent_id: this.parent_id
+                axios.post('/comments/newcomment', { 
+                        body: this.body,  
+                        parent_id: this.parent_id,
+                        commentable_type: this.commentable_type,
+                        commentable_id: this.commentable_id,
                     })
                     .catch(error => {
                         flash(error.response.data, 'danger');

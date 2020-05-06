@@ -3,19 +3,21 @@
 namespace App;
 
 use App\Source;
+use App\Traits\Commentable;
 use App\Traits\ModelFunctions;
-use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Job extends Model
 {
     use Source;
+    use Commentable;
     use ModelFunctions;
 
     protected $fillable = ['slug','recruiting','ends_at','featured_image'];
     public $pathPrefix  = '/jobs/';
     public $findWith    =   'slug';
-    public $excerpt    =   ['description', 23];
+    public $excerpt    =   ['meta_description', 23];
     
     protected $dates = [
         'created_at',
@@ -65,5 +67,10 @@ class Job extends Model
     public function wasJustPublished()
     {
         return $this->created_at->gt(Carbon::now()->subMinute());
+    }
+
+    public function getRecent()
+    {
+        return $this->posts()->limit(10)->get();
     }
 }

@@ -67,7 +67,7 @@
 
 						</div>
 					</div>
-					<comments :post="{{$post}}"></comments>
+					<comments commentable_type="Post" :commentable_id="{{$post->id}}" :post="{{$post}}"></comments>
 				</div>
 				<div class="column">
 					<h4 class="is-size-4 mb-small">Related Posts</h4> 

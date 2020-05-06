@@ -51,12 +51,13 @@
                     <input type="button" class="button" @click="smd = false" value="No">
                 </span>
             </div>
-            <new-comment :comment_id="id" @created="add" v-show="newcomment"></new-comment>
-            <comment class="is-hidden-mobile" v-for="(comment, index) in getItems" :key="comment.id" :comment="comment" :data="data" @deleted="remove(index)"></comment>
+            <new-comment :commentable_type="commentable_type" :commentable_id="commentable_id" :comment_id="id" @created="add" v-show="newcomment"></new-comment>
+
+            <comment :commentable_type="commentable_type" :commentable_id="commentable_id" class="is-hidden-mobile" v-for="(comment, index) in getItems" :key="comment.id" :comment="comment" :data="data" @deleted="remove(index)"></comment>
           </div>
 
         </article>
-        <comment class="is-hidden-tablet" v-for="(comment, index) in getItems" :key="comment.id" :comment="comment" :data="data" @deleted="remove(index)"></comment>
+        <comment :commentable_type="commentable_type" :commentable_id="commentable_id" class="is-hidden-tablet" v-for="(comment, index) in getItems" :key="comment.id" :comment="comment" :data="data" @deleted="remove(index)"></comment>
     </div>
 </template>
 
@@ -66,7 +67,7 @@
 
     // import Favorite from './Favorite.vue';
     export default {
-        props: ['comment','data'],
+        props: ['comment','data','commentable_type','commentable_id'],
 
         components: { comment, NewComment },
 

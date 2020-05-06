@@ -2,13 +2,13 @@
 <template>
     <div>
         <div v-for="(comment, index) in items.root" :key="comment.id">
-            <comment :comment="comment" :data="items" @deleted="remove(index)"></comment>
+            <comment :commentable_type="commentable_type" :commentable_id="commentable_id" :comment="comment" :data="items" @deleted="remove(index)"></comment>
         </div>
         <paginator :dataSet="dataSet" @changed="fetch"></paginator>
         <p v-if="locked">
             This thread has been locked. No more replies are allowed.
         </p>
-        <new-comment @created="add" v-else></new-comment>
+        <new-comment :commentable_type="commentable_type" :commentable_id="commentable_id" @created="add" v-else></new-comment>
     </div>
 </template>
 
@@ -19,7 +19,7 @@
     export  default {
         components: {NewComment},
         
-        props: ['post'],
+        props: ['post','commentable_type','commentable_id'],
 
         mixins: [collection],
         data() {
@@ -48,7 +48,8 @@
 
         methods: {
             fetch(page) {
-                axios.get(`${location.pathname}/comments`).then(this.refresh);
+                // /comments?commentable_type=Post&&commentable_id=
+                axios.get(`/comments?commentable_type=${this.commentable_type}&&commentable_id=${this.commentable_id}`).then(this.refresh);
             },
 
             refresh({data}) {

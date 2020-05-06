@@ -89,8 +89,12 @@ Route::get('/newcourse/courserequirements', 'CoursesController@getrequirements')
 Route::get('/faculty/{faculty}', 'FacultiesController@show')->name('faculty.show');
 Route::get('/getfaculties', 'FacultiesController@getfaculties')->name('schoolCourses');
 
-Route::post('/posts/{post}/newcomment', 'CommentController@store')->name('comment.store')->middleware('auth');
-Route::get('/posts/{post}/comments', 'CommentController@index')->name('comment.index');
+Route::post('/comments/newcomment', 'CommentController@store')->name('comment.store')->middleware('auth');
+
+Route::get('/comments', 'CommentController@index')->name('comment.index');
+// Temporarily Disabled
+// Route::get('/posts/{post}/comments', 'CommentController@index')->name('comment.index');
+
 Route::delete('/comment/{comment}/destroy', 'CommentController@destroy')->name('comment.destroy');
 Route::patch('/comment/{comment}/update', 'CommentController@update')->name('comment.update');
 

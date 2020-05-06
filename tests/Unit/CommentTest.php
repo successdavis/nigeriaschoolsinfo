@@ -41,10 +41,9 @@ class CommentTest extends TestCase
     public function it_belongs_to_a_post()
     {
         $this->assertInstanceOf('App\Post', $this->comment->commentable);
-
     }
 
-        /** @test */
+    /** @test */
     public function it_knows_if_it_was_just_publish()
     {
         $comment = create('App\Comment');
