@@ -52,15 +52,18 @@
 				<comments commentable_type="Job" :commentable_id="{{$job->id}}" :post="{{$job}}"></comments>				
 			</div>
 			<div class="column is-4">
-				<h4 class="is-size-3">Related Jobs</h4>
-				@foreach ($relatedJobs as $job)
-					<article class="media">
-						<div class="media-content">
-							<h3><strong>{{$job->title}}</strong></h3>
-						</div>
-					</article>
-				@endforeach
-				@include ('sections/ads/v-banner')
+				<div class="section">
+					<h4 class="is-size-3">Related Jobs</h4>
+					@foreach ($relatedJobs as $job)
+						<article class="media">
+							<div class="media-content">
+								<h3><strong>{{$job->title}}</strong></h3>
+							</div>
+						</article>
+					@endforeach
+					@include ('sections/ads/v-banner')
+					
+				</div>
 			</div>
 		</div>
 	</div>
