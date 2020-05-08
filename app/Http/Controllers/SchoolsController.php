@@ -103,9 +103,11 @@ class SchoolsController extends Controller
      * @param  \App\School  $school
      * @return \Illuminate\Http\Response
      */
-    public function edit(School $school)
+    public function edit(Schools $school)
     {
-        //
+        $photos = $school->photos()->get();
+        
+        return view('schools.create', compact('school','photos'));
     }
 
     /**
@@ -115,9 +117,39 @@ class SchoolsController extends Controller
      * @param  \App\School  $school
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, School $school)
+    public function update(Request $request, Schools $school)
     {
-        //
+        $request->validate([
+            'name'              => 'required|unique:schools|max:255|min:10', 
+            'description'       => 'required|min:300', 
+            'date_created'      => 'nullable|date',
+            'states_id'         => 'required|exists:states,id',
+            'lga_id'            => 'required|exists:lgas,id',
+            'address'           => 'required', 
+            'school_type_id'    => 'required|exists:school_types,id', 
+            'sponsored_id'      => 'required|exists:sponsoreds,id', 
+            'jamb_points'       => 'nullable|integer',
+            'phone'             => 'nullable|min:10|max:10', 
+        ]);
+
+        $school->name           = request('name'); 
+        $school->short_name     = request('short_name'); 
+        $school->description    = request('description'); 
+        $school->date_created   = request('date_created');
+        $school->website        = request('website'); 
+        $school->portal_website = request('portal_website');
+        $school->states_id      = request('states_id');
+        $school->lga_id         = request('lga_id');
+        $school->address        = request('address'); 
+        $school->school_type_id = request('school_type_id'); 
+        $school->sponsored_id   = request('sponsored_id');
+        $school->phone          = request('phone'); 
+        $school->email          = request('email');
+        $school->jamb_points    = request('jamb_points');
+
+        $school->save();
+
+        return $school;
     }
 
     /**

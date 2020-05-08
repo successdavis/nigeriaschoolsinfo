@@ -16,6 +16,11 @@
 <div class="container">
 	<div class="columns">
 		<div class="column is-three-quarters">
+			@auth
+				@if (auth()->user()->isAdmin())
+					<a href="/schools/{{$school->slug}}/edit" class="button">Edit School</a>
+				@endif
+			@endauth
 			<div class="section">
 				<article class="media mb-small is-hidden-desktop">
 					<figure class="media-left">

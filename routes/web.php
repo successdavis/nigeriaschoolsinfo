@@ -61,12 +61,17 @@ Route::get('/find/school', 'SchoolsController@findschool')->name('schools.findsc
 
 Route::get('/createnewschool', 'SchoolsController@create')->name('schools.create')->middleware('admin');
 Route::post('/schools/createschool', 'SchoolsController@store')->name('schools.store')->middleware('admin');
+Route::patch('/schools/{school}/update', 'SchoolsController@update')->name('schools.update')->middleware('admin');
+Route::get('/schools/{school}/edit', 'SchoolsController@edit')->middleware('admin');
 
 // return the requirement needed to create a new school
 Route::get('/createSchoolRequirements', 'SchoolsController@cschoolrequirements')->name('schools.cschoolrequirements');
 
 Route::get('/schoolsnotattached/{course}', 'CourseSchoolAttachmentController@getNotLinkedSchools')->name('courses.getNotLinkedSchools');
 Route::get('/schoolsattached/{course}', 'CourseSchoolAttachmentController@getLinkedSchools')->name('courses.getLinkedSchools');
+
+Route::post('/school/{schools}/addphoto', 'SchoolphotosController@store')->name('photos.store');
+Route::delete('/schoolphotos/{photo}/removephoto', 'SchoolphotosController@destroy')->name('photos.destroy');
 
 Route::get('/coursesnotattached/{school}', 'CourseSchoolAttachmentController@getNotLinkedCourses')->name('courses.getNotLinkedCourses');
 // This url change from /coursesattached/{school}

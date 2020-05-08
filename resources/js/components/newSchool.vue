@@ -6,9 +6,10 @@ export default {
 	components: {
       Editor
     },
+    props: ['data'],
 	data () {
 		return {
-			school: '',
+			school: this.data,
 			errorMessage: '',
 			showErrors: false,
 			steps: 1,
@@ -20,20 +21,20 @@ export default {
 			adaptive: true,
 			matchedSchools: '',
 			schoolForm: new Form ({
-				name: '',
-				short_name: '',
-				school_type_id: '',
-				sponsored_id: '',
-				website: '',
-				portal_website: '',
-				jamb_points: '',
-				states_id: '',
-				lga_id: '',
-				address: '',
-				phone: '',
-				email: '',
-				short_name: '',
-				description: '',
+				name: this.data != null ? this.data.name : '',
+				short_name: this.data ? this.data.short_name : '',
+				school_type_id: this.data ? this.data.school_type_id : '',
+				sponsored_id: this.data ? this.data.sponsored_id : '',
+				website: this.data ? this.data.website : '',
+				portal_website: this.data ? this.data.portal_website : '',
+				jamb_points: this.data ? this.data.jamb_points : '',
+				states_id: this.data ? this.data.states_id : '',
+				lga_id: this.data ? this.data.lga_id : '',
+				address: this.data ? this.data.address : '',
+				phone: this.data ? this.data.phone : '',
+				email: this.data ? this.data.email : '',
+				// short_name: this.school ? this.school.states_id : '',
+				description: this.data ? this.data.description : '',
 			}),
 		}
 	},
@@ -43,8 +44,21 @@ export default {
 				this.schoolForm.description = value;
 			},
 		createSchool() {
-			this.showErrors = false;
-			this.schoolForm.post('/schools/createschool')
+			if (this.school) {
+				this.showErrors = false;
+	        	this.schoolForm.patch(`/schools/${this.school.slug}/update`)
+	        	.then(data => {
+	        		flash('School data update was successful')
+	        	})
+	        	.catch(error => {
+	        		this.errorMessage = error.errors;
+	            	this.showErrors = true;
+	        		flash('Something went wrong with updating this school','failed');
+	        	})
+			}
+			else {
+				this.showErrors = false;
+				this.schoolForm.post('/schools/createschool')
                     .then(data => {
                     		this.school = data;
                             // this.schoolForm.reset();
@@ -56,7 +70,9 @@ export default {
                 	this.showErrors = true;
                     flash('We were unable to process your form', 'failed');
                 });
-        	},
+	        }
+        },
+
 	    findSchool () {
 	    	axios.get('/find/school', {params: {s: this.schoolForm.name, sn: this.schoolForm.short_name}})
 	    		.then (data => {

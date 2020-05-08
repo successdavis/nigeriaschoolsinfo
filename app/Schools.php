@@ -59,6 +59,11 @@ class Schools extends Model
         return $this->belongsTo(Lga::class);
     }
 
+    public function photos()
+    {
+        return $this->hasMany('App\Schoolphoto', 'schools_id');
+    }
+
     public function addCourse($course, $cut_off_points = null)
     {
         $this->courses()->attach($course->id, ['cut_off_points' => $cut_off_points]);

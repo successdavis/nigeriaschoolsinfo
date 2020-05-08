@@ -1,7 +1,11 @@
 @extends('layouts.app')
 @section('content')
 	<div class="container">
-		<new-school inline-template>
+		<new-school
+			@isset ($school)
+			 :data="{{$school}}" 
+			@endisset
+		 inline-template>
 			<div class="section ">
 				<div class="has-text-centered" v-if="showMatchedWarning">
 					<span class="is-size-5">Wait! These schools are similar to your new school</span>
@@ -243,8 +247,8 @@
 						  <div class="field-body">
 						    <div class="field is-fullwidth">
 						      <div class="control">
-						        <button type="submit" class="button is-primary">
-						          CREATE SCHOOL
+						        <button type="submit" class="button is-primary" v-text="school ? 'Update School' : 'Create School' ">
+						          
 						        </button>
 						      </div>
 						    </div>
@@ -254,6 +258,13 @@
 				</form>
 
 				<div v-if="school != '' && steps == 2">
+					<div class="has-text-centered is-size-3">School Images</div>
+					<div>
+						<school-images :photosdata="{{$photos}}" :school="school"></school-images>
+					</div>
+				</div>
+
+				<div v-if="school != '' && steps == 3">
 					<div class="has-text-centered">Attach Courses to this School</div>
 					<attach-courses :school="school"></attach-courses>
 				</div>
