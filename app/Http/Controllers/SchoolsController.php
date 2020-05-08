@@ -92,6 +92,10 @@ class SchoolsController extends Controller
      */
     public function show(Schools $school)
     {
+        $school->load(['posts' => function($query){
+            $query->where('followup', true);
+        }]);
+
         $courses = Courses::orderBy('visits','desc')->limit(10);
         $school->increment('visits');
         return view('schools.show', compact('school','courses'));

@@ -51,4 +51,23 @@ class PostTest extends TestCase
 
         $this->assertTrue($this->post->locked);
     }
+
+    /** @test */
+    public function it_can_be_marked_as_a_followup_post()
+    {
+        $this->assertFalse($this->post->isFollowUp());
+        $this->post->markAsFollow();
+
+        $this->assertTrue($this->post->fresh()->isFollowUp());
+    }
+
+    /** @test */
+    public function it_can_be_unmarked_as_a_followup_post()
+    {
+        $this->post->markAsFollow();
+        $this->assertTrue($this->post->fresh()->isFollowUp());
+
+        $this->post->unmarkAsFollow();
+        $this->assertFalse($this->post->fresh()->isFollowUp());
+    }
 }

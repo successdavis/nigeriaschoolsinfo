@@ -25,4 +25,9 @@ trait Source
 
         return $post;
     }
+
+    public function followupPosts()
+    {
+        return $this->posts()->where('followup', true)->get();
+    }
 }

@@ -56,4 +56,34 @@ class CreatePostTest extends TestCase
         
         $this->assertDatabaseMissing('posts', ['title' => $post->title]);
     }
+
+    /** @test */
+    public function an_admin_can_mark_a_post_as_a_followup()
+    {
+        $user = create('App\User');
+        $role = create('App\Role',['name' => 'admin']);
+
+        $user->assignRole($role->id);
+        $this->signIn($user);
+
+        $post = create('App\Post');
+        $response = $this->json('POST', $post->slug . '/markasfollowup');
+
+        $this->assertTrue($post->fresh()->isFollowUp());
+    }
+
+    /** @test */
+    public function an_admin_can_unmark_a_post_as_a_followup()
+    {
+        $user = create('App\User');
+        $role = create('App\Role',['name' => 'admin']);
+
+        $user->assignRole($role->id);
+        $this->signIn($user);
+
+        $post = create('App\Post',['followup' => true]);
+        $response = $this->json('DELETE', $post->slug . '/unmarkasfollowup');
+
+        $this->assertFalse($post->fresh()->isFollowUp());
+    }
 }

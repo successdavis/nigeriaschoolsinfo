@@ -12,6 +12,7 @@ $factory->define(Post::class, function (Faker $faker) {
         'source_type' 	=> 'App\Schools',
         'locked'        => false,
         'visits'        => 0,
+        'followup'      => false,
         'source_id'		=> function() {
             return factory('App\Schools')->create()->id;
         },

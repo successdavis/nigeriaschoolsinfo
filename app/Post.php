@@ -19,7 +19,8 @@ class Post extends Model
     public $excerpt    =   ['body', 23];
 
     protected $casts = [
-        'locked' => 'boolean'
+        'locked' => 'boolean',
+        'followup' => 'boolean'
     ];
 
     protected static function boot()
@@ -60,5 +61,24 @@ class Post extends Model
     public function hasFeaturedImage()
     {
         return isset($this->featured_image);
+    }
+
+    public function isFollowUp()
+    {
+        return $this->followup;
+    }
+
+    public function markAsFollow()
+    {
+        $this->followup = true;
+        $this->save();
+        return true;
+    }
+
+    public function unmarkAsFollow()
+    {
+        $this->followup = false;
+        $this->save();
+        return true;
     }
 }

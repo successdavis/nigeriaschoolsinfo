@@ -104,6 +104,4 @@ class Schools extends Model
     {
         return !! $this->admitting;
     }
-
-
 }

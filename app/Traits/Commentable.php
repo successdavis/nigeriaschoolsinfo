@@ -12,16 +12,4 @@ trait Commentable
     {
         return $this->morphMany(comment::class, 'commentable');
     }
-
-    // public function comments()
-    // {
-    //     return $this->invoices()->save(
-    //         new Invoice([
-    //             'user_id' => $userId ?: auth()->id(),
-    //             'amount' => $this->amount + $charge,
-    //             'invoiceNo' => Invoice::generateInvoiceNo(),
-    //             'installmental' => $installmental ?: true,
-    //         ])
-    //     );
-    // }
 }

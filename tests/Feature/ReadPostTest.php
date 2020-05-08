@@ -70,4 +70,14 @@ class ReadPostTest extends TestCase
 
         $this->assertEquals(1, $post->fresh()->visits);
     }
+
+    /** @test */
+    public function followup_post_can_be_retrieved_for_a_modeult()
+    {
+        $school = create('App\Schools');
+        $postOne = create('App\Post',['source_id' => $school->id, 'followup' => true]);
+        $postTwo = create('App\Post',['source_id' => $school->id]);
+
+        $this->assertCount(1, $school->followupPosts());
+    }
 }

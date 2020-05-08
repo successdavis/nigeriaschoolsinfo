@@ -43,6 +43,9 @@ Route::patch('/posts/updatepost/{post}', 'PostController@update')->name('post.up
 Route::get('/posts/{post}', 'PostController@show')->name('post.show');
 Route::post('/posts/{post}/featured_image', 'PostController@featured_image')->name('posts.featured_image')->middleware('admin');
 
+Route::post('{post}/markasfollowup', 'FollowupController@store')->middleware('admin');
+Route::delete('{post}/unmarkasfollowup', 'FollowupController@destroy')->middleware('admin');
+
 
 Route::post('/posts/postimages', 'PostController@addimage')->name('posts.images')->middleware('admin');
 Route::post('/posts/{post}/lock', 'PostController@lock')->name('post.lock')->middleware('admin');

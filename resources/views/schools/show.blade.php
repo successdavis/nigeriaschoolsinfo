@@ -75,7 +75,21 @@
 				<div class="mb-small">
 					<div class="is-size-3 ">Description</div>
 					<p class="is-size-5-desktop">{!! nl2br($school->description) !!}</p>
+
+					<div class="section content">
+						<h3>Recommended Articles</h3>
+						@foreach ($school->posts as $followup)
+							<a class=" is-size-5" href="{{$followup->path()}}">{{$followup->title}} Click to Read</a><br>
+						@endforeach
+					</div>
 				    
+				    <h3 class="is-size-3">{{ucfirst($school->short_name)}} cut off mark</h3>
+				    <p class="content is-size-5">The average cut off mark for {{$school->short_name}} is {{$school->jamb_points}}. It is important to note that this cut off mark may not be applicable for all courses, some courses may require you to score higher, while some even lower. <br>
+
+				    To view a complete list of courses and their required cut off mark for {{$school->short_name}}. <a href="/courses-offered-in/{{$school->slug}}">Click here</a>
+				    </p>
+
+
 					<div class="is-size-3 mt-small">Where is {{$school->short_name}} located?</div>
 					<div class="is-size-5-desktop">{{$school->name }} is located in {{$school->state->name}} State, {{$school->lga->name}} Local Government Area.</div>
 					<div class="is-size-5-desktop">
