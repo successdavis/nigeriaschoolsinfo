@@ -94,7 +94,7 @@ class SchoolsController extends Controller
     {
         $school->load(['posts' => function($query){
             $query->where('followup', true);
-        }]);
+        },'photos']);
 
         $courses = Courses::orderBy('visits','desc')->limit(10);
         $school->increment('visits');

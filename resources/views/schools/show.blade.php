@@ -85,6 +85,8 @@
 				    
 				    <h3 class="is-size-3">{{ucfirst($school->short_name)}} cut off mark</h3>
 				    <p class="content is-size-5">The average cut off mark for {{$school->short_name}} is {{$school->jamb_points}}. It is important to note that this cut off mark may not be applicable for all courses, some courses may require you to score higher, while some even lower. <br>
+				    
+				    @include ('sections/ads/in-feed')
 
 				    To view a complete list of courses and their required cut off mark for {{$school->short_name}}. <a href="/courses-offered-in/{{$school->slug}}">Click here</a>
 				    </p>
@@ -108,6 +110,24 @@
 						<div class="is-size-5-desktop">{{$course->name}}</div>
 					@endforeach
 					<a href="/courses-offered-in/{{$school->slug}}">View All</a>
+				</div>
+				<h2 class="is-size-3 mt-large">Photos of {{$school->name}}</h2>
+				<div class="section">
+					<image-carousel :wraparound="true" :autoplay="true" >
+				        @foreach ($school->photos as $photo)
+				            <div class="card" style="width: 260px; margin: 0 10px">
+							  <div class="card-image">
+							    <figure class="image" >
+							      <img src="{{$photo->url}}" alt="{{$photo->caption}}">
+							    </figure>
+							  </div>
+							  <div class="card-content">
+							  	<h3 class="is-size-4">{{$photo->caption}}</h3>
+							  	<p>{{$photo->description}}</p>
+							  </div>
+							</div>
+				        @endforeach     
+				    </image-carousel>
 				</div>
 			</div>
 		</div>
