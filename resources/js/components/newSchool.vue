@@ -9,6 +9,7 @@ export default {
     props: ['data'],
 	data () {
 		return {
+			processing: false,
 			school: this.data,
 			errorMessage: '',
 			showErrors: false,
@@ -44,15 +45,18 @@ export default {
 				this.schoolForm.description = value;
 			},
 		createSchool() {
+    		this.processing = true;
 			if (this.school) {
 				this.showErrors = false;
 	        	this.schoolForm.patch(`/schools/${this.school.slug}/update`)
 	        	.then(data => {
+		    		this.processing = false;
 	        		flash('School data update was successful')
 	        	})
 	        	.catch(error => {
 	        		this.errorMessage = error.errors;
 	            	this.showErrors = true;
+		    		this.processing = false;
 	        		flash('Something went wrong with updating this school','failed');
 	        	})
 			}
@@ -63,11 +67,13 @@ export default {
                     		this.school = data;
                             // this.schoolForm.reset();
                             this.steps = 2;
+				    		this.processing = false;
                             flash('School Successfully created.', 'success');
                     })
                 .catch(error => {
                 	this.errorMessage = error.errors;
                 	this.showErrors = true;
+		    		this.processing = false;
                     flash('We were unable to process your form', 'failed');
                 });
 	        }
@@ -95,6 +101,8 @@ export default {
     			this.sponsored = data.data.Sponsored;
     			this.types = data.data.Types;
 			});
+
+    	this.data ? this.statelgas() : '';
 	},
 
 	computed: {

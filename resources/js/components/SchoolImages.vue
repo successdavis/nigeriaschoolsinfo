@@ -47,12 +47,15 @@
 					    	</div>
 					  	</div>
 					</div>
-
+					<figure class="image is-128x128">
+					  	<img :src="tempImage">
+					</figure>
 			        <image-upload name="file" class="none" @loaded="onPhotoLoad"></image-upload>
 			        <div class="section">
-				        <button type="submit" class="button large">Attach Photo</button>
+				        <button type="submit" :class="processing ? 'is-loading' : ''" class="button large">Attach Photo</button>
 			        </div>
 			    </form>
+			    
 			</div>
 		</div>
 		<h2 class="is-size-3">Photos you have added</h2>
@@ -79,6 +82,7 @@ export default {
 
 	data () {
 		return {
+			processing: false,
 			logo: this.school ? this.school.logo_path : '',
 			photos: this.photosdata != undefined ? this.photosdata : [],
 			tempImage: '',
@@ -86,6 +90,7 @@ export default {
 				'caption': '',
 				'description': '',
 				'schools_id': this.school.id,
+				'file': '',
 			}),
 		}
 	},
@@ -109,9 +114,11 @@ export default {
 
         onPhotoLoad(image) {
         	this.tempImage = image.src;
+        	this.photosForm.file = image.file;
         },
 
         addPhoto() {
+        	this.processing = true;
         	let data = new FormData();
         	data.append('file', this.photosForm.file);
         	data.append('caption', this.photosForm.caption);
@@ -122,8 +129,13 @@ export default {
                 	flash('Photo Uploaded Successfully! ')
                 	this.photos.push({url: data.data, caption: this.photosForm.caption, description: this.photosForm.description});
                 	this.resetPhotosForm();
+                	this.tempImage = '';
+		        	this.processing = false;
                 })
-	            .catch(() => flash('Photo Upload Failed','failed'));
+	            .catch(() => {
+	            	flash('Photo Upload Failed','failed')
+		        	this.processing = false;
+	            });
         },
 
         remove(index, id) {

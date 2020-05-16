@@ -35,7 +35,7 @@ class SchoolphotosController extends Controller
             'url' => request()->file('file')->storeAs('schools/photos', $name, 'public')
         ]);
 
-        return asset('storage/' . $photo->url);
+        return $photo->url;
     }
 
     public function destroy(Schoolphoto $photo)

@@ -124,7 +124,7 @@ class SchoolsController extends Controller
     public function update(Request $request, Schools $school)
     {
         $request->validate([
-            'name'              => 'required|unique:schools|max:255|min:10', 
+            'name'              => 'required|max:255|min:10', 
             'description'       => 'required|min:300', 
             'date_created'      => 'nullable|date',
             'states_id'         => 'required|exists:states,id',

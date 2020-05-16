@@ -247,7 +247,7 @@
 						  <div class="field-body">
 						    <div class="field is-fullwidth">
 						      <div class="control">
-						        <button type="submit" class="button is-primary" v-text="school ? 'Update School' : 'Create School' ">
+						        <button type="submit" :class="processing ? 'is-loading' : '' " class="button is-primary" v-text="school ? 'Update School' : 'Create School' ">
 						          
 						        </button>
 						      </div>
