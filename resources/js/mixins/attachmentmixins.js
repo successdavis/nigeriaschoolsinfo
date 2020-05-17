@@ -1,30 +1,32 @@
 	export default {
 		props: {
 			school: {required: true},
-			check: {default: false},
 			course: {required: false},
 		},
 
 		data () {
 			return {
-				showChecked: this.check,
+				showChecked: this.course.is_link,
+				cutoffpoints: '',
 			}
 		},
 
 		methods: {
-			attachItems()
+			attachItem()
 			{
 				axios.post(`\\api/schoolcourseattachment`, {
 					course: this.course.id,
-					school: this.school.id
+					school: this.school.id,
+					cut_off_points: this.cutoffpoints
 				}).then(data => {
-					this.showChecked = false;
+					this.$emit('linked');
+					this.cutoffpoints = '';
 				})
 				.catch(error => {
-                    flash('There was a problem linking this school', 'failed');
+                    flash('Course linking failed. Be sure to provide jamb points', 'failed');
                 });
 			},
-			detachedItems()
+			detachItem()
 			{
 				axios.delete(`\\api/schoolcoursedetachment`, {
 					params: {
@@ -32,7 +34,7 @@
 						school: this.school.id
 					}
 				}).then(data => {
-					this.showChecked = true;
+					this.$emit('unlinked');
 				})
 				.catch(error => {
                     flash('There was a problem linking this school', 'failed');

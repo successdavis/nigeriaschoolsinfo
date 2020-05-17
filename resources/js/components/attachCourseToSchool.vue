@@ -13,28 +13,31 @@
 				    <div class="field">
 					  <div class="control ">
 					    <div class="select is-small">
-					      <select v-model="sort" @change="changeType">
+					      <select v-model="faculty" @change="changeType">
 					        <option value="" selected>Sort By (All)</option>
-					        <option v-for="type in types" v-text="type.name" :value="type.id"></option>
+					        <option v-for="faculty in faculties" v-text="faculty.name" :value="faculty.slug"></option>
 					      </select>
 					    </div>
 					  </div>
 					</div>
 				  </div>
 				  <div class="column">
-				    <input class="input is-rounded" type="text" placeholder="Rounded input">
+				    <input @keyup="search" v-model="searchKey" :class="processing ? 'is-loading' : ''" class="input is-rounded" type="text" placeholder="Rounded input">
 				  </div>
 				  <div class="column is-2">
 				    <span style="cursor: pointer" @click="selectall">Select All</span>
 				  </div>
 				</div>
+				<p>Fill the box with the cut_of_mark required for this course in this school Before attaching</p>
 				<tabs>
 					<tab name="Not Attached" :selected="true">
-						<course v-for="(course, index) in notAttachedCourses" :key="index" 
+						<course 
+							v-for="(course, index) in notAttachedCourses" 
+							:key="index" 
 							:school="school" 
-							:course="course" 
-							:check="true">
-						</course>
+							:course="course"
+							@linked="courseIsLinked(index)"
+						></course>
 
 						<infinite-loading @infinite="infiniteHandler"></infinite-loading>
 					</tab>
@@ -42,11 +45,11 @@
 						<course v-for="(course, index) in attachedCourses" 
 							:key="index" 
 							:course="course" 
-							:school="school" 
-							:check="false">
-						</course>
+							:school="school"
+							@unlinked="courseIsUnlinked(index)"
+						></course>
 
-						  <infinite-loading @infinite="getAttached"></infinite-loading>
+						<infinite-loading @infinite="infiniteHandler"></infinite-loading>
 					</tab>
 				</tabs>
 			</div>
@@ -56,6 +59,8 @@
 
 <script>
 import InfiniteLoading from 'vue-infinite-loading';
+import _ from 'lodash';
+
 	export default {
 		 components: {
 		    InfiniteLoading,
@@ -67,20 +72,33 @@ import InfiniteLoading from 'vue-infinite-loading';
 		},
 		data() {
 			return {
-				attached: [],
-				notAttachedCourses: [],
-				attachedCourses: [],
+				processing: false,
 				page: 1,
-				attachedpage: 1,
-				types: [],
-				sort: '',
+				courses: [],
+				faculties: [],
+				faculty: '',
 				searchKey: '',
 				infiniteId: +new Date(),
 				selectallitems: [],
 			}
 		},
 
+		computed: {
+			attachedCourses() {
+				return this.courses.filter(course => course.is_link == true);
+			},
+			notAttachedCourses() {
+				return this.courses.filter(course => course.is_link == false);
+			},
+		},
+
 		methods: {
+			courseIsLinked(index) {
+				this.notAttachedCourses[index].is_link = true;
+			},
+			courseIsUnlinked(index) {
+				this.attachedCourses[index].is_link = false;
+			},
 			selectall() {
 				this.notAttachedCourses.forEach(school => {
 					this.selectallitems.push(school.id);
@@ -94,7 +112,7 @@ import InfiniteLoading from 'vue-infinite-loading';
 				})
 	    		.then (data => {
                     flash('Batch Schools Create.', 'success');
-                    this.resetnotattached();
+                    this.reset();
 				})
 				.catch(error => {
                     flash('Unable to attach Many, Please contact Admin.', 'failed');
@@ -103,33 +121,16 @@ import InfiniteLoading from 'vue-infinite-loading';
 
 			// This method retrieve all the courses that are not attached to a school
 		    infiniteHandler($state) {
-		      axios.get(`/coursesnotattached/${this.school.slug}`, {
+		      axios.get(`/courseswithschoolattach/${this.school.slug}`, {
 		        params: {
 		          page: this.page,
-		          type: this.sort,
+		          faculty: this.faculty,
+		          s: this.searchKey,
 		        },
 		      }).then(({ data }) => {
 		        if (data.data.length) {
 		          this.page += 1;
-		          this.notAttachedCourses.push(...data.data);
-		          $state.loaded();
-		        } else {
-		          $state.complete();
-		        }
-		      });
-		    },
-
-		    getAttached($state) {
-		      axios.get(`/courses-offered-in/${this.school.slug}`, {
-		        params: {
-		          page: this.attachedpage,
-		          type: this.sort,
-		          // s: this.searchKey,
-		        },
-		      }).then(({ data }) => {
-		        if (data.data.length) {
-		          this.attachedpage += 1;
-		          this.attachedCourses.push(...data.data);
+		          this.courses.push(...data.data);
 		          $state.loaded();
 		        } else {
 		          $state.complete();
@@ -138,25 +139,32 @@ import InfiniteLoading from 'vue-infinite-loading';
 		    },
 
 		    changeType() {
-		      this.resetnotattached();
-		      this.attachedpage = 1;
-		      this.attachedCourses = [];
-		      this.infiniteId += 1;
-		      this.getAttached();
+		      this.reset();
 		    },
 
-		    resetnotattached() {
+		    reset() {
 		     	this.page = 1;
-		      	this.notAttachedCourses = [];
+		      	this.courses = [];
 		      	this.infiniteId += 1;
 		      	this.infiniteHandler();
                 this.selectallitems = [];
-		    }
-		  },
+		    },
+
+		    search: _.debounce(function(page) {
+                this.processing = true;
+                this.reset();
+            }, 700),
+		},
+
 		created () {
-			axios.get('/createSchoolRequirements/')
+			axios.get('/list-of-faculties/')
     		.then (data => {
-    			this.types = data.data.Types;
+    			this.faculties = data.data;
+			});
+
+			axios.get(`/courseswithschoolattach/${this.school.slug}`)
+    		.then (data => {
+    			this.courses = data.data.data;
 			});
 			
 		}

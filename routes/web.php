@@ -86,6 +86,7 @@ Route::get('/schools/{schools}/courses', 'CoursesController@index')->name('schoo
 Route::get('/schools/{schools}/coursesnotoffered', 'CourseSchoolAttachmentController@coursesnotoffered');
 
 Route::get('/courses', 'CoursesController@index')->name('courses.index');
+Route::get('/courseswithschoolattach/{schools}', 'CourseSchoolAttachmentController@courses')->name('courses.index');
 Route::get('/courses/editcourse/{course}', 'CoursesController@edit')->name('courses.edit')->middleware('admin');
 
 Route::get('/course/{courses}', 'CoursesController@show')->name('courses.show');
@@ -95,7 +96,8 @@ Route::get('/newcourse/courserequirements', 'CoursesController@getrequirements')
 
 
 Route::get('/faculty/{faculty}', 'FacultiesController@show')->name('faculty.show');
-Route::get('/getfaculties', 'FacultiesController@getfaculties')->name('schoolCourses');
+// change from getfaculties to list-of-faculties
+Route::get('/list-of-faculties', 'FacultiesController@index')->name('schoolCourses');
 
 Route::post('/comments/newcomment', 'CommentController@store')->name('comment.store')->middleware('auth');
 

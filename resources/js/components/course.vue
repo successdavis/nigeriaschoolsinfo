@@ -6,20 +6,27 @@
 	    </p>
 	  </figure>
 	  <div class="media-content">
-	    <div class="content"v-text="course.name">
-	    	
+	    <div class="content columns">
+	    	<span class="column" :class="showChecked ? 'is-12' : 'is-9' " v-text="course.name"></span>
+	    	<span class="column is-3" v-if="!showChecked"><input placeholder="Jamb Points" class="input" type="text" v-model="cutoffpoints"></span>
 	    </div>
 	  </div>
 	  <div class="media-right">
 	    <div class="is-danger">
-	    	<span class="icon has-text-warning">
-		  		<i class="fas fa-check" v-if="showChecked"></i>
+	    	
+			
+			<span class="is-pointer" v-if="!showChecked" @click="attachItem">
+				<span class="icon has-text-warning">
+			  		<i class="fas fa-check"></i>
+				</span>
+				<span>Attach</span>
 			</span>
-			<span class="icon has-text-warning" v-if="! showChecked">
-		  		<i class="fas fa-exclamation-triangle"></i>
+			<span class="is-pointer" v-if="showChecked" @click="detachItem">
+				<span class="icon has-text-warning">
+			  		<i class="fas fa-exclamation-triangle"></i>
+				</span>
+				<span>Detached</span>
 			</span>
-			<span style="cursor: pointer" v-if="showChecked" @click="attachItems">Attach</span>
-			<span style="cursor: pointer" v-if="!showChecked" @click="detachedItems">Detached</span>
 		</div>
 	  </div>
 	</article>
@@ -31,5 +38,11 @@
 	export default {
         mixins: [attachmentmixins],
 
-	}
+	};
 </script>
+
+<style scoped>
+	.is-pointer {
+		cursor: pointer;
+	}
+</style>

@@ -91,4 +91,9 @@ class Courses extends Model
     {
         return $this->posts()->limit(10)->get();
     }
+
+    public function schoolRelationship($schoolId = null)
+    {
+        return $this->schools()->where('schools_id', $schoolId)->exists();
+    }
 }

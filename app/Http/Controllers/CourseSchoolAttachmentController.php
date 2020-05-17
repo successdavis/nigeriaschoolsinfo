@@ -39,8 +39,14 @@ class CourseSchoolAttachmentController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'course' => 'required|integer',
+            'school' => 'required|integer',
+            'cut_off_points' => 'required|integer'
+        ]);
+
         $course = Courses::findOrFail($request->course);
-        $course->attachSchool($request->school);
+        $course->attachSchool($request->school, $request->cut_off_points);
 
         return Response(201);
     }
@@ -98,6 +104,24 @@ class CourseSchoolAttachmentController extends Controller
         $course->detachSchool($request->school);
 
         return Response(201);
+    }
+
+    public function courses(Schools $schools, CourseFilters $filters)
+    {
+        request()->validate([
+            's'         => 'nullable|string',
+            'faculty'   => 'nullable|string'
+        ]);
+        $courses = Courses::latest()->filter($filters);
+
+        $courses = $courses->paginate(50);
+
+        foreach ($courses as $course) {
+            $course['is_link'] = $course->schoolRelationship($schools->id);
+        }
+
+        return $courses;
+
     }
 
 

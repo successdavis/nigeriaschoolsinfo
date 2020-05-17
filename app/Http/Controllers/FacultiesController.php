@@ -14,7 +14,11 @@ class FacultiesController extends Controller
      */
     public function index()
     {
-        //
+        $faculties = Faculty::all();
+        if (request()->wantsJson()) {
+            return $faculties;
+        }
+        return 'Hi! Looking to browse a list of faculties in nigeria schools? Check back here soon, we are working on compiling a comprehensive list for you';
     }
 
     /**
@@ -82,11 +86,5 @@ class FacultiesController extends Controller
     public function destroy(Faculty $faculty)
     {
         //
-    }
-
-    public function getfaculties()
-    {
-        $faculties = Faculty::all();
-        return $faculties;
     }
 }
