@@ -23,7 +23,7 @@ class SchoolCourseAttachmentTest extends TestCase
     public function an_admin_can_attach_a_course_to_a_school_or_vice_versa()
     {
         $response = $this->json('POST', 
-            'api/schoolcourseattachment', ['course' => $this->course->id, 'school' => $this->school->id]
+            'api/schoolcourseattachment', ['course' => $this->course->id, 'school' => $this->school->id, 'cut_off_points' => 150]
         )->json();
 
         $this->assertCount(1, $this->course->schools);

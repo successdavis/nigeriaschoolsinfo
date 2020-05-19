@@ -15,7 +15,7 @@ class Courses extends Model
     public $pathPrefix = '/course/';
     public $findWith    =   'slug';
     public $excerpt    =   ['description', 23];
-    protected $with     = ['subjects', 'considerations'];
+    protected $with     = ['subjects'];
     
     use Source;
     use ModelFunctions;
@@ -42,11 +42,6 @@ class Courses extends Model
     public function subjects()
     {
         return $this->belongsToMany(Subject::class);
-    }
-
-    public function considerations()
-    {
-        return $this->hasMany(Consideration::class, 'course_id');
     }
 
     public function scopeFilter($query, $filters)
