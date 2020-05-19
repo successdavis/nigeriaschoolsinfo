@@ -60,23 +60,25 @@ class SchoolsController extends Controller
             'sponsored_id'      => 'required|exists:sponsoreds,id', 
             'jamb_points'       => 'nullable|integer',
             'phone'             => 'nullable|min:10|max:10', 
+            'meta_description'  => 'required|string|min:140|max:150', 
         ]);
 
         $school = Schools::create([
-            'name'          => request('name'), 
-            'short_name'    => request('short_name'), 
-            'description'   => request('description'), 
-            'date_created'  => request('date_created'),
-            'website'       => request('website'), 
-            'portal_website'=> request('portal_website'),
-            'states_id'      => request('states_id'),
-            'lga_id'        => request('lga_id'),
-            'address'       => request('address'), 
-            'school_type_id'=> request('school_type_id'), 
-            'sponsored_id'  => request('sponsored_id'), 
-            'phone'         => request('phone'), 
-            'email'         => request('email'),
-            'jamb_points'         => request('jamb_points')
+            'name'              => request('name'), 
+            'short_name'        => request('short_name'), 
+            'description'       => request('description'), 
+            'date_created'      => request('date_created'),
+            'website'           => request('website'), 
+            'portal_website'    => request('portal_website'),
+            'states_id'         => request('states_id'),
+            'lga_id'            => request('lga_id'),
+            'address'           => request('address'), 
+            'school_type_id'    => request('school_type_id'), 
+            'sponsored_id'      => request('sponsored_id'), 
+            'phone'             => request('phone'), 
+            'email'             => request('email'),
+            'jamb_points'       => request('jamb_points'),
+            'meta_description'  => request('meta_description')
         ]);
 
         if (request()->wantsJson()) {

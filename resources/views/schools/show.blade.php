@@ -10,7 +10,7 @@
 
   	<meta property="og:title" content="{{$school->name}}" />
   	<meta property="og:url" content="{{ url($school->path()) }}" />
-  	{{-- <meta property="og:description" content="{{$school->meta_description}}"> --}}
+  	<meta property="og:description" content="{{$school->meta_description}}">
   	<meta property="og:image" content="{{asset($school->logo_path)}}">
   	<meta property="og:type" content="article" />
   	<link rel="canonical" href="{{ url($school->path()) }}" />

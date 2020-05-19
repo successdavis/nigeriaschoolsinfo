@@ -208,7 +208,7 @@
 			<div v-if="attachingSchools">
 				
 			</div>
-			<button class="button" @click="creatingNew = true">Attach Schools</button>
+			<!-- <button class="button" @click="creatingNew = true">Attach Schools</button> -->
 			<button class="button" @click="creatingNew = true">Edit Course</button>
 			<button class="button" @click="creatingNew = true">Add new course</button>
 		</div>

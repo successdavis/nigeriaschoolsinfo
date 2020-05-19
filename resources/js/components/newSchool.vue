@@ -36,6 +36,7 @@ export default {
 				email: this.data ? this.data.email : '',
 				// short_name: this.school ? this.school.states_id : '',
 				description: this.data ? this.data.description : '',
+				meta_description: this.data ? this.data.meta_description : '',
 			}),
 		}
 	},
@@ -111,7 +112,13 @@ export default {
 			    return false;
 			}
 			return true;
-		}
+		},
+
+		meta_length () {
+			let char = this.schoolForm.meta_description.length,
+            limit = 150;
+        	return (limit - char);
+		},
 	}
 }
 

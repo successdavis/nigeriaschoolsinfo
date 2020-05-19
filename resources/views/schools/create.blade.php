@@ -241,6 +241,23 @@
 						</div>
 
 						<div class="field is-horizontal">
+						  <div class="field-label is-normal">
+						    <label class="label">*Meta Description</label>
+						    <p class="help is-success" v-text="meta_length"></p>
+						  </div>
+						  <div class="field-body">
+						    <div class="field">
+						      <div class="control">
+							  	<textarea maxlength="150" class="textarea" placeholder="This information appears on google, It should contain information that will convince the user to read your content" v-model="schoolForm.meta_description"></textarea>
+
+						      </div>
+						      <p class="help is-danger" v-if="schoolForm.errors.has('meta_description')" v-text="schoolForm.errors.get('meta_description')"></p>
+
+						    </div>
+						  </div>
+						</div>
+
+						<div class="field is-horizontal">
 						  <div class="field-label">
 						    <!-- Left empty for spacing -->
 						  </div>

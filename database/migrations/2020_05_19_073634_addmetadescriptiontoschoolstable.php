@@ -1,10 +1,10 @@
-    <?php
+<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddToJobsTable extends Migration
+class Addmetadescriptiontoschoolstable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddToJobsTable extends Migration
      */
     public function up()
     {
-        Schema::table('jobs', function (Blueprint $table) {
-            $table->string('featured_image')->nullable();
+        Schema::table('schools', function(Blueprint $table) {
+            $table->string('meta_description')->nullable();
         });
     }
 
@@ -25,8 +25,6 @@ class AddToJobsTable extends Migration
      */
     public function down()
     {
-        Schema::table('jobs', function (Blueprint $table) {
-            //
-        });
+        //
     }
 }
