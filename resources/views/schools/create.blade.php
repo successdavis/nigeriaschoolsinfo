@@ -260,7 +260,13 @@
 				<div v-if="school != '' && steps == 2">
 					<div class="has-text-centered is-size-3">School Images</div>
 					<div>
-						<school-images :photosdata="{{$photos}}" :school="school"></school-images>
+						<school-images 
+						@isset ($photos)
+						:photosdata="{{$photos}}" 
+						@endisset
+						
+						:school="school"
+						></school-images>
 					</div>
 				</div>
 
