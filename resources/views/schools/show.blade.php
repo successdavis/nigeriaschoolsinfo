@@ -113,10 +113,25 @@
 				<div class="mt-small">
 					<div class="is-size-3">{{$school->name}} courses and departments:</div>
 					<div class="is-size-5-desktop mb-small">The following is a list of courses offered in {{$school->short_name}} </div>
-					@foreach ($courses as $course)
-						<div class="is-size-5-desktop">{{$course->name}}</div>
-					@endforeach
-					<a href="/courses-offered-in/{{$school->slug}}">View All</a>
+					
+					<table class="table">
+						<thead>
+							<tr>
+								<th><abbr title="School">Courses</abbr></th>
+								<th><abbr title="School">Cut-of-points</abbr></th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach ($school->courses as $course)
+								<tr>
+									<td><a href="{{$course->path()}}">{{$course->name}}</a></td>
+									<td>{{$course->pivot->cut_off_points}}</td>
+								</tr>	
+							@endforeach
+						</tbody>
+					</table>
+
+					<a class="button is-large is-success" href="/courses-offered-in/{{$school->slug}}">View All Courses</a>
 				</div>
 				<h2 class="is-size-3 mt-large">Photos of {{$school->name}}</h2>
 				<div class="section">

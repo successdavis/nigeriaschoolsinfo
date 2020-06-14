@@ -1,9 +1,7 @@
 <template>
 	<article class="media">
 	  <figure class="media-left">
-	    <p class="image is-32x32">
-	      <img :src="course.logo_path">
-	    </p>
+    	<input type="checkbox" v-model="ismulticheck">
 	  </figure>
 	  <div class="media-content">
 	    <div class="content columns">
@@ -44,5 +42,11 @@
 <style scoped>
 	.is-pointer {
 		cursor: pointer;
+	}
+
+	input[type="checkbox"]{
+	  width: 20px; /*Desired width*/
+	  height: 20px; /*Desired height*/
+	  cursor: pointer;
 	}
 </style>

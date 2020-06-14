@@ -24,6 +24,7 @@
 						  <div class="control">
 						    <input v-model="PostForm.title" class="input" type="text" placeholder="What is the title of your project">
 						  </div>
+						  <p class="help is-danger" v-if="PostForm.errors.has('title')" v-text="PostForm.errors.get('title')">
 						</div>
 
 						<div class="field">
@@ -47,6 +48,7 @@
 						        <option v-for="course in courses" v-text="course.name" :value="course.id"></option>
 						      </select>
 						    </div>
+							<p class="help is-danger" v-if="PostForm.errors.has('course_id')" v-text="PostForm.errors.get('course_id')">
 						  </div>
 						</div>
 
@@ -59,6 +61,7 @@
 						        <option v-for="level in educationlevels" v-text="level.name" :value="level.id"></option>
 						      </select>
 						    </div>
+							<p class="help is-danger" v-if="PostForm.errors.has('schooltype_id')" v-text="PostForm.errors.get('schooltype_id')">
 						  </div>
 						</div>
 						<p>The description should contain the Abstract, Introduction and Table of Contents only, take advantage of the editor tools to format your content properly</p>
@@ -67,12 +70,13 @@
 						  <div class="control">
 						  	<editor :value="PostForm.description" @content="setPostBody"></editor>
 						  </div>
+							<p class="help is-danger" v-if="PostForm.errors.has('description')" v-text="PostForm.errors.get('description')">
 						</div>
 
 						<div class="field is-grouped">
 						  <div class="control">
-						    <button :disabled="processing" type="submit" class="button is-link" v-if="!posthandle">Publish Now</button>
-						    <button :disabled="processing" type="submit" class="button is-link" v-if="posthandle">Update Post</button>
+						    <button :disabled="processing" :class="processing ? 'is-loading' : '' " type="submit" class="button is-link" v-if="!posthandle">Publish Now</button>
+						    <button :disabled="processing" type="submit" :class="processing ? 'is-loading' : '' " class="button is-link" v-if="posthandle">Update Project</button>
 						  </div>
 						</div>
 					</form>

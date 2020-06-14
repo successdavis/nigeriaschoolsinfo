@@ -37,7 +37,9 @@ class PaymentController extends Controller
             'id'            => 'required|integer',
         ]);
 
-
+        // Check if a class exist and an item for the class
+        // Initialize payment for the item
+        // And return the payload information to vue for submission to paystack api
         $module = 'App\\' . ucwords(strtolower($request->module));
         if(class_exists($module)) {
             if (!$module::where('id', $request->id)->exists()) {

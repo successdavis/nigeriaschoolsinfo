@@ -28,7 +28,7 @@
 		},
 
 		mounted() {
-				axios.get(`/getfaculties`)
+				axios.get(`/list-of-faculties`)
 				.then (data => {
 					this.faculties = data.data;
 				}),
@@ -59,6 +59,7 @@
 				this.PostForm.description = value;
 			},
 			publishPost(){
+				this.processing = true;
 				if (!this.posthandle) {
 					this.PostForm.post('projects/newproject')
 					.then(data => {

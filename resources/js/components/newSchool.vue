@@ -33,10 +33,10 @@ export default {
 				lga_id: this.data ? this.data.lga_id : '',
 				address: this.data ? this.data.address : '',
 				phone: this.data ? this.data.phone : '',
-				email: this.data ? this.data.email : '',
+				email: this.data.email || '',
 				// short_name: this.school ? this.school.states_id : '',
-				description: this.data ? this.data.description : '',
-				meta_description: this.data ? this.data.meta_description : '',
+				description: this.data.description || '',
+				meta_description: this.data.meta_description || '',
 			}),
 		}
 	},

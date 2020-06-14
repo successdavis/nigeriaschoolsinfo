@@ -65,9 +65,10 @@ class ProjectController extends Controller
         $project->title         = $request->title;
         $project->description   = $request->description;
         $project->user_id       = Auth()->user()->id;
-        $project->course_id   = $request->course_id;
+        $project->course_id     = $request->course_id;
         $project->schooltype_id = $request->schooltype_id;
-        $project->amount        = $request->amount;
+        $project->amount        = 300000;
+        // The value for ammount is change from $request->amount to 300000
 
         $project->save();
 

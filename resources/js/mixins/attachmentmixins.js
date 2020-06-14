@@ -6,6 +6,7 @@
 
 		data () {
 			return {
+				ismulticheck: false,
 				showChecked: this.course.is_link,
 				cutoffpoints: '',
 			}
