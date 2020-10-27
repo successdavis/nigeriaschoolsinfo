@@ -1,6 +1,7 @@
 <nav-bar inline-template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand is-flex-touch justify-content-touch">
+{{--        Generate button that opens the off canvas menu on click --}}
       <a @click.prevent="drIsOpen = !drIsOpen" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -11,7 +12,8 @@
         <h3>NIGERIASCHOOLINFO</h3>
       </a>
       <a class="navbar-item is-hidden-desktop">
-          <ask-question :name="'ASK'" style="margin-right: 1em"></ask-question> 
+          (?)
+{{--          <ask-question :name="'ASK'" style="margin-right: 1em"></ask-question> --}}
       </a>
     </div>
 
@@ -80,13 +82,13 @@
             <input class="input ps-full-width" type="text" placeholder="Text input">
           </div> --}}
         </div>
-        
+
       </div>
 
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-              <ask-question style="margin-right: 1em"></ask-question> 
+              <ask-question style="margin-right: 1em"></ask-question>
             <a class="button is-light">
               CONTACT
             </a>
@@ -95,8 +97,10 @@
       </div>
     </div>
 
+{{--      Overlay for when the menu is open--}}
     <div v-if="drIsOpen" @click.prevent="drIsOpen = false" class="dr_overlay" v-cloak></div>
 
+{{--      Off canvas menu--}}
     <div :class="drIsOpen ? 'is-open' : 'not-open'" class="n_drawer open-left">
       <i @click.prevent="drIsOpen = false" class="fas fa-times n_drawer_close"></i>
       <div class="n_drawer-title">
@@ -152,7 +156,7 @@
         {{-- <ask-question style="width: 100%"></ask-question> --}}
         @auth
           <a class="button is-light is-fullwidth mt-small" href="">CONTACT</a>
-        <a class="button is-fullwidth mt-small" href="{{ route('logout') }}" 
+        <a class="button is-fullwidth mt-small" href="{{ route('logout') }}"
           onclick="event.preventDefault();
             document.getElementById('logout-form').submit();"
 
