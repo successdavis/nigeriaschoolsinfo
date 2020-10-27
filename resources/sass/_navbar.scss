@@ -38,11 +38,13 @@ $n_drawer_wd: 240px;
 
 @media screen and (min-width: 769px), print {
 	$n_drawer_desktop_close: 75px;
+
 	.n_drawer-is-open-mobile-left-push {
 		transform: none;
 	}
 
-	.n_drawer-is-open-mobile-left-push .n_drawer {
+	/*increase width when drawer is set to open*/
+	.n_drawer-is-open-mobile-left-push .n_drawer.is-desktop {
 		width: $n_drawer_wd;
 	}
 
@@ -53,12 +55,17 @@ $n_drawer_wd: 240px;
 	}
 
 	.n_drawer {
+		display: none;
+	}
+
+	.n_drawer.is-desktop {
+		display: block;
 		position: fixed;
 		width: $n_drawer_desktop_close;
 	}
 
-	.dashboard_content,
-	nav {
+	.dashboard_content.is-desktop,
+	nav.is-desktop {
 		margin-left: $n_drawer_desktop_close;
 		transition: .5s all;
 

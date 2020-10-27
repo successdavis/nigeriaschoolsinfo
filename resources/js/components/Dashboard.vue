@@ -6,6 +6,10 @@
           },
           desktop: {
             default: false,
+          },
+
+          drawerstatus: {
+            default: false,
           }
         },
 
@@ -18,7 +22,7 @@
         data () {
         	return {
         		completeRate: 0,
-                drIsOpen: this.desktop,
+                drIsOpen: this.drawerstatus,
         	}
         },
     };

@@ -1,14 +1,14 @@
 @include('layouts.header')
 <body>
     <div id="app">
-        <dashboard inline-template mode="overlay" :desktop="false">
+        <dashboard inline-template mode="push" :desktop="true">
             <div class="dashboard-wrapper" :class="drIsOpen ? modeclass : 'drIsClose' ">
-                <div class="n_drawer navbar-wrapper__child left">
+                <div :class="desktop == true ? 'is-desktop' : '' " class="n_drawer navbar-wrapper__child left">
                     Draw content goes here
                 </div>
                 <div class="drawer_overlay is-hidden-tablet" v-if="drIsOpen" @click="drIsOpen = false" v-cloak></div>
 
-                <nav class="navbar navbar-wrapper__child" role="navigation" aria-label="main navigation">
+                <nav :class="desktop == true ? 'is-desktop' : '' " class="navbar navbar-wrapper__child" role="navigation" aria-label="main navigation">
                     <div class="navbar-brand is-flex-touch justify-content-touch">
                         <a :class="desktop == true ? 'is-desktop' : '' "   @click.prevent="drIsOpen = !drIsOpen" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
                             <span aria-hidden="true"></span>
@@ -25,7 +25,7 @@
                     </div>
                 </nav>
 
-                <div class="dashboard_content section">
+                <div :class="desktop == true ? 'is-desktop' : '' " class="dashboard_content section">
                     Here goes the ultimate site contents
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,

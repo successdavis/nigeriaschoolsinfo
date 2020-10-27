@@ -2114,6 +2114,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     desktop: {
       "default": false
+    },
+    drawerstatus: {
+      "default": false
     }
   },
   computed: {
@@ -2124,7 +2127,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       completeRate: 0,
-      drIsOpen: this.desktop
+      drIsOpen: this.drawerstatus
     };
   }
 });

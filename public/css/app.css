@@ -2434,7 +2434,9 @@ a.navbar-burger.burger {
             transform: none;
   }
 
-  .n_drawer-is-open-mobile-left-push .n_drawer {
+  /*increase width when drawer is set to open*/
+
+  .n_drawer-is-open-mobile-left-push .n_drawer.is-desktop {
     width: 240px;
   }
 
@@ -2445,12 +2447,17 @@ a.navbar-burger.burger {
   }
 
   .n_drawer {
+    display: none;
+  }
+
+  .n_drawer.is-desktop {
+    display: block;
     position: fixed;
     width: 75px;
   }
 
-  .dashboard_content,
-  nav {
+  .dashboard_content.is-desktop,
+  nav.is-desktop {
     margin-left: 75px;
     -webkit-transition: 0.5s all;
     transition: 0.5s all;
