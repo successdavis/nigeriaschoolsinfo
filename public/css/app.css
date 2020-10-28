@@ -2393,19 +2393,13 @@
   transition: 0.5s all;
 }
 
-/*
-.dashboard-content {
-	padding: 1em;
-}
-*/
-
 a.navbar-burger.burger {
   margin-left: unset;
 }
 
 .n_drawer {
-  position: absolute;
-  background: red;
+  position: fixed;
+  background: #2e323a;
   padding: 1em;
   width: 240px;
   height: 100vh;
@@ -2426,6 +2420,18 @@ a.navbar-burger.burger {
 .n_drawer-is-open-mobile-left-push {
   -webkit-transform: translateX(240px);
           transform: translateX(240px);
+}
+
+.dashboardlabel.Label.is-visible {
+  -webkit-transition: 0.3s opacity;
+  transition: 0.3s opacity;
+  -webkit-transition-delay: 0.2s;
+          transition-delay: 0.2s;
+  opacity: 1;
+}
+
+.dashboardlabel.Label {
+  opacity: 0;
 }
 
 @media screen and (min-width: 769px), print {
@@ -2490,12 +2496,6 @@ a.navbar-burger.burger {
 a.navbar-burger.burger.is-desktop {
   display: block;
 }
-
-/*.n_drawer.is-open {
-	display: block;
-	opacity: 1;
-	transition: .5s all;
-}*/
 
 .post_sh_name {
   margin-left: auto;
