@@ -4,7 +4,8 @@ import router from './routes';
 
 Vue.component('Flash', require('./components/Flash.vue').default);
 Vue.component('dashboard', require('./components/Dashboard.vue').default);
-Vue.component('drawer-item', require('./components/Draweritem.vue').default);
+Vue.component('drawer-menu', require('./components/DrawerMenu.vue').default);
+Vue.component('menu-item', require('./components/menuitem.vue').default);
 Vue.component('ask-question', require('./components/AskQuestion.vue').default);
 Vue.component('image-carousel', require('./components/carousel.vue').default);
 Vue.component('shools-page', require('./pages/schools.vue').default);

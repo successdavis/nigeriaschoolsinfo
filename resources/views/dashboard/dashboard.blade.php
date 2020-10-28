@@ -51,9 +51,11 @@
             </template>
 
             <template slot="drawermenu" slot-scope="props">
-                <drawer-item type="menu-label">GENERAL</drawer-item>
-                
-                <drawer-item :props="props" icon="mdi-desktop-mac" link="/">Dashboard</drawer-item>
+                <drawer-menu>
+                    <menu-item :props="props" icon="mdi-desktop-mac" link="/">Dashboard</menu-item>
+                    <menu-item :props="props" icon="mdi-desktop-mac" link="/following">Following</menu-item>
+                    <menu-item type="menu-label">Administration</menu-item>
+                </drawer-menu>
             </template>
 
             <template slot="dashboardcontent">

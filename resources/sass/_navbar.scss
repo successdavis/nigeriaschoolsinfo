@@ -35,11 +35,11 @@ $n_drawer_wd: 240px;
 .dashboardlabel.Label.is-visible {
 	transition: .3s opacity;
 	transition-delay: .2s;
-	opacity: 1;
+	display: inline-block;
 }
 
 .dashboardlabel.Label {
-	opacity: 0;
+	display: none;
 }
 
 @media screen and (min-width: 769px), print {

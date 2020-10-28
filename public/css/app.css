@@ -2427,11 +2427,11 @@ a.navbar-burger.burger {
   transition: 0.3s opacity;
   -webkit-transition-delay: 0.2s;
           transition-delay: 0.2s;
-  opacity: 1;
+  display: inline-block;
 }
 
 .dashboardlabel.Label {
-  opacity: 0;
+  display: none;
 }
 
 @media screen and (min-width: 769px), print {
