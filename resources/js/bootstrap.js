@@ -1,4 +1,4 @@
- window._ = require('lodash');
+window._ = require('lodash');
 
 window.Vue = require('vue');
 
@@ -25,6 +25,7 @@ Vue.use(VueRouter);
 import VModal from 'vue-js-modal'
 import Form from './utilities/Form';
 
+
 import { Table, Input } from 'buefy'
 import 'buefy/dist/buefy.css'
 
@@ -34,6 +35,8 @@ Vue.use(Input)
 
 
 window.Form = Form;
+window.Event = new Vue();
+
 
 Vue.use(VModal)
 

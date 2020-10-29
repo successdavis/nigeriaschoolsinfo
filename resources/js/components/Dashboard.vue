@@ -8,7 +8,7 @@
 
       <nav :class="desktop == true ? 'is-desktop' : '' " class="navbar navbar-wrapper__child" role="navigation" aria-label="main navigation">
           <div class="navbar-brand is-flex-touch justify-content-touch">
-              <a :class="desktop == true ? 'is-desktop' : '' "   @click.prevent="drIsOpen = !drIsOpen" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
+              <a :class="desktop == true ? 'is-desktop' : '' "   @click.prevent="drawerToggle" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
                   <span aria-hidden="true"></span>
                   <span aria-hidden="true"></span>
                   <span aria-hidden="true"></span>
@@ -29,8 +29,8 @@
       <div :class="desktop == true ? 'is-desktop' : '' " class="dashboard_content section">
           
           <!-- Site main content goes here -->
-          <slot name="dashboardcontent"></slot>
-
+          <slot></slot>
+      
       </div>
   </div>
 </template>
@@ -39,7 +39,7 @@
 <script>
     export default {
         props: {
-          title: {default: 'admin'},
+          title: {default: 'Admin Dashboard'},
           mode: {default: 'overlay'},
           desktop: {default: false,},
           drawerstatus: {default: false,}
@@ -56,6 +56,22 @@
         		completeRate: 0,
             drIsOpen: this.drawerstatus,
         	}
+        },
+
+        created() {
+            Event.$on('expanddrawer', () => this.drIsOpen = true);
+        },
+
+        methods: {
+          drawerToggle () {
+              if (this.drIsOpen) {
+                this.drIsOpen = false;
+                Event.$emit('drawerisclosed');
+              } else {
+                this.drIsOpen = true;
+                Event.$emit('drawerisOpen');
+              }
+          },
         },
     };
 </script>

@@ -21,7 +21,7 @@
 	<div class="container">
 		<div class="mt-medium remove-max-width">
 			<div class="section">
-				<h1 class="is-size-3">Here is a complete list of courses offered in Nigeria Universities, Polytechnics, Colleges, Nurses etc.</h1>
+				<h1 class="has-text-centered content">Courses offered in Nigeria Universities, Polytechnics, Colleges, Nurses etc.</h1>
 			</div>
 			<div class="columns">
 				<div class="column is-hidden-touch section">

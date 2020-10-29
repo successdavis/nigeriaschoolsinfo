@@ -53,15 +53,33 @@
             <template slot="drawermenu" slot-scope="props">
                 <drawer-menu>
                     <menu-item :props="props" icon="mdi-desktop-mac" link="/">Dashboard</menu-item>
-                    <menu-item :props="props" icon="mdi-desktop-mac" link="/following">Following</menu-item>
-                    <menu-item type="menu-label">Administration</menu-item>
+                    <menu-item :props="props" icon="mdi-account-settings" link="/Profile">Profile</menu-item>
+                    <menu-item :props="props" icon="mdi-link" link="/following">Following</menu-item>
+                    <menu-item type="menu-label">Dashboard</menu-item>
+                    <menu-item 
+                        icon="mdi-grease-pencil"
+                        :props="props" 
+                        type="dropdown"
+                        :items="[
+                            {
+                                link: '/posts',
+                                label: 'All Posts'
+                            },
+                            {
+                                link: '/newpost',
+                                label: 'Add New'
+                            },
+                            {
+                                link: '/category',
+                                label: 'Category'
+                            },
+                        ]"
+                    >Posts</menu-item>
                 </drawer-menu>
             </template>
 
-            <template slot="dashboardcontent">
-                <router-view></router-view>
-            </template>
-
+            
+            <router-view></router-view>
         </dashboard>
 
         <flash message="{{ session('flash') }}"></flash>

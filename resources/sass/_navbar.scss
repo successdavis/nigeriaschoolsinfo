@@ -42,6 +42,10 @@ $n_drawer_wd: 240px;
 	display: none;
 }
 
+.menu-list-label, .icon {
+	color: #727c8f;
+	}
+
 @media screen and (min-width: 769px), print {
 	$n_drawer_desktop_close: 75px;
 

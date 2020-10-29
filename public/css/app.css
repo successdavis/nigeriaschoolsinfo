@@ -2434,6 +2434,11 @@ a.navbar-burger.burger {
   display: none;
 }
 
+.menu-list-label,
+.icon {
+  color: #727c8f;
+}
+
 @media screen and (min-width: 769px), print {
   .n_drawer-is-open-mobile-left-push {
     -webkit-transform: none;
