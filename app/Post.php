@@ -7,9 +7,12 @@ use App\Traits\ModelFunctions;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Post extends Model
 {
+    use SoftDeletes;
     use ModelFunctions;
     use Commentable;
     protected $guarded = [];

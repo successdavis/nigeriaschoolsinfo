@@ -30,4 +30,8 @@ trait Source
     {
         return $this->posts()->where('followup', true)->get();
     }
+
+    public function getClassName() {
+        return basename(get_class($this));
+    }
 }

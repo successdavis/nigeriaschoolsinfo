@@ -60,4 +60,42 @@ class UpdatePostTest extends TestCase
 
         $this->assertInstanceOf("App\Courses", $this->post->fresh()->source);
     }
+
+        /** @test */
+    public function an_approved_admin_can_mark_a_post_as_followup()
+    {
+        $user = create('App\User');
+        $role = create('App\Role',['name' => 'admin']);
+
+        $user->assignRole($role->id);
+        $this->signIn($user);
+
+        $this->patch($this->post->slug . '/followup', []);
+
+        $this->assertTrue($this->post->fresh()->isFollowUp());
+    }
+
+        /** @test */
+    public function an_admin_can_unmark_a_post_as_followup()
+    {
+        $user = create('App\User');
+        $role = create('App\Role',['name' => 'admin']);
+
+        $user->assignRole($role->id);
+        $this->signIn($user);
+
+        $this->delete($this->post->slug . '/followup', []);
+
+        $this->assertFalse($this->post->fresh()->isFollowUp());
+    }
+
+
+
+    /** @test */
+    public function it_can_be_soft_deleted_by_approved_persons()
+    {
+        $responds = $this->json('delete', $this->post->slug . '/delete')->json();
+
+        $this->assertSoftDeleted('posts', ['slug' => $this->post->slug]);
+    }
 }

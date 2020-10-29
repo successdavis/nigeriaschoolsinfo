@@ -17,12 +17,15 @@ class PostResource extends JsonResource
         return [
             'id'            => $this->id,
             'body'          => $this->body,
-            'created_at'    => $this->created_at,
+            'created_at'    => $this->created_at->diffForHumans(),
             'slug'          => $this->slug,
             'title'         => $this->title,
             'updated_at'    => $this->updated_at,
-            'path'          => $this->path()
-
+            'path'          => $this->path(),
+            'author'        => $this->publisher->name,
+            'category'      => $this->source->getClassName(),
+            'visits'        => $this->visits,
+            'followup'      => $this->followup,
         ];
     }
 }

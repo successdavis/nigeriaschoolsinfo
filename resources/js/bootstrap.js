@@ -26,19 +26,17 @@ import VModal from 'vue-js-modal'
 import Form from './utilities/Form';
 
 
-import { Table, Input } from 'buefy'
+import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 
-Vue.use(Table)
-Vue.use(Input)
-
+Vue.use(Buefy)
 
 
 window.Form = Form;
 window.Event = new Vue();
 
 
-Vue.use(VModal)
+Vue.use(VModal, {dialog: true})
 
 window.axios = require('axios');
 

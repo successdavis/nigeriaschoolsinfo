@@ -32,7 +32,7 @@ class PostController extends Controller
         $posts = $posts->paginate(50);
 
         if (request()->wantsJson()) {
-            return $posts;
+            return PostResource::collection($posts);
         }
 
         return view('posts.index', compact('posts','q','trending'));
@@ -147,7 +147,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return $post;
     }
 
     public function lock(Post $post)

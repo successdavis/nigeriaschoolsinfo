@@ -34,6 +34,7 @@ Route::get('/', 'ApplicationController@index');
 
 Route::get('/testpage', 'TestController@index');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/posts', 'PostController@index');
 Route::get('/posts/newpost', 'PostController@create')->name('post.create')->middleware('admin');
 Route::get('/posts/newpostrequirements', 'PostController@newpostrequirement')->middleware('admin');
 Route::get('/posts/relatedpost', 'PostController@relatedpost');
@@ -42,9 +43,10 @@ Route::post('/posts/publishpost', 'PostController@store')->name('post.store')->m
 Route::patch('/posts/updatepost/{post}', 'PostController@update')->name('post.update')->middleware('admin');
 Route::get('/posts/{post}', 'PostController@show')->name('post.show');
 Route::post('/posts/{post}/featured_image', 'PostController@featured_image')->name('posts.featured_image')->middleware('admin');
+Route::delete('/{post}/delete', 'PostController@destroy')->name('posts.delete');
 
-Route::post('{post}/markasfollowup', 'FollowupController@store')->middleware('admin');
-Route::delete('{post}/unmarkasfollowup', 'FollowupController@destroy')->middleware('admin');
+Route::patch('{post}/followup', 'FollowupController@store')->middleware('admin');
+Route::delete('{post}/followup', 'FollowupController@destroy')->middleware('admin');
 
 
 Route::post('/posts/postimages', 'PostController@addimage')->name('posts.images')->middleware('admin');
