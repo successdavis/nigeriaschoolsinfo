@@ -62,7 +62,7 @@ Route::get('/schools', 'SchoolsController@index')->name('schools.index');
 Route::get('/schools/type/{schooltype}', 'SchoolsController@index')->name('schoolsInType');
 Route::get('/schools/{school}', 'SchoolsController@show')->name('schools.show');
 
-Route::get('/find/school', 'SchoolsController@findschool')->name('schools.findschool');
+// Route::get('/find/school', 'SchoolsController@findschool')->name('schools.findschool');
 
 Route::get('/createnewschool', 'SchoolsController@create')->name('schools.create')->middleware('admin');
 Route::post('/schools/createschool', 'SchoolsController@store')->name('schools.store')->middleware('admin');

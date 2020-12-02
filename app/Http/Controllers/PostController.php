@@ -57,9 +57,9 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|max:70',
+            'title' => 'required|max:100|min:25',
             'body' => 'required',
-            // 'meta_description' => 'required|max:150|min:140',
+            'meta_description' => 'required|max:150|min:140',
         ]);
 
         $module = 'App\\' . ucwords(strtolower($request->module));
@@ -98,7 +98,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.create', compact('post'));
+        return new PostResource($post);
     }
 
     /**

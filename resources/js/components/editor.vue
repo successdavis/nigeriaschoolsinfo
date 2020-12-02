@@ -118,6 +118,11 @@ Quill.register(ImageBlot);
         `,
       }
     },
+    watch: {
+      value: function() {
+        this.content = this.value;
+      }
+    },
     methods: {
       persistFile() {
         if(! this.$refs.file.files[0]) return;

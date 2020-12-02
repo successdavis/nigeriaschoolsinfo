@@ -66,7 +66,7 @@
                                 label: 'All Posts'
                             },
                             {
-                                link: '/newpost',
+                                link: '/addpost',
                                 label: 'Add New'
                             },
                             {

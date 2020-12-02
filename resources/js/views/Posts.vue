@@ -20,7 +20,7 @@
 							<button class="button">All</button>
 							<button class="button">Draft</button>
 							<button class="button">Deleted</button>
-							<button class="button">Add New</button>
+							<button class="button"><router-link to="/addpost">Add New</router-link></button>
 						</div>
 					</div>
 				</div>
@@ -113,11 +113,14 @@
 													<i v-else class="mdi mdi-link"></i>
 												</span>
 											</button>
-											<button type="button" class="button">
-												<span class="icon is-small">
-													<i class="mdi mdi-pencil"></i>
-												</span>
-											</button>
+											<!-- Router button that leads to edit post -->
+											<router-link :to="{name: 'editpost', params: {slug: data.slug}}">
+												<button type="button" class="button">
+													<span class="icon is-small">
+														<i class="mdi mdi-pencil"></i>
+													</span>
+												</button>
+											</router-link>
 										</div>
 									</td>
 								</tr>

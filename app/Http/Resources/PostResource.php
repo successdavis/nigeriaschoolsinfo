@@ -26,6 +26,9 @@ class PostResource extends JsonResource
             'category'      => $this->source->getClassName(),
             'visits'        => $this->visits,
             'followup'      => $this->followup,
+            'meta_description'      => $this->meta_description,
+            'source_id'     => $this->source_id,
+            'source_title'  => $this->source->name
         ];
     }
 }

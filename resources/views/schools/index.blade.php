@@ -18,7 +18,7 @@
 	<div class="container">
 		<div class="mt-medium remove-max-width">
 			<div class="section has-text-centered">
-				<h2 class="is-size-5">A complete list of Universites, Polytechnics, Colleges, Nurses and other degree awarding institutions in Nigeria</h2>
+				<h2 class="is-size-5">List of Universites, Polytechnics, Colleges, Nurses and other degree awarding institutions in Nigeria</h2>
 				<div>Please use the sort and search here to quickly navigate and find any school</div>
 				<div class="is-hidden-desktop">Click the eye to view courses for each school</div>
 			</div>
