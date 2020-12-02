@@ -21,13 +21,14 @@
 export default {
     props: {
         setup: {required: true},
+        source_title: {default: ''},
     },
     data() {
         return {
             data: [],
             keepFirst: true,
             openOnFocus: false,
-            name: '',
+            name: this.source_title,
             selected: null,
             clearable: true,
         }

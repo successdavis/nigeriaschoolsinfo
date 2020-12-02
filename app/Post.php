@@ -66,6 +66,15 @@ class Post extends Model
         return isset($this->featured_image);
     }
 
+    public function getFeaturedImageAttribute($image)
+    {
+        if ($image) {
+            return asset('storage/' . $image);
+        }else {
+            return '';
+        }
+    }
+
     public function isFollowUp()
     {
         return $this->followup;

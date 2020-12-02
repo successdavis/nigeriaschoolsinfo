@@ -27,8 +27,9 @@ class PostResource extends JsonResource
             'visits'        => $this->visits,
             'followup'      => $this->followup,
             'meta_description'      => $this->meta_description,
-            'source_id'     => $this->source_id,
-            'source_title'  => $this->source->name
+            'source_id'     => $this->source->id,
+            'source_title'  => $this->source->name,
+            'image'         => $this->featured_image
         ];
     }
 }

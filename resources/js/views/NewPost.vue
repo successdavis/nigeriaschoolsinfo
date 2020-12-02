@@ -29,7 +29,7 @@
 
 				<div v-if="PostForm.module == 'Schools'">
 					<!-- ============================================================================== -->
-					<search @userselected="setSelected" :setup="findschool"></search>
+					<search @userselected="setSelected" :source_title="source_title" :setup="findschools"></search>
 					<!-- ============================================================================== -->
 				</div>
 
@@ -47,7 +47,7 @@
 					</div>
 				</div>
 				<div v-if="PostForm.module == 'Courses'">
-					<search @userselected="setSelected" :setup="findcourse"></search>
+					<search @userselected="setSelected" :source_title="source_title" :setup="findcourses"></search>
 				</div>
 
 				<div v-if="PostForm.module == 'Postcategory'">
@@ -66,7 +66,7 @@
 				<div v-if="PostForm.module == 'Job'">
 					
 					<!-- ============================================================================== -->
-					<search @userselected="setSelected" :setup="findjob"></search>
+					<search @userselected="setSelected" :source_title="source_title" :setup="findjob"></search>
 					<!-- ============================================================================== -->
 
 				</div>
@@ -117,11 +117,10 @@
 	      ImageUpload,
 	      Search
 	    },
-	    props: ['image'],
 		data () {
 			return {
 				isLoading: false,
-                featuredimage: this.image,
+                featuredimage: '',
 				posthandle: '',
 				type: '',
 				categories: [],
@@ -135,22 +134,23 @@
 					module: '',
 					module_id: ''
 				}),
+				source_title: '',
 
-				findschool: {
+				findschools: {
 					url: '/schools',
 					title: 'name',
-					label: 'Enter School Name'
+					label: 'Enter School Name',
 				},
 
-				findcourse: {
+				findcourses: {
 					url: '/courses',
 					title: 'name',
-					label: 'Enter Course Name'
+					label: 'Enter Course Name',
 				},
 				findjob: {
 					url: '/latest-job-opportunities-and-application',
 					title: 'title',
-					label: 'Enter Job Title'
+					label: 'Enter Job Title',
 				}
 			}
 		},
@@ -225,16 +225,16 @@
 
 			setData(post) {
 				if (post) {
-					console.log('--------------')
-					console.log(post)
-					console.log('--------------')
+
+					this.posthandle	= post
 			        this.PostForm.posthandle = post
 			        this.PostForm.body = post.body,
 					this.PostForm.title = post.title,
 					this.PostForm.meta_description = post.meta_description,
 					this.PostForm.module = post.category,
 					this.PostForm.module_id = post.source_id
-					this.PostForm.title 	= post.source_title
+					this.source_title	= post.source_title
+					this.featuredimage	= post.image
 			    } else {
 			        console.log('failed')
 			    }
@@ -255,26 +255,14 @@
 	    		.then (data => {
 	    			this.jobs = data.data.data;
 			});
-
-	    	// if (this.$route.params.slug) {
-	    	// 	axios.get(`editpost/${this.$route.params.slug}`)
-	    	// 	.then (data => {
-	    	// 		this.posthandle = data.data
-	    	// 	})
-	    	// }
 		},
 
 	  	beforeRouteEnter (to, from, next) {
 	    	axios.get(`editpost/${to.params.slug}`)
     		.then (data => {
-    			console.log(data)
     			next(vm => vm.setData(data.data.data));
     		})
 	  	},
-	  	// when route changes and this component is already rendered,
-	  	// the logic will be slightly different.
-	  	// beforeRouteUpdate (to, from, next) {
-	   //  	console.log('hey')
-	  	// },
+
 	}
 </script>

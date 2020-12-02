@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Postcategory::class, function (Faker $faker) {
     return [
-        'title'				=> $faker->word,
+        'name'				=> $faker->word,
         'description'		=> $faker->text,
         'meta_description'	=> $faker->sentence,
     ];
