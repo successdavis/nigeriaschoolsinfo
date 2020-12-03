@@ -258,10 +258,14 @@
 		},
 
 	  	beforeRouteEnter (to, from, next) {
-	    	axios.get(`editpost/${to.params.slug}`)
-    		.then (data => {
-    			next(vm => vm.setData(data.data.data));
-    		})
+	  		if (to.params.slug) {
+		    	axios.get(`editpost/${to.params.slug}`)
+	    		.then (data => {
+	    			next(vm => vm.setData(data.data.data));
+	    		})
+	  		}else {
+		  		next();
+	  		}
 	  	},
 
 	}

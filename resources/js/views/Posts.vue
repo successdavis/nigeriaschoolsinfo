@@ -153,6 +153,7 @@
             return {
                 data: [
                 ],
+                error: '',
                 columns: [
                     {
                         field: 'title',
@@ -187,7 +188,30 @@
         	this.getPost();
 		},
 
+		beforeRouteEnter (to, from, next) {
+	    	
+	    	axios.get('/posts')
+			.then((data) => {
+				next(vm => vm.setData(data.data.data));
+			})
+			.catch((error) => {
+				flash('Unable to retrieve post at the moment');
+				return false
+			})
+
+	    	// axios.get(`editpost/${to.params.slug}`)
+    		// .then (data => {
+    		// 	next(vm => vm.setData(data.data.data));
+    		// })
+	  	},
+
 		methods: {
+			setData (data) {
+		      if (data) {
+		        this.data = data;
+		      }
+		    },
+
 			getPost () {
 				this.isLoading = true;
 				axios.get('/posts')

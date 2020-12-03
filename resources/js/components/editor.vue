@@ -92,7 +92,7 @@ Quill.register(ImageBlot);
           modules: {
             toolbar: [
               ['bold', 'italic', 'underline', 'strike'],
-              ['blockquote', 'code-block'],
+              ['link','blockquote', 'code-block'],
               [{ 'header': 1 }, { 'header': 2 }],
               [{ 'list': 'ordered' }, { 'list': 'bullet' }],
               [{ 'script': 'sub' }, { 'script': 'super' }],
