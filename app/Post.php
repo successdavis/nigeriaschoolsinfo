@@ -22,8 +22,9 @@ class Post extends Model
     public $excerpt    =   ['body', 23];
 
     protected $casts = [
-        'locked' => 'boolean',
-        'followup' => 'boolean'
+        'locked'       => 'boolean',
+        'followup'      => 'boolean',
+        'published'     => 'boolean'
     ];
 
     protected static function boot()
@@ -91,6 +92,20 @@ class Post extends Model
     {
         $this->followup = false;
         $this->save();
+        return true;
+    }
+
+    public function publish() {
+        $this->published = true;
+        $this->save();
+
+        return true;
+    }
+
+    public function unpublish() {
+        $this->published = false;
+        $this->save();
+
         return true;
     }
 }

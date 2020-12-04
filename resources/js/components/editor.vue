@@ -45,6 +45,7 @@
   import Quill from 'quill'
 
 let BlockEmbed = Quill.import('blots/block/embed');
+let Delta = Quill.import('delta');
 
 class ImageBlot extends BlockEmbed {
   static create(value) {
@@ -160,7 +161,16 @@ Quill.register(ImageBlot);
       },
       onEditorReady(editor) {
         console.log('editor ready!', editor)
-      }
+      },
+
+      // startInterval: function () {
+      //   setInterval(() => {
+      //     this.editor.on('text-change', () => {
+      //       console.log('text change');
+      //     })
+      //   }, 1*1000);
+      // },
+
     },
     computed: {
       editor() {

@@ -1,7 +1,7 @@
 <template>
 	<div class="columns">
 		<div class="column is-9">
-			<form @submit.prevent="publishPost">
+			<form @submit.prevent="savePost">
 				<div class="field">
 				  <label class="label">Post Title</label>
 				  <div class="control">
@@ -24,6 +24,8 @@
 				      </select>
 
 				    </div>
+		      	<p class="help is-danger" v-if="PostForm.errors.has('module')" v-text="PostForm.errors.get('module')"></p>
+
 				  </div>
 				</div>
 
@@ -31,6 +33,8 @@
 					<!-- ============================================================================== -->
 					<search @userselected="setSelected" :source_title="source_title" :setup="findschools"></search>
 					<!-- ============================================================================== -->
+		      	<p class="help is-danger" v-if="PostForm.errors.has('module_id')" v-text="PostForm.errors.get('module_id')"></p>
+
 				</div>
 
 				<div v-if="PostForm.module == 'Exams'">
@@ -45,9 +49,13 @@
 					    </div>
 					  </div>
 					</div>
+		      	<p class="help is-danger" v-if="PostForm.errors.has('module_id')" v-text="PostForm.errors.get('module_id')"></p>
+
 				</div>
 				<div v-if="PostForm.module == 'Courses'">
 					<search @userselected="setSelected" :source_title="source_title" :setup="findcourses"></search>
+		      	<p class="help is-danger" v-if="PostForm.errors.has('module_id')" v-text="PostForm.errors.get('module_id')"></p>
+
 				</div>
 
 				<div v-if="PostForm.module == 'Postcategory'">
@@ -68,6 +76,7 @@
 					<!-- ============================================================================== -->
 					<search @userselected="setSelected" :source_title="source_title" :setup="findjob"></search>
 					<!-- ============================================================================== -->
+		      	<p class="help is-danger" v-if="PostForm.errors.has('module_id')" v-text="PostForm.errors.get('module_id')"></p>
 
 				</div>
 
@@ -80,14 +89,14 @@
 
 				<div class="field is-grouped">
 				  <div class="control">
-				    <button :disabled="disabled" type="submit" class="button is-link" v-if="!posthandle">Publish Now</button>
-				    <button :disabled="disabled" type="submit" class="button is-link" v-if="posthandle">Update Post</button>
+				    <button :disabled="disabled" @click="publish" type="submit" class="button is-link" v-if="posthandle" v-text="ispublished ? 'Unpublish Post' : 'Publish Post' "></button>
 				  </div>
 				</div>
 			</form>
 		</div>
 		<div class="column is-3">
 			<div class="section">
+				<a class="button" @click="savePost">Save</a>
 				<h3 class="is-size-4">Featured Image</h3>
 				<div v-if="posthandle">
 					<img :src="featuredimage">
@@ -97,7 +106,7 @@
 
 				</div>
 				<p class="help"> Post the content then upload a cover photo here. </p>
-				<h3 class="is-size-4 mt-medium">Meta Description <span v-text="meta_length"></span></h3>
+				<h3 class="is-size-4 mt-medium">Meta Desc <span v-text="meta_length"></span></h3>
 				<textarea maxlength="150" v-model="PostForm.meta_description" class="textarea" placeholder="This content will appear on search result"></textarea>
 				<p class="help"> A brief summary of your content. Not less than 140 characters. </p>
 		      	<p class="help is-danger" v-if="PostForm.errors.has('meta_description')" v-text="PostForm.errors.get('meta_description')"></p>
@@ -122,6 +131,7 @@
 				isLoading: false,
                 featuredimage: '',
 				posthandle: '',
+				ispublished: false,
 				type: '',
 				categories: [],
 				jobs: '',
@@ -157,9 +167,11 @@
 
 		computed: {
 			meta_length () {
-				let char = this.PostForm.meta_description.length,
-	            limit = 150;
-	        	return (limit - char);
+				if (this.PostForm.meta_description) {
+					let char = this.PostForm.meta_description.length,
+		            limit = 150;
+		        	return (limit - char);
+				}
 			},
 
 			// PostModule() {
@@ -188,18 +200,18 @@
 				this.PostForm.body = value;
 			},
 
-			publishPost () {
+			savePost () {
 
 				this.disabled = true;
 				if (!this.posthandle) {
-					this.PostForm.post('/posts/publishpost')
+					this.PostForm.post('/posts/savepost')
 					.then(data => {
-						flash('Your new post has been published', 'success')
+						flash('Your new post has been saved', 'success')
 						this.posthandle = data;
 						this.disabled = false;
 					})
 					.catch(error => {
-						flash('Your Form Has errors', 'failed')
+						flash('Sorry, we could not save your new post', 'failed')
 						this.disabled = false;
 					});
 				}else {
@@ -213,6 +225,13 @@
 						this.disabled = false;
 					})
 				}
+			},
+
+			publish() {
+					axios[this.ispublished ? 'delete' : 'patch'](`/posts/${this.posthandle.slug}/togglepublish`)
+					.then((data) => {
+						this.ispublished = data.data.published
+					})
 			},
 
 			resetField() {

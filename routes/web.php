@@ -39,14 +39,18 @@ Route::get('/posts/newpost', 'PostController@create')->name('post.create')->midd
 Route::get('/posts/newpostrequirements', 'PostController@newpostrequirement')->middleware('admin');
 Route::get('/posts/relatedpost', 'PostController@relatedpost');
 Route::get('/editpost/{post}', 'PostController@edit')->middleware('admin');
-Route::post('/posts/publishpost', 'PostController@store')->name('post.store')->middleware('admin');
+Route::post('/posts/savepost', 'PostController@store')->name('post.store')->middleware('admin');
 Route::patch('/posts/updatepost/{post}', 'PostController@update')->name('post.update')->middleware('admin');
 Route::get('/posts/{post}', 'PostController@show')->name('post.show');
 Route::post('/posts/{post}/featured_image', 'PostController@featured_image')->name('posts.featured_image')->middleware('admin');
 Route::delete('/{post}/delete', 'PostController@destroy')->name('posts.delete');
 
+Route::patch('/posts/{post}/togglepublish', 'PostController@publish')->middleware('admin');
+Route::delete('/posts/{post}/togglepublish', 'PostController@unpublish')->middleware('admin');
+
 Route::patch('{post}/followup', 'FollowupController@store')->middleware('admin');
 Route::delete('{post}/followup', 'FollowupController@destroy')->middleware('admin');
+
 
 
 Route::post('/posts/postimages', 'PostController@addimage')->name('posts.images')->middleware('admin');

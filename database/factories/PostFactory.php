@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Post::class, function (Faker $faker) {
     return [
-        'title' 		=> $faker->name,
+        'title' 		=> 'the quick brown fox jumps over the lazy dog and the',
         'body' 			=> $faker->paragraph,
         'source_type' 	=> 'App\Schools',
         'locked'        => false,
@@ -19,7 +19,7 @@ $factory->define(Post::class, function (Faker $faker) {
         'user_id'     => function() {
             return factory('App\User')->create()->id;
         },
-        'meta_description' => 'Proin faucibus arcu quis ante. Morbi mattis ullamcorper velit. Curabitur a felis in nunc fringilla tristique. Suspendisse enim turpis, dictum sed, id'
+        'meta_description' => 'Proin faucibus arcu quis ante. Morbi mattis ullamcorper velit. Curabitur a felis in nunc fringilla tristique. Suspendisse enim turpis, dictum sed, '
     ];
 });
 
