@@ -8,7 +8,7 @@
 				@foreach ($jobs as $job)
 					<article class="media">
 						<div class="media-content">
-							<h3><a class="has-text-black" href="{{$job->path()}}">{{$job->title}}<strong> Click to Read</strong></a></h3>
+							<h3><a class="has-text-black" href="{{$job->path()}}">{{$job->name}}<strong> Click to Read</strong></a></h3>
 						</div>
 					</article>
 				@endforeach

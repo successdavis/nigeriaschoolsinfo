@@ -24,7 +24,23 @@ let routes = [
 		component: AddPost,
 		name: 'editpost',
 		props: true,
-	}
+	},
+	// {
+	// 	path: '/schools',
+	// 	component: Posts
+	// },
+
+	// {
+	// 	path: '/addschool',
+	// 	component: AddPost
+	// },
+
+	// {
+	// 	path: '/editschool/:slug',
+	// 	component: AddPost,
+	// 	name: 'editpost',
+	// 	props: true,
+	// }
 
 ];
 

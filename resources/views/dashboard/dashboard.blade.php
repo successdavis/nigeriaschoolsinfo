@@ -75,6 +75,21 @@
                             },
                         ]"
                     >Posts</menu-item>
+                    <menu-item 
+                        icon="mdi-grease-pencil"
+                        :props="props" 
+                        type="dropdown"
+                        :items="[
+                            {
+                                link: '/schools',
+                                label: 'All Posts'
+                            },
+                            {
+                                link: '/addschool',
+                                label: 'Add New'
+                            },
+                        ]"
+                    >Schools</menu-item>
                 </drawer-menu>
             </template>
 
