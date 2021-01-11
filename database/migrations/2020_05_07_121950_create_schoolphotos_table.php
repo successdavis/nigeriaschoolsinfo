@@ -30,6 +30,6 @@ class CreateSchoolphotosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schoolphotoviews');
+        Schema::dropIfExists('schoolphotos');
     }
 }

@@ -104,20 +104,20 @@
 									<td class="is-actions-cell">
 										<div class="buttons are-small is-right">
 											<button type="button" class="button is-danger" @click="deletePost(data.slug, index)">
-												<span class="icon is-small">
+												<span class="icon is-small" title="Delete Post">
 													<i class="mdi mdi-trash-can"></i>
 												</span>
 											</button>
 											<button type="button" :class="data.followup ? 'is-success' : '' " class="button" @click="togglelink(data.slug, index)">
 												<span class="icon is-small" >
-													<i v-if="data.followup" class="mdi mdi-link-off"></i>
-													<i v-else class="mdi mdi-link"></i>
+													<i v-if="data.followup" title="Mark as Followup" class="mdi mdi-link-off"></i>
+													<i v-else class="mdi mdi-link" title="Unlink Followup"></i>
 												</span>
 											</button>
 											<!-- Router button that leads to edit post -->
 											<router-link :to="{name: 'editpost', params: {slug: data.slug}}">
 												<button type="button" class="button">
-													<span class="icon is-small">
+													<span class="icon is-small" title="Edit Post">
 														<i class="mdi mdi-pencil"></i>
 													</span>
 												</button>

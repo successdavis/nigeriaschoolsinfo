@@ -29,7 +29,8 @@ class PostResource extends JsonResource
             'meta_description'      => $this->meta_description,
             'source_id'     => $this->source->id,
             'source_title'  => $this->source->name,
-            'image'         => $this->featured_image
+            'image'         => $this->featured_image,
+            'published'     => $this->published
         ];
     }
 }

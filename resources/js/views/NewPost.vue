@@ -254,6 +254,7 @@
 					this.PostForm.module_id = post.source_id
 					this.source_title	= post.source_title
 					this.featuredimage	= post.image
+					this.ispublished	= post.published
 			    } else {
 			        console.log('failed')
 			    }

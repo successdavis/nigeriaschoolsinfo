@@ -26,7 +26,7 @@ class JobFilters extends Filters
     protected function s($s)
     {
         $this->builder->getQuery()->orders = [];
-        return $this->builder->where('name', 'LIKE', '%' . $s . '%')
+        return $this->builder->where('title', 'LIKE', '%' . $s . '%')
             ->orWhere('description', 'LIKE', '%' . $s . '%')
             ->orderBy('recruiting', 'DESC');
     }

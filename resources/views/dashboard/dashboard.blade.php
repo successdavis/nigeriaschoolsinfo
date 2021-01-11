@@ -82,11 +82,11 @@
                         :items="[
                             {
                                 link: '/schools',
-                                label: 'All Posts'
+                                label: 'Schools'
                             },
                             {
                                 link: '/addschool',
-                                label: 'Add New'
+                                label: 'Create School'
                             },
                         ]"
                     >Schools</menu-item>

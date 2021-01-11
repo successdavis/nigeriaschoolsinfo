@@ -2,6 +2,7 @@ import VueRouter from 'vue-router';
 import Home from './views/Home.vue';
 import Posts from './views/Posts.vue';
 import AddPost from './views/NewPost.vue';
+import Schools from './views/Schools.vue';
 
 let routes = [
 	{
@@ -25,10 +26,11 @@ let routes = [
 		name: 'editpost',
 		props: true,
 	},
-	// {
-	// 	path: '/schools',
-	// 	component: Posts
-	// },
+	
+	{
+		path: '/schools',
+		component: Schools
+	},
 
 	// {
 	// 	path: '/addschool',
