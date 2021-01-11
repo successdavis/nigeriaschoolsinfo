@@ -29,7 +29,7 @@
 						<form>
 							<div class="field has-addons">
 								<div class="control">
-									<input v-model="searchkeyword" type="text" placeholder="Name | Id_No | Email" class="input">
+									<input @keyup="postSearch" v-model="searchkeyword" type="text" placeholder="Name | Id_No | Email" class="input">
 								</div>
 								<div class="control">
 									<button type="submit" class="button is-primary" :class="isLoading ? 'is-loading' : '' ">
@@ -148,7 +148,7 @@
 </template>
 
 <script>
-	// import 
+    import _ from 'lodash';
     export default {
         data() {
             return {
@@ -233,11 +233,10 @@
 		    	this.fetchPost();
 		    },
 
-            // postSearch: _.debounce(function(page) {
-            //     this.isLoading = true;
-            //     this.reset();
-            //     this.fetch();
-            // }, 600),
+            postSearch: _.debounce(function(page) {
+                this.isLoading = true;
+                this.fetchPost();
+            }, 600),
 
 			fetchPost () {
 				this.isLoading = true;
