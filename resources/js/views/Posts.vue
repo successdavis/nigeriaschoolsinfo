@@ -18,7 +18,7 @@
 					<div class="level-item">
 						<div class="buttons has-addons">
 							<button class="button">All</button>
-							<button class="button">Draft</button>
+							<button :class="draft ? 'is-success' : '' " class="button" @click="updatedraft">Draft</button>
 							<button class="button">Deleted</button>
 							<button class="button"><router-link to="/addpost">Add New</router-link></button>
 						</div>
@@ -29,7 +29,7 @@
 						<form>
 							<div class="field has-addons">
 								<div class="control">
-									<input @keyUp="search" v-model="searchkeyword" type="text" placeholder="Name | Id_No | Email" class="input">
+									<input v-model="searchkeyword" type="text" placeholder="Name | Id_No | Email" class="input">
 								</div>
 								<div class="control">
 									<button type="submit" class="button is-primary" :class="isLoading ? 'is-loading' : '' ">
@@ -110,8 +110,8 @@
 											</button>
 											<button type="button" :class="data.followup ? 'is-success' : '' " class="button" @click="togglelink(data.slug, index)">
 												<span class="icon is-small" >
-													<i v-if="data.followup" title="Mark as Followup" class="mdi mdi-link-off"></i>
-													<i v-else class="mdi mdi-link" title="Unlink Followup"></i>
+													<i v-if="data.followup" title="Unlink to followup" class="mdi mdi-link-off"></i>
+													<i v-else class="mdi mdi-link" title="Link as Followup"></i>
 												</span>
 											</button>
 											<!-- Router button that leads to edit post -->
@@ -178,17 +178,15 @@
                         label: 'Hits',
                     }
                 ],
-                total: '50',
-                searchkeyword: '',
+                total: 'not set',
+                per_page: '50',
+                searchkeyword: 'a',
                 sortby: '',
                 isLoading: false,
                 sortdir: 'dsc',
+                draft: false,
             }
         },
-        created () {
-        	this.getPost();
-		},
-
 		beforeRouteEnter (to, from, next) {
 	    	
 	    	axios.get('/posts')
@@ -213,9 +211,29 @@
 		      }
 		    },
 
-			getPost () {
+		    updatedraft() {
+		    	this.draft = !this.draft;
+		    	this.fetchPost();
+		    },
+
+            // postSearch: _.debounce(function(page) {
+            //     this.isLoading = true;
+            //     this.reset();
+            //     this.fetch();
+            // }, 600),
+
+			fetchPost () {
 				this.isLoading = true;
-				axios.get('/posts')
+				axios.get('/posts', {
+                    params: {
+                        // page: this.page,
+                        // column: this.sortedColumn,
+                        // order: this.order,
+                        // per_page: this.per_page,
+                        q: this.searchkeyword,
+                        draft: this.draft,
+                    }
+                })
 				.then((data) => {
 					this.data = data.data.data
 					this.isLoading = false;
@@ -225,10 +243,6 @@
 					flash('Unable to retrieve post at the moment');
 				})
 
-			},
-
-			search() {
-				console.log('searching');
 			},
 
 			deletePost(slug, index) {

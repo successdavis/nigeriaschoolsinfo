@@ -21,9 +21,9 @@ class PostController extends Controller
     public function index(Request $request, PostFilters $filters)
     {
         $request->validate([
-            'q' => 'nullable|string'
+            'q'     => 'nullable|string',
+            // 'draft' => 'nullable|boolean'
         ]);
-
         $q = request('q');
         $posts = Post::filter($filters)->latest();
 
