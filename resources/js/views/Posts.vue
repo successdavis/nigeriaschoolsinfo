@@ -17,9 +17,9 @@
 				<div class="level-left">
 					<div class="level-item">
 						<div class="buttons has-addons">
-							<button class="button">All</button>
+							<button :class="all ? 'is-success' : '' " class="button" @click="resetfilters">All</button>
 							<button :class="draft ? 'is-success' : '' " class="button" @click="updatedraft">Draft</button>
-							<button class="button">Deleted</button>
+							<button class="button" :class="deleted ? 'is-success' : '' " @click="updatedeleted">Deleted</button>
 							<button class="button"><router-link to="/addpost">Add New</router-link></button>
 						</div>
 					</div>
@@ -185,6 +185,8 @@
                 isLoading: false,
                 sortdir: 'dsc',
                 draft: false,
+                deleted: false,
+                all: true,
             }
         },
 		beforeRouteEnter (to, from, next) {
@@ -213,6 +215,21 @@
 
 		    updatedraft() {
 		    	this.draft = !this.draft;
+		    	this.deleted = false;
+		    	this.all = false;
+		    	this.fetchPost();
+		    },
+
+		    updatedeleted() {
+		    	this.draft = false;
+		    	this.all = false;
+		    	this.deleted = !this.deleted;
+		    	this.fetchPost();
+		    },
+		    resetfilters() {
+		    	this.all = true;
+		    	this.draft = false;
+		    	this.deleted = false;
 		    	this.fetchPost();
 		    },
 
@@ -232,6 +249,7 @@
                         // per_page: this.per_page,
                         q: this.searchkeyword,
                         draft: this.draft,
+                        deleted: this.deleted,
                     }
                 })
 				.then((data) => {

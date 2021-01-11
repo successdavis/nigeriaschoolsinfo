@@ -26,7 +26,6 @@ class PostFilters extends Filters
 
     protected function deleted($deleted)
     {
-        $this->builder->getQuery()->wheres = [];
         if (filter_var($deleted, FILTER_VALIDATE_BOOLEAN)) {
             return $this->builder->onlyTrashed();
         }
