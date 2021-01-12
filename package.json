@@ -31,7 +31,7 @@
         "bulma-o-steps": "^1.0.9",
         "dedent": "^0.7.0",
         "flickity": "^2.2.1",
-        "highlight.js": "^9.18.3",
+        "highlight.js": "^10.4.1",
         "moment": "^2.29.1",
         "quill": "^1.3.7",
         "trix": "^1.3.0",
