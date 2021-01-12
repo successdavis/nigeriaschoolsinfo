@@ -36,11 +36,9 @@ class SchoolFilters extends Filters
 
     protected function s($s)
     {
-
-        $this->builder->getQuery()->orders = [];
-        return $this->builder->where('name', 'LIKE', '%' . $s . '%')
-            ->orWhere('description', 'LIKE', '%' . $s . '%');
-            // ->orWhere('short_name', 'LIKE', '%' . $s . '%');
+        return $this->builder->where(function ($query) use ($s) {
+            $query->where('name', 'LIKE', '%' . $s . '%')->orWhere('description', 'LIKE', '%' . $s . '%');
+        });
     }
 
     public function attached($course)

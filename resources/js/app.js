@@ -23,6 +23,7 @@ Vue.component('attach-subjects', require('./components/attachSubjects.vue').defa
 Vue.component('special-consideration', require('./components/SpecialConsideration.vue').default);
 Vue.component('tabs', require('./components/tabs.vue').default);
 Vue.component('tab', require('./components/tab.vue').default);
+Vue.component('datatable', require('./components/datatable.vue').default);
 Vue.component('school', require('./components/school.vue').default);
 Vue.component('course', require('./components/course.vue').default);
 Vue.component('school-quickview', require('./components/schoolQuickView.vue').default);
