@@ -29,7 +29,9 @@ class PostController extends Controller
 
         $trending = Post::orderBy('visits','desc')->limit(10)->get();
 
-        $posts = $posts->paginate(50);
+        $posts = $posts->paginate(20);
+
+        // return $posts;
 
         if (request()->wantsJson()) {
             return PostResource::collection($posts);

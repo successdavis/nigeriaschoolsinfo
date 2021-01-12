@@ -9,7 +9,7 @@
 			</p>
 			<button type="button" class="button is-small align-sf-ct">
 				<span class="icon"><i class="mdi mdi-refresh default"></i></span>
-				<span>Refresh</span>
+				<span @click="fetchPost">Refresh</span>
 			</button>
 		</header>
 		<div class="notification is-card-toolbar">
@@ -44,7 +44,6 @@
 		</div>
 		<div class="card-content">
 			<div>
-				<!---->
 				<div class="b-table">
 					<div class="field table-mobile-sort">
 						<div class="field has-addons">
@@ -128,8 +127,10 @@
 							</tbody>
 						</table>
 					  	<!-- <infinite-loading :identifier="infiniteId" @infinite="fetch"></infinite-loading> -->
+		  	            <b-loading :is-full-page="true" v-model="isLoading" :can-cancel="true"></b-loading>
 					</div>
-					<div class="level">
+					<paginator @changed="fetchPost" :dataset="dataset"></paginator>
+					<!-- <div class="level">
 						<div class="level-left">
 							<div class="level-item">
 								<span>Total Posts: <span v-text="total"></span></span>
@@ -140,7 +141,7 @@
 
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
@@ -180,20 +181,21 @@
                 ],
                 total: 'not set',
                 per_page: '50',
-                searchkeyword: 'a',
+                searchkeyword: '',
                 sortby: '',
                 isLoading: false,
                 sortdir: 'dsc',
                 draft: false,
                 deleted: false,
                 all: true,
+                dataset: false,
             }
         },
 		beforeRouteEnter (to, from, next) {
 	    	
 	    	axios.get('/posts')
-			.then((data) => {
-				next(vm => vm.setData(data.data.data));
+			.then(({data}) => {
+				next(vm => vm.setData(data));
 			})
 			.catch((error) => {
 				flash('Unable to retrieve post at the moment');
@@ -209,7 +211,16 @@
 		methods: {
 			setData (data) {
 		      if (data) {
-		        this.data = data;
+		        this.data = data.data;
+		        this.dataset = {
+                    next_page_url : data.links.next,
+                    current_page: data.meta.current_page,
+                    per_page: data.meta.per_page,
+                    total: data.meta.total,
+                    from: data.meta.from,
+                    last_page: data.meta.last_page,
+                    prev_page_url: data.links.prev
+                };
 		      }
 		    },
 
@@ -238,11 +249,11 @@
                 this.fetchPost();
             }, 600),
 
-			fetchPost () {
+			fetchPost (page) {
 				this.isLoading = true;
 				axios.get('/posts', {
                     params: {
-                        // page: this.page,
+                        page: page,
                         // column: this.sortedColumn,
                         // order: this.order,
                         // per_page: this.per_page,
@@ -251,8 +262,8 @@
                         deleted: this.deleted,
                     }
                 })
-				.then((data) => {
-					this.data = data.data.data
+				.then(({data}) => {
+					this.setData(data);
 					this.isLoading = false;
 				})
 				.catch((error) => {
