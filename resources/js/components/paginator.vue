@@ -1,6 +1,6 @@
 <template>
 
-    <nav class="pagination is-rounded" role="navigation" aria-label="pagination" v-if="shouldPaginate">
+    <nav style="margin-left: 0" class="pagination is-rounded" role="navigation" aria-label="pagination" v-if="shouldPaginate">
       <a class="pagination-previous" v-show="prevUrl" rel="Previous" @click.prevent="page--">Previous</a>
       <a class="pagination-next" v-show="nextUrl" @click.prevent="page++" rel="next">Next page</a>
       <ul class="pagination-list">
