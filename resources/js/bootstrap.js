@@ -24,11 +24,12 @@ import VModal from 'vue-js-modal'
 import Form from './utilities/Form';
 
 
-import { Table, Loading} from 'buefy'
+import { Table, Loading, Switch} from 'buefy'
 import 'buefy/dist/buefy.css'
 
 Vue.use(Table)
 Vue.use(Loading)
+Vue.use(Switch)
 
 
 window.Form = Form;

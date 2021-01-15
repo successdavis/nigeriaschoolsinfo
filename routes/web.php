@@ -71,6 +71,8 @@ Route::get('/schools/{school}', 'SchoolsController@show')->name('schools.show');
 Route::get('/createnewschool', 'SchoolsController@create')->name('schools.create')->middleware('admin');
 Route::post('/schools/createschool', 'SchoolsController@store')->name('schools.store')->middleware('admin');
 Route::patch('/schools/{school}/update', 'SchoolsController@update')->name('schools.update')->middleware('admin');
+Route::patch('/schools/{school}/admission', 'SchoolsController@openAdmission')->name('schools.admission')->middleware('admin');
+Route::delete('/schools/{school}/admission', 'SchoolsController@closeAdmission')->name('schools.admission')->middleware('admin');
 Route::get('/schools/{school}/edit', 'SchoolsController@edit')->middleware('admin');
 
 // return the requirement needed to create a new school

@@ -157,6 +157,20 @@ class SchoolsController extends Controller
         return $school;
     }
 
+    public function openAdmission(Schools $school) 
+    {
+        $school->openAdmission();
+
+        return $school;
+    }
+
+    public function closeAdmission(Schools $school) 
+    {
+        $school->closeAdmission();
+
+        return $school;
+    }
+
     /**
      * Remove the specified resource from storage.
      *

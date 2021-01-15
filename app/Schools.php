@@ -20,6 +20,7 @@ class Schools extends Model
 
     protected $guarded = [];
     protected $with = ['courses'];
+    protected $casts = ['admitting' => 'boolean'];
 
     public $pathPrefix  = '/schools/';
     public $findWith    =   'slug';
@@ -97,6 +98,13 @@ class Schools extends Model
     {
         return $this->update([
             'admitting' => true
+        ]);
+    }
+
+    public function closeAdmission()
+    {
+        return $this->update([
+            'admitting' => false
         ]);
     }
 

@@ -83,48 +83,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr class="" v-for="(data,index) in data">
-									<td class="has-no-head-mobile is-image-cell">
-
-									</td>
-									<td data-label="Name" class="">
-										<a :href="data.slug" v-text="data.name"></a>
-									</td>
-									<td data-label="Short Name" v-text="data.short_name" class=""></td>
-									<td data-label="Website" v-text="data.website" class=""></td>
-									<td data-label="Admitting" v-text="data.admitting" class="">
-										
-									</td>
-									<td data-label="Level" v-text="data.level" class=""></td>
-									<td data-label="Sponsor" v-text="data.sponsor" class=""></td>
-									<td data-label="Visits" class="">
-										<small title="Sep 19, 2018" class="has-text-grey is-abbr-like"
-										v-text="data.visits"></small>
-									</td>
-									<td class="is-actions-cell">
-										<div class="buttons are-small is-right">
-											<button type="button" class="button is-danger" @click="deleteSchool(data.slug, index)">
-												<span class="icon is-small" title="Delete Post">
-													<i class="mdi mdi-trash-can"></i>
-												</span>
-											</button>
-											<button type="button" :class="data.followup ? 'is-success' : '' " class="button" @click="togglelink(data.slug, index)">
-												<span class="icon is-small" >
-													<i v-if="data.followup" title="Turn off Admitting" class="mdi mdi-link-off"></i>
-													<i v-else class="mdi mdi-link" title="Turn on Admitting"></i>
-												</span>
-											</button>
-											<!-- Router button that leads to edit post -->
-											<router-link :to="{name: 'editschool', params: {slug: data.slug}}">
-												<button type="button" class="button">
-													<span class="icon is-small" title="Edit Post">
-														<i class="mdi mdi-pencil"></i>
-													</span>
-												</button>
-											</router-link>
-										</div>
-									</td>
-								</tr>
+								<schoollist :school="data" v-for="(data,index) in data" :key="data.id"></schoollist>
 							</tbody>
 						</table>
 					  	<!-- <infinite-loading :identifier="infiniteId" @infinite="fetch"></infinite-loading> -->
@@ -138,8 +97,11 @@
 </template>
 
 <script>
+    import collection from '../mixins/collection';
     import _ from 'lodash';
+	import schoollist from './schoollist.vue';
     export default {
+		components: {schoollist},
         data() {
             return {
                 data: [
@@ -220,6 +182,11 @@
                     prev_page_url: data.links.prev
                 };
 		      }
+		    },
+
+		    toggleAdmit(data, index) {
+		    	console.log('hey')
+		    	axios.patch(`schools/${data.slug}/admit`)
 		    },
 
 		    resetfilters() {
