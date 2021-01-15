@@ -1,3 +1,5 @@
+import Vue from 'vue'
+window.Vue = Vue;
 require('./bootstrap'); 
 import router from './routes';
 
@@ -29,7 +31,7 @@ Vue.component('course', require('./components/course.vue').default);
 Vue.component('school-quickview', require('./components/schoolQuickView.vue').default);
 Vue.component('related-post', require('./components/relatedPost.vue').default);
 Vue.component('comments', require('./components/comments.vue').default);
-Vue.component('comment', require('./components/comment.vue').default);
+// Vue.component('comment', require('./components/comment.vue').default);
 Vue.component('reactivity', require('./components/Reactivity.vue').default);
 Vue.component('project-material', require('./pages/ProjectMaterial.vue').default);
 Vue.component('paystack-payment', require('./components/PaystackInlinePayment.vue').default);

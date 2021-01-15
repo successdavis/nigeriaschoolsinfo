@@ -40,7 +40,7 @@
 
 <script>
   import dedent from 'dedent'
-  import hljs from 'highlight.js'
+  // import hljs from 'highlight.js'
   import debounce from 'lodash/debounce'
   import Quill from 'quill'
 
@@ -71,7 +71,7 @@ Quill.register(ImageBlot);
   import { quillEditor } from 'vue-quill-editor'
 
   // highlight.js style
-  import 'highlight.js/styles/tomorrow.css'
+  // import 'highlight.js/styles/tomorrow.css'
 
 
 
@@ -108,9 +108,9 @@ Quill.register(ImageBlot);
               // ['link', 'image', 'video'],
               // [{'image': []}],
             ],
-            syntax: {
-              highlight: text => hljs.highlightAuto(text).value
-            }
+            // syntax: {
+            //   highlight: text => hljs.highlightAuto(text).value
+            // }
           }
 
         },
@@ -177,9 +177,9 @@ Quill.register(ImageBlot);
         return this.$refs.myTextEditor.quill
       },
 
-      contentCode() {
-        return hljs.highlightAuto(this.content).value
-      }
+      // contentCode() {
+      //   return hljs.highlightAuto(this.content).value
+      // }
     },
     mounted() {
       console.log('this is Quill instance:', this.editor)

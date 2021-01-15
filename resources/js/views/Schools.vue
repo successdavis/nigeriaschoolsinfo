@@ -92,7 +92,9 @@
 									</td>
 									<td data-label="Short Name" v-text="data.short_name" class=""></td>
 									<td data-label="Website" v-text="data.website" class=""></td>
-									<td data-label="Admitting" v-text="data.admitting" class=""></td>
+									<td data-label="Admitting" v-text="data.admitting" class="">
+										
+									</td>
 									<td data-label="Level" v-text="data.level" class=""></td>
 									<td data-label="Sponsor" v-text="data.sponsor" class=""></td>
 									<td data-label="Visits" class="">

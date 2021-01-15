@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
 	<div>
 		<slot></slot>
 	</div>
@@ -25,4 +25,4 @@
 		}
 
 	}
-</script>
+</script> -->
