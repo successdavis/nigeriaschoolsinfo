@@ -1,6 +1,7 @@
 <template>
 	<div>
-		<div class="section">		
+		<div class="section">
+			<p>Add School Logo Below</p>		
 			<figure class="image is-128x128">
 			  <img :src="logo">
 			</figure>
@@ -78,13 +79,13 @@ export default {
 	components: {
 		ImageUpload
 	},
-	props: ['school','photosdata'],
+	props: ['school'],
 
 	data () {
 		return {
 			processing: false,
 			logo: this.school ? this.school.logo_path : '',
-			photos: this.photosdata != undefined ? this.photosdata : [],
+			photos: [],
 			tempImage: '',
 			photosForm: new Form({
 				'caption': '',
@@ -93,6 +94,13 @@ export default {
 				'file': '',
 			}),
 		}
+	},
+
+	mounted() {
+		axios.get(`/api/${this.school.slug}/schoolphotos`)
+		.then((data) => {
+			this.photos = data.data
+		})
 	},
 
 	methods: {

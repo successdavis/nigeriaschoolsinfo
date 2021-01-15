@@ -190,8 +190,6 @@
 
                 data.append('file', file);
 
-                console.log(data);
-
                 axios.post(`/posts/${this.posthandle.slug}/featured_image`, data)
                     .then(() => flash('Post Cover Image Uploaded! '))
                     .catch(() => flash('Cover Image Upload Failed','failed'));

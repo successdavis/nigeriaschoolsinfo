@@ -35,9 +35,9 @@ class SchoolsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Schools $school)
     {
-        return view('schools.create');
+        return $school;
     }
 
     /**

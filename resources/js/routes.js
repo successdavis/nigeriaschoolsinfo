@@ -3,6 +3,7 @@ import Home from './views/Home.vue';
 import Posts from './views/Posts.vue';
 import AddPost from './views/NewPost.vue';
 import Schools from './views/Schools.vue';
+import EditSchool from './views/newSchool.vue';
 
 let routes = [
 	{
@@ -34,15 +35,14 @@ let routes = [
 
 	// {
 	// 	path: '/addschool',
-	// 	component: AddPost
+	// 	component: AddSchool
 	// },
-
-	// {
-	// 	path: '/editschool/:slug',
-	// 	component: AddPost,
-	// 	name: 'editpost',
-	// 	props: true,
-	// }
+	{
+		path: '/editschool/:slug',
+		component: EditSchool,
+		name: 'editschool',
+		props: true,
+	}
 
 ];
 

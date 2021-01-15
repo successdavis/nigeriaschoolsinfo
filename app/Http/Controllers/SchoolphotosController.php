@@ -13,6 +13,10 @@ class SchoolphotosController extends Controller
         return $this->middleware(['auth','admin']);
     }
     
+    public function index(Schools $schools) {
+        return $schools->photos()->get();
+    }
+
     public function store(Request $request, Schools $schools)
     {
 		$request->validate([

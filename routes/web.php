@@ -68,7 +68,7 @@ Route::get('/schools/{school}', 'SchoolsController@show')->name('schools.show');
 
 // Route::get('/find/school', 'SchoolsController@findschool')->name('schools.findschool');
 
-Route::get('/createnewschool', 'SchoolsController@create')->name('schools.create')->middleware('admin');
+Route::get('/editschool/{school}', 'SchoolsController@create')->name('schools.edit')->middleware('admin');
 Route::post('/schools/createschool', 'SchoolsController@store')->name('schools.store')->middleware('admin');
 Route::patch('/schools/{school}/update', 'SchoolsController@update')->name('schools.update')->middleware('admin');
 Route::patch('/schools/{school}/admission', 'SchoolsController@openAdmission')->name('schools.admission')->middleware('admin');
@@ -83,6 +83,7 @@ Route::get('/schoolsattached/{course}', 'CourseSchoolAttachmentController@getLin
 
 Route::post('/school/{schools}/addphoto', 'SchoolphotosController@store')->name('photos.store');
 Route::delete('/schoolphotos/{photo}/removephoto', 'SchoolphotosController@destroy')->name('photos.destroy');
+Route::get('/api/{schools}/schoolphotos', 'SchoolphotosController@index')->name('photos.show');
 
 Route::get('/coursesnotattached/{school}', 'CourseSchoolAttachmentController@getNotLinkedCourses')->name('courses.getNotLinkedCourses');
 // This url change from /coursesattached/{school}

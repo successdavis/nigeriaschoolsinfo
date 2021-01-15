@@ -42,7 +42,7 @@ class CourseSchoolAttachmentController extends Controller
         $request->validate([
             'course' => 'required|integer',
             'school' => 'required|integer',
-            'cut_off_points' => 'required|integer'
+            'cut_off_points' => 'nullable|integer'
         ]);
 
         $course = Courses::findOrFail($request->course);

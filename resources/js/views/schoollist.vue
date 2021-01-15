@@ -19,18 +19,6 @@
 		</td>
 		<td class="is-actions-cell">
 			<div class="buttons are-small is-right">
-				<button type="button" class="button is-danger" @click="deleteSchool(school.slug, index)">
-					<span class="icon is-small" title="Delete Post">
-						<i class="mdi mdi-trash-can"></i>
-					</span>
-				</button>
-				<button type="button" :class="school.followup ? 'is-success' : '' " class="button" @click="togglelink(school.slug, index)">
-					<span class="icon is-small" >
-						<i v-if="school.followup" title="Turn off Admitting" class="mdi mdi-link-off"></i>
-						<i v-else class="mdi mdi-link" title="Turn on Admitting"></i>
-					</span>
-				</button>
-				<!-- Router button that leads to edit post -->
 				<router-link :to="{name: 'editschool', params: {slug: school.slug}}">
 					<button type="button" class="button">
 						<span class="icon is-small" title="Edit Post">

@@ -9,26 +9,11 @@
 		>
 			<div class="section">
 				<div class="columns">
-				  <div class="column is-3">
-				    <div class="field">
-					  <div class="control ">
-					    <div class="select is-small">
-					      <select v-model="faculty" @change="changeType">
-					        <option value="" selected>Sort By (All)</option>
-					        <option v-for="faculty in faculties" v-text="faculty.name" :value="faculty.slug"></option>
-					      </select>
-					    </div>
-					  </div>
-					</div>
-				  </div>
 				  <div class="column">
 				    <input @keyup="search" v-model="searchKey" :class="processing ? 'is-loading' : ''" class="input is-rounded" type="text" placeholder="Rounded input">
 				  </div>
-				  <div class="column is-2">
-				    <span style="cursor: pointer" @click="selectall">Select All</span>
-				  </div>
 				</div>
-				<p>Fill the box with the cut_of_mark required for this course in this school Before attaching</p>
+				<p>Fill the box with the cut_of_mark required for the course in this school Before attaching</p>
 				<tabs>
 					<tab name="Not Attached" :selected="true">
 						<course 
@@ -99,19 +84,12 @@ import _ from 'lodash';
 			courseIsUnlinked(index) {
 				this.attachedCourses[index].is_link = false;
 			},
-			selectall() {
-				this.notAttachedCourses.forEach(school => {
-					this.selectallitems.push(school.id);
-				})
-
-				this.attachMany();
-			},
 			attachMany(){
 				axios.post(`\\api/schoolcourseattachmany/${this.course.slug}`, {
 					schools: this.selectallitems
 				})
 	    		.then (data => {
-                    flash('Batch Schools Create.', 'success');
+                    flash('Batch Schools Attached.', 'success');
                     this.reset();
 				})
 				.catch(error => {
