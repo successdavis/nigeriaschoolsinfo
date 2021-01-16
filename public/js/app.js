@@ -2979,6 +2979,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2999,7 +3003,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       faculty: '',
       searchKey: '',
       infiniteId: +new Date(),
-      selectallitems: []
+      selectallitems: [],
+      notAttachedMultiCheck: [],
+      AttachedMultiCheck: []
     };
   },
   computed: {
@@ -3012,27 +3018,47 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       return this.courses.filter(function (course) {
         return course.is_link == false;
       });
+    },
+    isBatchAttach: function isBatchAttach() {
+      return this.notAttachedMultiCheck.length !== 0;
+    },
+    isBatchDetach: function isBatchDetach() {
+      return this.AttachedMultiCheck.length !== 0;
     }
   },
   methods: {
+    notAttachedChecked: function notAttachedChecked(id, checkstatus) {
+      // this.items.splice(index, 1);
+      var index = this.notAttachedMultiCheck.indexOf(id);
+      checkstatus ? this.notAttachedMultiCheck.push(id) : this.notAttachedMultiCheck.splice(index, 1);
+    },
+    AttachedChecked: function AttachedChecked(id, checkstatus) {
+      // this.items.splice(index, 1);
+      var index = this.AttachedMultiCheck.indexOf(id);
+      checkstatus ? this.AttachedMultiCheck.push(id) : this.AttachedMultiCheck.splice(index, 1);
+    },
     courseIsLinked: function courseIsLinked(index) {
       this.notAttachedCourses[index].is_link = true;
     },
     courseIsUnlinked: function courseIsUnlinked(index) {
       this.attachedCourses[index].is_link = false;
     },
-    attachMany: function attachMany() {
+    BatchAttach: function BatchAttach() {
       var _this = this;
 
-      axios.post("\\api/schoolcourseattachmany/".concat(this.course.slug), {
-        schools: this.selectallitems
+      axios.post("\\api/attachcoursestoschool/".concat(this.school.slug), {
+        courses: this.notAttachedMultiCheck
       }).then(function (data) {
         flash('Batch Schools Attached.', 'success');
+        _this.notAttachedMultiCheck = [];
 
         _this.reset();
       })["catch"](function (error) {
         flash('Unable to attach Many, Please contact Admin.', 'failed');
       });
+    },
+    BatchDetach: function BatchDetach() {
+      console.log('h');
     },
     // This method retrieve all the courses that are not attached to a school
     infiniteHandler: function infiniteHandler($state) {
@@ -6570,7 +6596,15 @@ __webpack_require__.r(__webpack_exports__);
       cutoffpoints: ''
     };
   },
+  watch: {
+    ismulticheck: function ismulticheck() {
+      this.ischecked();
+    }
+  },
   methods: {
+    ischecked: function ischecked() {
+      this.$emit('checked', this.course.id, this.ismulticheck);
+    },
     attachItem: function attachItem() {
       var _this = this;
 
@@ -47684,6 +47718,40 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c(
+                "button",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.isBatchAttach,
+                      expression: "isBatchAttach"
+                    }
+                  ],
+                  staticClass: "button",
+                  on: { click: _vm.BatchAttach }
+                },
+                [_vm._v("Batch Attach")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.isBatchDetach,
+                      expression: "isBatchDetach"
+                    }
+                  ],
+                  staticClass: "button",
+                  on: { click: _vm.BatchDetach }
+                },
+                [_vm._v("Batch Detach")]
+              ),
+              _vm._v(" "),
+              _c(
                 "tabs",
                 [
                   _c(
@@ -47695,6 +47763,7 @@ var render = function() {
                           key: index,
                           attrs: { school: _vm.school, course: course },
                           on: {
+                            checked: _vm.notAttachedChecked,
                             linked: function($event) {
                               return _vm.courseIsLinked(index)
                             }
@@ -47718,6 +47787,7 @@ var render = function() {
                           key: index,
                           attrs: { course: course, school: _vm.school },
                           on: {
+                            checked: _vm.AttachedChecked,
                             unlinked: function($event) {
                               return _vm.courseIsUnlinked(index)
                             }

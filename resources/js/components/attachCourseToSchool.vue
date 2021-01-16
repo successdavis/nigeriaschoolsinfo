@@ -14,9 +14,12 @@
 				  </div>
 				</div>
 				<p>Fill the box with the cut_of_mark required for the course in this school Before attaching</p>
+				<button @click="BatchAttach" class="button" v-show="isBatchAttach">Batch Attach</button>
+				<button @click="BatchDetach" class="button" v-show="isBatchDetach">Batch Detach</button>
 				<tabs>
-					<tab name="Not Attached" :selected="true">
+					<tab  name="Not Attached" :selected="true">
 						<course 
+							@checked="notAttachedChecked"
 							v-for="(course, index) in notAttachedCourses" 
 							:key="index" 
 							:school="school" 
@@ -26,8 +29,9 @@
 
 						<infinite-loading @infinite="infiniteHandler"></infinite-loading>
 					</tab>
-					<tab name="attached">
-						<course v-for="(course, index) in attachedCourses" 
+					<tab  name="attached">
+						<course v-for="(course, index) in attachedCourses"
+							@checked="AttachedChecked" 
 							:key="index" 
 							:course="course" 
 							:school="school"
@@ -65,6 +69,8 @@ import _ from 'lodash';
 				searchKey: '',
 				infiniteId: +new Date(),
 				selectallitems: [],
+				notAttachedMultiCheck:[],
+				AttachedMultiCheck:[]
 			}
 		},
 
@@ -75,26 +81,50 @@ import _ from 'lodash';
 			notAttachedCourses() {
 				return this.courses.filter(course => course.is_link == false);
 			},
+			isBatchAttach() {
+				return this.notAttachedMultiCheck.length !== 0;
+			},
+			isBatchDetach() {
+				return this.AttachedMultiCheck.length !== 0;
+			}
 		},
 
 		methods: {
+			notAttachedChecked(id,checkstatus){
+            // this.items.splice(index, 1);
+            	let index = this.notAttachedMultiCheck.indexOf(id)
+            	checkstatus 
+            	? this.notAttachedMultiCheck.push(id) 
+            	: this.notAttachedMultiCheck.splice(index, 1)
+			},
+			AttachedChecked(id,checkstatus){
+            // this.items.splice(index, 1);
+            	let index = this.AttachedMultiCheck.indexOf(id)
+            	checkstatus 
+            	? this.AttachedMultiCheck.push(id) 
+            	: this.AttachedMultiCheck.splice(index, 1)
+			},
 			courseIsLinked(index) {
 				this.notAttachedCourses[index].is_link = true;
 			},
 			courseIsUnlinked(index) {
 				this.attachedCourses[index].is_link = false;
 			},
-			attachMany(){
-				axios.post(`\\api/schoolcourseattachmany/${this.course.slug}`, {
-					schools: this.selectallitems
+			BatchAttach(){
+				axios.post(`\\api/attachcoursestoschool/${this.school.slug}`, {
+					courses: this.notAttachedMultiCheck
 				})
 	    		.then (data => {
                     flash('Batch Schools Attached.', 'success');
+                    this.notAttachedMultiCheck = [];
                     this.reset();
 				})
 				.catch(error => {
                     flash('Unable to attach Many, Please contact Admin.', 'failed');
 				});
+			},
+			BatchDetach(){
+				console.log('h')
 			},
 
 			// This method retrieve all the courses that are not attached to a school

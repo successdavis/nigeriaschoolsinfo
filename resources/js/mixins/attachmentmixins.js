@@ -12,7 +12,16 @@
 			}
 		},
 
+		watch: {
+			ismulticheck (){
+				this.ischecked();
+			}
+		},
+
 		methods: {
+			ischecked(){
+				this.$emit('checked',this.course.id, this.ismulticheck)
+			},
 			attachItem()
 			{
 				axios.post(`\\api/schoolcourseattachment`, {

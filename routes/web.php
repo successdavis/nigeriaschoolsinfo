@@ -13,7 +13,8 @@ Route::get('/api/statelocalgovernments', 'LocationController@index')->name('stat
 
 Route::post('/api/schoolcourseattachment', 'CourseSchoolAttachmentController@store')->name('courseschool.store');
 Route::delete('/api/schoolcoursedetachment', 'CourseSchoolAttachmentController@destroy')->name('courseschool.delete');
-Route::post('/api/schoolcourseattachmany/{course}', 'CourseSchoolAttachmentController@storemany')->name('courseschool.storemany');
+Route::post('/api/schoolcourseattachmany/{course}', 'CourseSchoolAttachmentController@storeManySchools')->name('courseschool.storemany');
+Route::post('/api/attachcoursestoschool/{schools}', 'CourseSchoolAttachmentController@storeManyCourses')->name('courseschool.storeManyCourses');
 
 // '/course/' . $this->course->slug .'/attachSubject'
 Route::post('/api/{course}/attachSubject', 'AttachSubjectController@store')->name('attachsubject.store');
