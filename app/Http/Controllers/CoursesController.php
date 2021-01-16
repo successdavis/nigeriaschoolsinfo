@@ -47,12 +47,12 @@ class CoursesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'            => 'required|unique:courses|max:255|min:10',
-            'description'     => 'required|min:300', 
+            'name'            => 'required|unique:courses|max:200|min:5',
+            'description'     => 'required', 
             'faculty_id'      => 'required|exists:faculties,id',
             'salary'          => 'required|integer', 
             'duration'        => 'required|integer',
-            'utme_comment'      => 'nullable|string|max:255',
+            'utme_comment'      => 'nullable|string|max:250',
             'utme_requirement'    => 'nullable|string',
             'direct_requirement'    => 'nullable|string',
             'considerations'    => 'nullable|string',
@@ -99,7 +99,7 @@ class CoursesController extends Controller
      */
     public function edit(Courses $course)
     {
-        return view('courses.edit', compact('course'));
+        return new CourseResource($course);
     }
 
     /**

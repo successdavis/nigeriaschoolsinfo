@@ -98,7 +98,7 @@ Route::get('/schools/{schools}/coursesnotoffered', 'CourseSchoolAttachmentContro
 
 Route::get('/courses', 'CoursesController@index')->name('courses.index');
 Route::get('/courseswithschoolattach/{schools}', 'CourseSchoolAttachmentController@courses')->name('courses.index');
-Route::get('/courses/editcourse/{course}', 'CoursesController@edit')->name('courses.edit')->middleware('admin');
+Route::get('/editcourse/{course}', 'CoursesController@edit')->name('courses.edit')->middleware('admin');
 
 Route::get('/course/{courses}', 'CoursesController@show')->name('courses.show');
 Route::post('/courses/createcourse', 'CoursesController@store')->name('courses.store');

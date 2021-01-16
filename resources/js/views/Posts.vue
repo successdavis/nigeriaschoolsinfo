@@ -90,7 +90,7 @@
 
 									</td>
 									<td data-label="Title" class="">
-										<a :href="data.slug" v-text="data.title"></a>
+										<a :href="data.path" target="_blank" v-text="data.title"></a>
 										<span v-text="data.published ? '' : 'Draft' "></span>
 									</td>
 									<td data-label="Author" v-text="data.author" class=""></td>

@@ -12,6 +12,7 @@
     </div>
 </template>
 
+
 <script> 
     import NewComment from './NewComment.vue';
     import collection from '../mixins/collection';

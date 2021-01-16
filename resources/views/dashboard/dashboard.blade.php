@@ -76,13 +76,13 @@
                         ]"
                     >Posts</menu-item>
                     <menu-item 
-                        icon="mdi-grease-pencil"
+                        icon="mdi-school"
                         :props="props" 
                         type="dropdown"
                         :items="[
                             {
                                 link: '/schools',
-                                label: 'Schools'
+                                label: 'All Schools'
                             },
                             {
                                 link: '/addschool',
@@ -90,6 +90,21 @@
                             },
                         ]"
                     >Schools</menu-item>
+                    <menu-item 
+                        icon="mdi-book-open-variant"
+                        :props="props" 
+                        type="dropdown"
+                        :items="[
+                            {
+                                link: '/courses',
+                                label: 'All Courses'
+                            },
+                            {
+                                link: '/addcourse',
+                                label: 'Add Course'
+                            },
+                        ]"
+                    >Courses</menu-item>
                 </drawer-menu>
             </template>
 

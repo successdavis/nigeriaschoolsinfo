@@ -66,6 +66,8 @@
 	            <div class="has-text-centered">
 		            <button @click="postsubjects" class="button mt-small is-link is-rounded is-centered">Update Subjects</button>
 	            </div>
+	            
+  	            <b-loading :is-full-page="true" v-model="isLoading" :can-cancel="true"></b-loading>
 	        </div>
      	</modal>
 	</div>
@@ -78,11 +80,11 @@
 		data () {
 			return {
 				subjects: [],
-				selectedSubjects: [],
 				previoussubjects: [],
 				one: '',
 				two: '',
 				three: '',
+				isLoading: false,
 			}
 		},
 
@@ -107,10 +109,12 @@
 				axios.get(`/api/${this.course.slug}/getsubjects`)
 	    		.then (data => {
 	    			this.previoussubjects = data.data;
+	    			this.isloading = false;
 				});
 			},
 
 			postsubjects() {
+				this.isloading = true;
 				axios.post(`/api/${this.course.slug}/attachManySubject`, {
 					subjects: this.getSelectedSubjects,
 				})

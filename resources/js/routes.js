@@ -4,6 +4,8 @@ import Posts from './views/Posts.vue';
 import AddPost from './views/NewPost.vue';
 import Schools from './views/Schools.vue';
 import EditSchool from './views/newSchool.vue';
+import Courses from './views/Courses.vue';
+import newCourse from './views/newCourse.vue';
 
 let routes = [
 	{
@@ -42,7 +44,24 @@ let routes = [
 		component: EditSchool,
 		name: 'editschool',
 		props: true,
-	}
+	},
+
+	{
+		path: '/courses',
+		component: Courses
+	},
+
+	{
+		path: '/addcourse',
+		component: newCourse
+	},
+	{
+		path: '/editcourse/:slug',
+		component: newCourse,
+		name: 'editcourse',
+		props: true,
+	},
+
 
 ];
 

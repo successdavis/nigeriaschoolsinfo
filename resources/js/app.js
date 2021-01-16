@@ -17,7 +17,6 @@ Vue.component('courses-page', require('./pages/courses.vue').default);
 Vue.component('paginator', require('./components/paginator.vue').default);
 Vue.component('course_quick_view', require('./components/CourseQuickView.vue').default);
 Vue.component('school-images', require('./components/SchoolImages.vue').default);
-Vue.component('new-course', require('./components/newCourse.vue').default);
 Vue.component('attach-schools', require('./components/attachSchool.vue').default);
 Vue.component('attach-courses', require('./components/attachCourseToSchool.vue').default);
 Vue.component('attach-subjects', require('./components/attachSubjects.vue').default);

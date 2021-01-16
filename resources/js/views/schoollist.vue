@@ -4,9 +4,9 @@
 
 		</td>
 		<td data-label="Name" class="">
-			<a :href="school.slug" v-text="school.name"></a>
+			<a :href="school.path" target="_blank">{{school.name}}</a>
 		</td>
-		<td data-label="Short Name" v-text="school.short_name" class=""></td>
+		<td data-label="Short Name" v-text="school.short_name"></td>
 		<td data-label="Website" v-text="school.website" class=""></td>
 		<td data-label="Admitting" class="">
 			<b-switch @input="toggleAdmit" v-model="admitting"></b-switch>
@@ -21,7 +21,7 @@
 			<div class="buttons are-small is-right">
 				<router-link :to="{name: 'editschool', params: {slug: school.slug}}">
 					<button type="button" class="button">
-						<span class="icon is-small" title="Edit Post">
+						<span class="icon is-small" title="Edit School">
 							<i class="mdi mdi-pencil"></i>
 						</span>
 					</button>
