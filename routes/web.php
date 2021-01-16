@@ -15,6 +15,7 @@ Route::post('/api/schoolcourseattachment', 'CourseSchoolAttachmentController@sto
 Route::delete('/api/schoolcoursedetachment', 'CourseSchoolAttachmentController@destroy')->name('courseschool.delete');
 Route::post('/api/schoolcourseattachmany/{course}', 'CourseSchoolAttachmentController@storeManySchools')->name('courseschool.storemany');
 Route::post('/api/attachcoursestoschool/{schools}', 'CourseSchoolAttachmentController@storeManyCourses')->name('courseschool.storeManyCourses');
+Route::delete('/api/detachcoursestoschool/{schools}', 'CourseSchoolAttachmentController@destroyManyCourses')->name('courseschool.storeManyCourses');
 
 // '/course/' . $this->course->slug .'/attachSubject'
 Route::post('/api/{course}/attachSubject', 'AttachSubjectController@store')->name('attachsubject.store');

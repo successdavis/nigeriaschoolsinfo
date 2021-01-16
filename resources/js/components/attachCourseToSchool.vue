@@ -70,7 +70,7 @@ import _ from 'lodash';
 				infiniteId: +new Date(),
 				selectallitems: [],
 				notAttachedMultiCheck:[],
-				AttachedMultiCheck:[]
+				attachedMultiCheck:[]
 			}
 		},
 
@@ -85,7 +85,7 @@ import _ from 'lodash';
 				return this.notAttachedMultiCheck.length !== 0;
 			},
 			isBatchDetach() {
-				return this.AttachedMultiCheck.length !== 0;
+				return this.attachedMultiCheck.length !== 0;
 			}
 		},
 
@@ -99,10 +99,10 @@ import _ from 'lodash';
 			},
 			AttachedChecked(id,checkstatus){
             // this.items.splice(index, 1);
-            	let index = this.AttachedMultiCheck.indexOf(id)
+            	let index = this.attachedMultiCheck.indexOf(id)
             	checkstatus 
-            	? this.AttachedMultiCheck.push(id) 
-            	: this.AttachedMultiCheck.splice(index, 1)
+            	? this.attachedMultiCheck.push(id) 
+            	: this.attachedMultiCheck.splice(index, 1)
 			},
 			courseIsLinked(index) {
 				this.notAttachedCourses[index].is_link = true;
@@ -124,7 +124,19 @@ import _ from 'lodash';
 				});
 			},
 			BatchDetach(){
-				console.log('h')
+				axios.delete(`\\api/detachcoursestoschool/${this.school.slug}`, {
+					params: {
+						courses: this.attachedMultiCheck
+					}
+				})
+	    		.then (data => {
+                    flash('Batch Schools Detach.', 'success');
+                    this.attachedMultiCheck = [];
+                    this.reset();
+				})
+				.catch(error => {
+                    flash('Unable to attach Many, Please contact Admin.', 'failed');
+				});
 			},
 
 			// This method retrieve all the courses that are not attached to a school

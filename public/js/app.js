@@ -3005,7 +3005,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       infiniteId: +new Date(),
       selectallitems: [],
       notAttachedMultiCheck: [],
-      AttachedMultiCheck: []
+      attachedMultiCheck: []
     };
   },
   computed: {
@@ -3023,7 +3023,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       return this.notAttachedMultiCheck.length !== 0;
     },
     isBatchDetach: function isBatchDetach() {
-      return this.AttachedMultiCheck.length !== 0;
+      return this.attachedMultiCheck.length !== 0;
     }
   },
   methods: {
@@ -3034,8 +3034,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     AttachedChecked: function AttachedChecked(id, checkstatus) {
       // this.items.splice(index, 1);
-      var index = this.AttachedMultiCheck.indexOf(id);
-      checkstatus ? this.AttachedMultiCheck.push(id) : this.AttachedMultiCheck.splice(index, 1);
+      var index = this.attachedMultiCheck.indexOf(id);
+      checkstatus ? this.attachedMultiCheck.push(id) : this.attachedMultiCheck.splice(index, 1);
     },
     courseIsLinked: function courseIsLinked(index) {
       this.notAttachedCourses[index].is_link = true;
@@ -3058,11 +3058,24 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       });
     },
     BatchDetach: function BatchDetach() {
-      console.log('h');
+      var _this2 = this;
+
+      axios["delete"]("\\api/detachcoursestoschool/".concat(this.school.slug), {
+        params: {
+          courses: this.attachedMultiCheck
+        }
+      }).then(function (data) {
+        flash('Batch Schools Detach.', 'success');
+        _this2.attachedMultiCheck = [];
+
+        _this2.reset();
+      })["catch"](function (error) {
+        flash('Unable to attach Many, Please contact Admin.', 'failed');
+      });
     },
     // This method retrieve all the courses that are not attached to a school
     infiniteHandler: function infiniteHandler($state) {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get("/courseswithschoolattach/".concat(this.school.slug), {
         params: {
@@ -3074,11 +3087,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         var data = _ref.data;
 
         if (data.data.length) {
-          var _this2$courses;
+          var _this3$courses;
 
-          _this2.page += 1;
+          _this3.page += 1;
 
-          (_this2$courses = _this2.courses).push.apply(_this2$courses, _toConsumableArray(data.data));
+          (_this3$courses = _this3.courses).push.apply(_this3$courses, _toConsumableArray(data.data));
 
           $state.loaded();
         } else {
@@ -3102,13 +3115,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }, 700)
   },
   created: function created() {
-    var _this3 = this;
+    var _this4 = this;
 
     axios.get('/list-of-faculties/').then(function (data) {
-      _this3.faculties = data.data;
+      _this4.faculties = data.data;
     });
     axios.get("/courseswithschoolattach/".concat(this.school.slug)).then(function (data) {
-      _this3.courses = data.data.data;
+      _this4.courses = data.data.data;
     });
   }
 });
