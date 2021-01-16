@@ -51,7 +51,7 @@ class SchoolsController extends Controller
 
         $request->validate([
             'name'              => 'required|unique:schools|max:255|min:10', 
-            'description'       => 'required|min:300', 
+            'description'       => 'required|string', 
             'date_created'      => 'nullable|date',
             'states_id'         => 'required|exists:states,id',
             'lga_id'            => 'required|exists:lgas,id',
@@ -126,7 +126,7 @@ class SchoolsController extends Controller
     {
         $request->validate([
             'name'              => 'required|max:255|min:10', 
-            'description'       => 'required|min:300', 
+            'description'       => 'nullable|string', 
             'date_created'      => 'nullable|date',
             'states_id'         => 'required|exists:states,id',
             'lga_id'            => 'required|exists:lgas,id',

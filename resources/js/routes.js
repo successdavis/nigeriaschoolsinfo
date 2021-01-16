@@ -33,10 +33,10 @@ let routes = [
 		component: Schools
 	},
 
-	// {
-	// 	path: '/addschool',
-	// 	component: AddSchool
-	// },
+	{
+		path: '/addschool',
+		component: EditSchool
+	},
 	{
 		path: '/editschool/:slug',
 		component: EditSchool,

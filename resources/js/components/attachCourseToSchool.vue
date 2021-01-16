@@ -9,6 +9,18 @@
 		>
 			<div class="section">
 				<div class="columns">
+					<div class="column is-3">
+				    <div class="field">
+					  <div class="control ">
+					    <div class="select is-small">
+					      <select v-model="faculty" @change="changeType">
+					        <option value="" selected>Sort By (All)</option>
+					        <option v-for="faculty in faculties" v-text="faculty.name" :value="faculty.slug"></option>
+					      </select>
+					    </div>
+					  </div>
+					</div>
+				  </div>
 				  <div class="column">
 				    <input @keyup="search" v-model="searchKey" :class="processing ? 'is-loading' : ''" class="input is-rounded" type="text" placeholder="Rounded input">
 				  </div>

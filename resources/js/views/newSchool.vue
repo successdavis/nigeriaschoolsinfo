@@ -257,8 +257,7 @@
 				  <div class="field-body">
 				    <div class="field is-fullwidth">
 				      <div class="control">
-				        <button type="submit" :class="processing ? 'is-loading' : '' " class="button is-primary" v-text="school ? 'Update School' : 'Create School' ">
-				          
+				        <button type="submit" :class="processing ? 'is-loading' : '' " class="button is-primary" v-text="data ? 'Update School' : 'Create School' ">
 				        </button>
 				      </div>
 				    </div>
@@ -267,14 +266,14 @@
 			</div>
 		</form>
 
-		<div v-if="school != '' && steps == 2">
+		<div v-if="data != '' && steps == 2">
 			<div class="has-text-centered is-size-3">Logo & School Images</div>
 			<div>
 				<school-images :school="data"></school-images>
 			</div>
 		</div>
 
-		<div v-if="school != '' && steps == 3">
+		<div v-if="data != '' && steps == 3">
 			<div class="has-text-centered">Attach Courses to this School</div>
 			<attach-courses :school="data"></attach-courses>
 		</div>
@@ -300,7 +299,6 @@
 				data: '',
 				ispublished: false,
 				processing: false,
-				school: this.data,
 				errorMessage: '',
 				showErrors: false,
 				steps: 1,
@@ -310,7 +308,22 @@
 				states: [],
 				lgas: [],
 				matchedSchools: [],
-				schoolForm: new Form({}),
+				schoolForm: new Form({
+					name: '',
+					short_name: '',
+					school_type_id: '',
+					sponsored_id: '',
+					website: '',
+					portal_website:'',
+					jamb_points: '',
+					states_id: '',
+					lga_id: '',
+					address: '',
+					phone: '',
+					email: '',
+					description: '',
+					meta_description: '',
+				}),
 			}
 		},
 
@@ -331,66 +344,70 @@
 			},
 		},
 
+		created() {
+			axios.get('/createSchoolRequirements/')
+    		.then (data => {
+    			this.states = data.data.States;
+    			this.sponsored = data.data.Sponsored;
+    			this.types = data.data.Types;
+			});
+		},
+
 		methods: {
 			setPostBody (value) {
 				this.schoolForm.description = value;
 			},
-		createSchool() {
-    		this.processing = true;
-			if (this.school) {
-				this.showErrors = false;
-	        	this.schoolForm.patch(`/schools/${this.school.slug}/update`)
-	        	.then(data => {
-		    		this.processing = false;
-	        		flash('School data update was successful')
-	        	})
-	        	.catch(error => {
-	        		this.errorMessage = error.errors;
-	            	this.showErrors = true;
-		    		this.processing = false;
-	        		flash('Something went wrong with updating this school','failed');
-	        	})
-			}
-			else {
-				this.showErrors = false;
-				this.schoolForm.post('/schools/createschool')
-                    .then(data => {
-                    		this.school = data;
-                            // this.schoolForm.reset();
-                            this.steps = 2;
-				    		this.processing = false;
-                            flash('School Successfully created.', 'success');
-                    })
-                .catch(error => {
-                	this.errorMessage = error.errors;
-                	this.showErrors = true;
-		    		this.processing = false;
-                    flash('We were unable to process your form', 'failed');
-                });
-	        }
-        },
+			createSchool() {
+	    		this.processing = true;
+				if (this.data) {
+					this.showErrors = false;
+		        	this.schoolForm.patch(`/schools/${this.data.slug}/update`)
+		        	.then(data => {
+			    		this.processing = false;
+		        		flash('School data update was successful')
+		        	})
+		        	.catch(error => {
+		        		this.errorMessage = error.errors;
+		            	this.showErrors = true;
+			    		this.processing = false;
+		        		flash('Something went wrong with updating this school','failed');
+		        	})
+				}
+				else {
+					this.showErrors = false;
+					this.schoolForm.post('/schools/createschool')
+	                    .then(data => {
+	                    		this.data = data;
+	                            // this.schoolForm.reset();
+	                            this.steps = 2;
+					    		this.processing = false;
+	                            flash('School Successfully created.', 'success');
+	                    })
+	                .catch(error => {
+	                	this.errorMessage = error.errors;
+	                	this.showErrors = true;
+			    		this.processing = false;
+	                    flash('We were unable to process your form', 'failed');
+	                });
+		        }
+	        },
 
-	    findSchool () {
-	    	axios.get('/find/school', {params: {s: this.schoolForm.name, sn: this.schoolForm.short_name}})
-	    		.then (data => {
-	    			this.matchedSchools = data.data;
-	    		});
-	    },
+		    findSchool () {
+		    	axios.get('/find/school', {params: {s: this.schoolForm.name, sn: this.schoolForm.short_name}})
+		    		.then (data => {
+		    			this.matchedSchools = data.data;
+		    		});
+		    },
 
-	    statelgas () {
-	    	axios.get('/api/statelocalgovernments', {params: {local: this.schoolForm.states_id}})
-	    		.then (data => {
-	    			this.lgas = data.data;
-	    		});
-	    },
+		    statelgas () {
+		    	axios.get('/api/statelocalgovernments', {params: {local: this.schoolForm.states_id}})
+		    		.then (data => {
+		    			this.lgas = data.data;
+		    		});
+		    },
 			setData(school) {
 				if (school) {
-					axios.get('/createSchoolRequirements/')
-		    		.then (data => {
-		    			this.states = data.data.States;
-		    			this.sponsored = data.data.Sponsored;
-		    			this.types = data.data.Types;
-					});
+					
 					this.data = school.data
 					this.schoolForm = new Form ({
 						name: school.data.name,
@@ -421,8 +438,12 @@
 	    		.then (data => {
 	    			next(vm => vm.setData(data));
 	    		})
+	    		.catch(() => {
+			  		flash('This School cannot be edited at this time');
+	    			return false
+	    		})
 	  		}else {
-		  		flash('This School cannot be edited at this time');
+		  		next();
 	  		}
 	  	},
 	}

@@ -2983,6 +2983,18 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -6235,7 +6247,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -6249,7 +6260,6 @@ __webpack_require__.r(__webpack_exports__);
       data: '',
       ispublished: false,
       processing: false,
-      school: this.data,
       errorMessage: '',
       showErrors: false,
       steps: 1,
@@ -6259,7 +6269,22 @@ __webpack_require__.r(__webpack_exports__);
       states: [],
       lgas: [],
       matchedSchools: [],
-      schoolForm: new Form({})
+      schoolForm: new Form({
+        name: '',
+        short_name: '',
+        school_type_id: '',
+        sponsored_id: '',
+        website: '',
+        portal_website: '',
+        jamb_points: '',
+        states_id: '',
+        lga_id: '',
+        address: '',
+        phone: '',
+        email: '',
+        description: '',
+        meta_description: ''
+      })
     };
   },
   computed: {
@@ -6278,44 +6303,53 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/createSchoolRequirements/').then(function (data) {
+      _this.states = data.data.States;
+      _this.sponsored = data.data.Sponsored;
+      _this.types = data.data.Types;
+    });
+  },
   methods: {
     setPostBody: function setPostBody(value) {
       this.schoolForm.description = value;
     },
     createSchool: function createSchool() {
-      var _this = this;
+      var _this2 = this;
 
       this.processing = true;
 
-      if (this.school) {
+      if (this.data) {
         this.showErrors = false;
-        this.schoolForm.patch("/schools/".concat(this.school.slug, "/update")).then(function (data) {
-          _this.processing = false;
+        this.schoolForm.patch("/schools/".concat(this.data.slug, "/update")).then(function (data) {
+          _this2.processing = false;
           flash('School data update was successful');
         })["catch"](function (error) {
-          _this.errorMessage = error.errors;
-          _this.showErrors = true;
-          _this.processing = false;
+          _this2.errorMessage = error.errors;
+          _this2.showErrors = true;
+          _this2.processing = false;
           flash('Something went wrong with updating this school', 'failed');
         });
       } else {
         this.showErrors = false;
         this.schoolForm.post('/schools/createschool').then(function (data) {
-          _this.school = data; // this.schoolForm.reset();
+          _this2.data = data; // this.schoolForm.reset();
 
-          _this.steps = 2;
-          _this.processing = false;
+          _this2.steps = 2;
+          _this2.processing = false;
           flash('School Successfully created.', 'success');
         })["catch"](function (error) {
-          _this.errorMessage = error.errors;
-          _this.showErrors = true;
-          _this.processing = false;
+          _this2.errorMessage = error.errors;
+          _this2.showErrors = true;
+          _this2.processing = false;
           flash('We were unable to process your form', 'failed');
         });
       }
     },
     findSchool: function findSchool() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get('/find/school', {
         params: {
@@ -6323,29 +6357,22 @@ __webpack_require__.r(__webpack_exports__);
           sn: this.schoolForm.short_name
         }
       }).then(function (data) {
-        _this2.matchedSchools = data.data;
+        _this3.matchedSchools = data.data;
       });
     },
     statelgas: function statelgas() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get('/api/statelocalgovernments', {
         params: {
           local: this.schoolForm.states_id
         }
       }).then(function (data) {
-        _this3.lgas = data.data;
+        _this4.lgas = data.data;
       });
     },
     setData: function setData(school) {
-      var _this4 = this;
-
       if (school) {
-        axios.get('/createSchoolRequirements/').then(function (data) {
-          _this4.states = data.data.States;
-          _this4.sponsored = data.data.Sponsored;
-          _this4.types = data.data.Types;
-        });
         this.data = school.data;
         this.schoolForm = new Form({
           name: school.data.name,
@@ -6375,9 +6402,12 @@ __webpack_require__.r(__webpack_exports__);
         next(function (vm) {
           return vm.setData(data);
         });
+      })["catch"](function () {
+        flash('This School cannot be edited at this time');
+        return false;
       });
     } else {
-      flash('This School cannot be edited at this time');
+      next();
     }
   }
 });
@@ -6724,11 +6754,10 @@ var routes = [{
 }, {
   path: '/schools',
   component: _views_Schools_vue__WEBPACK_IMPORTED_MODULE_3__.default
-}, // {
-// 	path: '/addschool',
-// 	component: AddSchool
-// },
-{
+}, {
+  path: '/addschool',
+  component: _views_newSchool_vue__WEBPACK_IMPORTED_MODULE_4__.default
+}, {
   path: '/editschool/:slug',
   component: _views_newSchool_vue__WEBPACK_IMPORTED_MODULE_4__.default,
   name: 'editschool',
@@ -47697,6 +47726,64 @@ var render = function() {
             { staticClass: "section" },
             [
               _c("div", { staticClass: "columns" }, [
+                _c("div", { staticClass: "column is-3" }, [
+                  _c("div", { staticClass: "field" }, [
+                    _c("div", { staticClass: "control " }, [
+                      _c("div", { staticClass: "select is-small" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.faculty,
+                                expression: "faculty"
+                              }
+                            ],
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.faculty = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                },
+                                _vm.changeType
+                              ]
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { value: "", selected: "" } },
+                              [_vm._v("Sort By (All)")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.faculties, function(faculty) {
+                              return _c("option", {
+                                domProps: {
+                                  value: faculty.slug,
+                                  textContent: _vm._s(faculty.name)
+                                }
+                              })
+                            })
+                          ],
+                          2
+                        )
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
                 _c("div", { staticClass: "column" }, [
                   _c("input", {
                     directives: [
@@ -52297,7 +52384,7 @@ var render = function() {
                     attrs: { type: "submit" },
                     domProps: {
                       textContent: _vm._s(
-                        _vm.school ? "Update School" : "Create School"
+                        _vm.data ? "Update School" : "Create School"
                       )
                     }
                   })
@@ -52309,7 +52396,7 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _vm.school != "" && _vm.steps == 2
+    _vm.data != "" && _vm.steps == 2
       ? _c("div", [
           _c("div", { staticClass: "has-text-centered is-size-3" }, [
             _vm._v("Logo & School Images")
@@ -52319,7 +52406,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _vm.school != "" && _vm.steps == 3
+    _vm.data != "" && _vm.steps == 3
       ? _c(
           "div",
           [
