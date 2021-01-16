@@ -55,56 +55,60 @@
                     <menu-item :props="props" icon="mdi-desktop-mac" link="/">Dashboard</menu-item>
                     <menu-item :props="props" icon="mdi-account-settings" link="/Profile">Profile</menu-item>
                     <menu-item :props="props" icon="mdi-link" link="/following">Following</menu-item>
-                    <menu-item type="menu-label">Dashboard</menu-item>
-                    <menu-item 
-                        icon="mdi-grease-pencil"
-                        :props="props" 
-                        type="dropdown"
-                        :items="[
-                            {
-                                link: '/posts',
-                                label: 'All Posts'
-                            },
-                            {
-                                link: '/addpost',
-                                label: 'Add New'
-                            },
-                            {
-                                link: '/category',
-                                label: 'Category'
-                            },
-                        ]"
-                    >Posts</menu-item>
-                    <menu-item 
-                        icon="mdi-school"
-                        :props="props" 
-                        type="dropdown"
-                        :items="[
-                            {
-                                link: '/schools',
-                                label: 'All Schools'
-                            },
-                            {
-                                link: '/addschool',
-                                label: 'Create School'
-                            },
-                        ]"
-                    >Schools</menu-item>
-                    <menu-item 
-                        icon="mdi-book-open-variant"
-                        :props="props" 
-                        type="dropdown"
-                        :items="[
-                            {
-                                link: '/courses',
-                                label: 'All Courses'
-                            },
-                            {
-                                link: '/addcourse',
-                                label: 'Add Course'
-                            },
-                        ]"
-                    >Courses</menu-item>
+                    @auth
+                        @if (auth()->user()->isAdmin())
+                        <menu-item type="menu-label">Admin Control</menu-item>
+                        <menu-item 
+                            icon="mdi-grease-pencil"
+                            :props="props" 
+                            type="dropdown"
+                            :items="[
+                                {
+                                    link: '/posts',
+                                    label: 'All Posts'
+                                },
+                                {
+                                    link: '/addpost',
+                                    label: 'Add New'
+                                },
+                                {
+                                    link: '/category',
+                                    label: 'Category'
+                                },
+                            ]"
+                        >Posts</menu-item>
+                        <menu-item 
+                            icon="mdi-school"
+                            :props="props" 
+                            type="dropdown"
+                            :items="[
+                                {
+                                    link: '/schools',
+                                    label: 'All Schools'
+                                },
+                                {
+                                    link: '/addschool',
+                                    label: 'Create School'
+                                },
+                            ]"
+                        >Schools</menu-item>
+                        <menu-item 
+                            icon="mdi-book-open-variant"
+                            :props="props" 
+                            type="dropdown"
+                            :items="[
+                                {
+                                    link: '/courses',
+                                    label: 'All Courses'
+                                },
+                                {
+                                    link: '/addcourse',
+                                    label: 'Add Course'
+                                },
+                            ]"
+                        >Courses</menu-item>
+                        @endif
+                    @endauth
                 </drawer-menu>
             </template>
 
