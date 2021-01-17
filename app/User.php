@@ -3,14 +3,15 @@
 namespace App;
 
 use App\Post;
-use App\Role;
 use App\Scholarship;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    use HasRoles;
     use Notifiable;
 
     /**
@@ -53,24 +54,9 @@ class User extends Authenticatable
         return $this->hasOne(Scholarship::class)->latest();
     }
 
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class, 'users_roles');
-    }
-
     public function payments()
     {
         return $this->hasMany(Payment::class);
-    }
-
-    public function assignRole($role)
-    {
-        $this->roles()->attach($role);
-    }
-
-    public function isAdmin()
-    {
-        return $this->roles()->where('name', 'admin')->exists();
     }
 
     public function comments()

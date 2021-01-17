@@ -37,27 +37,27 @@ Route::get('/', 'ApplicationController@index');
 Route::get('/testpage', 'TestController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/posts', 'PostController@index');
-Route::get('/posts/newpost', 'PostController@create')->name('post.create')->middleware('admin');
-Route::get('/posts/newpostrequirements', 'PostController@newpostrequirement')->middleware('admin');
+Route::get('/posts/newpost', 'PostController@create')->name('post.create');
+Route::get('/posts/newpostrequirements', 'PostController@newpostrequirement');
 Route::get('/posts/relatedpost', 'PostController@relatedpost');
 Route::get('/editpost/{post}', 'PostController@edit')->middleware('admin');
-Route::post('/posts/savepost', 'PostController@store')->name('post.store')->middleware('admin');
-Route::patch('/posts/updatepost/{post}', 'PostController@update')->name('post.update')->middleware('admin');
+Route::post('/posts/savepost', 'PostController@store')->name('post.store');
+Route::patch('/posts/updatepost/{post}', 'PostController@update')->name('post.update');
 Route::get('/posts/{post}', 'PostController@show')->name('post.show');
-Route::post('/posts/{post}/featured_image', 'PostController@featured_image')->name('posts.featured_image')->middleware('admin');
+Route::post('/posts/{post}/featured_image', 'PostController@featured_image')->name('posts.featured_image');
 Route::delete('/{post}/delete', 'PostController@destroy')->name('posts.delete');
 
-Route::patch('/posts/{post}/togglepublish', 'PostController@publish')->middleware('admin');
-Route::delete('/posts/{post}/togglepublish', 'PostController@unpublish')->middleware('admin');
+Route::patch('/posts/{post}/togglepublish', 'PostController@publish');
+Route::delete('/posts/{post}/togglepublish', 'PostController@unpublish');
 
 Route::patch('{post}/followup', 'FollowupController@store')->middleware('admin');
 Route::delete('{post}/followup', 'FollowupController@destroy')->middleware('admin');
 
 
 
-Route::post('/posts/postimages', 'PostController@addimage')->name('posts.images')->middleware('admin');
-Route::post('/posts/{post}/lock', 'PostController@lock')->name('post.lock')->middleware('admin');
-Route::post('/posts/{post}/unlock', 'PostController@unlock')->name('post.unlock')->middleware('admin');
+Route::post('/posts/postimages', 'PostController@addimage')->name('posts.images');
+Route::post('/posts/{post}/lock', 'PostController@lock')->name('post.lock');
+Route::post('/posts/{post}/unlock', 'PostController@unlock')->name('post.unlock');
 
 Route::get('/exams', 'ExamsController@index')->name('exams.index');
 Route::get('/exams/{exams}', 'ExamsController@show')->name('exams.index');
@@ -70,12 +70,12 @@ Route::get('/schools/{school}', 'SchoolsController@show')->name('schools.show');
 
 // Route::get('/find/school', 'SchoolsController@findschool')->name('schools.findschool');
 
-Route::get('/editschool/{school}', 'SchoolsController@create')->name('schools.edit')->middleware('admin');
-Route::post('/schools/createschool', 'SchoolsController@store')->name('schools.store')->middleware('admin');
-Route::patch('/schools/{school}/update', 'SchoolsController@update')->name('schools.update')->middleware('admin');
-Route::patch('/schools/{school}/admission', 'SchoolsController@openAdmission')->name('schools.admission')->middleware('admin');
-Route::delete('/schools/{school}/admission', 'SchoolsController@closeAdmission')->name('schools.admission')->middleware('admin');
-Route::get('/schools/{school}/edit', 'SchoolsController@edit')->middleware('admin');
+Route::get('/editschool/{school}', 'SchoolsController@create')->name('schools.edit');
+Route::post('/schools/createschool', 'SchoolsController@store')->name('schools.store');
+Route::patch('/schools/{school}/update', 'SchoolsController@update')->name('schools.update');
+Route::patch('/schools/{school}/admission', 'SchoolsController@openAdmission')->name('schools.admission');
+Route::delete('/schools/{school}/admission', 'SchoolsController@closeAdmission')->name('schools.admission');
+Route::get('/schools/{school}/edit', 'SchoolsController@edit');
 
 // return the requirement needed to create a new school
 Route::get('/createSchoolRequirements', 'SchoolsController@cschoolrequirements')->name('schools.cschoolrequirements');
@@ -98,7 +98,7 @@ Route::get('/schools/{schools}/coursesnotoffered', 'CourseSchoolAttachmentContro
 
 Route::get('/courses', 'CoursesController@index')->name('courses.index');
 Route::get('/courseswithschoolattach/{schools}', 'CourseSchoolAttachmentController@courses')->name('courses.index');
-Route::get('/editcourse/{course}', 'CoursesController@edit')->name('courses.edit')->middleware('admin');
+Route::get('/editcourse/{course}', 'CoursesController@edit')->name('courses.edit');
 
 Route::get('/course/{courses}', 'CoursesController@show')->name('courses.show');
 Route::post('/courses/createcourse', 'CoursesController@store')->name('courses.store');
@@ -156,5 +156,5 @@ Route::get('/scholarship/{scholarship}', 'ScholarshipController@show');
 Route::get('/edit-scholarship/{scholarship}', 'ScholarshipController@edit');
 Route::patch('/updatescholarship/{scholarship}', 'ScholarshipController@update')->name('scholarship.update');
 
-Route::post('/categories/newcategory', 'PostcategoryController@store')->name('category.store')->middleware('admin');
+Route::post('/categories/newcategory', 'PostcategoryController@store')->name('category.store');
 Route::get('/categories', 'PostcategoryController@index')->name('category.index');

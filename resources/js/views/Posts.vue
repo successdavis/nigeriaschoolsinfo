@@ -192,7 +192,7 @@
             }
         },
 		beforeRouteEnter (to, from, next) {
-	    	
+            this.isLoading = true;
 	    	axios.get('/posts')
 			.then(({data}) => {
 				next(vm => vm.setData(data));
@@ -210,6 +210,7 @@
 
 		methods: {
 			setData (data) {
+                this.isLoading = false;
 		      if (data) {
 		        this.data = data.data;
 		        this.dataset = {
