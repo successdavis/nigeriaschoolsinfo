@@ -261,9 +261,9 @@
 			},
 			createCourse() {
 				this.showErrors = false;
-				this.courseForm.post('/courses/createcourse')
+				if (this.course == '') {
+					this.courseForm.post('/courses/createcourse')
                     .then(data => {
-                    		this.creatingNew = false;
                     		this.steps = 1;
                             this.courseForm.reset();
                             this.course = data;
@@ -273,6 +273,16 @@
 	                	this.showErrors = true;
 	                    flash(error.message, 'failed');
 	                });
+				}else {
+					this.courseForm.patch(`/updatecourse/${this.course.slug}`)
+                    .then(data => {
+                            flash('Course updated.', 'success');
+                    })
+	                .catch(error => {
+	                	this.showErrors = true;
+	                    flash(error.message, 'failed');
+	                });
+				}
 	        },
 
 	        createNew() {

@@ -6021,18 +6021,27 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.showErrors = false;
-      this.courseForm.post('/courses/createcourse').then(function (data) {
-        _this.creatingNew = false;
-        _this.steps = 1;
 
-        _this.courseForm.reset();
+      if (this.course == '') {
+        this.courseForm.post('/courses/createcourse').then(function (data) {
+          _this.steps = 1;
 
-        _this.course = data;
-        flash('Course created.', 'success');
-      })["catch"](function (error) {
-        _this.showErrors = true;
-        flash(error.message, 'failed');
-      });
+          _this.courseForm.reset();
+
+          _this.course = data;
+          flash('Course created.', 'success');
+        })["catch"](function (error) {
+          _this.showErrors = true;
+          flash(error.message, 'failed');
+        });
+      } else {
+        this.courseForm.patch("/updatecourse/".concat(this.course.slug)).then(function (data) {
+          flash('Course updated.', 'success');
+        })["catch"](function (error) {
+          _this.showErrors = true;
+          flash(error.message, 'failed');
+        });
+      }
     },
     createNew: function createNew() {
       this.course = '';

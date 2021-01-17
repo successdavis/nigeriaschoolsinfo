@@ -114,7 +114,38 @@ class CoursesController extends Controller
      */
     public function update(Request $request, Courses $courses)
     {
-        $this->authorize('update', $course);
+        $this->authorize('update', $courses);
+
+        $this->authorize('create', new Courses);
+        $request->validate([
+            'name'                  => 'required|max:200|min:5',
+            'description'           => 'required', 
+            'faculty_id'            => 'required|exists:faculties,id',
+            'salary'                => 'required|integer', 
+            'duration'              => 'required|integer',
+            'utme_comment'          => 'nullable|string|max:250',
+            'utme_requirement'      => 'nullable|string',
+            'direct_requirement'    => 'nullable|string',
+            'considerations'        => 'nullable|string',
+        ]);
+        
+        // dd(request()->all());
+        $courses->update([
+            'name'              =>  $request->name,
+            'short_name'        =>  $request->short_name,
+            'faculty_id'        =>  $request->faculty_id,
+            'description'       =>  $request->description,
+            'salary'            =>  $request->salary,
+            'duration'          =>  $request->duration,
+            'utme_comment'          =>  $request->utme_comment,
+            'utme_requirement'      =>  $request->utme_requirement,
+            'direct_requirement'    =>  $request->direct_requirement,
+            'considerations'        =>  $request->considerations,
+        ]);
+
+        if (request()->wantsJson()) {
+            return response($courses, 201);
+        }
         
     }
 

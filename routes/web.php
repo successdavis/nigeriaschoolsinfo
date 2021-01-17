@@ -104,6 +104,7 @@ Route::get('/course/{courses}', 'CoursesController@show')->name('courses.show');
 Route::post('/courses/createcourse', 'CoursesController@store')->name('courses.store');
 Route::get('/find/courses', 'CoursesController@findcourses')->name('courses.find');
 Route::get('/newcourse/courserequirements', 'CoursesController@getrequirements');
+Route::patch('/updatecourse/{courses}', 'CoursesController@update');
 
 
 Route::get('/faculty/{faculty}', 'FacultiesController@show')->name('faculty.show');

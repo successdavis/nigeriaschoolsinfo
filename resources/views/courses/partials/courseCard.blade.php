@@ -15,14 +15,13 @@
         <a :href="course.path">View</a>
       </span>
     </p>
-    @auth
-      @if (auth()->user()->isAdmin())
+    @can('update courses')
         <p class="card-footer-item">
           <span>
-            <a :href="'/courses/editcourse/' + course.slug">Edit</a>
+            <a :href="'/home#/editcourse/' + course.slug">Edit</a>
           </span>
+
         </p>
-      @endif
-    @endauth
+    @endcan
   </footer>
 </div>

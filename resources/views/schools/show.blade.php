@@ -24,9 +24,9 @@
 	<div class="columns">
 		<div class="column is-three-quarters">
 			@auth
-				@if (auth()->user()->isAdmin())
+				@can('update schools')
 					<a href="/schools/{{$school->slug}}/edit" class="button">Edit School</a>
-				@endif
+				@endcan
 			@endauth
 			<div class="section">
 				<article class="media mb-small is-hidden-desktop">
