@@ -192,7 +192,6 @@
             }
         },
 		beforeRouteEnter (to, from, next) {
-            this.isLoading = true;
 	    	axios.get('/posts')
 			.then(({data}) => {
 				next(vm => vm.setData(data));
@@ -210,7 +209,7 @@
 
 		methods: {
 			setData (data) {
-                this.isLoading = false;
+                this.isLoading = true;
 		      if (data) {
 		        this.data = data.data;
 		        this.dataset = {
@@ -222,6 +221,8 @@
                     last_page: data.meta.last_page,
                     prev_page_url: data.links.prev
                 };
+                this.isLoading = false;
+
 		      }
 		    },
 

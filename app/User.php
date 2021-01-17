@@ -49,6 +49,11 @@ class User extends Authenticatable
         return $this->hasOne(Job::class)->latest();
     }
 
+    public function lastcourse()
+    {
+        return $this->hasOne(Courses::class)->latest();
+    }
+
     public function lastScholarship()
     {
         return $this->hasOne(Scholarship::class)->latest();

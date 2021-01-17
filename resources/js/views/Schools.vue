@@ -160,11 +160,6 @@
 				flash('Unable to retrieve schools at the moment');
 				return false
 			})
-
-	    	// axios.get(`editpost/${to.params.slug}`)
-    		// .then (data => {
-    		// 	next(vm => vm.setData(data.data.data));
-    		// })
 	  	},
 
 		methods: {

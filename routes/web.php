@@ -44,20 +44,20 @@ Route::get('/editpost/{post}', 'PostController@edit')->middleware('admin');
 Route::post('/posts/savepost', 'PostController@store')->name('post.store');
 Route::patch('/posts/updatepost/{post}', 'PostController@update')->name('post.update');
 Route::get('/posts/{post}', 'PostController@show')->name('post.show');
-Route::post('/posts/{post}/featured_image', 'PostController@featured_image')->name('posts.featured_image');
+Route::post('/posts/{post}/featured_image', 'PostImageController@store')->name('posts.featured_image');
 Route::delete('/{post}/delete', 'PostController@destroy')->name('posts.delete');
 
-Route::patch('/posts/{post}/togglepublish', 'PostController@publish');
-Route::delete('/posts/{post}/togglepublish', 'PostController@unpublish');
+Route::patch('/posts/{post}/togglepublish', 'PublishPostController@store');
+Route::delete('/posts/{post}/togglepublish', 'PublishPostController@destroy');
 
 Route::patch('{post}/followup', 'FollowupController@store')->middleware('admin');
 Route::delete('{post}/followup', 'FollowupController@destroy')->middleware('admin');
 
 
 
-Route::post('/posts/postimages', 'PostController@addimage')->name('posts.images');
-Route::post('/posts/{post}/lock', 'PostController@lock')->name('post.lock');
-Route::post('/posts/{post}/unlock', 'PostController@unlock')->name('post.unlock');
+Route::post('/posts/postimages', 'PostImageController@addimage')->name('posts.images');
+Route::post('/posts/{post}/lock', 'LockPostController@store')->name('post.lock');
+Route::post('/posts/{post}/unlock', 'LockPostController@delete')->name('post.unlock');
 
 Route::get('/exams', 'ExamsController@index')->name('exams.index');
 Route::get('/exams/{exams}', 'ExamsController@show')->name('exams.index');

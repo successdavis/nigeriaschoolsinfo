@@ -46,16 +46,17 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', new Courses);
         $request->validate([
-            'name'            => 'required|unique:courses|max:200|min:5',
-            'description'     => 'required', 
-            'faculty_id'      => 'required|exists:faculties,id',
-            'salary'          => 'required|integer', 
-            'duration'        => 'required|integer',
-            'utme_comment'      => 'nullable|string|max:250',
-            'utme_requirement'    => 'nullable|string',
+            'name'                  => 'required|unique:courses|max:200|min:5',
+            'description'           => 'required', 
+            'faculty_id'            => 'required|exists:faculties,id',
+            'salary'                => 'required|integer', 
+            'duration'              => 'required|integer',
+            'utme_comment'          => 'nullable|string|max:250',
+            'utme_requirement'      => 'nullable|string',
             'direct_requirement'    => 'nullable|string',
-            'considerations'    => 'nullable|string',
+            'considerations'        => 'nullable|string',
         ]);
         
         // dd(request()->all());
@@ -99,6 +100,8 @@ class CoursesController extends Controller
      */
     public function edit(Courses $course)
     {
+        $this->authorize('update', $course);
+
         return new CourseResource($course);
     }
 
@@ -111,7 +114,8 @@ class CoursesController extends Controller
      */
     public function update(Request $request, Courses $courses)
     {
-        //
+        $this->authorize('update', $course);
+        
     }
 
     /**

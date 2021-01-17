@@ -87,12 +87,12 @@
 				  </div>
 				</div>
 
-				<div class="field is-grouped">
-				  <div class="control">
-				    <button :disabled="disabled" @click="publish" type="submit" class="button is-link" v-if="posthandle" v-text="ispublished ? 'Unpublish Post' : 'Publish Post' "></button>
-				  </div>
-				</div>
 			</form>
+			<div class="field is-grouped">
+			  <div class="control">
+			    <button :disabled="disabled" @click.stop="publish" type="submit" class="button is-link" v-if="posthandle" v-text="ispublished ? 'Unpublish Post' : 'Publish Post' "></button>
+			  </div>
+			</div>
 		</div>
 		<div class="column is-3">
 			<div class="section">
@@ -209,7 +209,7 @@
 						this.disabled = false;
 					})
 					.catch(error => {
-						flash('Sorry, we could not save your new post', 'failed')
+						flash(error.message, 'failed')
 						this.disabled = false;
 					});
 				}else {
@@ -219,7 +219,7 @@
 						this.disabled = false;
 					})
 					.catch(error => {
-						flash('Update Failed', 'failed');
+						flash(error.message, 'failed');
 						this.disabled = false;
 					})
 				}
@@ -230,12 +230,16 @@
 					.then((data) => {
 						this.ispublished = data.data.published
 					})
-			},
+					.catch(error => {
+						console.log(error);
+						flash(error.message, 'failed')
+					})
+			}, 
 
 			resetField() {
 				this.PostForm.module_id = '';
 			},
-
+ 
 			setSelected(selected) {
 				selected ? this.PostForm.module_id = selected.id : this.PostForm.module_id = '';
 			},

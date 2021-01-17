@@ -41,16 +41,6 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('posts.create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -58,6 +48,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', new Post);
         $request->validate([
             'title'     => 'required|max:100|min:25',
             'body'      => 'required',
@@ -101,6 +92,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
         return new PostResource($post);
     }
 
@@ -113,6 +105,8 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $this->authorize('update', $post);
+
         $request->validate([
             'title'     => 'required|max:100|min:25',
             'body'      => 'required',
@@ -149,23 +143,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
+
         $post->delete();
 
         return $post;
-    }
-
-    public function lock(Post $post)
-    {
-        $post->lock();
-
-        return back()->with('flash', 'This post is now lock');
-    }
-
-    public function unlock(Post $post)
-    {
-        $post->unlock();
-
-        return back()->with('flash', 'This post is now unlock');
     }
 
     public function newpostrequirement()
@@ -193,54 +175,5 @@ class PostController extends Controller
         }
 
         abort('Something isn\'t right!', 400);
-    }
-
-    public function addimage(Request $request)
-    {
-
-        $request->validate([
-            'file' => ['required', 'image']
-        ]);
-
-        $name = pathinfo(request()->file('file')->getClientOriginalName(), PATHINFO_FILENAME);
-
-        $newName = str_replace(' ', '-', $name).'.'.request()->file('file')->getClientOriginalExtension();
-
-        $path = request()->file('file')->storeAs('posts', $newName, 'public');
-
-        $src =  asset('storage/'.$path);
-
-        return response()
-            ->json([
-                'src' => $src,
-                'alt' => $name
-            ]);
-    }
-
-    public function featured_image(Request $request, Post $post)
-    {
-        $request->validate([
-            'file' => ['required', 'image']
-        ]);
-
-        $name = $post->slug .'.'.request()->file('file')->getClientOriginalExtension();
-
-        $post->update([
-            'featured_image' => request()->file('file')->storeAs('posts', $name, 'public')
-        ]);
-
-        return response($post, 200);
-    }
-
-    public function publish(Post $post) {
-        $post->publish();
-
-        return $post;
-    }
-
-    public function unpublish(Post $post) {
-        $post->unpublish();
-
-        return $post;
     }
 }

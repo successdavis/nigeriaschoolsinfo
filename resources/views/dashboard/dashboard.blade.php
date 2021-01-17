@@ -55,6 +55,7 @@
                     <menu-item :props="props" icon="mdi-desktop-mac" link="/">Dashboard</menu-item>
                     <menu-item :props="props" icon="mdi-account-settings" link="/Profile">Profile</menu-item>
                     <menu-item :props="props" icon="mdi-link" link="/following">Following</menu-item>
+                    @role('writer')
                         <menu-item type="menu-label">Admin Control</menu-item>
                         <menu-item 
                             icon="mdi-grease-pencil"
@@ -105,6 +106,7 @@
                                 },
                             ]"
                         >Courses</menu-item>
+                    @endrole
                 </drawer-menu>
             </template>
 

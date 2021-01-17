@@ -20,8 +20,7 @@
 						<div class="tile is-parent">
 						    <article class="tile is-child box">
 						      <p class="title">{{$post->title}}</p> 
-						      @auth()
-							    @if (auth()->user()->isAdmin())
+						      @can('update', $post)
 							    	<a href="/editpost/{{$post->slug}}" class="button">Edit</a>
 								    @if ($post->locked)
 							     		<form action="{{ route('post.unlock', ['post' => $post->slug]) }}" method="POST">
@@ -37,8 +36,7 @@
 									    </form>
 								     @endif
 
-							    @endif
-							  @endauth
+							  @endcan
 						      <p class="subtitle">{{$post->source->name}}</p>
 						      <div class="content">
 						      	<div class="has-text-center">

@@ -14,7 +14,7 @@
 			<button @click="$modal.hide('new-Course')">No</button>
 		</div>
 		<div v-show="showErrors" class="is-danger">Your Form contain errors Please review all steps</div>
-			<form @submit.prevent="createCourse" @change="errorMessage=''">
+			<form @submit.prevent="createCourse" @change="errorMessage=''" novalidate>
 				<div v-show="steps == 1">
 						<div class="is-size-4 has-text-centered	mb-small">Basic Information</div>
 						<div class="field is-horizontal">
@@ -24,7 +24,7 @@
 						  <div class="field-body">
 						    <div class="field">
 						      <div class="control">
-						        <input v-model="courseForm.name" @change="findCourses" required class="input" type="text" placeholder="Enter Course Name">
+						        <input v-model="courseForm.name" @change="findCourses" class="input" type="text" placeholder="Enter Course Name">
 						      </div>
 						      <p class="help is-danger" v-if="courseForm.errors.has('name')" v-text="courseForm.errors.get('name')">
 						      </p>
@@ -39,7 +39,7 @@
 						  <div class="field-body">
 						    <div class="field">
 						      <div class="control">
-						        <input @change="findCourses" v-model="courseForm.short_name" required class="input" type="text" placeholder="E.g EDUTECH">
+						        <input @change="findCourses" v-model="courseForm.short_name" class="input" type="text" placeholder="E.g EDUTECH">
 						      </div>
 						      <p class="help is-danger" v-if="courseForm.errors.has('short_name')" v-text="courseForm.errors.get('short_name')"></p>
 						      </p>
@@ -56,7 +56,7 @@
 						    <div class="field">
 						      <div class="control">
 						        <div class="select is-fullwidth">
-						          <select v-model="courseForm.faculty_id" required>
+						          <select v-model="courseForm.faculty_id">
 						            <option value="">Select a type</option>
 						            <option v-for="faculty in faculties" :value="faculty.id" v-text="faculty.name"></option>
 						          </select>
@@ -127,7 +127,7 @@
 					  <div class="field-body">
 					    <div class="field">
 					      <div class="control">
-					        <textarea v-model="courseForm.utme_comment" required class="textarea" placeholder="Please indicate which other subject(s) can be conbined here. Be brief"></textarea>
+					        <textarea v-model="courseForm.utme_comment" class="textarea" placeholder="Please indicate which other subject(s) can be conbined here. Be brief"></textarea>
 					      </div>
 					      <p class="help is-danger" v-if="courseForm.errors.has('utme_comment')" v-text="courseForm.errors.get('utme_comment')"></p>
 					    </div>
@@ -140,7 +140,7 @@
 					  <div class="field-body">
 					    <div class="field">
 					      <div class="control">
-					        <textarea v-model="courseForm.utme_requirement" required class="textarea" placeholder="Write here the utme requirements for this course"></textarea>
+					        <textarea v-model="courseForm.utme_requirement" class="textarea" placeholder="Write here the utme requirements for this course"></textarea>
 					      </div>
 					      <p class="help is-danger" v-if="courseForm.errors.has('utme_requirement')" v-text="courseForm.errors.get('utme_requirement')"></p>
 
@@ -154,7 +154,7 @@
 					  <div class="field-body">
 					    <div class="field">
 					      <div class="control">
-					        <textarea v-model="courseForm.direct_requirement" required class="textarea" placeholder="Write here the requirement for direct entry admission"></textarea>
+					        <textarea v-model="courseForm.direct_requirement" class="textarea" placeholder="Write here the requirement for direct entry admission"></textarea>
 					      </div>
 					      <p class="help is-danger" v-if="courseForm.errors.has('direct_requirement')" v-text="courseForm.errors.get('direct_requirement')"></p>
 					    </div>
@@ -167,7 +167,7 @@
 					  <div class="field-body">
 					    <div class="field">
 					      <div class="control">
-					        <textarea v-model="courseForm.considerations" required class="textarea" placeholder="Please state the considerations for each school"></textarea>
+					        <textarea v-model="courseForm.considerations" class="textarea" placeholder="Please state the considerations for each school"></textarea>
 					      </div>
 					      <p class="help is-danger" v-if="courseForm.errors.has('considerations')" v-text="courseForm.errors.get('considerations')"></p>
 					    </div>
@@ -193,8 +193,8 @@
 				</div>
 			</form>
 				<div v-if="!showMatchedWarning" class="mt-medium buttons is-centered">
-					<button class="button" @click="steps --" :disabled="steps === 1">Prev</button>
-					<button class="button" @click="steps ++" :disabled="steps === max_steps">Next</button>
+					<button type="button" class="button" @click="steps --" :disabled="steps === 1">Prev</button>
+					<button type="button" class="button" @click="steps ++" :disabled="steps === max_steps">Next</button>
 				</div>
 		</div>
 			<!-- <button class="button" @click="creatingNew = true">Attach Schools</button> -->
@@ -224,7 +224,7 @@
 					faculty_id: '',
 					description: '',
 					logo_path: '',
-					salary: '',
+					salary: '', 
 					duration: '',
 					utme_comment: '',
 					utme_requirement: '',
@@ -270,9 +270,8 @@
                             flash('Course created.', 'success');
                     })
 	                .catch(error => {
-	                	this.errorMessage = error.errors;
 	                	this.showErrors = true;
-	                    flash('We were unable to process your form', 'failed');
+	                    flash(error.message, 'failed');
 	                });
 	        },
 
