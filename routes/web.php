@@ -15,7 +15,7 @@ Route::post('/api/schoolcourseattachment', 'CourseSchoolAttachmentController@sto
 Route::delete('/api/schoolcoursedetachment', 'CourseSchoolAttachmentController@destroy')->name('courseschool.delete');
 Route::post('/api/schoolcourseattachmany/{course}', 'CourseSchoolAttachmentController@storeManySchools')->name('courseschool.storemany');
 Route::post('/api/attachcoursestoschool/{schools}', 'CourseSchoolAttachmentController@storeManyCourses')->name('courseschool.storeManyCourses');
-Route::delete('/api/detachcoursestoschool/{schools}', 'CourseSchoolAttachmentController@destroyManyCourses')->name('courseschool.storeManyCourses');
+Route::delete('/api/detachcoursestoschool/{schools}', 'CourseSchoolAttachmentController@destroyManyCourses')->name('courseschool.deleteManyCourses');
 
 // '/course/' . $this->course->slug .'/attachSubject'
 Route::post('/api/{course}/attachSubject', 'AttachSubjectController@store')->name('attachsubject.store');
@@ -60,7 +60,7 @@ Route::post('/posts/{post}/lock', 'LockPostController@store')->name('post.lock')
 Route::post('/posts/{post}/unlock', 'LockPostController@delete')->name('post.unlock');
 
 Route::get('/exams', 'ExamsController@index')->name('exams.index');
-Route::get('/exams/{exams}', 'ExamsController@show')->name('exams.index');
+Route::get('/exams/{exams}', 'ExamsController@show')->name('exams.show');
 
 // /schools/type/university?a=admitting&page=1
 
@@ -74,7 +74,7 @@ Route::get('/editschool/{school}', 'SchoolsController@create')->name('schools.ed
 Route::post('/schools/createschool', 'SchoolsController@store')->name('schools.store');
 Route::patch('/schools/{school}/update', 'SchoolsController@update')->name('schools.update');
 Route::patch('/schools/{school}/admission', 'SchoolsController@openAdmission')->name('schools.admission');
-Route::delete('/schools/{school}/admission', 'SchoolsController@closeAdmission')->name('schools.admission');
+Route::delete('/schools/{school}/admission', 'SchoolsController@closeAdmission')->name('schools.closeadmission');
 Route::get('/schools/{school}/edit', 'SchoolsController@edit');
 
 // return the requirement needed to create a new school
@@ -97,7 +97,7 @@ Route::get('/schools/{schools}/courses', 'CoursesController@index')->name('schoo
 Route::get('/schools/{schools}/coursesnotoffered', 'CourseSchoolAttachmentController@coursesnotoffered');
 
 Route::get('/courses', 'CoursesController@index')->name('courses.index');
-Route::get('/courseswithschoolattach/{schools}', 'CourseSchoolAttachmentController@courses')->name('courses.index');
+Route::get('/courseswithschoolattach/{schools}', 'CourseSchoolAttachmentController@courses');
 Route::get('/editcourse/{course}', 'CoursesController@edit')->name('courses.edit');
 
 Route::get('/course/{courses}', 'CoursesController@show')->name('courses.show');
@@ -109,7 +109,7 @@ Route::patch('/updatecourse/{courses}', 'CoursesController@update');
 
 Route::get('/faculty/{faculty}', 'FacultiesController@show')->name('faculty.show');
 // change from getfaculties to list-of-faculties
-Route::get('/list-of-faculties', 'FacultiesController@index')->name('schoolCourses');
+Route::get('/list-of-faculties', 'FacultiesController@index');
 
 Route::post('/comments/newcomment', 'CommentController@store')->name('comment.store')->middleware('auth');
 
@@ -143,7 +143,7 @@ Route::post('/initializepayment', 'PaymentController@create')->name('payment.cre
 Route::post('/payment/{payment}', 'PaymentController@store')->name('payment.store');
 
 Route::get('/latest-job-opportunities-and-application', 'JobController@index')->name('jobs.index');
-Route::get('/create-a-new-job', 'JobController@create')->name('jobs.create');
+Route::get('/create-a-new-job', 'JobController@create');
 Route::get('/edit-job/{job}', 'JobController@edit')->name('jobs.create');
 Route::post('/jobs/create', 'JobController@store')->name('jobs.store');
 Route::patch('/jobs/{job}/update', 'JobController@update')->name('jobs.update');
