@@ -15,6 +15,16 @@ class PostPolicy
         return $user->hasPermissionTo('create posts');
     }
 
+    public function updateFeaturedImage(User $user, Post $post)
+    {
+        if ($user->hasRole(['editor', 'admin'])) {
+            return true;
+        }else if($post->user_id == $user->id && $user->hasPermissionTo('update posts')) {
+            
+            return true;
+        }   
+    }
+
     /**
      * Determine whether the user can update the model.
      *

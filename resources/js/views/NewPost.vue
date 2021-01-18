@@ -245,6 +245,7 @@
 			},
 
 			setData(post) {
+				console.log(post);
 				if (post) {
 
 					this.posthandle	= post

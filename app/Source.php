@@ -32,6 +32,6 @@ trait Source
     }
 
     public function getClassName() {
-        return basename(get_class($this));
+        return (new \ReflectionClass($this))->getShortName();
     }
 }

@@ -33,7 +33,7 @@ class PostImageController extends Controller
 
     public function store(Request $request, Post $post)
     {
-        $this->authorize('create', $post);
+        $this->authorize('updateFeaturedImage', $post);
         $request->validate([
             'file' => ['required', 'image']
         ]);
