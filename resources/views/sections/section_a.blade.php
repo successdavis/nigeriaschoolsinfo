@@ -1,11 +1,11 @@
 <div class="container">
 	<div class="mb-large">
-		<div class="columns">
+		<div class="columns" style="max-width: unset">
 			<div class="column is-4">
 				<div class="has-text-centered">
 					<h1 class="is-size-3">Latest Education News</h1>
 				</div>
-				<div class="section">
+				<div >
 					<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 					<ins class="adsbygoogle"
 					     style="display:block"
@@ -18,6 +18,13 @@
 					</script>
 					@foreach ($posts as $post)
 						<article class="media">
+							@if($post->hasFeaturedImage())
+								<figure class="media-left">
+								    <p class="image is-64x64">
+								      <img src="{{$post->featured_image}}" alt="photo">
+								    </p>
+								 </figure>
+							@endif
 							<div class="media-content">
 								<h3><a class="has-text-black" href="{{$post->path()}}">{{$post->title}}<strong>Click to Read</strong></a></h3>
 							</div>

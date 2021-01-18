@@ -64,7 +64,7 @@ class Post extends Model
 
     public function hasFeaturedImage()
     {
-        return isset($this->featured_image);
+        return $this->featured_image !== "";
     }
 
     public function getFeaturedImageAttribute($image)
