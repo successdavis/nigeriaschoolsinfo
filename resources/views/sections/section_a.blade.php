@@ -46,7 +46,7 @@
 					@foreach ($scholarships as $scholarship)
 						<article class="media">
 							<div class="media-content">
-								<h3><a class="has-text-black" href="{{$scholarship->path()}}">{{$scholarship->name}}<strong> Click to Read</strong></a></h3>
+								<h3><a class="has-text-black" href="{{$scholarship->path()}}">{{$scholarship->title}}<strong> Click to Read</strong></a></h3>
 							</div>
 						</article>
 					@endforeach
