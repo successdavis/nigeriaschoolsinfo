@@ -149,17 +149,6 @@ class CoursesController extends Controller
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Courses  $courses
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Courses $courses)
-    {
-        //
-    }
-
     public function getCourses($schools, $filters)
     {
         $courses = Courses::latest()->filter($filters);

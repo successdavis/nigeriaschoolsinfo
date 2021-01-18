@@ -37,8 +37,5 @@ class CourseFilters extends Filters
         return $this->builder->where(function ($query) use ($s) {
             $query->where('name', 'LIKE', "%{$s}%");
         });
-
-        // return $result = $this->builder->where('name', 'LIKE', '%' . $s . '%')
-        //     ->orWhere('description', 'LIKE', '%' . $s . '%');
     }
 }
