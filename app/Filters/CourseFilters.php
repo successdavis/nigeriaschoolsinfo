@@ -34,7 +34,7 @@ class CourseFilters extends Filters
     protected function s($s)
     {
         if ($s == null) {
-            return [];
+            return;
         }
 
         return $this->builder->where(function ($query) use ($s) {
