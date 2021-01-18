@@ -33,9 +33,6 @@ class CourseFilters extends Filters
     
     protected function s($s)
     {
-        if ($s == null) {
-            return;
-        }
 
         return $this->builder->where(function ($query) use ($s) {
             $query->where('name', 'LIKE', "%{$s}%");
