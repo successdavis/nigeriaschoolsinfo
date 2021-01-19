@@ -19,7 +19,7 @@
                   PROJECTS
               </a>
 
-              <a href="/courses" class="navbar-item">
+              <a href="/courses-offered-in-nigeria-institutions" class="navbar-item">
                   COURSES
               </a>
 
@@ -115,7 +115,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/courses">
+                        <a href="/courses-offered-in-nigeria-institutions">
                             <span class="icon"><i class="mdi mdi-bookshelf"></i></span>
                             <span class="menu-list-label">Courses</span>
                         </a>

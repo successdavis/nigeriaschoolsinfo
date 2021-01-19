@@ -96,7 +96,7 @@ Route::get('/schools-offering/{course}', 'CoursesController@getschools');
 Route::get('/schools/{schools}/courses', 'CoursesController@index')->name('schoolCourses');
 Route::get('/schools/{schools}/coursesnotoffered', 'CourseSchoolAttachmentController@coursesnotoffered');
 
-Route::get('/courses', 'CoursesController@index')->name('courses.index');
+Route::get('/courses-offered-in-nigeria-institutions', 'CoursesController@index')->name('courses.index');
 Route::get('/courseswithschoolattach/{schools}', 'CourseSchoolAttachmentController@courses');
 Route::get('/editcourse/{course}', 'CoursesController@edit')->name('courses.edit');
 

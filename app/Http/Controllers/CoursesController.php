@@ -20,11 +20,14 @@ class CoursesController extends Controller
     public function index(Schools $schools, CourseFilters $filters)
     {
         $courses = Courses::latest()->get();
-        // $courses = $this->getCourses($schools, $filters);
+        $courses = $this->getCourses($schools, $filters);
 
-        if (request()->wantsJson()) {
-            return CourseResource::collection($courses);
-        }
+        dd($courses);
+
+        // if (request()->wantsJson()) {
+        //     return CourseResource::collection($courses);
+        // }
+
         // $faculties = Faculty::all();
         // return view('courses.index', compact('courses', 'faculties'));
     }

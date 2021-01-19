@@ -4,7 +4,7 @@
         <dashboard title="NIGERIASCHOOLINFO"  mode="push" :desktop="true">
             
             <template slot="navigation">
-                <div class="navbar-start">
+                <!-- <div class="navbar-start">
                   <a class="navbar-item">
                     Home
                   </a>
@@ -34,9 +34,9 @@
                       </a>
                     </div>
                   </div>
-                </div>
+                </div> -->
 
-                <div class="navbar-end">
+                <!-- <div class="navbar-end">
                   <div class="navbar-item">
                     <div class="buttons">
                       <a class="button is-primary">
@@ -47,7 +47,7 @@
                       </a>
                     </div>
                   </div>
-                </div>                
+                </div>  -->               
             </template>
 
             <template slot="drawermenu" slot-scope="props">
