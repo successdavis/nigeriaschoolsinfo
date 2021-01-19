@@ -19,17 +19,14 @@ class CoursesController extends Controller
      */
     public function index(Schools $schools, CourseFilters $filters)
     {
-        $courses = Courses::latest()->get();
         $courses = $this->getCourses($schools, $filters);
 
-        dd($courses);
+        if (request()->wantsJson()) {
+            return CourseResource::collection($courses);
+        }
 
-        // if (request()->wantsJson()) {
-        //     return CourseResource::collection($courses);
-        // }
-
-        // $faculties = Faculty::all();
-        // return view('courses.index', compact('courses', 'faculties'));
+        $faculties = Faculty::all();
+        return view('courses.index', compact('courses', 'faculties'));
     }
 
     /**
@@ -155,7 +152,7 @@ class CoursesController extends Controller
 
     public function getCourses($schools, $filters)
     {
-        $courses = Courses::latest()->filter($filters);
+        $courses = Courses::orderBy('name')->filter($filters);
         if ($schools->exists) {
             $courses = $schools->courses();
         }
