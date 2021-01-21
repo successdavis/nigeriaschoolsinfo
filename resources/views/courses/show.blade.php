@@ -14,6 +14,8 @@
   	{{-- <meta property="og:image" content="{{ asset('storage/'.$courses->featured_image) }}"> --}}
   	<meta property="og:type" content="article" />
   	<link rel="canonical" href="{{ url($courses->path()) }}" />
+	<meta name=”robots” content=”index, follow”>
+
 @endsection
 
 @section('content')
@@ -70,6 +72,13 @@
 
 				<h2 class="is-size-4 mt-medium">{{$courses->short_name}} Special Consideration</h2>
 				<details>{!! nl2br($courses->considerations) !!}</details>
+
+				<div class="section">
+					<a class="button is-link is-outlined" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ url($courses->path()) }}&display=popup">
+					<img style="width: 20px; margin-right: .4em;" src="{{url('/images/facebook.svg')}}"> Share Post </a>
+
+					<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-via="@NSISnews" data-hashtags="Nigeria News, Asu, WaecNigeria, jamb" data-related="NSISnews,S_techmax" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+				</div>
 
 			</div>
 		</div>

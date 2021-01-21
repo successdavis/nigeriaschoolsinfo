@@ -8,6 +8,17 @@
     <meta name="description" content="
      {{$post->meta_description}}
      ">
+	<link rel="canonical" href="{{ url($post->path()) }}" />
+	<meta name=”robots” content=”index, follow”>
+
+    <meta property="og:url"           content="{{ url($post->path()) }}"/>
+	<meta property="og:type"          content="website" />
+	<meta property="og:title"         content="{{$post->title}}" />
+	<meta property="og:description"   content="{{$post->meta_description}}" />
+	<meta property="og:image"         content="{{$post->featured_image}}" />
+	<meta property="og:site_name" 	content="Nigeria School Info" />
+
+
 @endsection
 
 @section('content')
@@ -56,6 +67,9 @@
 
 
 					        	{!! nl2br($post->body) !!}
+
+					        	@include('/layouts/sharebtn')
+
 					        </p>
 					      </div>
 					    </article>

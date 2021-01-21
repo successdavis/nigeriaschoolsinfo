@@ -28,6 +28,8 @@
 					<div class="content">
 						<p>{!! nl2br($scholarship->description) !!}</p>
 					</div>
+
+		        	@include('/layouts/sharebtn')
 					
 					@include ('sections/ads/in-article')
 

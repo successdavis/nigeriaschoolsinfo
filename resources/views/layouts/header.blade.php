@@ -18,10 +18,10 @@
 
     {{-- <script data-ad-client="ca-pub-3146034280624513" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> --}}
 
+    @yield('head')
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    @yield('head')
     <script>
         window.App = {!! json_encode([
             'user' => Auth::user(),

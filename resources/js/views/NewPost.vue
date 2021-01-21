@@ -153,7 +153,7 @@
 				},
 
 				findcourses: {
-					url: '/courses',
+					url: '/courses-offered-in-nigeria-institutions',
 					title: 'name',
 					label: 'Enter Course Name',
 				},
