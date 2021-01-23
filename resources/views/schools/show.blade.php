@@ -14,6 +14,8 @@
   	<meta property="og:image" content="{{asset($school->logo_path)}}">
   	<meta property="og:type" content="article" />
   	<link rel="canonical" href="{{ url($school->path()) }}" />
+	<meta name=”robots” content=”index, follow”>
+  	
 @endsection
 
 

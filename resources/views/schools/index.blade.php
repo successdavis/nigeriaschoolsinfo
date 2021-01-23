@@ -34,8 +34,8 @@
 						      <select v-model="path" @change="sort">
 							    <option value="" selected>All</option>
 							    <option value="/schools/type/university?a=admitting">Still Admitting</option>
-							  	@foreach ($schooltype as $type)
-							    	<option value="{{$type->path()}}?">{{$type->name}}</option>
+							  	@foreach ($programme as $programme)
+							    	<option value="{{$programme->path()}}?">{{$programme->name}}</option>
 					            @endforeach
 							    <option v-for="sort in sortLinks" value="/schools/type/university?q=federal" v-text="sort.name"></option>
 							  </select>

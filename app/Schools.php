@@ -35,9 +35,9 @@ class Schools extends Model
         });
     }
 
-    public function SchoolType()
+    public function programme()
     {
-        return $this->belongsTo('App\SchoolType');
+        return $this->belongsTo('App\Programme');
     }
 
     public function courses()

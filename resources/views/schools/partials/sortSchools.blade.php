@@ -8,11 +8,11 @@
 	Still Admitting
 </label>
 
-@foreach ($schooltype as $type)
+@foreach ($programme as $programme)
 
 	<label class="checkbox sort_school_options">
-		<input id="{{$type->id}}"  type="checkbox"  @click="setOptions" v-model="checkedNames" value="{{$type->path()}}?">
-		{{$type->name}}
+		<input id="{{$programme->id}}"  type="checkbox"  @click="setOptions" v-model="checkedNames" value="{{$programme->path()}}?">
+		{{$programme->name}}
 	</label>
 
 @endforeach

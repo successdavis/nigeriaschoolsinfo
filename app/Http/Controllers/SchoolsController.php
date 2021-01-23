@@ -6,7 +6,7 @@ use App\Courses;
 use App\Filters\SchoolFilters;
 use App\Http\Resources\SchoolResource;
 use App\School;
-use App\SchoolType;
+use App\Programme;
 use App\Schools;
 use App\Sponsored;
 use App\States;
@@ -19,9 +19,9 @@ class SchoolsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(SchoolType $schooltype, SchoolFilters $filters)
+    public function index(Programme $programme, SchoolFilters $filters)
     {
-        $schools = $this->getSchools($schooltype, $filters);
+        $schools = $this->getSchools($programme, $filters);
 
         if (request()->wantsJson()) {
             return SchoolResource::collection($schools);
@@ -182,12 +182,12 @@ class SchoolsController extends Controller
         //
     }
 
-    public function getSchools($schooltype, $filters)
+    public function getSchools($programme, $filters)
     {
         $schools = Schools::orderBy('name')->filter($filters);
 
-        if ($schooltype->exists) {
-            $schools->where('school_type_id', $schooltype->id);
+        if ($programme->exists) {
+            $schools->where('school_type_id', $programme->id);
         }
 
         return $schools = $schools->paginate(20);
@@ -215,7 +215,7 @@ class SchoolsController extends Controller
      */
     public function cschoolrequirements()
     {
-        $Types = SchoolType::all();
+        $Types = Programme::all();
         $Sponsored = Sponsored::all();
         $States = States::all();
 

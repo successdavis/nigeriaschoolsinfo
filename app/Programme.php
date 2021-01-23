@@ -3,11 +3,14 @@
 namespace App;
 
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SchoolType extends Model
+class Programme extends Model
 {
-	protected $guarded = [];
+    use HasFactory;
+
+    protected $guarded = [];
 	protected static function boot()
     {
         parent::boot();

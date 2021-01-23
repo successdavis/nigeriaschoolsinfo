@@ -28,9 +28,9 @@
                     SCHOOLS
                 </a>
                 <div class="navbar-dropdown">
-                    @foreach ($schooltype as $type)
-                    <a href="{{$type->path()}}" class="navbar-item">
-                        {{$type->name}}
+                    @foreach ($programme as $programme)
+                    <a href="{{$programme->path()}}" class="navbar-item">
+                        {{$programme->name}}
                     </a>
                     @endforeach
                     <hr class="navbar-divider">

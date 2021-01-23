@@ -13,6 +13,8 @@
   	<meta property="og:image" content="{{ asset('storage/'.$job->featured_image) }}">
   	<meta property="og:type" content="article" />
   	<link rel="canonical" href="{{ url($job->path()) }}" />
+	<meta name=”robots” content=”index, follow”>
+  	
 @endsection
 
 @section('content')

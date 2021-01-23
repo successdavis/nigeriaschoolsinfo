@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Projectcategory;
-use App\SchoolType;
+use App\Programme;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,10 +28,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         \View::composer(['*'], function ($view) {
-            $schooltype = \Cache::rememberForever('schooltype', function() {
-                return SchoolType::all();
+            $schooltype = \Cache::rememberForever('programme', function() {
+                return Programme::all();
             });
-            $view->with('schooltype', $schooltype);
+            $view->with('programme', $schooltype);
         });
         // \View::composer('project.index', function ($view) {
         //     $projectcategories = \Cache::rememberForever('projectcategories', function() {

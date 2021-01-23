@@ -36,9 +36,9 @@ class SchoolResource extends JsonResource
             'email'             => $this->email,
             'slug'              => $this->slug,
             'path'              => $this->path(),
-            'excerpt'              => $this->excerpt(),
+            'excerpt'           => $this->excerpt(),
             'courses_count'     => $this->courses->count(),
-            'level'             => $this->SchoolType->name,
+            'programme'         => $this->programme->name,
             'sponsor'           => $this->sponsored->name,
 
         ];

@@ -26,7 +26,7 @@ class CreateSchoolsTable extends Migration
             $table->unsignedInteger('lga_id');
             $table->text('address')->nullable();
             $table->boolean('admitting')->default(false);
-            $table->unsignedInteger('school_type_id'); // University, Polytechnics, Nurses School
+            $table->unsignedInteger('programme_id'); // University, Polytechnics, Nurses School
             $table->unsignedInteger('sponsored_id'); // Federal, State, Private etc
             $table->string('jamb_points')->nullable();
             $table->string('phone')->nullable();
