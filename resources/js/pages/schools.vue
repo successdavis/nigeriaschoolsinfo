@@ -4,12 +4,12 @@
 		data () {
 			return {
                 sortLinks: [
-                    {"name" : "Federal Universities", "value" : "/schools/type/university?q=federal"},
-                    {"name" : "State Universities", "value" : "/schools/type/university?q=state"},
-                    {"name" : "Private Universities", "value" : "/schools/type/university?q=private"},
-                    {"name" : "Federal Polytechnics", "value" : "/schools/type/polytechnic?q=federal"},
-                    {"name" : "State Polytechnics", "value" : "/schools/type/polytechnic?q=state"},
-                    {"name" : "Private Polytechnics", "value" : "/schools/type/polytechnic?q=private"},
+                    {"name" : "Federal Universities", "value" : "/schools/programme/degree-university?q=federal"},
+                    {"name" : "State Universities", "value" : "/schools/programme/degree-university?q=state"},
+                    {"name" : "Private Universities", "value" : "/schools/programme/degree-university?q=private"},
+                    {"name" : "Federal Polytechnics", "value" : "/schools/programme/polytechnic?q=federal"},
+                    {"name" : "State Polytechnics", "value" : "/schools/programme/polytechnic?q=state"},
+                    {"name" : "Private Polytechnics", "value" : "/schools/programme/polytechnic?q=private"},
                 ],
 				isLoading: false,
 				schools: '',

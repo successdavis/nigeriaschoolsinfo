@@ -187,7 +187,7 @@ class SchoolsController extends Controller
         $schools = Schools::orderBy('name')->filter($filters);
 
         if ($programme->exists) {
-            $schools->where('school_type_id', $programme->id);
+            $schools->where('programme_id', $programme->id);
         }
 
         return $schools = $schools->paginate(20);

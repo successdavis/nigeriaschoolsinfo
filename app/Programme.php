@@ -49,6 +49,6 @@ class Programme extends Model
 
 	public function path()
     {
-        return '/schools/type/' . $this->slug;
+        return '/schools/programme/' . $this->slug;
     }
 }

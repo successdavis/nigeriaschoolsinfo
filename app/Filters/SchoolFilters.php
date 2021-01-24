@@ -18,7 +18,7 @@ class SchoolFilters extends Filters
     {
         $this->builder->getQuery()->orders = [];
         if (! Sponsored::where('slug', $sponsored)->exists()) {
-            abort(422, 'Bad Request');
+            abort(418, 'I am a teapot - bug');
         }
         $sponsored = Sponsored::where('slug', $sponsored)->get();
         
@@ -57,14 +57,4 @@ class SchoolFilters extends Filters
     //         $q->where('courses_id', $course);
     //     });
     // }
-
-    public function type($type)
-    {
-        if (empty($type)) {
-            return $this->builder;
-        }
-        
-        $this->builder->getQuery()->orders = [];
-        return $this->builder->where('school_type_id', $type);
-    }
 }
