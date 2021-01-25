@@ -77,7 +77,7 @@ class Schools extends Model
 
     public function TypeOf()
     {
-        return $this->SchoolType->name;
+        return $this->Programme->name;
     }
 
     public function getLogoPathAttribute($logo)
