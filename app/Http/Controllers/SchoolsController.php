@@ -21,7 +21,6 @@ class SchoolsController extends Controller
      */
     public function index(Programme $programme, SchoolFilters $filters)
     {
-    	dd($programme);
         $schools = $this->getSchools($programme, $filters);
 
         if (request()->wantsJson()) {
