@@ -65,8 +65,8 @@ Route::get('/exams/{exams}', 'ExamsController@show')->name('exams.show');
 // /schools/type/university?a=admitting&page=1
 
 Route::get('/schools', 'SchoolsController@index')->name('schools.index');
+Route::get('/schools/show/{school}', 'SchoolsController@show')->name('schools.show');
 Route::get('/schools/programme/{programme}', 'SchoolsController@index')->name('schoolsInType');
-Route::get('/schools/{school}', 'SchoolsController@show')->name('schools.show');
 
 // Route::get('/find/school', 'SchoolsController@findschool')->name('schools.findschool');
 
