@@ -39,6 +39,11 @@ class Courses extends Model
         return $this->belongsToMany(Schools::class)->withPivot('cut_off_points');
     }
 
+    public function programmes()
+    {
+        return $this->belongsToMany(Programme::class)->withTimestamps();
+    }
+
     public function subjects()
     {
         return $this->belongsToMany(Subject::class);

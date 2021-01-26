@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Courses;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -46,6 +47,11 @@ class Programme extends Model
         return $this->hasMany('App\Project');
     }
 
+
+    public function courses()
+    {
+        return $this->belongsToMany(Courses::class)->withTimestamps();
+    }
 
 	public function path()
     {

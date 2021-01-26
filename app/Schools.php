@@ -4,6 +4,7 @@ namespace App;
 
 use App\Faculties;
 use App\Lga;
+use App\Programme;
 use App\Sponsored;
 use App\States;
 use App\Traits\Insertinbetweentext;
@@ -35,9 +36,9 @@ class Schools extends Model
         });
     }
 
-    public function programme()
+    public function programmes()
     {
-        return $this->belongsTo('App\Programme');
+        return $this->belongsToMany(Programme::class)->withTimestamps();
     }
 
     public function courses()
