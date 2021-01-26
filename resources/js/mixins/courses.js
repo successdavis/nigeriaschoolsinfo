@@ -9,6 +9,7 @@ export default {
             checkedFaculty: [],
             isLoading: false,
             sort: '',
+            path: '',
         };
     },
 
@@ -18,11 +19,20 @@ export default {
 
     watch: {
         sort() {
+            this.path = '';
             this.fetch();
-        }
+        },
+        path() {
+            this.sort = '';
+            this.fetch();
+        },
     },
 
     methods: {
+        setPath(e){
+            this.checkedFaculty = [e.target.value];
+            this.path = e.target.value;
+        },
         setOptions (e) {
             this.checkedFaculty = [e.target.value];
             this.sort = e.target.value;
@@ -37,6 +47,10 @@ export default {
                 let query = location.search.match(/page=(\d+)/);
 
                 page = query ? query[1] : 1;
+            }
+            
+            if (this.path) {
+                 return `/programme/${this.path}/courses`;
             }
 
             if (this.sort) {

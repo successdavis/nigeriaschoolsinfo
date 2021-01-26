@@ -6892,7 +6892,8 @@ __webpack_require__.r(__webpack_exports__);
       page: '',
       checkedFaculty: [],
       isLoading: false,
-      sort: ''
+      sort: '',
+      path: ''
     };
   },
   created: function created() {
@@ -6900,10 +6901,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     sort: function sort() {
+      this.path = '';
+      this.fetch();
+    },
+    path: function path() {
+      this.sort = '';
       this.fetch();
     }
   },
   methods: {
+    setPath: function setPath(e) {
+      this.checkedFaculty = [e.target.value];
+      this.path = e.target.value;
+    },
     setOptions: function setOptions(e) {
       this.checkedFaculty = [e.target.value];
       this.sort = e.target.value;
@@ -6916,6 +6926,10 @@ __webpack_require__.r(__webpack_exports__);
       if (!page) {
         var query = location.search.match(/page=(\d+)/);
         page = query ? query[1] : 1;
+      }
+
+      if (this.path) {
+        return "/programme/".concat(this.path, "/courses");
       }
 
       if (this.sort) {

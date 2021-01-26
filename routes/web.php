@@ -91,7 +91,7 @@ Route::get('/coursesnotattached/{school}', 'CourseSchoolAttachmentController@get
 // This url change from /coursesattached/{school}
 Route::get('/courses-offered-in/{school}', 'CourseSchoolAttachmentController@getLinkedCourses')->name('courses.getLinkedCourses');
 
-Route::get('/all-courses-offered-in/{programme}', 'CoursesController@index')->name('courses.getLinkedCourses');
+Route::get('/programme/{programme}/courses', 'CoursesController@index')->name('courses.getLinkedCourses');
 
 Route::get('/schools-offering/{course}', 'CoursesController@getschools');
 

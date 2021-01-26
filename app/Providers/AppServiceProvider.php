@@ -28,10 +28,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         \View::composer(['*'], function ($view) {
-            $schooltype = \Cache::rememberForever('programme', function() {
+            $programmes = \Cache::rememberForever('programme', function() {
                 return Programme::all();
             });
-            $view->with('programme', $schooltype);
+            $view->with('programme', $programmes);
         });
         // \View::composer('project.index', function ($view) {
         //     $projectcategories = \Cache::rememberForever('projectcategories', function() {

@@ -1,3 +1,12 @@
+<div class="container">
+	{{-- ==== Google Adsense Display Ads ===== --}}
+    @include ('sections/ads/horizontal_banner')
+</div>
+    
+
+
+
+
 @extends('layouts.app')
 
 
