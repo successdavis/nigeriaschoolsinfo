@@ -58,6 +58,8 @@
 						<span v-for="(school, index) in schools">
 							@include('schools.partials.schoolCard')
 						</span>
+		  	            <b-loading :is-full-page="true" v-model="isLoading" :can-cancel="true"></b-loading>
+						
 				        <paginator :dataSet="dataSet" @changed="fetch"></paginator>
 					</div>
 				</div>

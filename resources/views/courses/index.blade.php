@@ -21,7 +21,7 @@
 	<div class="container">
 		<div class="mt-medium remove-max-width">
 			<div class="section">
-				<h1 class="has-text-centered content">Courses offered in Nigeria Universities, Polytechnics, Colleges, Nurses etc.</h1>
+				<h2 class="has-text-centered content">Courses offered in Nigeria Universities, Polytechnics, Colleges, Nurses etc.</h2>
 			</div>
 			<div class="columns">
 				<div class="column is-hidden-touch section">
@@ -59,6 +59,8 @@
 						<span v-for="(course, index) in courses">
 							@include('courses.partials.courseCard')
 						</span>
+		  	            <b-loading :is-full-page="true" v-model="isLoading" :can-cancel="true"></b-loading>
+
 				        <paginator :dataSet="dataSet" @changed="fetch"></paginator>
 					</div>
 				</div>

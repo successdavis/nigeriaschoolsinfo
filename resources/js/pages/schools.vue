@@ -44,6 +44,7 @@
             }, 700),
 
             fetch(page) {
+                this.isLoading = true;
                 axios.get(this.url(page)).then(this.refresh);
             },
 

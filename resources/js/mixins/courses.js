@@ -28,6 +28,7 @@ export default {
             this.sort = e.target.value;
         },
         fetch(page) {
+            this.isLoading = true;
             axios.get(this.url(page)).then(this.refresh);
         },
 
