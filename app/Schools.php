@@ -36,9 +36,9 @@ class Schools extends Model
         });
     }
 
-    public function programmes()
+    public function programme()
     {
-        return $this->belongsToMany(Programme::class)->withTimestamps();
+        return $this->belongsTo(Programme::class);
     }
 
     public function courses()

@@ -91,9 +91,10 @@ Route::get('/coursesnotattached/{school}', 'CourseSchoolAttachmentController@get
 // This url change from /coursesattached/{school}
 Route::get('/courses-offered-in/{school}', 'CourseSchoolAttachmentController@getLinkedCourses')->name('courses.getLinkedCourses');
 
+Route::get('/all-courses-offered-in/{programme}', 'CoursesController@index')->name('courses.getLinkedCourses');
+
 Route::get('/schools-offering/{course}', 'CoursesController@getschools');
 
-Route::get('/schools/{schools}/courses', 'CoursesController@index')->name('schoolCourses');
 Route::get('/schools/{schools}/coursesnotoffered', 'CourseSchoolAttachmentController@coursesnotoffered');
 
 Route::get('/courses-offered-in-nigeria-institutions', 'CoursesController@index')->name('courses.index');

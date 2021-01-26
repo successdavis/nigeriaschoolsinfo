@@ -6,7 +6,7 @@ use App\Courses;
 use App\Faculty;
 use App\Filters\CourseFilters;
 use App\Http\Resources\CourseResource;
-use App\Schools;
+use App\Programme;
 use App\Subject;
 use Illuminate\Http\Request;
 
@@ -17,9 +17,9 @@ class CoursesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Schools $schools, CourseFilters $filters)
+    public function index(Programme $programme, CourseFilters $filters)
     {
-        $courses = $this->getCourses($schools, $filters);
+        $courses = $this->getCourses($programme, $filters);
 
         if (request()->wantsJson()) {
             return CourseResource::collection($courses);
@@ -150,11 +150,11 @@ class CoursesController extends Controller
         
     }
 
-    public function getCourses($schools, $filters)
+    public function getCourses($programme, $filters)
     {
         $courses = Courses::orderBy('name')->filter($filters);
-        if ($schools->exists) {
-            $courses = $schools->courses();
+        if ($programme->exists) {
+            $courses = $programme->courses();
         }
 
         return $courses = $courses->paginate(25);
