@@ -33,6 +33,7 @@ class CourseResource extends JsonResource
             'subjects'       => $this->subjects,
             'path'           => $this->path(),
             'visits'           => $this->visits,
+            'programmes'       => $this->programmes()->pluck('id'),
 
         ];
     }

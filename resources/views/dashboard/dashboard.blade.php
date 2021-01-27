@@ -97,7 +97,7 @@
                             type="dropdown"
                             :items="[
                                 {
-                                    link: '/courses',
+                                    link: '/courses-offered-in-nigeria-institutions',
                                     label: 'All Courses'
                                 },
                                 {

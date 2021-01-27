@@ -58,6 +58,7 @@ class CoursesController extends Controller
             'utme_requirement'      => 'nullable|string',
             'direct_requirement'    => 'nullable|string',
             'considerations'        => 'nullable|string',
+            'selectedprogrammes'    => 'required|array'
         ]);
         
         // dd(request()->all());
@@ -73,6 +74,8 @@ class CoursesController extends Controller
             'direct_requirement'    =>  $request->direct_requirement,
             'considerations'        =>  $request->considerations,
         ]);
+
+        $course->programmes()->attach($request->selectedprogrammes);
 
         if (request()->wantsJson()) {
             return response($course, 201);

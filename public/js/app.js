@@ -4846,7 +4846,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     fetch: function fetch(page) {
       this.isLoading = true;
-      axios.get('/courses', {
+      axios.get('/courses-offered-in-nigeria-institutions', {
         params: {
           page: page,
           // column: this.sortedColumn,
@@ -5966,6 +5966,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -5975,6 +5985,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       course: '',
       faculties: [],
+      programmes: [],
       showErrors: false,
       errorMessage: '',
       matchedCourses: [],
@@ -5993,7 +6004,8 @@ __webpack_require__.r(__webpack_exports__);
         utme_requirement: '',
         direct_requirement: '',
         considerations: '',
-        meta_description: ''
+        meta_description: '',
+        selectedprogrammes: []
       })
     };
   },
@@ -6013,6 +6025,7 @@ __webpack_require__.r(__webpack_exports__);
         this.courseForm.utme_requirement = course.data.data.utme_requirement;
         this.courseForm.direct_requirement = course.data.data.direct_requirement;
         this.courseForm.considerations = course.data.data.considerations;
+        this.courseForm.selectedprogrammes = course.data.data.programmes;
       } else {
         console.log('failed');
       }
@@ -6088,6 +6101,10 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get('/newcourse/courserequirements').then(function (data) {
       _this3.faculties = data.data.faculties;
+    });
+    axios.get('/educationlevels').then(function (data) {
+      console.log(data.data);
+      _this3.programmes = data.data;
     });
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
@@ -7016,7 +7033,7 @@ var routes = [{
   name: 'editschool',
   props: true
 }, {
-  path: '/courses',
+  path: '/courses-offered-in-nigeria-institutions',
   component: _views_Courses_vue__WEBPACK_IMPORTED_MODULE_5__.default
 }, {
   path: '/addcourse',
@@ -64852,6 +64869,84 @@ var render = function() {
               [_vm._v("Basic Information")]
             ),
             _vm._v(" "),
+            _c(
+              "center",
+              { staticClass: "section" },
+              [
+                _vm._l(_vm.programmes, function(programme) {
+                  return _c("label", { staticClass: "checkbox" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.courseForm.selectedprogrammes,
+                          expression: "courseForm.selectedprogrammes"
+                        }
+                      ],
+                      attrs: { type: "checkbox" },
+                      domProps: {
+                        value: programme.id,
+                        checked: Array.isArray(
+                          _vm.courseForm.selectedprogrammes
+                        )
+                          ? _vm._i(
+                              _vm.courseForm.selectedprogrammes,
+                              programme.id
+                            ) > -1
+                          : _vm.courseForm.selectedprogrammes
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.courseForm.selectedprogrammes,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = programme.id,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                _vm.$set(
+                                  _vm.courseForm,
+                                  "selectedprogrammes",
+                                  $$a.concat([$$v])
+                                )
+                            } else {
+                              $$i > -1 &&
+                                _vm.$set(
+                                  _vm.courseForm,
+                                  "selectedprogrammes",
+                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                )
+                            }
+                          } else {
+                            _vm.$set(_vm.courseForm, "selectedprogrammes", $$c)
+                          }
+                        }
+                      }
+                    }),
+                    _vm._v(
+                      "\n\t\t\t\t\t\t  " +
+                        _vm._s(programme.name) +
+                        " \n\t\t\t\t\t\t"
+                    )
+                  ])
+                }),
+                _vm._v(" "),
+                _vm.courseForm.errors.has("selectedprogrammes")
+                  ? _c("p", {
+                      staticClass: "help is-danger",
+                      domProps: {
+                        textContent: _vm._s(
+                          _vm.courseForm.errors.get("selectedprogrammes")
+                        )
+                      }
+                    })
+                  : _vm._e()
+              ],
+              2
+            ),
+            _vm._v(" "),
             _c("div", { staticClass: "field is-horizontal" }, [
               _vm._m(0),
               _vm._v(" "),
@@ -65113,7 +65208,8 @@ var render = function() {
                 ])
               ])
             ])
-          ]
+          ],
+          1
         ),
         _vm._v(" "),
         _c(

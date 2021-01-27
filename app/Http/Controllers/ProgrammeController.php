@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\SchoolType;
+use App\Programme;
 use Illuminate\Http\Request;
 
-class EducationLevelController extends Controller
+class ProgrammeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class EducationLevelController extends Controller
      */
     public function index()
     {
-        return $levels = SchoolType::all();
+        return $programmes = Programme::all();
     }
 
     /**

@@ -17,6 +17,16 @@
 			<form @submit.prevent="createCourse" @change="errorMessage=''" novalidate>
 				<div v-show="steps == 1">
 						<div class="is-size-4 has-text-centered	mb-small">Basic Information</div>
+						
+						<center class="section">
+							<label class="checkbox" v-for="programme in programmes">
+							  <input type="checkbox" v-model="courseForm.selectedprogrammes" :value="programme.id">
+							  {{programme.name}} 
+							</label>
+					      <p class="help is-danger" v-if="courseForm.errors.has('selectedprogrammes')" v-text="courseForm.errors.get('selectedprogrammes')"></p>
+						</center>
+
+
 						<div class="field is-horizontal">
 						  <div class="field-label is-normal">
 						    <label class="label">*Name</label>
@@ -212,6 +222,7 @@
 			return {
 				course: '',
 				faculties: [],
+				programmes: [],
 				showErrors: false,
 				errorMessage: '',
 				matchedCourses: [],
@@ -231,6 +242,7 @@
 					direct_requirement: '',
 					considerations: '',
 					meta_description: '',
+					selectedprogrammes: [],
 				}),
 			}
 		},
@@ -252,6 +264,7 @@
 						this.courseForm.utme_requirement = course.data.data.utme_requirement
 						this.courseForm.direct_requirement = course.data.data.direct_requirement
 						this.courseForm.considerations = course.data.data.considerations
+						this.courseForm.selectedprogrammes = course.data.data.programmes
 			    } else {
 			        console.log('failed')
 			    }
@@ -323,6 +336,11 @@
 			axios.get('/newcourse/courserequirements')
     		.then (data => {
     			this.faculties = data.data.faculties;
+			});
+			axios.get('/educationlevels')
+    		.then (data => {
+    			console.log(data.data);
+    			this.programmes = data.data;
 			});
 		},
 		beforeRouteEnter (to, from, next) {

@@ -97,6 +97,7 @@ Route::get('/schools-offering/{course}', 'CoursesController@getschools');
 
 Route::get('/schools/{schools}/coursesnotoffered', 'CourseSchoolAttachmentController@coursesnotoffered');
 
+// was previously /courses
 Route::get('/courses-offered-in-nigeria-institutions', 'CoursesController@index')->name('courses.index');
 Route::get('/courseswithschoolattach/{schools}', 'CourseSchoolAttachmentController@courses');
 Route::get('/editcourse/{course}', 'CoursesController@edit')->name('courses.edit');
@@ -137,7 +138,7 @@ Route::get('/projectscategories', 'ProjectcategoryController@index')->name('proj
 
 // This method retrieve all the school types, 
 // that's the level of education, nurse, nce, degree etc
-Route::get('/educationlevels', 'EducationLevelController@index')->name('schooltype.index');
+Route::get('/educationlevels', 'ProgrammeController@index')->name('schooltype.index');
 
 
 Route::post('/initializepayment', 'PaymentController@create')->name('payment.create');

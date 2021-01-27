@@ -138,7 +138,7 @@
         methods: {
         	fetch(page) {
 				this.isLoading = true;
-				axios.get('/courses', {
+				axios.get('/courses-offered-in-nigeria-institutions', {
                     params: {
                         page: page,
                         // column: this.sortedColumn,

@@ -47,7 +47,7 @@ let routes = [
 	},
 
 	{
-		path: '/courses',
+		path: '/courses-offered-in-nigeria-institutions',
 		component: Courses
 	},
 
