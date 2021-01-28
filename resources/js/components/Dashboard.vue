@@ -6,7 +6,7 @@
       </div>
       <div class="drawer_overlay is-hidden-tablet" v-if="drIsOpen" @click="drIsOpen = false" v-cloak></div>
 
-      <nav :class="desktop == true ? 'is-desktop' : '' " class="navbar navbar-wrapper__child" role="navigation" aria-label="main navigation">
+      <nav :class="desktop == true ? 'is-desktop' : '' " class="navbar is-fixed-top navbar-wrapper__child" role="navigation" aria-label="main navigation">
           <div class="navbar-brand is-flex-touch justify-content-touch">
               <a :class="desktop == true ? 'is-desktop' : '' "   @click.prevent="drawerToggle" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
                   <span aria-hidden="true"></span>

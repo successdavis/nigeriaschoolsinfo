@@ -23,14 +23,14 @@
     @include ('sections/ads/horizontal_banner')
 
 <div class="container">
-	<div class="columns">
+	<div class="columns is-gapless">
 		<div class="column is-three-quarters">
 			@auth
 				@can('update schools')
 					<a href="/schools/{{$school->slug}}/edit" class="button">Edit School</a>
 				@endcan
 			@endauth
-			<div class="section">
+			<div class="">
 				<article class="media mb-small is-hidden-desktop">
 					<figure class="media-left">
 						<p class="image is-48x48">
@@ -70,7 +70,7 @@
 					<div class="is-size-5-desktop"><strong>Sponsor:</strong> {{$school->sponsored->name}} </div>
 				</div>
 				<div class="mb-small">
-					<div class="is-size-3">{{$school->short_name}} Admission Info: </div>
+					<div class="is-size-4">{{$school->short_name}} Admission Info: </div>
 					@if ($school->isAdmitting())
 						<div class="is-size-5-desktop">{{$school->short_name}} is open for application to new intake</div>
 						<div class="is-size-5-desktop">Interested candidates can find below the website address and portal for application, if you have trouble applying, use the contact information provided here <a target="_blank" href="https://www.sleettech.com">www.sleettech.com</a> for documented steps and procedures to successfully complete your application.</div>
@@ -82,8 +82,8 @@
 			    @include ('sections/ads/in-article')
 
 				<div class="mb-small">
-					<div class="is-size-3 ">Description</div>
-					<p class="is-size-5-desktop">{!! nl2br($school->description) !!}</p>
+					<div class="is-size-4 ">Description</div>
+					<p class="content has-text-justified">{!! nl2br($school->description) !!}</p>
 
 					<div class="section content">
 						<h3>Recommended Articles</h3>
@@ -92,17 +92,16 @@
 						@endforeach
 					</div>
 				    
-				    <h3 class="is-size-3">{{ucfirst($school->short_name)}} cut off mark</h3>
-				    <p class="content is-size-5">The average cut off mark for {{$school->short_name}} is {{$school->jamb_points}}. It is important to note that this cut off mark may not be applicable for all courses, some courses may require you to score higher, while some even lower. <br>
+				    <h3 class="is-size-4">{{ucfirst($school->short_name)}} cut off mark</h3>
+				    <p class="content has-text-justified">The average cut off mark for {{$school->short_name}} is {{$school->jamb_points}}. It is important to note that this cut off mark may not be applicable for all courses, some courses may require you to score higher, while some even lower. <br>
 				    
 				    @include ('sections/ads/in-feed')
 
 				    To view a complete list of courses and their required cut off mark for {{$school->short_name}}. <a href="/courses-offered-in/{{$school->slug}}">Click here</a>
 				    </p>
 
-
-					<div class="is-size-3 mt-small">Where is {{$school->short_name}} located?</div>
-					<div class="is-size-5-desktop">{{$school->name }} is located in {{$school->state->name}} State, {{$school->lga->name}} Local Government Area.</div>
+					<div class="is-size-4 mt-small">{{$school->short_name}} School Address?</div>
+					<div class="content has-text-justified">{{$school->name }} is located in {{$school->state->name}} State, {{$school->lga->name}} Local Government Area.</div>
 					<div class="is-size-5-desktop">
 						<div class="mt-small"><strong>School Address:</strong> {{$school->address}}</div>
 						<div><strong>Phone Number: </strong> +234{{$school->phone}} </div>
@@ -113,7 +112,7 @@
 				{{-- <p>{!! nl2br(str_replace(" ", "&nbsp;", $school->description)) !!}</p> --}}
 				</div>
 				<div class="mt-small">
-					<div class="is-size-3">{{$school->name}} courses and departments:</div>
+					<h4 class="is-size-4">{{$school->name}} courses and departments:</h4>
 					<div class="is-size-5-desktop mb-small">The following is a list of courses offered in {{$school->short_name}} </div>
 					
 					<table class="table">
@@ -135,7 +134,7 @@
 
 					<a class="button is-large is-success" href="/courses-offered-in/{{$school->slug}}">View All Courses</a>
 				</div>
-				<h2 class="is-size-3 mt-large">Photos of {{$school->name}}</h2>
+				<h4 class="is-size-4 mt-large">Photos of {{$school->name}}</h4>
 				<div class="section">
 					<image-carousel :wraparound="true" :autoplay="true" >
 				        @foreach ($school->photos as $photo)

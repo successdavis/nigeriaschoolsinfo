@@ -22,14 +22,14 @@
 <div class="container">
     @include ('sections/ads/horizontal_banner')
 	
-	<div class="columns">
+	<div class="columns is-gapless">
 		<div class="column is-three-quarters">
-			<div class="section content">
+			<div class="content">
 				
-				<h1 class="is-size-4 mb-medium">Course Title: {{$courses->name}}</h1>
+				<h4 class="content mb-medium">Course Title: {{$courses->name}}</h4>
 
 				<h2 class="is-size-4">Course Description</h2>
-				<p class="is-size-5">{!! nl2br($courses->description) !!}</p>
+				<p class="content has-text-justified">{!! nl2br($courses->description) !!}</p>
 
 				<h2 class="is-size-4">Subject Combination for JAMB</h2>
 				<p>Here are the courses to combine when filling this course for JAMB UTME</p>
@@ -40,13 +40,13 @@
 			    @include ('sections/ads/in-article')
 
 				<h2 class="is-size-4">Course Cut-of-Point</h2>
-				<p>The required cut-of-points for this course ({{$courses->name}}) depends on the school you are applying for, basically every school has a minimum cut of marks for accepting students in this area. Also, it is important to note that your O'level subject is a primary criteria for screening, continue reading to know the required subjects you must have on your O'Level result</p>
+				<p class="content has-text-justified">The required cut-of-points for this course ({{$courses->name}}) depends on the school you are applying for, basically every school has a minimum cut of marks for accepting students in this area. Also, it is important to note that your O'level subject is a primary criteria for screening, continue reading to know the required subjects you must have on your O'Level result</p>
 
 				<h2 class="is-size-4">{{$courses->name}} Requirement UTME</h2>
-				<div class="mb-medium">{{$courses->utme_requirement}}</div>
+				<div class="mb-medium has-text-justified content">{{$courses->utme_requirement}}</div>
 
 				<h2 class="is-size-4">{{$courses->name}} Requirements Direct Entry</h2>
-				<div class="mb-small">{{$courses->direct_requirement}}</div>
+				<div class="mb-small content has-text-justified">{{$courses->direct_requirement}}</div>
 			    
 
 				<h2 class="is-size-4 mt-medium">Schools offering {{$courses->name}}</h2>
