@@ -33,16 +33,17 @@
                         commentable_type: this.commentable_type,
                         commentable_id: this.commentable_id,
                     })
-                    .catch(error => {
-                        flash(error.response.data, 'danger');
-                        this.processing = false;
-                    })
                     .then(({data}) => {
                         this.body = '';
 
                         flash('Your reply has been posted.');
                         this.processing = false;
                         this.$emit('created', data);
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        flash(error.response.data, 'danger');
+                        this.processing = false;
                     });
             }
         }

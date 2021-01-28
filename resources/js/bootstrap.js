@@ -15,6 +15,7 @@ Vue.prototype.authorize = function (...params) {
 
 Vue.prototype.signedIn 	= window.App.signedIn;
 Vue.prototype.user 		= window.App.user;
+Vue.prototype.verified 	= window.App.verified;
 
 import VueRouter from 'vue-router';
 

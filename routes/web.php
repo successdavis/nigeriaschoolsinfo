@@ -1,12 +1,22 @@
 <?php
 
-Auth::routes();
+Auth::routes(['verify' => true]);
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    Auth()->user()->sendEmailVerificationNotification();
+
+    return back()->with('flash', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 Route::get('/post-category/{category}', 'PostcategoryController@show')->name('category.show');
 
 
-Route::post('api/{school}/addlogo', 'SchoolLogoController@store')->name('school.logo')->middleware('auth');
-Route::post('api/{exams}/attachlogo', 'ExamsLogoController@store')->name('exam.logo')->middleware('admin');
+Route::post('api/{school}/addlogo', 'SchoolLogoController@store')->name('school.logo')->middleware(['auth','verified']);
+Route::post('api/{exams}/attachlogo', 'ExamsLogoController@store')->name('exam.logo')->middleware(['auth','verified']);
 
 Route::get('api/advertisements', 'AdvertisementsController@index')->name('advertisements.index');
 Route::get('/api/statelocalgovernments', 'LocationController@index')->name('statelocal.index');
@@ -71,7 +81,7 @@ Route::get('/schools/programme/{programme}', 'SchoolsController@index')->name('s
 // Route::get('/find/school', 'SchoolsController@findschool')->name('schools.findschool');
 
 Route::get('/editschool/{school}', 'SchoolsController@create')->name('schools.edit');
-Route::post('/schools/createschool', 'SchoolsController@store')->name('schools.store');
+Route::post('/schools/createschool', 'SchoolsController@store')->name('schools.store')->middleware(['auth','verified']);
 Route::patch('/schools/{school}/update', 'SchoolsController@update')->name('schools.update');
 Route::patch('/schools/{school}/admission', 'SchoolsController@openAdmission')->name('schools.admission');
 Route::delete('/schools/{school}/admission', 'SchoolsController@closeAdmission')->name('schools.closeadmission');
@@ -83,8 +93,8 @@ Route::get('/createSchoolRequirements', 'SchoolsController@cschoolrequirements')
 Route::get('/schoolsnotattached/{course}', 'CourseSchoolAttachmentController@getNotLinkedSchools')->name('courses.getNotLinkedSchools');
 Route::get('/schoolsattached/{course}', 'CourseSchoolAttachmentController@getLinkedSchools')->name('courses.getLinkedSchools');
 
-Route::post('/school/{schools}/addphoto', 'SchoolphotosController@store')->name('photos.store');
-Route::delete('/schoolphotos/{photo}/removephoto', 'SchoolphotosController@destroy')->name('photos.destroy');
+Route::post('/school/{schools}/addphoto', 'SchoolphotosController@store')->name('photos.store')->middleware(['auth','verified']);
+Route::delete('/schoolphotos/{photo}/removephoto', 'SchoolphotosController@destroy')->name('photos.destroy')->middleware(['auth','verified']);
 Route::get('/api/{schools}/schoolphotos', 'SchoolphotosController@index')->name('photos.show');
 
 Route::get('/coursesnotattached/{school}', 'CourseSchoolAttachmentController@getNotLinkedCourses')->name('courses.getNotLinkedCourses');
@@ -100,31 +110,31 @@ Route::get('/schools/{schools}/coursesnotoffered', 'CourseSchoolAttachmentContro
 // was previously /courses
 Route::get('/courses-offered-in-nigeria-institutions', 'CoursesController@index')->name('courses.index');
 Route::get('/courseswithschoolattach/{schools}', 'CourseSchoolAttachmentController@courses');
-Route::get('/editcourse/{course}', 'CoursesController@edit')->name('courses.edit');
+Route::get('/editcourse/{course}', 'CoursesController@edit')->name('courses.edit')->middleware(['auth','verified']);
 
 Route::get('/course/{courses}', 'CoursesController@show')->name('courses.show');
-Route::post('/courses/createcourse', 'CoursesController@store')->name('courses.store');
+Route::post('/courses/createcourse', 'CoursesController@store')->name('courses.store')->middleware(['auth','verified']);
 Route::get('/find/courses', 'CoursesController@findcourses')->name('courses.find');
 Route::get('/newcourse/courserequirements', 'CoursesController@getrequirements');
-Route::patch('/updatecourse/{courses}', 'CoursesController@update');
+Route::patch('/updatecourse/{courses}', 'CoursesController@update')->middleware(['auth','verified']);
 
 
 Route::get('/faculty/{faculty}', 'FacultiesController@show')->name('faculty.show');
 // change from getfaculties to list-of-faculties
 Route::get('/list-of-faculties', 'FacultiesController@index');
 
-Route::post('/comments/newcomment', 'CommentController@store')->name('comment.store')->middleware('auth');
+Route::post('/comments/newcomment', 'CommentController@store')->name('comment.store')->middleware(['auth','verified']);
 
 Route::get('/comments', 'CommentController@index')->name('comment.index');
 // Temporarily Disabled
 // Route::get('/posts/{post}/comments', 'CommentController@index')->name('comment.index');
 
-Route::delete('/comment/{comment}/destroy', 'CommentController@destroy')->name('comment.destroy');
-Route::patch('/comment/{comment}/update', 'CommentController@update')->name('comment.update');
+Route::delete('/comment/{comment}/destroy', 'CommentController@destroy')->name('comment.destroy')->middleware(['auth','verified']);
+Route::patch('/comment/{comment}/update', 'CommentController@update')->name('comment.update')->middleware(['auth','verified']);
 
 
-Route::post('/projects/{project}/uploadmaterial', 'UploadProjectController@store')->name('project.upload');
-Route::post('/projects/newproject', 'ProjectController@store')->name('project.store');
+Route::post('/projects/{project}/uploadmaterial', 'UploadProjectController@store')->name('project.upload')->middleware(['auth','verified']);
+Route::post('/projects/newproject', 'ProjectController@store')->name('project.store')->middleware(['auth','verified']);
 Route::get('/nigeria-education-project-topics-and-materials', 'ProjectController@index')->name('project.index');
 Route::get('/project/{project}', 'ProjectController@show')->name('project.show');
 Route::patch('project/{project}/update', 'ProjectController@update')->name('project.update');
@@ -141,16 +151,16 @@ Route::get('/projectscategories', 'ProjectcategoryController@index')->name('proj
 Route::get('/educationlevels', 'ProgrammeController@index')->name('schooltype.index');
 
 
-Route::post('/initializepayment', 'PaymentController@create')->name('payment.create');
-Route::post('/payment/{payment}', 'PaymentController@store')->name('payment.store');
+Route::post('/initializepayment', 'PaymentController@create')->name('payment.create')->middleware(['auth','verified']);
+Route::post('/payment/{payment}', 'PaymentController@store')->name('payment.store')->middleware(['auth','verified']);
 
 Route::get('/latest-job-opportunities-and-application', 'JobController@index')->name('jobs.index');
-Route::get('/create-a-new-job', 'JobController@create');
-Route::get('/edit-job/{job}', 'JobController@edit')->name('jobs.create');
-Route::post('/jobs/create', 'JobController@store')->name('jobs.store');
-Route::patch('/jobs/{job}/update', 'JobController@update')->name('jobs.update');
+Route::get('/create-a-new-job', 'JobController@create')->middleware(['auth','verified']);
+Route::get('/edit-job/{job}', 'JobController@edit')->name('jobs.create')->middleware(['auth','verified']);
+Route::post('/jobs/create', 'JobController@store')->name('jobs.store')->middleware(['auth','verified']);
+Route::patch('/jobs/{job}/update', 'JobController@update')->name('jobs.update')->middleware(['auth','verified']);
 Route::get('/jobs/{job}', 'JobController@show')->name('jobs.show');
-Route::post('/jobs/{job}/featured_image', 'JobController@featured_image')->name('jobs.featured_image');
+Route::post('/jobs/{job}/featured_image', 'JobController@featured_image')->name('jobs.featured_image')->middleware(['auth','verified']);
 
 Route::get('/latest-scholarships-opportunities-for-application', 'ScholarshipController@index');
 Route::post('/scholarships/create', 'ScholarshipController@store');
@@ -159,5 +169,5 @@ Route::get('/scholarship/{scholarship}', 'ScholarshipController@show');
 Route::get('/edit-scholarship/{scholarship}', 'ScholarshipController@edit');
 Route::patch('/updatescholarship/{scholarship}', 'ScholarshipController@update')->name('scholarship.update');
 
-Route::post('/categories/newcategory', 'PostcategoryController@store')->name('category.store');
+Route::post('/categories/newcategory', 'PostcategoryController@store')->name('category.store')->middleware(['auth','verified']);
 Route::get('/categories', 'PostcategoryController@index')->name('category.index');
