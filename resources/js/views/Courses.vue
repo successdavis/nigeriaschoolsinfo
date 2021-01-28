@@ -40,7 +40,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="card-content">
+		<div class="card-content p-3">
 			<div>
 				<div class="b-table">
 					<div class="field table-mobile-sort">
@@ -85,9 +85,9 @@
 							<tbody>
 								<tr v-for="(course,index) in courses" :key="course.id">
 									<td></td>
-									<td ><a :href="course.path" target="_blank">{{course.name}}</a></td>
-									<td v-text="course.short_name"></td>
-									<td v-text="course.visits"></td>
+									<td data-label="Name"><a :href="course.path" target="_blank">{{course.name}}</a></td>
+									<td data-label="Short Name" v-text="course.short_name"></td>
+									<td data-label="Visits" v-text="course.visits"></td>
 									<td class="is-actions-cell">
 										<div class="buttons are-small is-right">
 											<router-link :to="{name: 'editcourse', params: {slug: course.slug}}">
