@@ -42,7 +42,7 @@ Route::get('/api/schools/{type}', 'ApiController@getschools');
 
 Route::get('/latest-nigeria-education-news', 'PostController@index')->name('news.education');
 
-Route::get('/', 'ApplicationController@index');
+Route::get('/', 'ApplicationController@index')->name('application.index');
 
 Route::get('/testpage', 'TestController@index');
 Route::get('/home', 'HomeController@index')->name('home');

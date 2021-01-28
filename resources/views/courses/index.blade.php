@@ -12,18 +12,14 @@
 
 
 @section('content')
-<div class="container">
-	<!-- Google Adsense Display Ads -->
-    @include ('sections/ads/horizontal_banner')
-</div>
-    
+
 <courses-page inline-template>
 	<div class="container">
-		<div class="mt-medium remove-max-width">
+		<div class="mt-medium">
 			<div class="section">
 				<h2 class="has-text-centered content">Courses offered in Nigeria Universities, Polytechnics, Colleges, Nurses etc.</h2>
 			</div>
-			<div class="columns">
+			<div class="columns is-gapless">
 				<div class="column is-hidden-touch">
 					@include('courses.partials.sortCourses')
 				</div>

@@ -54,6 +54,13 @@
                 <drawer-menu>
                     <menu-item :props="props" icon="mdi-desktop-mac" link="/">Dashboard</menu-item>
                     <menu-item :props="props" icon="mdi-account-settings" link="/Profile">Profile</menu-item>
+                    <!-- <menu-item :props="props" icon="mdi-account-settings" link="/">Blog</menu-item> -->
+                    <li>
+                        <a href="{{ route('application.index') }}">
+                            <span class="icon"><i class="mdi mdi-newspaper-variant-multiple"></i></span>
+                            <span class="menu-list-label ">Blog</span>
+                        </a>
+                    </li>
                     <menu-item :props="props" icon="mdi-link" link="/following">Following</menu-item>
                     @role('writer')
                         <menu-item type="menu-label">Admin Control</menu-item>

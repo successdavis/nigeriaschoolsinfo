@@ -23,13 +23,16 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <script>
-        window.App = {!! json_encode([
-            'user' => Auth::user(),
-            'signedIn'  => Auth::check(),
-        ]) !!};
         @auth
             window.App = {!! json_encode([
+                'user' => Auth::user(),
+                'signedIn'  => Auth::check(),
                 'verified'  => Auth::user()->hasVerifiedEmail()
+            ]) !!};
+        @else
+            window.App = {!! json_encode([
+                'user' => Auth::user(),
+                'signedIn'  => Auth::check(),
             ]) !!};
         @endauth
     </script>
