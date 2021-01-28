@@ -7,9 +7,9 @@
                     {"name" : "Federal Universities", "value" : "/schools/programme/degree-university?q=federal"},
                     {"name" : "State Universities", "value" : "/schools/programme/degree-university?q=state"},
                     {"name" : "Private Universities", "value" : "/schools/programme/degree-university?q=private"},
-                    {"name" : "Federal Polytechnics", "value" : "/schools/programme/polytechnic?q=federal"},
-                    {"name" : "State Polytechnics", "value" : "/schools/programme/polytechnic?q=state"},
-                    {"name" : "Private Polytechnics", "value" : "/schools/programme/polytechnic?q=private"},
+                    {"name" : "Federal Polytechnics", "value" : "/schools/programme/nd-polytechnic?q=federal"},
+                    {"name" : "State Polytechnics", "value" : "/schools/programme/nd-polytechnics?q=state"},
+                    {"name" : "Private Polytechnics", "value" : "/schools/programme/nd-polytechnics?q=private"},
                 ],
 				isLoading: false,
 				schools: '',
@@ -80,7 +80,7 @@
                 this.schools = data.data;
                 this.pagination = data;
 
-                window.scrollTo(0, 0);
+                // window.scrollTo(0, 0);
             },
 
             sort() {

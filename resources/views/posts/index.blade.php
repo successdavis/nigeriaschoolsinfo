@@ -13,14 +13,14 @@
 	@include ('sections/ads/horizontal_banner')
 	
 	<div class="container">
-		<div class="section">
+		<div>
 			<div class="mb-medium">
-				<h1 class="has-text-centered is-size-3">
+				<h1 class="has-text-centered is-size-4">
 					Latest Nigeria Education News Update on Universities, Polytechnic, Colleges etc
 				</h1>
 			</div>
 			
-			<div class="columns">
+			<div class="columns is-gapless">
 				<div class="column is-three-quarters">
 					<div >
 						<div class="mb-large">
