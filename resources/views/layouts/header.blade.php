@@ -26,7 +26,11 @@
         window.App = {!! json_encode([
             'user' => Auth::user(),
             'signedIn'  => Auth::check(),
-            'verified'  => Auth::user()->hasVerifiedEmail()
         ]) !!};
+        @auth
+            window.App = {!! json_encode([
+                'verified'  => Auth::user()->hasVerifiedEmail()
+            ]) !!};
+        @endauth
     </script>
 </head>
