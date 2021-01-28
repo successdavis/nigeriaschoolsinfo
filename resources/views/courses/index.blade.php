@@ -12,7 +12,10 @@
 
 
 @section('content')
-
+<div class="container">
+	<!-- Google Adsense Display Ads -->
+    @include ('sections/ads/horizontal_banner')
+</div>
 <courses-page inline-template>
 	<div class="container">
 		<div class="mt-medium">
