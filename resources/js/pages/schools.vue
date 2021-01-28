@@ -7,7 +7,7 @@
                     {"name" : "Federal Universities", "value" : "/schools/programme/degree-university?q=federal"},
                     {"name" : "State Universities", "value" : "/schools/programme/degree-university?q=state"},
                     {"name" : "Private Universities", "value" : "/schools/programme/degree-university?q=private"},
-                    {"name" : "Federal Polytechnics", "value" : "/schools/programme/nd-polytechnic?q=federal"},
+                    {"name" : "Federal Polytechnics", "value" : "/schools/programme/nd-polytechnics?q=federal"},
                     {"name" : "State Polytechnics", "value" : "/schools/programme/nd-polytechnics?q=state"},
                     {"name" : "Private Polytechnics", "value" : "/schools/programme/nd-polytechnics?q=private"},
                 ],
