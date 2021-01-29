@@ -8,7 +8,7 @@ use App\Exams;
 use App\Filters\PostFilters;
 use App\Http\Resources\PostResource;
 use App\Post;
-use App\SchoolType;
+use App\Programme;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -154,9 +154,9 @@ class PostController extends Controller
     {
         $exams = Exams::all();
         $courses = Courses::all();
-        $schooltype = SchoolType::all();
+        $programmes = Programme::all();
 
-        return compact('exams', 'courses', 'schooltype');
+        return compact('exams', 'courses', 'programmes');
     }
 
     public function relatedpost(Request $request)
