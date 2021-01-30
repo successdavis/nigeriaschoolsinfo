@@ -10,7 +10,7 @@ class PostImageController extends Controller
    
     public function addimage(Request $request)
     {
-        $this->authorize('create', $post);
+        $this->authorize('create', new Post);
         
         $request->validate([
             'file' => ['required', 'image']
