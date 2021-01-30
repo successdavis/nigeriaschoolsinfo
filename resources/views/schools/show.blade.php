@@ -49,7 +49,7 @@
 				<article class="media mb-small is-hidden-touch">
 					<figure class="media-left">
 						<p class="image is-96x96">
-						  <img src="{{asset($school->logo_path)}}">
+						  <img src="{{asset($school->logo_path)}}" alt="{{$school->name}} logo">
 						</p>
 					</figure>
 					<div class="media-content">

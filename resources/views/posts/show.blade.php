@@ -49,17 +49,10 @@
 						  @endcan
 					      <p class="subtitle">{{$post->source->name}}</p>
 					      <div class="content">
-					      	<div class="has-text-center">
-					      		@isset ($post->source->logo_path)
-							      	<p class="image is-64x64">
-							      		<img class="is-rounded" src="{{asset($post->source->logo_path)}}">
-							    	</p>
-					      		@endisset
-					      	</div>
 					        <p>
 					        	@if ($post->hasFeaturedImage())
 							      	<p class="image" style="display: flex; justify-content: center;">
-							      		<img style="width: 320px" class="" src="{{asset('storage/'.$post->featured_image)}}">
+							      		<img style="width: 320px" class="" src="{{$post->featured_image}}" alt="{{$post->title}} cover">
 							    	</p>
 					      		@endif
 

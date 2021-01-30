@@ -3,7 +3,7 @@
     <article class="media school-card mb-small">
       <figure class="media-left">
         <p class="image is-32x32">
-          <img class="is-rounded" :src="school.logo_path">
+          <img class="is-rounded" :src="school.logo_path" :alt="school.name + ' logo'">
         </p>
         <p class="image is-32x32 mt-small">
           {{-- 23 --}}
