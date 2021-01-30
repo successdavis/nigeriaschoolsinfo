@@ -38,8 +38,29 @@ class Generatesitemap extends Command
      */
     public function handle()
     {
+        $sitemap = SitemapGenerator::create('https://nigeriaschoolinfo.com')->getSitemap();
+
+        $sitemap->add(Url::create('/')->setPriority(0.5));
+
+        foreach (Post::all() as $post) {
+            $sitemap->add(Url::create($post->path())->setPriority(0.5));
+        }
+        foreach (Schools::all() as $school) {
+            $sitemap->add(Url::create($school->path())->setPriority(0.5));
+        }
+        foreach (Courses::all() as $course) {
+            $sitemap->add(Url::create($course->path())->setPriority(0.5));
+        }
+        foreach (Job::all() as $job) {
+            $sitemap->add(Url::create($job->path())->setPriority(0.5));
+        }
+        foreach (Exams::all() as $exam) {
+            $sitemap->add(Url::create($exam->path())->setPriority(0.5));
+        }
+        foreach (Scholarship::all() as $scholarship) {
+            $sitemap->add(Url::create($scholarship->path())->setPriority(0.5));
+        }
         
-        SitemapGenerator::create('https://nigeriaschoolinfo.com')
-            ->writeToFile(public_path('sitemap.xml'));
+        $sitemap->writeToFile('sitemap.xml');
     }
 }
