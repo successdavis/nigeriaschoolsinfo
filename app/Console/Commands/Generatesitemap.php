@@ -48,28 +48,48 @@ class Generatesitemap extends Command
     {
         $sitemap = SitemapGenerator::create('https://nigeriaschoolinfo.com')->getSitemap();
 
-        $sitemap->add(Url::create('/')->setPriority(0.5));
+        $sitemap->add(Url::create('/')->setLastModificationDate(Carbon::yesterday())
+            ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
+            ->setPriority(0.5));
 
         foreach (Post::all() as $post) {
-            $sitemap->add(Url::create($post->path())->setPriority(0.5));
+            $sitemap->add(Url::create($post->path())
+                ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
+                ->setPriority(0.5));
+                ->setPriority(0.5));
         }
         foreach (Schools::all() as $school) {
-            $sitemap->add(Url::create($school->path())->setPriority(0.5));
+            $sitemap->add(Url::create($school->path())
+                ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
+                ->setPriority(0.5));
+                ->setPriority(0.5));
         }
         foreach (Courses::all() as $course) {
-            $sitemap->add(Url::create($course->path())->setPriority(0.5));
+            $sitemap->add(Url::create($course->path())
+                ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
+                ->setPriority(0.5));
+                ->setPriority(0.5));
         }
         foreach (Job::all() as $job) {
-            $sitemap->add(Url::create($job->path())->setPriority(0.5));
+            $sitemap->add(Url::create($job->path())
+                ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
+                ->setPriority(0.5));
+                ->setPriority(0.5));
         }
         foreach (Exams::all() as $exam) {
-            $sitemap->add(Url::create($exam->path())->setPriority(0.5));
+            $sitemap->add(Url::create($exam->path())
+                ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
+                ->setPriority(0.5));
+                ->setPriority(0.5));
         }
         foreach (Scholarship::all() as $scholarship) {
-            $sitemap->add(Url::create($scholarship->path())->setPriority(0.5));
+            $sitemap->add(Url::create($scholarship->path())
+                ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
+                ->setPriority(0.5));
+                ->setPriority(0.5));
         }
         
-        $sitemap->writeToFile('sitemap.xml');
+        $sitemap->writeToFile(public_path('sitemap.xml'));
         return 'sitemap generated';
     }
 }
