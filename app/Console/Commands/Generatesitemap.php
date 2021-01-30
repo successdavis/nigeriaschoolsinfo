@@ -38,6 +38,7 @@ class Generatesitemap extends Command
      */
     public function handle()
     {
+        
         SitemapGenerator::create('https://nigeriaschoolinfo.com')
             ->writeToFile(public_path('sitemap.xml'));
     }
