@@ -10,6 +10,8 @@ use App\Scholarship;
 use App\Schools;
 use Illuminate\Console\Command;
 use Spatie\Sitemap\SitemapGenerator;
+use Spatie\Sitemap\Sitemap;
+use Spatie\Sitemap\Tags\Url;
 
 class Generatesitemap extends Command
 {
@@ -68,5 +70,6 @@ class Generatesitemap extends Command
         }
         
         $sitemap->writeToFile('sitemap.xml');
+        return 'sitemap generated';
     }
 }
