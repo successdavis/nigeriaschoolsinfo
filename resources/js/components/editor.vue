@@ -88,6 +88,7 @@ Quill.register(ImageBlot);
     },
     data() {
       return {
+        imgname: '',
         canUpload: false,
         editorOption: {
           modules: {
@@ -127,6 +128,7 @@ Quill.register(ImageBlot);
     methods: {
       persistFile() {
         if(! this.$refs.file.files[0]) return;
+        this.imgname = this.$refs.file.files[0].name;
         let file = this.$refs.file.files[0];
 
         let data = new FormData();
@@ -143,7 +145,7 @@ Quill.register(ImageBlot);
       insertIntoEditor(data) {
         let range = this.editor.getSelection();
         this.editor.insertEmbed(range.index, 'image', {
-          alt: 'some-text-here',
+          alt: this.imgname + ' thumbnail',
           url: data.data.src,
         });
       },
