@@ -2,6 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Courses;
+use App\Exams;
+use App\Job;
+use App\Post;
+use App\Scholarship;
+use App\Schools;
 use Illuminate\Console\Command;
 use Spatie\Sitemap\SitemapGenerator;
 
