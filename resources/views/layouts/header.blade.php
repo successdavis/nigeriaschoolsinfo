@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="has-navbar-fixed-top" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html  lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,7 +16,7 @@
     
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.3.45/css/materialdesignicons.min.css">
 
-    <script data-ad-client="ca-pub-3146034280624513" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script data-ad-client="ca-pub-3146034280624513" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
     @yield('head')
     <!-- Styles -->

@@ -98,10 +98,18 @@ class SchoolsController extends Controller
     {
         $school->load(['posts' => function($query){
             $query->where('followup', true);
-        },'photos','courses'])->loadCount('courses');
+        },'photos','courses' => function($query)
+            {$query->pluck('name')->take(20);
+        }])->loadCount('courses');
+
+        $relatedschools = Schools::where('programme_id', $school->programme_id)
+            ->where('id', '!=', $school->id)
+            ->inRandomOrder()
+            ->limit(6)
+            ->get();
 
         $school->increment('visits');
-        return view('schools.show', compact('school'));
+        return view('schools.show', compact(['school','relatedschools']));
     }
 
     /**
@@ -133,7 +141,7 @@ class SchoolsController extends Controller
             'states_id'         => 'required|exists:states,id',
             'lga_id'            => 'required|exists:lgas,id',
             'address'           => 'required', 
-            'school_type_id'    => 'required|exists:school_types,id', 
+            'programme_id'    => 'required|exists:programmes,id', 
             'sponsored_id'      => 'required|exists:sponsoreds,id', 
             'jamb_points'       => 'nullable|integer',
             'phone'             => 'nullable|min:10|max:10', 
@@ -148,7 +156,7 @@ class SchoolsController extends Controller
         $school->states_id      = request('states_id');
         $school->lga_id         = request('lga_id');
         $school->address        = request('address'); 
-        $school->school_type_id = request('school_type_id'); 
+        $school->programme_id = request('programme_id'); 
         $school->sponsored_id   = request('sponsored_id');
         $school->phone          = request('phone'); 
         $school->email          = request('email');

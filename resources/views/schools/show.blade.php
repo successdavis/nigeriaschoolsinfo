@@ -22,14 +22,7 @@
 @section('content')
     @include ('sections/ads/horizontal_banner')
 
-<div class="container">
-	<div class="columns is-gapless">
-		<div class="column is-three-quarters">
-			@auth
-				@can('update schools')
-					<a href="/schools/{{$school->slug}}/edit" class="button">Edit School</a>
-				@endcan
-			@endauth
+<div class="container is-max-desktop">	
 			<div class="">
 				<article class="media mb-small is-hidden-desktop">
 					<figure class="media-left">
@@ -40,7 +33,7 @@
 					<div class="media-content">
 						<div class="content">
 						  <p>
-						    <strong class="mb-small">{{$school->name}}</strong> <small> {{$school->short_name}}</small>
+						    <strong class="mb-small">{{ucfirst($school->name)}}</strong> <small> {{$school->short_name}}</small>
 						    <br>
 						  </p>
 						</div>
@@ -62,23 +55,23 @@
 						</div>
 					</div>
 				</article>
-					<div class="mb-small is-size-5-desktop"><strong>Programme:</strong> {{$school->typeOf()}} </div>
-					<div class="is-size-5-desktop"><strong>Sponsor:</strong> {{$school->sponsored->name}} </div>
+					<div class="mb-2 is-size-5-desktop"><strong>Programme:</strong> {{$school->typeOf()}} </div>
+					<div class="mb-3 is-size-5-desktop"><strong>Sponsor:</strong> {{ucfirst($school->sponsored->name)}} </div>
 				<div class="mb-small">
 					<p>{{$school->name}} also known as {{$school->short_name}} is a {{$school->sponsored->name}} {{$school->typeOf()}} established in {{$school->date_created->format('Y')}} ({{$school->date_created->diffForHumans()}}). The school offers over {{$school->courses_count}} undergraduate courses, It is located in {{$school->state->name}}. 
 						@if($school->website)
 
-						{{$school->short_name}} has a public profile for anyone who wants to know more about the institution and can be accessed via its website. Visit {{$school->short_name}} landing page on {{$school->website}} or visit the school portal on {{$school->portal_website}} to apply for admission.
+						{{ucfirst($school->short_name)}} has a public profile for anyone who wants to know more about the institution and can be accessed via its website. Visit {{$school->short_name}} landing page on {{$school->website}} or visit the school portal on {{$school->portal_website}} to apply for admission.
 
 						@else 
 
-						{{$school->short_name}} does not have an online public profile for students or prospective distant students to review before applying to the instition. If you wish to study in {{$school->short_name}}, we recommend that you visit the school to see for yourself if it has the qualities you're looking for. 
+						{{ucfirst($school->short_name)}} does not have an online public profile for students or prospective distant students to review before applying to the instition. If you wish to study in {{$school->short_name}}, we recommend that you visit the school to see for yourself if it has the qualities you're looking for. 
 
 						@endif
 					Other vital informations such as courses offered, UTME requirement, Direct Entry requirement, and the school photos are available below.
 					</p>
 
-					<h3 class="is-size-4 mt-3">Does {{$school->short_name}} have hostel accommodation</h3>
+					<h3 class="is-size-4 mt-3">Does {{ucfirst($school->short_name)}} have hostel accommodation</h3>
 					@if($school->hostels)
 						{{$school->short_name}} has a provision for hostel accomodation to students who desire to live within the school premises. 
 					@else
@@ -88,8 +81,9 @@
 
 
 				</div>
+			    @include ('sections/ads/in-article')
 				<div class="mb-small">
-					<div class="is-size-4">{{$school->short_name}} Admission Info: </div>
+					<div class="is-size-4">{{ucfirst($school->short_name)}} Admission Info: </div>
 					@if ($school->isAdmitting())
 						<div class="is-size-5-desktop">{{$school->short_name}} is open for application to new intake</div>
 						<div class="is-size-5-desktop">Interested candidates can find below the website address and portal for application, if you have trouble applying, use the contact information provided here <a target="_blank" href="https://www.sleettech.com">www.sleettech.com</a> for documented steps and procedures to successfully complete your application.</div>
@@ -98,7 +92,6 @@
 						{{-- put a subscription button here later --}}
 					@endif
 				</div>
-			    @include ('sections/ads/in-article')
 
 				<div class="mb-small">
 					<div class="is-size-4 ">Description</div>
@@ -131,29 +124,27 @@
 				{{-- <p>{!! nl2br(str_replace(" ", "&nbsp;", $school->description)) !!}</p> --}}
 				</div>
 				<div class="mt-small">
-					<h4 class="is-size-4">{{$school->name}} courses and departments:</h4>
+					<h4 class="is-size-4">{{ucfirst($school->name)}} courses and departments:</h4>
 					<div class="is-size-5-desktop mb-small">The following is a list of courses offered in {{$school->short_name}} </div>
 					
 					<table class="table">
 						<thead>
 							<tr>
 								<th><abbr title="School">Courses</abbr></th>
-								<th><abbr title="School">Cut-of-points</abbr></th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach ($school->courses as $course)
 								<tr>
 									<td><a href="{{$course->path()}}">{{$course->name}}</a></td>
-									<td>{{$course->pivot->cut_off_points}}</td>
 								</tr>	
 							@endforeach
 						</tbody>
 					</table>
-
 					<a class="button is-large is-success" href="/courses-offered-in/{{$school->slug}}">View All Courses</a>
+					@include ('sections/ads/v-banner')
 				</div>
-				<h4 class="is-size-4 mt-large">Photos of {{$school->name}}</h4>
+				<h4 class="is-size-4 mt-large">Photos of {{ucfirst($school->name)}}</h4>
 				<div class="section">
 					<image-carousel :wraparound="true" :autoplay="true" >
 				        @foreach ($school->photos as $photo)
@@ -179,14 +170,32 @@
 					<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-via="@NSISnews" data-hashtags="Nigeria News, Asu, WaecNigeria, jamb" data-related="NSISnews,S_techmax" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 				</div>
 			</div>
+		<div>
+			<h3 class="is-size-4 mb-4">See Also Other {{$school->typeOf()}} Institutions </h3>
+			<div class="tile is-ancestor wrap-elements">
+				@foreach($relatedschools as $relatedschool)
+					<div class="tile is-3 is-parent">
+						<div class="card mb-small">
+							<div class="card-image">
+							    <figure class="image is-4by3">
+							      <img src="{{asset($relatedschool->logo_path)}}" alt="{{$relatedschool->short_name}} logo">
+							    </figure>
+							</div>
+						    <div class="card-content">
+						     	<p>{{$relatedschool->name}}</p>
+						    </div>
+						    <footer class="exam card-footer">
+						      <a href="{{$relatedschool->path()}}" class="card-footer-item"><i class="fas fa-binoculars"></i>View</a>
+						    </footer>
+						</div>
+					</div>
+				@endforeach
+			</div>
 		</div>
 		<div class="column">
-			<div class="mt-large mb-medium">{{$school->short_name}} News</div>
+			<div class="mt-large mb-medium">{{ucfirst($school->short_name)}} News</div>
 			<related-post :module="'Schools'" :module_id="{{$school->id}}"></related-post>
-			@include ('sections/ads/v-banner')
 		</div>
-		
-	</div>
 </div>
 
 @endsection
