@@ -28,7 +28,7 @@ class SchoolResource extends JsonResource
             'lga'               => $this->lga,
             'address'           => $this->address,
             'admitting'         => $this->admitting,
-            'school_type_id'    => $this->school_type_id,
+            'programme_id'      => $this->programme_id,
             'sponsored'         => $this->sponsored,
             'jamb_points'       => $this->jamb_points,
             'phone'             => $this->phone,

@@ -52,13 +52,13 @@
 				    <div class="field">
 				      <div class="control">
 				        <div class="select is-fullwidth">
-				          <select v-model="schoolForm.school_type_id" required>
+				          <select v-model="schoolForm.programme_id" required>
 				            <option value="">Pick a type</option>
 				            <option v-for="type in types" :value="type.id" v-text="type.name"></option>
 				          </select>
 				        </div>
 				      </div>
-				      <p class="help is-danger" v-if="schoolForm.errors.has('school_type_id')" v-text="schoolForm.errors.get('school_type_id')"></p>
+				      <p class="help is-danger" v-if="schoolForm.errors.has('programme_id')" v-text="schoolForm.errors.get('programme_id')"></p>
 
 				    </div>
 				  </div>
@@ -117,6 +117,36 @@
 				        <input v-model="schoolForm.jamb_points" class="input" type="number" placeholder="Enter Points">
 				      </div>
 				      <p class="help is-danger" v-if="schoolForm.errors.has('jamb_points')" v-text="schoolForm.errors.get('jamb_points')"></p>
+				      
+				    </div>
+				  </div>
+				</div>
+
+				<div class="field is-horizontal">
+				  <div class="field-label is-normal">
+				    <label class="label">Date Established</label>
+				  </div>
+				  <div class="field-body">
+				    <div class="field">
+				      <b-datepicker v-model="schoolForm.date_created" >
+					  </b-datepicker>
+				      <p class="help is-danger" v-if="schoolForm.errors.has('date_created')" v-text="schoolForm.errors.get('date_created')"></p>
+				      
+				    </div>
+				  </div>
+				</div>
+				<div class="field is-horizontal">
+				  <div class="field-label is-normal">
+				    <label class="label">Hostels</label>
+				  </div>
+				  <div class="field-body">
+				    <div class="field">
+				      	<b-field>
+				            <b-switch v-model="schoolForm.hostels_accomodation">
+				                {{ schoolForm.hostels_accomodation }}
+				            </b-switch>
+				        </b-field>
+				      <p class="help is-danger" v-if="schoolForm.errors.has('date_created')" v-text="schoolForm.errors.get('date_created')"></p>
 				      
 				    </div>
 				  </div>
@@ -279,7 +309,7 @@
 		</div>
 		<div v-if="!showMatchedWarning" class="mt-medium buttons is-centered">
 			<button class="button" @click="steps --" :disabled="steps === 1">Prev</button>
-			<button class="button" @click="steps ++" :disabled="steps === max_steps">Next</button>
+			<button v-if="data != ''" class="button" @click="steps ++" :disabled="steps === max_steps">Next</button>
 		</div>
 	</div>
 </template>
@@ -307,11 +337,12 @@
 				sponsored: [],
 				states: [],
 				lgas: [],
+				isSwitchedCustom: 'Yes',
 				matchedSchools: [],
 				schoolForm: new Form({
 					name: '',
 					short_name: '',
-					school_type_id: '',
+					programme_id: '',
 					sponsored_id: '',
 					website: '',
 					portal_website:'',
@@ -323,6 +354,8 @@
 					email: '',
 					description: '',
 					meta_description: '',
+					date_created: new Date(),
+					hostels_accomodation: false,
 				}),
 			}
 		},
@@ -378,7 +411,6 @@
 					this.schoolForm.post('/schools/createschool')
 	                    .then(data => {
 	                    		this.data = data;
-	                            // this.schoolForm.reset();
 	                            this.steps = 2;
 					    		this.processing = false;
 	                            flash('School Successfully created.', 'success');
@@ -412,7 +444,7 @@
 					this.schoolForm = new Form ({
 						name: school.data.name,
 						short_name: school.data.short_name,
-						school_type_id: school.data.school_type_id,
+						programme_id: school.data.programme_id,
 						sponsored_id: school.data.sponsored_id,
 						website: school.data.website,
 						portal_website:school.data.portal_website,
@@ -424,6 +456,8 @@
 						email: school.data.email,
 						description: school.data.description,
 						meta_description: school.data.meta_description,
+						date_created: school.data.date_created,
+						hostels_accomodation: school.data.hostels_accomodation,
 					});
 					school.data.states_id ? this.statelgas() : '';
 			    } else {

@@ -27,7 +27,6 @@ class SchoolLogoPolicy
      */
     public function create(User $user)
     {
-        return auth()->user()->isAdmin();
-        // return $user->isAdmin();
+        return $user->hasPermissionTo('create schools');
     }
 }

@@ -56,11 +56,12 @@ class SchoolsController extends Controller
             'states_id'         => 'required|exists:states,id',
             'lga_id'            => 'required|exists:lgas,id',
             'address'           => 'required', 
-            'school_type_id'    => 'required|exists:school_types,id', 
+            'programme_id'    => 'required|exists:programmes,id', 
             'sponsored_id'      => 'required|exists:sponsoreds,id', 
             'jamb_points'       => 'nullable|integer',
             'phone'             => 'nullable|min:10|max:10', 
             'meta_description'  => 'required|string|min:140|max:150', 
+            'hostels_accomodation'  => 'required|boolean', 
         ]);
 
         $school = Schools::create([
@@ -73,12 +74,13 @@ class SchoolsController extends Controller
             'states_id'         => request('states_id'),
             'lga_id'            => request('lga_id'),
             'address'           => request('address'), 
-            'school_type_id'    => request('school_type_id'), 
+            'programme_id'    => request('programme_id'), 
             'sponsored_id'      => request('sponsored_id'), 
             'phone'             => request('phone'), 
             'email'             => request('email'),
             'jamb_points'       => request('jamb_points'),
-            'meta_description'  => request('meta_description')
+            'meta_description'  => request('meta_description'),
+            'hostels_accomodation' => request('hostels_accomodation')
         ]);
 
         if (request()->wantsJson()) {
@@ -96,7 +98,7 @@ class SchoolsController extends Controller
     {
         $school->load(['posts' => function($query){
             $query->where('followup', true);
-        },'photos','courses']);
+        },'photos','courses'])->loadCount('courses');
 
         $school->increment('visits');
         return view('schools.show', compact('school'));

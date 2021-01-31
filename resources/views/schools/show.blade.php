@@ -56,18 +56,37 @@
 						<div class="content">
 						  <p>
 						    <strong class="mb-small is-size-3">{{$school->name}}</strong> <small class="is-size-5"> <br> {{$school->short_name}} 
-						    	@if ($school->date_created)
-						    		Established: {{$school->date_created}} 
-						    	@endif
 						    </small>
 						    <br>
 						  </p>
 						</div>
 					</div>
 				</article>
-				<div class="mb-small">
-					<div class="mb-small is-size-5-desktop"><strong>School Type:</strong> {{$school->typeOf()}} </div>
+					<div class="mb-small is-size-5-desktop"><strong>Programme:</strong> {{$school->typeOf()}} </div>
 					<div class="is-size-5-desktop"><strong>Sponsor:</strong> {{$school->sponsored->name}} </div>
+				<div class="mb-small">
+					<p>{{$school->name}} also known as {{$school->short_name}} is a {{$school->sponsored->name}} {{$school->typeOf()}} established in {{$school->date_created->format('Y')}} ({{$school->date_created->diffForHumans()}}). The school offers over {{$school->courses_count}} undergraduate courses, It is located in {{$school->state->name}}. 
+						@if($school->website)
+
+						{{$school->short_name}} has a public profile for anyone who wants to know more about the institution and can be accessed via its website. Visit {{$school->short_name}} landing page on {{$school->website}} or visit the school portal on {{$school->portal_website}} to apply for admission.
+
+						@else 
+
+						{{$school->short_name}} does not have an online public profile for students or prospective distant students to review before applying to the instition. If you wish to study in {{$school->short_name}}, we recommend that you visit the school to see for yourself if it has the qualities you're looking for. 
+
+						@endif
+					Other vital informations such as courses offered, UTME requirement, Direct Entry requirement, and the school photos are available below.
+					</p>
+
+					<h3 class="is-size-4 mt-3">Does {{$school->short_name}} have hostel accommodation</h3>
+					@if($school->hostels)
+						{{$school->short_name}} has a provision for hostel accomodation to students who desire to live within the school premises. 
+					@else
+						 No! {{$school->short_name}} does not have provission for hostel accomodation at the moment. 
+					@endif
+					<p class="content">Hostels accomodation is dedicated to making students living stress free and to reduce the cost fee for renting a house outside the school premises.</p>
+
+
 				</div>
 				<div class="mb-small">
 					<div class="is-size-4">{{$school->short_name}} Admission Info: </div>
@@ -75,7 +94,7 @@
 						<div class="is-size-5-desktop">{{$school->short_name}} is open for application to new intake</div>
 						<div class="is-size-5-desktop">Interested candidates can find below the website address and portal for application, if you have trouble applying, use the contact information provided here <a target="_blank" href="https://www.sleettech.com">www.sleettech.com</a> for documented steps and procedures to successfully complete your application.</div>
 					@else
-						<div class="is-size-5-desktop">{{$school->short_name }} is not open for registration at the moment, Please check back later</div>
+						<div class="is-size-5-desktop">{{$school->short_name }} is not open for POST UTME or Direct Entry application at the moment, Please check back here again</div>
 						{{-- put a subscription button here later --}}
 					@endif
 				</div>

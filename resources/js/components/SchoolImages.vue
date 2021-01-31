@@ -67,7 +67,7 @@
 				</figure>
 			  	<h3 class="is-size-4" v-text="photo.caption"></h3>
 			  	<p v-text="photo.description"></p>
-			  	<button @click="remove(index, photo.id)">Remove</button>
+			  	<button class="button" @click="remove(index, photo.id)">Remove</button>
 			</span>
 		</div>
 	</div>

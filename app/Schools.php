@@ -21,7 +21,11 @@ class Schools extends Model
 
     protected $guarded = [];
     protected $with = ['courses'];
-    protected $casts = ['admitting' => 'boolean'];
+    protected $casts = [
+        'admitting' => 'boolean'
+    ];
+
+    protected $dates = ['date_created'];
 
     public $pathPrefix  = '/schools/';
     public $findWith    =   'slug';
