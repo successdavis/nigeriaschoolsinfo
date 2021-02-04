@@ -52,13 +52,17 @@ class ImageBlot extends BlockEmbed {
     let node = super.create();
     node.setAttribute('alt', value.alt);
     node.setAttribute('src', value.url);
+    node.setAttribute('srcset', value.srcset);
+    node.setAttribute('sizes', value.sizes);
     return node;
   }
 
   static value(node) {
     return {
       alt: node.getAttribute('alt'),
-      url: node.getAttribute('src')
+      url: node.getAttribute('src'),
+      srcset: node.getAttribute('srcset'),
+      srcset: node.getAttribute('sizes')
     };
   }
 }
@@ -93,6 +97,7 @@ Quill.register(ImageBlot);
         editorOption: {
           modules: {
             toolbar: [
+              ['image'],
               ['bold', 'italic', 'underline', 'strike'],
               ['link','blockquote', 'code-block'],
               [{ 'header': 1 }, { 'header': 2 }],
@@ -145,8 +150,10 @@ Quill.register(ImageBlot);
       insertIntoEditor(data) {
         let range = this.editor.getSelection();
         this.editor.insertEmbed(range.index, 'image', {
-          alt: this.imgname + ' thumbnail',
+          alt: data.data.alt + ' thumbnail',
           url: data.data.src,
+          srcset: data.data.srcset,
+          sizes: data.data.sizes
         });
       },
       onEditorChange: debounce(function(value) {
