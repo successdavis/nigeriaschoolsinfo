@@ -148,7 +148,7 @@
 				<div class="section">
 					<image-carousel :wraparound="true" :autoplay="true" >
 				        @foreach ($school->photos as $photo)
-				            <div class="card" style="width: 260px; margin: 0 10px">
+				            <div class="card" style="width: 260px; margin: 0 10px;">
 							  <div class="card-image">
 							    <figure class="image" >
 							      <img src="{{$photo->url}}" alt="{{$photo->caption}}">
