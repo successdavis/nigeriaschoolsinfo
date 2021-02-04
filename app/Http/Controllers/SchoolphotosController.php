@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Schoolphoto;
+use App\Repositories\ImageConverter;
 use App\Schools;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class SchoolphotosController extends Controller
         return $schools->photos()->get();
     }
 
-    public function store(Request $request, Schools $schools)
+    public function store(Request $request, Schools $schools, ImageConverter $converter)
     {
 		$request->validate([
             'caption'       => 'required|string',
@@ -31,12 +32,13 @@ class SchoolphotosController extends Controller
         $photo->schools_id  = $schools->id;
         $photo->save();
 
-        $name = $schools->slug . '-' 
-        . str_replace(' ', '-', strtolower($request->caption))
-        .'.'.request()->file('file')->getClientOriginalExtension();
+        $filename = $schools->slug . '-' 
+        . str_replace(' ', '-', strtolower($request->caption));
+
+        $path = $converter->convertImages('', $directory = 'schools/photos', $name = $filename);
 
         $photo->update([
-            'url' => request()->file('file')->storeAs('schools/photos', $name, 'public')
+            'url' => 'schools/photos/' . $filename . '-768px.webp', 'public'
         ]);
 
         return $photo->url;

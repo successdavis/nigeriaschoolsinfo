@@ -113,7 +113,7 @@ export default {
         persist(file) {
             let data = new FormData();
 
-            data.append('logo', file);
+            data.append('file', file);
 
             axios.post(`/api/${this.school.slug}/addlogo`, data)
                 .then(() => flash('Logo Uploaded Successfully! '))
