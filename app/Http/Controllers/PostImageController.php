@@ -13,24 +13,17 @@ class PostImageController extends Controller
     public function addimage(Request $request)
     {
         $this->authorize('create', new Post);
-        
         $request->validate([
             'file' => ['required', 'image']
         ]);
 
         $convertSizes = ['1920','1600','1366','1024','768','640'];
-        $format = '.webp';
         $path = $this->converImages();
-            // array:2 [
-            //   "storePath" => "public/posts/145306344_904921300255896_8985664486606542574_o.webp",
-            //   "title" => "145306344_904921300255896_8985664486606542574_o",
-            //   "oldtitle" => "145306344 904921300255896 8985664486606542574 o"
-            // ]
-        $src =  asset('storage/'.$path['storePath']);
+        //   "storePath" => "public/posts/145306344_904921300255896_8985664486606542574_o.webp",
 
         $srcset =  '';
         foreach ($convertSizes as $size) {
-           $srcset = $srcset . asset('storage/posts/' . $path['title'] . '-' . $size .'px' . $format) . ' ' . $size .'w,';
+           $srcset = $srcset . asset('storage/posts/' . $this->slugifyFileName() . '-' . $size .'px.webp') . ' ' . $size .'w,';
         }
 
         $sizes =  '';
@@ -46,8 +39,8 @@ class PostImageController extends Controller
 
         return response()
             ->json([
-                'src' => $src,
-                'alt' => $path['oldtitle'],
+                'src' => asset('storage/'.$path),
+                'alt' => $this->originalFileName(),
                 'srcset' => $srcset,
                 'sizes' => $sizes,
             ]);
@@ -60,24 +53,19 @@ class PostImageController extends Controller
             'file' => ['required', 'image']
         ]);
 
-        
-
-        $name = $post->slug .'.'.request()->file('file')->getClientOriginalExtension();
-
+        $path = $this->converImages($sizes = ['320','64'], '', $name  =  $post->slug, '',  $saveOriginal = false);
+        // posts/and-here-is-the-post-title-and-other-interesting-stuffs.jpg
         $post->update([
-            'featured_image' => request()->file('file')->storeAs('posts', $name, 'public')
+            'featured_image' => 'posts/' . $post->slug . '-320px.webp'
         ]);
 
         return response($post, 200);
     }
 
-    public function converImages($sizes = [], $directory = null, $format = '' ) 
+    public function converImages($sizes = [], $directory = null, $name = '', $format = '', $saveOriginal = true ) 
     {
-
-        // Get the actual filename without extension
-        $name = pathinfo(request()->file('file')->getClientOriginalName(), PATHINFO_FILENAME);
-        // replace spaces with hyphen (-)
-        $newName = str_replace(' ', '-', $name);
+        $newName = $name ?: $this->slugifyFileName();
+        
         // Check if a directory was given else assign a default
         $directory = $directory ?: 'posts';
         // The path and format to store the image
@@ -87,10 +75,12 @@ class PostImageController extends Controller
 
         $convertSizes = $sizes ?: ['1920','1600','1366','1024','768','640'];
 
-        // Convert and store image in its original width
-        $storePath = $path . $format;
-        $img = Image::make(request()->file('file'));
-        Storage::put($storePath, (string) $img->encode('webp'));
+        if ($saveOriginal) {
+            // Convert and store image in its original width
+            $storePath = $path . $format;
+            $img = Image::make(request()->file('file'));
+            Storage::put($storePath, (string) $img->encode('webp'));
+        }
 
         // Intervention Convert image into different sizes
         foreach ($convertSizes as $size) { 
@@ -102,6 +92,19 @@ class PostImageController extends Controller
         }
 
         // Return stored path to axios
-        return ['storePath' => $path . $format, 'title' =>  $newName, 'oldtitle' => $name  ];
+        return $storePath = $path . $format;
+    }
+
+    protected function slugifyFileName() {
+        // Get the actual filename without extension
+        $filename = $this->originalFileName();
+        // replace spaces with hyphen (-)
+        $slugifyName = str_replace(' ', '-', $filename);
+
+        return $slugifyName;
+    }
+
+    protected function originalFileName() {
+        return $filename = pathinfo(request()->file('file')->getClientOriginalName(), PATHINFO_FILENAME);
     }
 }

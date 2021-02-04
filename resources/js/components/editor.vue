@@ -2,7 +2,7 @@
   <div class="example">
     <div class="file">
       <label class="file-label">
-        <input :disabled="! canUpload" @change="persistFile" class="file-input" type="file" id="file" ref="file" >
+        <input :class="isLoading ? 'is-loading' : '' " :disabled="! canUpload" @change="persistFile" class="file-input button" type="file" id="file" ref="file" >
         <span class="file-cta">
           <span class="file-icon">
             <i class="fas fa-upload"></i>
@@ -11,6 +11,7 @@
             Choose a file…
           </span>
         </span>
+        <b-loading :is-full-page="false" v-model="isLoading" :can-cancel="true"></b-loading>
       </label>
     </div>
     <quill-editor
@@ -92,6 +93,7 @@ Quill.register(ImageBlot);
     },
     data() {
       return {
+        isLoading: false,
         imgname: '',
         canUpload: false,
         editorOption: {
@@ -132,6 +134,7 @@ Quill.register(ImageBlot);
     },
     methods: {
       persistFile() {
+        this.isLoading = true;
         if(! this.$refs.file.files[0]) return;
         this.imgname = this.$refs.file.files[0].name;
         let file = this.$refs.file.files[0];
@@ -144,6 +147,7 @@ Quill.register(ImageBlot);
             .then(data => {
                 this.insertIntoEditor(data);
                 flash('File Uploaded!');
+                this.isLoading = false;
             });
       },
 

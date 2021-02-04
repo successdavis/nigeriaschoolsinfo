@@ -3718,6 +3718,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 //
 //
 //
+//
  // import hljs from 'highlight.js'
 
 
@@ -3780,6 +3781,7 @@ quill__WEBPACK_IMPORTED_MODULE_2___default().register(ImageBlot);
   },
   data: function data() {
     return {
+      isLoading: false,
       imgname: '',
       canUpload: false,
       editorOption: {
@@ -3834,6 +3836,7 @@ quill__WEBPACK_IMPORTED_MODULE_2___default().register(ImageBlot);
     persistFile: function persistFile() {
       var _this = this;
 
+      this.isLoading = true;
       if (!this.$refs.file.files[0]) return;
       this.imgname = this.$refs.file.files[0].name;
       var file = this.$refs.file.files[0];
@@ -3843,6 +3846,7 @@ quill__WEBPACK_IMPORTED_MODULE_2___default().register(ImageBlot);
         _this.insertIntoEditor(data);
 
         flash('File Uploaded!');
+        _this.isLoading = false;
       });
     },
     insertIntoEditor: function insertIntoEditor(data) {
@@ -5047,6 +5051,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -5111,10 +5116,13 @@ __webpack_require__.r(__webpack_exports__);
       this.persist(image.file);
     },
     persist: function persist(file) {
+      var _this = this;
+
+      this.isLoading = true;
       var data = new FormData();
       data.append('file', file);
       axios.post("/posts/".concat(this.posthandle.slug, "/featured_image"), data).then(function () {
-        return flash('Post Cover Image Uploaded! ');
+        return _this.isLoading = false;
       })["catch"](function () {
         return flash('Cover Image Upload Failed', 'failed');
       });
@@ -5123,34 +5131,39 @@ __webpack_require__.r(__webpack_exports__);
       this.PostForm.body = value;
     },
     savePost: function savePost() {
-      var _this = this;
+      var _this2 = this;
 
+      this.isLoading = true;
       this.disabled = true;
 
       if (!this.posthandle) {
         this.PostForm.post('/posts/savepost').then(function (data) {
           flash('Your new post has been saved', 'success');
-          _this.posthandle = data;
-          _this.disabled = false;
+          _this2.posthandle = data;
+          _this2.disabled = false;
+          _this2.isLoading = false;
         })["catch"](function (error) {
           flash(error.message, 'failed');
-          _this.disabled = false;
+          _this2.disabled = false;
+          _this2.isLoading = false;
         });
       } else {
         this.PostForm.patch("/posts/updatepost/".concat(this.posthandle.slug)).then(function (data) {
           flash('Post Updated', 'success');
-          _this.disabled = false;
+          _this2.disabled = false;
+          _this2.isLoading = false;
         })["catch"](function (error) {
           flash(error.message, 'failed');
-          _this.disabled = false;
+          _this2.disabled = false;
+          _this2.isLoading = false;
         });
       }
     },
     publish: function publish() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios[this.ispublished ? 'delete' : 'patch']("/posts/".concat(this.posthandle.slug, "/togglepublish")).then(function (data) {
-        _this2.ispublished = data.data.published;
+        _this3.ispublished = data.data.published;
       })["catch"](function (error) {
         console.log(error);
         flash(error.message, 'failed');
@@ -5178,17 +5191,17 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this4 = this;
 
     axios.get('/posts/newpostrequirements').then(function (data) {
-      _this3.exams = data.data.exams;
-      _this3.courses = data.data.courses;
+      _this4.exams = data.data.exams;
+      _this4.courses = data.data.courses;
     });
     axios.get('/categories').then(function (data) {
-      _this3.categories = data.data;
+      _this4.categories = data.data;
     });
     axios.get('/latest-job-opportunities-and-application').then(function (data) {
-      _this3.jobs = data.data.data;
+      _this4.jobs = data.data.data;
     });
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
@@ -5405,7 +5418,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
-    axios.get('/posts').then(function (_ref) {
+    axios.get('/latest-nigeria-education-news').then(function (_ref) {
       var data = _ref.data;
       next(function (vm) {
         return vm.setData(data);
@@ -62478,16 +62491,33 @@ var render = function() {
     { staticClass: "example" },
     [
       _c("div", { staticClass: "file" }, [
-        _c("label", { staticClass: "file-label" }, [
-          _c("input", {
-            ref: "file",
-            staticClass: "file-input",
-            attrs: { disabled: !_vm.canUpload, type: "file", id: "file" },
-            on: { change: _vm.persistFile }
-          }),
-          _vm._v(" "),
-          _vm._m(0)
-        ])
+        _c(
+          "label",
+          { staticClass: "file-label" },
+          [
+            _c("input", {
+              ref: "file",
+              staticClass: "file-input button",
+              class: _vm.isLoading ? "is-loading" : "",
+              attrs: { disabled: !_vm.canUpload, type: "file", id: "file" },
+              on: { change: _vm.persistFile }
+            }),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _c("b-loading", {
+              attrs: { "is-full-page": false, "can-cancel": true },
+              model: {
+                value: _vm.isLoading,
+                callback: function($$v) {
+                  _vm.isLoading = $$v
+                },
+                expression: "isLoading"
+              }
+            })
+          ],
+          1
+        )
       ]),
       _vm._v(" "),
       _c("quill-editor", {
@@ -63999,81 +64029,99 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "column is-3" }, [
-      _c("div", { staticClass: "section" }, [
-        _c("a", { staticClass: "button", on: { click: _vm.savePost } }, [
-          _vm._v("Save")
-        ]),
-        _vm._v(" "),
-        _c("h3", { staticClass: "is-size-4" }, [_vm._v("Featured Image")]),
-        _vm._v(" "),
-        _vm.posthandle
-          ? _c("div", [
-              _c("img", { attrs: { src: _vm.featuredimage } }),
-              _vm._v(" "),
-              _c(
-                "form",
-                { attrs: { method: "POST", enctype: "multipart/form-data" } },
-                [
-                  _c("image-upload", {
-                    staticClass: "none",
-                    attrs: { name: "file" },
-                    on: { loaded: _vm.onLoad }
-                  })
-                ],
-                1
-              )
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("p", { staticClass: "help" }, [
-          _vm._v(" Post the content then upload a cover photo here. ")
-        ]),
-        _vm._v(" "),
-        _c("h3", { staticClass: "is-size-4 mt-medium" }, [
-          _vm._v("Meta Desc "),
-          _c("span", { domProps: { textContent: _vm._s(_vm.meta_length) } })
-        ]),
-        _vm._v(" "),
-        _c("textarea", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.PostForm.meta_description,
-              expression: "PostForm.meta_description"
+      _c(
+        "div",
+        { staticClass: "section" },
+        [
+          _c("a", { staticClass: "button", on: { click: _vm.savePost } }, [
+            _vm._v("Save")
+          ]),
+          _vm._v(" "),
+          _c("h3", { staticClass: "is-size-4" }, [_vm._v("Featured Image")]),
+          _vm._v(" "),
+          _vm.posthandle
+            ? _c("div", [
+                _c("img", { attrs: { src: _vm.featuredimage } }),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  { attrs: { method: "POST", enctype: "multipart/form-data" } },
+                  [
+                    _c("image-upload", {
+                      staticClass: "none",
+                      attrs: { name: "file" },
+                      on: { loaded: _vm.onLoad }
+                    })
+                  ],
+                  1
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("b-loading", {
+            attrs: { "is-full-page": false, "can-cancel": true },
+            model: {
+              value: _vm.isLoading,
+              callback: function($$v) {
+                _vm.isLoading = $$v
+              },
+              expression: "isLoading"
             }
-          ],
-          staticClass: "textarea",
-          attrs: {
-            maxlength: "150",
-            placeholder: "This content will appear on search result"
-          },
-          domProps: { value: _vm.PostForm.meta_description },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+          }),
+          _vm._v(" "),
+          _c("p", { staticClass: "help" }, [
+            _vm._v(" Post the content then upload a cover photo here. ")
+          ]),
+          _vm._v(" "),
+          _c("h3", { staticClass: "is-size-4 mt-medium" }, [
+            _vm._v("Meta Desc "),
+            _c("span", { domProps: { textContent: _vm._s(_vm.meta_length) } })
+          ]),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.PostForm.meta_description,
+                expression: "PostForm.meta_description"
               }
-              _vm.$set(_vm.PostForm, "meta_description", $event.target.value)
+            ],
+            staticClass: "textarea",
+            attrs: {
+              maxlength: "150",
+              placeholder: "This content will appear on search result"
+            },
+            domProps: { value: _vm.PostForm.meta_description },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.PostForm, "meta_description", $event.target.value)
+              }
             }
-          }
-        }),
-        _vm._v(" "),
-        _c("p", { staticClass: "help" }, [
-          _vm._v(
-            " A brief summary of your content. Not less than 140 characters. "
-          )
-        ]),
-        _vm._v(" "),
-        _vm.PostForm.errors.has("meta_description")
-          ? _c("p", {
-              staticClass: "help is-danger",
-              domProps: {
-                textContent: _vm._s(_vm.PostForm.errors.get("meta_description"))
-              }
-            })
-          : _vm._e()
-      ])
+          }),
+          _vm._v(" "),
+          _c("p", { staticClass: "help" }, [
+            _vm._v(
+              " A brief summary of your content. Not less than 140 characters. "
+            )
+          ]),
+          _vm._v(" "),
+          _vm.PostForm.errors.has("meta_description")
+            ? _c("p", {
+                staticClass: "help is-danger",
+                domProps: {
+                  textContent: _vm._s(
+                    _vm.PostForm.errors.get("meta_description")
+                  )
+                }
+              })
+            : _vm._e()
+        ],
+        1
+      )
     ])
   ])
 }

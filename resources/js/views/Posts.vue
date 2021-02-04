@@ -192,7 +192,7 @@
             }
         },
 		beforeRouteEnter (to, from, next) {
-	    	axios.get('/posts')
+	    	axios.get('/latest-nigeria-education-news')
 			.then(({data}) => {
 				next(vm => vm.setData(data));
 			})

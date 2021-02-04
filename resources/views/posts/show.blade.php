@@ -52,7 +52,13 @@
 					        <p>
 					        	@if ($post->hasFeaturedImage())
 							      	<p class="image" style="display: flex; justify-content: center;">
-							      		<img style="width: 320px" class="" src="{{$post->featured_image}}" alt="{{$post->title}} cover">
+							      		<img style="width: 320px" class="" 
+							      		src="{{$post->featured_image}}" 
+							      		alt="{{$post->title}} cover"
+							      		srcset="
+							      			{{asset('storage/posts/' . $post->slug)}}-320px.webp 320w,
+							      		" 
+							      		>
 							    	</p>
 					      		@endif
 

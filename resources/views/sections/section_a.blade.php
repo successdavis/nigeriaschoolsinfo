@@ -21,7 +21,7 @@
 							@if($post->hasFeaturedImage())
 								<figure class="media-left">
 								    <p class="image is-64x64">
-								      <img src="{{$post->featured_image}}" alt="{{$post->title}} cover">
+								      <img src="{{asset('storage/posts/' . $post->slug)}}-64px.webp" alt="{{$post->title}} cover">
 								    </p>
 								 </figure>
 							@endif

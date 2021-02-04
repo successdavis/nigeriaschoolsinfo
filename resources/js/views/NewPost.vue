@@ -105,6 +105,7 @@
 			        </form>
 
 				</div>
+		        <b-loading :is-full-page="false" v-model="isLoading" :can-cancel="true"></b-loading>
 				<p class="help"> Post the content then upload a cover photo here. </p>
 				<h3 class="is-size-4 mt-medium">Meta Desc <span v-text="meta_length"></span></h3>
 				<textarea maxlength="150" v-model="PostForm.meta_description" class="textarea" placeholder="This content will appear on search result"></textarea>
@@ -186,12 +187,13 @@
 	            this.persist(image.file);
 	        },
 	        persist(file) {
+	        	this.isLoading = true;
                 let data = new FormData();
 
                 data.append('file', file);
 
                 axios.post(`/posts/${this.posthandle.slug}/featured_image`, data)
-                    .then(() => flash('Post Cover Image Uploaded! '))
+                    .then(() => this.isLoading = false)
                     .catch(() => flash('Cover Image Upload Failed','failed'));
             },
 			setPostBody (value) {
@@ -199,7 +201,7 @@
 			},
 
 			savePost () {
-
+				this.isLoading = true;
 				this.disabled = true;
 				if (!this.posthandle) {
 					this.PostForm.post('/posts/savepost')
@@ -207,20 +209,24 @@
 						flash('Your new post has been saved', 'success')
 						this.posthandle = data;
 						this.disabled = false;
+						this.isLoading = false;
 					})
 					.catch(error => {
 						flash(error.message, 'failed')
 						this.disabled = false;
+						this.isLoading = false;
 					});
 				}else {
 					this.PostForm.patch(`/posts/updatepost/${this.posthandle.slug}`)
 					.then(data => {
 						flash('Post Updated', 'success')
 						this.disabled = false;
+						this.isLoading = false;
 					})
 					.catch(error => {
 						flash(error.message, 'failed');
 						this.disabled = false;
+						this.isLoading = false;
 					})
 				}
 			},
