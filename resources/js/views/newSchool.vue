@@ -243,7 +243,7 @@
 				  </div>
 				</div>
 			</div>	
-			<div class="section">
+			<div class="">
 				<div class="is-size-4 has-text-centered	mb-small">Bio Data</div>
 
 				<div class="field is-horizontal">

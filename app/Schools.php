@@ -22,7 +22,8 @@ class Schools extends Model
     protected $guarded = [];
     protected $with = ['courses'];
     protected $casts = [
-        'admitting' => 'boolean'
+        'admitting' => 'boolean',
+        'hostels_accomodation' => 'boolean'
     ];
 
     protected $dates = ['date_created'];

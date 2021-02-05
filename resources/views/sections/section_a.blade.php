@@ -21,12 +21,19 @@
 							@if($post->hasFeaturedImage())
 								<figure class="media-left">
 								    <p class="image is-64x64">
-								      <img src="{{asset('storage/posts/' . $post->slug)}}-64px.webp" alt="{{$post->title}} cover">
+								      <img 
+								      src="{{$post->featured_image}}" alt="{{$post->title}} cover"
+								      srcset="
+								      {{asset('storage/posts/' . $post->slug)}}-320px.webp 320w, 
+								      {{asset('storage/posts/' . $post->slug)}}-64px.webp 64w
+								      "
+								      sizes="" 
+								      >
 								    </p>
 								 </figure>
 							@endif
 							<div class="media-content">
-								<h3><a class="has-text-black" href="{{$post->path()}}">{{$post->title}}<strong>Click to Read</strong></a></h3>
+								<h3><a class="has-text-black" href="{{$post->path()}}">{{$post->title}} <strong> Click to Read</strong></a></h3>
 							</div>
 						</article>
 					@endforeach

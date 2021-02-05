@@ -145,7 +145,10 @@ class SchoolsController extends Controller
             'sponsored_id'      => 'required|exists:sponsoreds,id', 
             'jamb_points'       => 'nullable|integer',
             'phone'             => 'nullable|min:10|max:10', 
+            'meta_description'  => 'required|string|min:140|max:150', 
         ]);
+
+        // dd(request('hostels_accomodation'));
 
         $school->name           = request('name'); 
         $school->short_name     = request('short_name'); 
@@ -161,6 +164,8 @@ class SchoolsController extends Controller
         $school->phone          = request('phone'); 
         $school->email          = request('email');
         $school->jamb_points    = request('jamb_points');
+        $school->meta_description       = request('meta_description');
+        $school->hostels_accomodation   = request('hostels_accomodation');
 
         $school->save();
 

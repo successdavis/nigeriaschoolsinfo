@@ -57,7 +57,7 @@ class PostImageController extends Controller
         $path = $converter->convertImages($sizes = ['320','64'], '', $name  =  $post->slug, '',  $saveOriginal = false);
         // posts/and-here-is-the-post-title-and-other-interesting-stuffs.jpg
         $post->update([
-            'featured_image' => 'posts/' . $post->slug . '-320px.webp'
+            'featured_image' => 'posts/' . $post->slug . '-64px.webp'
         ]);
 
         return response($post, 200);
