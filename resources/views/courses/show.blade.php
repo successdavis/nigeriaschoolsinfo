@@ -39,8 +39,9 @@
 				<div>{{$courses->utme_comment}}</div>
 			    @include ('sections/ads/in-article')
 
-				<h2 class="is-size-4">Course Cut-of-Point</h2>
-				<p class="content has-text-justified">The required cut-of-points for this course ({{$courses->name}}) depends on the school you are applying for, basically every school has a minimum cut of marks for accepting students in this area. Also, it is important to note that your O'level subject is a primary criteria for screening, continue reading to know the required subjects you must have on your O'Level result</p>
+				<h2 class="is-size-4">Course Cut of Point</h2>
+				<p>{{$courses->cut_off_point}} is the minimum cut off point for {{$courses->name}} as specified by JAMB. </p>
+				<p class="content has-text-justified">Also, the required cut-of-points for this course ({{$courses->name}}) depends on the school you are applying for, basically many schools have a different minimum cut of marks for accepting students in this area, which may be higher or even lower than JAMB recommend. Also, it is important to note that your O'level result (WAEC, NECO, GCE etc) is a primary criteria for screening, continue reading to know the required subjects you must have on your O'Level result</p>
 
 				<h2 class="is-size-4">{{$courses->name}} Requirement UTME</h2>
 				<div class="mb-medium has-text-justified content">{{$courses->utme_requirement}}</div>

@@ -24,10 +24,10 @@
 								      <img 
 								      src="{{$post->featured_image}}" alt="{{$post->title}} cover"
 								      srcset="
+								      {{$post->featured_image}} 
 								      {{asset('storage/posts/' . $post->slug)}}-320px.webp 320w, 
 								      {{asset('storage/posts/' . $post->slug)}}-64px.webp 64w
 								      "
-								      sizes="" 
 								      >
 								    </p>
 								 </figure>

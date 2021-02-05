@@ -73,6 +73,7 @@ class CoursesController extends Controller
             'utme_requirement'      =>  $request->utme_requirement,
             'direct_requirement'    =>  $request->direct_requirement,
             'considerations'        =>  $request->considerations,
+            'cut_off_point'        =>  $request->cut_off_point,
         ]);
 
         $course->programmes()->attach($request->selectedprogrammes);
@@ -131,6 +132,7 @@ class CoursesController extends Controller
             'utme_requirement'      => 'nullable|string',
             'direct_requirement'    => 'nullable|string',
             'considerations'        => 'nullable|string',
+            'cut_off_point'         => 'nullable|integer'
         ]);
         
         // dd(request()->all());
@@ -145,6 +147,7 @@ class CoursesController extends Controller
             'utme_requirement'      =>  $request->utme_requirement,
             'direct_requirement'    =>  $request->direct_requirement,
             'considerations'        =>  $request->considerations,
+            'cut_off_point'        =>  $request->cut_off_point,
         ]);
 
         if (request()->wantsJson()) {

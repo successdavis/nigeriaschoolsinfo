@@ -92,6 +92,21 @@
 						    </div>
 						  </div>
 						</div>
+
+						<div class="field is-horizontal">
+						  <div class="field-label is-normal">
+						    <label class="label">Cut off Point</label>
+						  </div>
+						  <div class="field-body">
+						    <div class="field">
+						      <div class="control">
+						        <input min="0" max="15" v-model="courseForm.cut_off_point" class="input" type="number" placeholder="Enter Points">
+						      </div>
+						      <p class="help is-danger" v-if="courseForm.errors.has('cut_off_point')" v-text="courseForm.errors.get('cut_off_point')"></p>
+						      
+						    </div>
+						  </div>
+						</div>
 						<div class="field is-horizontal">
 						  <div class="field-label is-normal">
 						    <label class="label">Salary</label>
@@ -242,6 +257,7 @@
 					direct_requirement: '',
 					considerations: '',
 					meta_description: '',
+					cut_off_point: '',
 					selectedprogrammes: [],
 				}),
 			}
@@ -264,6 +280,7 @@
 						this.courseForm.utme_requirement = course.data.data.utme_requirement
 						this.courseForm.direct_requirement = course.data.data.direct_requirement
 						this.courseForm.considerations = course.data.data.considerations
+						this.courseForm.cut_off_point = course.data.data.cut_off_point
 						this.courseForm.selectedprogrammes = course.data.data.programmes
 			    } else {
 			        console.log('failed')
