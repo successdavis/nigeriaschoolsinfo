@@ -163,7 +163,7 @@ class CoursesController extends Controller
             $courses = $programme->courses();
         }
 
-        return $courses = $courses->paginate(25);
+        return $courses = $courses->paginate(50);
     }
 
     public function findcourses(Request $request)
