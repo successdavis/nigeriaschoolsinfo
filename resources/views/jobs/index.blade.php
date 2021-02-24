@@ -22,15 +22,17 @@
 				<div class="section">
 					@foreach ($jobs as $job)
 						<article class="media">
-							<div class="media-content">
-								<h3 class="is-size-4">
-									<a class="has-text-black" href="{{$job->path()}}">{{$job->title}}</a>
-								</h3>
-								<p>{{ $job->excerpt() }}</p>
-							<div>
-								<strong>Offered by: </strong>{{$job->employer}}
-							</div>
-							</div>
+							<a class="has-text-black" href="{{$job->path()}}">
+								<div class="media-content">
+									<h3 class="is-size-4">
+										<h3 class="has-text-black title" >{{$job->name}}</h3>
+									</h3>
+									<p>{{ $job->excerpt() }}</p>
+								<div>
+									<strong class="Subtitle">Offered by: {{$job->employer}}</strong>
+								</div>
+								</div>
+							</a>
 						</article>
 					@endforeach
 				</div>
