@@ -72,7 +72,7 @@
 					</p>
 
 					<h3 class="is-size-4 mt-3 ">Does {{ucfirst($school->short_name)}} have hostel accommodation</h3>
-					@if($school->hostels)
+					@if($school->hostels_accomodation)
 						<p class="is-size-5-desktop">{{$school->short_name}} has a provision for hostel accomodation to students who desire to live within the school premises. </p>
 					@else
 						 <p class="is-size-5-desktop">No! {{$school->short_name}} does not have provission for hostel accomodation at the moment. </p>
