@@ -99,7 +99,7 @@ class SchoolsController extends Controller
         $school->load(['posts' => function($query){
             $query->where('followup', true);
         },'photos','courses' => function($query)
-            {$query->pluck('name')->take(20);
+            {$query->orderBy('name')->pluck('name')->take(20);
         }])->loadCount('courses');
 
         $relatedschools = Schools::where('programme_id', $school->programme_id)

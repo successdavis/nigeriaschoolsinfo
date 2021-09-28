@@ -6,7 +6,6 @@
           <img class="is-rounded" :src="school.logo_path" :alt="school.name + ' logo'">
         </p>
         <p class="image is-32x32 mt-small">
-          {{-- 23 --}}
           <span class="school_sh_name  mg_left-auto image__favicon--small" v-text="school.courses_count"></span>
         </p>
         <p class="image is-32x32 mt-small is-hidden-tablet ">
