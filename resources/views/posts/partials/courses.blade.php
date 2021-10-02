@@ -1,7 +1,9 @@
 @component('posts.partials.post',['post' => $post])
 
     @slot('image')
-        <img class="mt-small" src="{{asset('storage/'.$post->featured_image)}}" alt="{{$post->title}} thumbnail">
+        <a href="{{$post->source->path()}}">
+            <img class="mt-small" src="{{asset('storage/'.$post->featured_image)}}" alt="{{$post->title}} thumbnail">
+        </a>
     @endslot 
 
     @slot('title')

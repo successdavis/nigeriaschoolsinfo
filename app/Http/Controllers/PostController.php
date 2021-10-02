@@ -29,7 +29,7 @@ class PostController extends Controller
 
         $trending = Post::orderBy('visits','desc')->limit(10)->get();
 
-        $posts = $posts->paginate(20);
+        $posts = $posts->paginate(50);
 
         // return $posts;
 

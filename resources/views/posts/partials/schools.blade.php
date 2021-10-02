@@ -13,10 +13,10 @@
     	<span class="post_sh_name is-hidden-tablet">{{$post->source->short_name}}</span>
     @endslot 
 
-    @slot('body')
+<!--     @slot('body')
         <span class="has-text-black ">{!! nl2br($post->excerpt()) !!}</span>
         <span ><strong>Read More</strong></span>
-    @endslot
+    @endslot -->
     @slot('table_short_name')
         <p class="pt-all">
         <span class="post_sh_name"><a class="has-text-black" href="{{$post->source->path()}}">{{$post->source->short_name}}</a></span>

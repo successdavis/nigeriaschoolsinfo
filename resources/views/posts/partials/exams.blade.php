@@ -2,7 +2,10 @@
 @component('posts.partials.post',['post' => $post])
 
     @slot('image')
-    	<img class="is-rounded" src="{{asset($post->source->logo_path)}}" alt="{{$post->title}} thumbnail">
+        <a href="{{$post->source->path()}}">
+        	<img class="is-rounded" src="{{asset($post->source->logo_path)}}" alt="{{$post->title}} thumbnail">
+        </a>
+
     @endslot 
 
     @slot('title')

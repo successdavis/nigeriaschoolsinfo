@@ -1,7 +1,9 @@
-<article class="media">
+<article class="media" style="align-items: center;">
   <figure class="media-left">
     <p class="image is-64x64">
-      {{$image}}
+        <a href="{{$post->source->path()}}">
+          {{$image}}
+        </a>
     </p>
     {{-- {{$source}} --}}
   </figure>
@@ -13,7 +15,9 @@
               {{$title}}
             </span>
         </div>
-        {{$body}}
+        <div class="is-hidden-touch">
+          {{$body}}
+        </div>
       </a>
     </div>
   </div>

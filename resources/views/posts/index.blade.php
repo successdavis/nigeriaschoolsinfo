@@ -10,7 +10,9 @@
 @endsection
 
 @section('content')
-	@include ('sections/ads/horizontal_banner')
+	<div>
+		@include ('sections/ads/horizontal_banner')
+	</div>
 	
 	<div class="container">
 		<div>
