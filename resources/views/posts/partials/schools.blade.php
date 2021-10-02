@@ -1,12 +1,14 @@
 @component('posts.partials.post',['post' => $post])
 
     @slot('image')
-    	<img class="is-rounded" src="{{asset($post->source->logo_path)}}" alt="{{$post->title}} thumbnail">
+        <a href="{{$post->source->path()}}">
+        	<img class="is-rounded" src="{{asset($post->source->logo_path)}}" alt="{{$post->title}} thumbnail">
+        </a>
     @endslot 
 
     @slot('title')
     	{{$post->title}} <br>
-      <span class="is-size-7">posted: {{$post->created_at->diffForHumans()}}</span>
+      <span class="is-size-7">updated: {{$post->updated_at->diffForHumans()}}</span>
     @endslot 
 
     @slot('source')

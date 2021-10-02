@@ -10,7 +10,7 @@
 
     @slot('title')
     	{{$post->title}} <br>
-      <span class="is-size-7">posted: {{$post->created_at->diffForHumans()}}</span>
+      <span class="is-size-7">updated: {{$post->updated_at->diffForHumans()}}</span>
     @endslot 
 
     @slot('source')

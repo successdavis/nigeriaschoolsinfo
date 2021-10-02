@@ -41,7 +41,9 @@
 							</form>
 						</div>
 
-						@include ('sections/ads/in-feed')
+						<div class="is-hidden-touch">
+							@include ('sections/ads/in-feed')
+						</div>
 
 						@foreach ($posts as $post)
 			                @if (view()->exists("posts.partials.{$post->source->getShortName()}"))
