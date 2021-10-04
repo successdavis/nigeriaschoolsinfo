@@ -20,7 +20,9 @@
 
 
 @section('content')
-    @include ('sections/ads/horizontal_banner')
+	<div style="width:100vw; overflow: hidden;" class="mb-2">
+	    @include ('sections/ads/horizontal_banner')
+	</div>
 
 <div class="container is-max-desktop">	
 	<article class="media mb-small is-hidden-desktop">
