@@ -15,7 +15,7 @@
     </div>
     <footer class="exam card-footer">
       <a href="#" class="card-footer-item"><i class="fas fa-eye"></i> Watch</a>
-      <a href="#" class="card-footer-item"><i class="fas fa-binoculars"></i>View</a>
+      <a :href="'/exams/' + exam.slug" class="card-footer-item"><i class="fas fa-binoculars"></i>View</a>
     </footer>
   </div>
 </div>

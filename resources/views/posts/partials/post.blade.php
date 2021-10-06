@@ -13,6 +13,7 @@
         <div class="is-size-4 is-flex-mobile post_header">
             <span class="post_header--title">
               {{$title}}
+              <span class="is-size-7">updated: {{$post->created_at->diffForHumans()}}</span>
             </span>
         </div>
         <div class="is-hidden-touch">

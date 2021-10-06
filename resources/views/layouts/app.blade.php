@@ -1,5 +1,5 @@
 @include('layouts.header')
-<body>
+<body style="width: 100%; overflow-x: hidden;">
 <div id="app">
     <dashboard title="NIGERIASCHOOLINFO">
         <template slot="navigation" >
@@ -38,30 +38,6 @@
                       Nursing Schools
                   </a>
               </div>
-          </div>
-
-          <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link" href="/exams">
-                EXAMS
-            </a>
-
-            <div class="navbar-dropdown">
-                <a class="navbar-item">
-                  Post UTME
-              </a>
-              <a class="navbar-item">
-                  JAMB
-              </a>
-              <a class="navbar-item">
-                  NECO
-              </a>
-              <a class="navbar-item">
-                  WAEC
-              </a>
-              <hr class="navbar-divider">
-              <a class="navbar-item">
-                  Other
-              </a>
           </div>
 
       </div>
