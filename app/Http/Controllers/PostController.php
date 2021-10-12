@@ -6,9 +6,11 @@ use App\Advertisements;
 use App\Courses;
 use App\Exams;
 use App\Filters\PostFilters;
+use App\Filters\SchoolFilters;
 use App\Http\Resources\PostResource;
 use App\Post;
 use App\Programme;
+use App\Schools;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -18,8 +20,10 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, PostFilters $filters)
+    public function index(Request $request, PostFilters $filters, SchoolFilters $schoolfilters)
     {
+        $request->request->add(['a' => 'admitting']);
+
         $request->validate([
             'q'     => 'nullable|string',
             // 'draft' => 'nullable|boolean'
@@ -31,13 +35,14 @@ class PostController extends Controller
 
         $posts = $posts->paginate(50);
 
-        // return $posts;
+
+        $schoolsAdmitting = Schools::filter($schoolfilters)->limit(100)->pluck('name');
 
         if (request()->wantsJson()) {
             return PostResource::collection($posts);
         }
 
-        return view('posts.index', compact('posts','q','trending'));
+        return view('posts.index', compact('posts','q','trending','schoolsAdmitting'));
     }
 
     /**

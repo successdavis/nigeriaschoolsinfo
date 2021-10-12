@@ -43,6 +43,13 @@
 				</div>
 
 			</tab>
+			<tab name="Articles">
+				@foreach ($exams->posts as $followup)
+					<p>
+						<a class=" is-size-4" href="{{$followup->path()}}">{{$followup->title}}</a>
+					</p>
+				@endforeach
+			</tab>
 		</tabs>
 	</div>
 

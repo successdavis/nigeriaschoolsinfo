@@ -155,13 +155,6 @@
 			</div>
 		</tab>
 
-
-		<tab name="Requirement">
-			<h3 class="is-size-4">{{ucfirst($school->short_name)}} cut off mark {{date('Y')}}</h3>
-		    <p class="is-size-5-desktop has-text-justified">The average cut off mark for {{$school->short_name}} is {{$school->jamb_points}}. It is important to note that this cut off mark may not be applicable for all courses, some courses may require you to score higher, while some even lower.</p>
-		</tab>
-
-
 		<tab name="Courses">
 			<div class="mt-small">
 				<h4 class="is-size-4">{{ucfirst($school->name)}} courses and departments:</h4>
@@ -185,19 +178,28 @@
 				@include ('sections/ads/v-banner')
 			</div>
 		</tab>
+
 		<tab name="Articles">
 
 			<div class="content">
 				<p>Frequent questions asked</p>
 				<ul>
 					@foreach ($school->posts as $followup)
-						<li>
+						<p>
 							<a class=" is-size-4" href="{{$followup->path()}}">{{$followup->title}}</a>
-						</li>
+						</p>
 					@endforeach
 				</ul>
 			</div>
 		</tab>
+
+		<tab name="Requirement">
+			<h3 class="is-size-4">{{ucfirst($school->short_name)}} cut off mark {{date('Y')}}</h3>
+		    <p class="is-size-5-desktop has-text-justified">The average cut off mark for {{$school->short_name}} is {{$school->jamb_points}}. It is important to note that this cut off mark may not be applicable for all courses, some courses may require you to score higher, while some even lower.</p>
+		</tab>
+
+
+
 		<tab name="Related Schools">
 			<div>
 				<h3 class="is-size-4 mb-4">See Also Other {{$school->typeOf()}} Institutions </h3>

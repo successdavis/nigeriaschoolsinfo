@@ -17,9 +17,7 @@
 	<div class="container">
 		<div>
 			<div class="mb-medium">
-				<h1 class="has-text-centered is-size-4">
-					Latest Nigeria Education News Update on Universities, Polytechnic, Colleges etc
-				</h1>
+			
 			</div>
 			
 			<div class="columns is-gapless">
@@ -45,11 +43,39 @@
 							@include ('sections/ads/in-feed')
 						</div>
 
-						@foreach ($posts as $post)
-			                @if (view()->exists("posts.partials.{$post->source->getShortName()}"))
-			                    @include ("posts.partials.{$post->source->getShortName()}")
-			                @endif
-			            @endforeach
+
+						<tabs>
+							<tab name="Posts" selected="true">
+								@foreach ($posts as $post)
+					                @if (view()->exists("posts.partials.{$post->source->getShortName()}"))
+					                    @include ("posts.partials.{$post->source->getShortName()}")
+					                @endif
+					            @endforeach
+							</tab>
+							<tab name="{{date('Y')}}/{{date('Y') + 1}} Schools Admitting">
+								@foreach($schoolsAdmitting as $school)
+									<article class="media">
+									  <figure class="media-left">
+									    <p class="image is-64x64">
+									      <img class="is-rounded" src="{{asset($post->source->logo_path)}}" alt="{{$post->title}} thumbnail">
+									    </p>
+									  </figure>
+									  <div class="media-content">
+									    <div class="content">
+									      <p>
+									        <strong>Deadline</strong> <small>@johnsmith</small> <small>31m</small>
+									        <br>
+									        {{$school}}
+									      </p>
+									    </div>
+									  </div>
+									</article>
+
+								@endforeach
+							</tab>
+						</tabs>
+
+
 
 						<div class="section">
 							{{ $posts->links() }}
