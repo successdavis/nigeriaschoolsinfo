@@ -1,8 +1,10 @@
 <template>	
 	<div>	
-		<span @click="$modal.show(name)" class="mg_left-auto image__favicon--small"><i class="fas fa-eye"></i></span>
+		<span @click="$modal.show(name)" class="mg_left-auto image__favicon--small"><i class="mdi mdi-book-open-variant"></i></span>
 			<modal
 				:name="name"
+				@before-open="beforeOpen"
+				@before-close="beforeClose"
 				height="auto"
 				:adaptive="true"
 				scrollable="scrollable"
@@ -52,6 +54,16 @@
 		          $state.complete();
 		        }
 		      });
+		    },
+
+		    beforeOpen(event) {
+		    	let body = document.querySelector('body')
+		    	body.style.overflowY = "hidden"
+		    },
+
+		    beforeClose(event) {
+		    	let body = document.querySelector('body');
+		    	body.style.overflowY = "auto"
 		    },
 		}
 	};

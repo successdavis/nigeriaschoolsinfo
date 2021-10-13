@@ -36,7 +36,7 @@ class PostController extends Controller
         $posts = $posts->paginate(50);
 
 
-        $schoolsAdmitting = Schools::filter($schoolfilters)->limit(100)->pluck('name');
+        $schoolsAdmitting = Schools::filter($schoolfilters)->limit(50)->select('name','reg_ends_at')->get();
 
         if (request()->wantsJson()) {
             return PostResource::collection($posts);

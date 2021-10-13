@@ -18,9 +18,8 @@
             <div class="is-size-5 is-flex-mobile school_header">
                   <span v-text="school.name"></span>
             </div>
-            <span class="has-text-black" v-text="school.excerpt"></span>
-            <span ><strong>Read More</strong></span>
-
+            <p v-text="school.programme"></p>
+            <p style="color: green" v-if="school.admitting">{{date('Y')}}/{{date('Y') + 1}} Admission Ongoing </p>
           </a>
         </div>
       </div>

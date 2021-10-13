@@ -141,14 +141,12 @@ class SchoolsController extends Controller
             'states_id'         => 'required|exists:states,id',
             'lga_id'            => 'required|exists:lgas,id',
             'address'           => 'required', 
-            'programme_id'    => 'required|exists:programmes,id', 
+            'programme_id'      => 'required|exists:programmes,id', 
             'sponsored_id'      => 'required|exists:sponsoreds,id', 
             'jamb_points'       => 'nullable|integer',
             'phone'             => 'nullable|min:10|max:10', 
             'meta_description'  => 'required|string|min:140|max:150', 
         ]);
-
-        // dd(request('hostels_accomodation'));
 
         $school->name           = request('name'); 
         $school->short_name     = request('short_name'); 
@@ -159,11 +157,11 @@ class SchoolsController extends Controller
         $school->states_id      = request('states_id');
         $school->lga_id         = request('lga_id');
         $school->address        = request('address'); 
-        $school->programme_id = request('programme_id'); 
-        $school->sponsored_id   = request('sponsored_id');
-        $school->phone          = request('phone'); 
-        $school->email          = request('email');
-        $school->jamb_points    = request('jamb_points');
+        $school->programme_id       = request('programme_id'); 
+        $school->sponsored_id           = request('sponsored_id');
+        $school->phone                  = request('phone'); 
+        $school->email                  = request('email');
+        $school->jamb_points            = request('jamb_points');
         $school->meta_description       = request('meta_description');
         $school->hostels_accomodation   = request('hostels_accomodation');
 
@@ -172,9 +170,13 @@ class SchoolsController extends Controller
         return $school;
     }
 
-    public function openAdmission(Schools $school) 
+    public function openAdmission(Request $request, Schools $school) 
     {
-        $school->openAdmission();
+        $request->validate([
+            'ends_at'      => 'nullable|date',
+        ]);
+
+        $school->openAdmission($request->ends_at);
 
         return $school;
     }

@@ -26,7 +26,7 @@ class Schools extends Model
         'hostels_accomodation' => 'boolean'
     ];
 
-    protected $dates = ['date_created'];
+    protected $dates = ['date_created','reg_ends_at'];
 
     public $pathPrefix  = '/schools/';
     public $findWith    =   'slug';
@@ -100,10 +100,11 @@ class Schools extends Model
         return $filters->apply($query);
     }
 
-    public function openAdmission()
+    public function openAdmission($endDate)
     {
         return $this->update([
-            'admitting' => true
+            'admitting' => true,
+            'reg_ends_at' => $endDate
         ]);
     }
 

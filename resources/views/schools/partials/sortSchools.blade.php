@@ -4,7 +4,7 @@
 </label>
 
 <label class="checkbox sort_school_options">
-	<input type="checkbox"  @click="setOptions" v-model="checkedNames" value="/schools/type/university?a=admitting">
+	<input type="checkbox"  @click="setOptions" v-model="checkedNames" value="/schools?a=admitting">
 	Still Admitting
 </label>
 

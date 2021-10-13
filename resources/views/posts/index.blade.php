@@ -53,6 +53,9 @@
 					            @endforeach
 							</tab>
 							<tab name="{{date('Y')}}/{{date('Y') + 1}} Schools Admitting">
+								<div class="mb-medium">
+									<a href="/schools" class="button is-primary small is-fullwidth is-expanded">View Full List Here</a>
+								</div>
 								@foreach($schoolsAdmitting as $school)
 									<article class="media">
 									  <figure class="media-left">
@@ -63,9 +66,9 @@
 									  <div class="media-content">
 									    <div class="content">
 									      <p>
-									        <strong>Deadline</strong> <small>@johnsmith</small> <small>31m</small>
+									        <strong>Reg Ends:</strong> <small>{{$school->reg_ends_at->diffForHumans()}}</small>
 									        <br>
-									        {{$school}}
+									        {{$school->name}}
 									      </p>
 									    </div>
 									  </div>
