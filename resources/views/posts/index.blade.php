@@ -57,23 +57,24 @@
 									<a href="/schools" class="button is-primary small is-fullwidth is-expanded">View Full List Here</a>
 								</div>
 								@foreach($schoolsAdmitting as $school)
-									<article class="media">
-									  <figure class="media-left">
-									    <p class="image is-64x64">
-									      <img class="is-rounded" src="{{asset($post->source->logo_path)}}" alt="{{$post->title}} thumbnail">
-									    </p>
-									  </figure>
-									  <div class="media-content">
-									    <div class="content">
-									      <p>
-									        <strong>Reg Ends:</strong> <small>{{$school->reg_ends_at->diffForHumans()}}</small>
-									        <br>
-									        {{$school->name}}
-									      </p>
-									    </div>
-									  </div>
-									</article>
-
+									<a href="{{$school->path()}}">
+										<article class="media">
+										  <figure class="media-left">
+										    <p class="image is-64x64">
+										      <img class="is-rounded" src="{{asset($school->logo_path)}}" alt="{{$school->name}} thumbnail">
+										    </p>
+										  </figure>
+										  <div class="media-content">
+										    <div class="content">
+										      <p>
+										        <strong>Reg Ends:</strong> <small>{{$school->reg_ends_at->diffForHumans()}}</small>
+										        <br>
+										        {{$school->name}}
+										      </p>
+										    </div>
+										  </div>
+										</article>
+									</a>
 								@endforeach
 							</tab>
 						</tabs>
