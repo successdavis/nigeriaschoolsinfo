@@ -22,6 +22,7 @@ class PostController extends Controller
      */
     public function index(Request $request, PostFilters $filters, SchoolFilters $schoolfilters)
     {
+        dd('here');
         $request->request->add(['a' => 'admitting']);
 
         $request->validate([
