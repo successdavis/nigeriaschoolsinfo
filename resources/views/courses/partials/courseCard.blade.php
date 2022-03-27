@@ -12,7 +12,7 @@
     </p>
     <p class="card-footer-item">
       <span>
-        <a :href="course.path">View</a>
+        <!-- <a :href="course.path">View</a> -->
       </span>
     </p>
     @can('update courses')
