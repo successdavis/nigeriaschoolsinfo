@@ -29,11 +29,11 @@ class CourseResource extends JsonResource
             'utme_comment'  => $this->utme_comment,
             'utme_requirement'  => $this->utme_requirement,
             'direct_requirement'  => $this->direct_requirement,
-            'considerations'  => $this->considerations,
+            // 'considerations'  => $this->considerations,
             'subjects'       => $this->subjects,
             'path'           => $this->path(),
             'visits'           => $this->visits,
-            'programmes'       => $this->programmes()->pluck('id'),
+            // 'programmes'       => $this->programmes()->pluck('id'),
 
         ];
     }
