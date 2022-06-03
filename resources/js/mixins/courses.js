@@ -65,6 +65,7 @@ export default {
             this.isLoading = false;
             this.courses = data.data;
             this.pagination = data;
+            console.log(data.data);
             this.dataSet = {
                 next_page_url : data.links.next,
                 current_page: data.meta.current_page,
