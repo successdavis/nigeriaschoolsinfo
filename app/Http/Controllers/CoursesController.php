@@ -19,7 +19,8 @@ class CoursesController extends Controller
      */
     public function index(Programme $programme, CourseFilters $filters)
     {
-        $courses = $this->getCourses($programme, $filters);
+//        $courses = $this->getCourses($programme, $filters);
+        $courses = Courses::all();
 
         dd($courses);
 
