@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Courses;
 use App\Filters\CourseFilters;
-use App\Http\Resources\CourseResource;
+use App\Http\Resources\CourseIndexPageResource;
 use App\Http\Resources\SchoolResource;
 use App\Schools;
 use Illuminate\Http\Request;
@@ -150,8 +150,8 @@ class CourseSchoolAttachmentController extends Controller
         $courses = $courses->paginate(20);
 
         if (request()->wantsJson()) {
-            return CourseResource::collection($courses);
-        }   
+            return CourseIndexPageResource::collection($courses);
+        }
     }
 
     public function getLinkedCourses(Schools $school)
@@ -162,8 +162,8 @@ class CourseSchoolAttachmentController extends Controller
         $courses = $courses->paginate(20);
 
         if (request()->wantsJson()) {
-            return CourseResource::collection($courses);
-        }   
+            return CourseIndexPageResource::collection($courses);
+        }
 
         return view('schools.coursesoffered', compact('courses','school'));
     }

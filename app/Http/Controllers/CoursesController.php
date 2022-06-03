@@ -5,28 +5,25 @@ namespace App\Http\Controllers;
 use App\Courses;
 use App\Faculty;
 use App\Filters\CourseFilters;
-use App\Http\Resources\CourseResource;
+use App\Http\Resources\CourseIndexPageResource;
 use App\Programme;
 use App\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CoursesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index(Programme $programme, CourseFilters $filters)
     {
-//        $courses = $this->getCourses($programme, $filters);
-        $courses = Courses::all();
-
-        dd($courses);
+        $courses = $this->getCourses($programme, $filters);
 
         if (request()->wantsJson()) {
-            return $courses;
-//            return CourseResource::collection($courses);
+            return CourseIndexPageResource::collection($courses);
         }
 
         $faculties = Faculty::all();
@@ -111,7 +108,7 @@ class CoursesController extends Controller
     {
         $this->authorize('update', $course);
 
-        return new CourseResource($course);
+        return new CourseIndexPageResource($course);
     }
 
     /**
@@ -162,7 +159,10 @@ class CoursesController extends Controller
 
     public function getCourses($programme, $filters)
     {
-        $courses = Courses::orderBy('name')->filter($filters);
+//        $courses = DB::table('courses')->orderBy('name', 'asc')->select('name','duration','salary')->filter($filters);
+
+        $courses = Courses::orderBy('name')->select('name','description','salary','duration')->filter($filters);
+
         if ($programme->exists) {
             $courses = $programme->courses();
         }
