@@ -22,7 +22,8 @@ class CoursesController extends Controller
         $courses = $this->getCourses($programme, $filters);
 
         if (request()->wantsJson()) {
-            return CourseResource::collection($courses);
+            return $courses;
+//            return CourseResource::collection($courses);
         }
 
         $faculties = Faculty::all();
@@ -50,9 +51,9 @@ class CoursesController extends Controller
         $this->authorize('create', new Courses);
         $request->validate([
             'name'                  => 'required|unique:courses|max:200|min:5',
-            'description'           => 'required', 
+            'description'           => 'required',
             'faculty_id'            => 'required|exists:faculties,id',
-            'salary'                => 'required|integer', 
+            'salary'                => 'required|integer',
             'duration'              => 'required|integer',
             'utme_comment'          => 'nullable|string|max:250',
             'utme_requirement'      => 'nullable|string',
@@ -60,7 +61,7 @@ class CoursesController extends Controller
             'considerations'        => 'nullable|string',
             'selectedprogrammes'    => 'required|array'
         ]);
-        
+
         // dd(request()->all());
         $course = Courses::create([
             'name'              =>  $request->name,
@@ -93,7 +94,7 @@ class CoursesController extends Controller
     {
         $courses->increment('visits');
         $courses->with(['schools'])->limit(50)->get();
-        
+
         return view('courses.show', compact('courses'));
     }
 
@@ -124,9 +125,9 @@ class CoursesController extends Controller
         $this->authorize('create', new Courses);
         $request->validate([
             'name'                  => 'required|max:200|min:5',
-            'description'           => 'required', 
+            'description'           => 'required',
             'faculty_id'            => 'required|exists:faculties,id',
-            'salary'                => 'required|integer', 
+            'salary'                => 'required|integer',
             'duration'              => 'required|integer',
             'utme_comment'          => 'nullable|string|max:250',
             'utme_requirement'      => 'nullable|string',
@@ -134,7 +135,7 @@ class CoursesController extends Controller
             'considerations'        => 'nullable|string',
             'cut_off_point'         => 'nullable|integer'
         ]);
-        
+
         // dd(request()->all());
         $courses->update([
             'name'              =>  $request->name,
@@ -153,7 +154,7 @@ class CoursesController extends Controller
         if (request()->wantsJson()) {
             return response($courses, 201);
         }
-        
+
     }
 
     public function getCourses($programme, $filters)

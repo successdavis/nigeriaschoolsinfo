@@ -48,7 +48,7 @@ export default {
 
                 page = query ? query[1] : 1;
             }
-            
+
             if (this.path) {
                  return `/programme/${this.path}/courses`;
             }
@@ -78,7 +78,7 @@ export default {
 
         search: _.debounce(function(page) {
             this.sort = '';
-            this.isLoading = true;
+            // this.isLoading = true;
             this.fetch(this.page);
         }, 700),
     }
