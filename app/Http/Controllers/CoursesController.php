@@ -21,6 +21,8 @@ class CoursesController extends Controller
     {
         $courses = $this->getCourses($programme, $filters);
 
+        dd($courses);
+
         if (request()->wantsJson()) {
             return $courses;
 //            return CourseResource::collection($courses);
