@@ -161,7 +161,7 @@ class CoursesController extends Controller
     {
 //        $courses = DB::table('courses')->orderBy('name', 'asc')->select('name','duration','salary')->filter($filters);
 
-        $courses = Courses::orderBy('name')->select('name','description','salary','duration')->filter($filters);
+        $courses = Courses::orderBy('name')->select('name','description','salary','duration','slug')->filter($filters);
 
         if ($programme->exists) {
             $courses = $programme->courses();

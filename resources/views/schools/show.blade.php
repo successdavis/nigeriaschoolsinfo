@@ -6,7 +6,7 @@
 
 @section('head')
     <meta name="description" content="All you need to know about {{$school->name}}, cut-of-point, courses offered, location and photos of {{$school->short_name}}">
-  	<meta name="keywords" content="{{$school->name}} project"> 
+  	<meta name="keywords" content="{{$school->name}} project">
 
   	<meta property="og:title" content="{{$school->name}}" />
   	<meta property="og:url" content="{{ url($school->path()) }}" />
@@ -15,7 +15,7 @@
   	<meta property="og:type" content="article" />
   	<link rel="canonical" href="{{ url($school->path()) }}" />
 	<meta name=”robots” content=”index, follow”>
-  	
+
 @endsection
 
 
@@ -24,7 +24,7 @@
 	    @include ('sections/ads/horizontal_banner')
 	</div>
 
-<div class="container is-max-desktop">	
+<div class="container is-max-desktop">
 	<article class="media mb-small is-hidden-desktop">
 		<figure class="media-left">
 			<p class="image is-48x48">
@@ -49,7 +49,7 @@
 		<div class="media-content">
 			<div class="content">
 			  <p>
-			    <strong class="mb-small is-size-3">{{$school->name}}</strong> <small class="is-size-5"> <br> {{$school->short_name}} 
+			    <strong class="mb-small is-size-3">{{$school->name}}</strong> <small class="is-size-5"> <br> {{$school->short_name}}
 			    </small>
 			    <br>
 			  </p>
@@ -81,14 +81,14 @@
 		<tab name="Overview">
 						<div class="">
 				<div class="mb-small">
-					<p class="is-size-5-desktop">{{$school->name}} also known as {{$school->short_name}} is a {{$school->sponsored->name}} {{$school->typeOf()}} established in {{$school->date_created->format('Y')}} ({{$school->date_created->diffForHumans()}}). The school offers over {{$school->courses_count}} undergraduate courses, It is located in {{$school->state->name}}. 
+					<p class="is-size-5-desktop">{{$school->name}} also known as {{$school->short_name}} is a {{$school->sponsored->name}} {{$school->typeOf()}} established in {{$school->date_created->format('Y')}} ({{$school->date_created->diffForHumans()}}). The school offers over {{$school->courses_count}} undergraduate courses, It is located in {{$school->state->name}}.
 						@if($school->website)
 
 						{{ucfirst($school->short_name)}} has a public profile for anyone who wants to know more about the institution and can be accessed via its website. Visit {{$school->short_name}} landing page on {{$school->website}} or visit the school portal on {{$school->portal_website}} to apply for admission.
 
-						@else 
+						@else
 
-						{{ucfirst($school->short_name)}} does not have an online public profile for students or prospective distant students to review before applying to the instition. If you wish to study in {{$school->short_name}}, we recommend that you visit the school to see for yourself if it has the qualities you're looking for. 
+						{{ucfirst($school->short_name)}} does not have an online public profile for students or prospective distant students to review before applying to the instition. If you wish to study in {{$school->short_name}}, we recommend that you visit the school to see for yourself if it has the qualities you're looking for.
 
 						@endif
 					Other vital informations such as courses offered, UTME requirement, Direct Entry requirement, and the school photos are available below.
@@ -105,7 +105,7 @@
 
 				</div>
 			    @include ('sections/ads/in-article')
-		
+
 
 				<div class="mb-small">
 					<div class="is-size-4 ">Description</div>
@@ -117,7 +117,7 @@
 							<a class=" is-size-5" href="{{$followup->path()}}">{{$followup->title}} Click to Read</a><br>
 						@endforeach
 					</div>
-				    
+
 
 				    To view a complete list of courses and their required cut off mark for {{$school->short_name}}. <a href="/courses-offered-in/{{$school->slug}}">Click here</a>
 				    </p>
@@ -129,7 +129,7 @@
 						<div><strong>Phone Number: </strong> +234{{$school->phone}} </div>
 						<div><strong>Email: </strong> {{$school->email}} </div>
 						<div><strong>Website:</strong><a href="https://{{$school->website}}" target="_blank"> {{$school->website}}</a></div>
-						<div><strong>Portal: </strong><a href="https://{{$school->portal_website}}" target="_blank"> {{$school->portal_website}}</a></div> 
+						<div><strong>Portal: </strong><a href="https://{{$school->portal_website}}" target="_blank"> {{$school->portal_website}}</a></div>
 					</div>
 				{{-- <p>{!! nl2br(str_replace(" ", "&nbsp;", $school->description)) !!}</p> --}}
 				</div>
@@ -149,7 +149,7 @@
 							  	<p>{{$photo->description}}</p>
 							  </div>
 							</div>
-				        @endforeach     
+				        @endforeach
 				    </image-carousel>
 				</div>
 			</div>
@@ -159,18 +159,22 @@
 			<div class="mt-small">
 				<h4 class="is-size-4">{{ucfirst($school->name)}} courses and departments:</h4>
 				<div class="is-size-5-desktop mb-small">The following is a list of courses offered in {{$school->short_name}} </div>
-				
+
 				<table class="table">
 					<thead>
 						<tr>
 							<th><abbr title="School">Courses</abbr></th>
+							<th><abbr title="School">Jamb Points</abbr></th>
 						</tr>
 					</thead>
 					<tbody>
-						@foreach ($school->courses as $course)
-							<tr>
-								<td><a href="{{$course->path()}}">{{$course->name}}</a></td>
-							</tr>	
+						@foreach ($school->courses()->select('name','slug')->get() as $course)
+                            <a href="{{$course->path()}}">
+                                <tr>
+                                    <td>{{$course->name}}</td>
+                                    <td>{{$course->pivot->cut_off_points}}</td>
+                                </tr>
+                            </a>
 						@endforeach
 					</tbody>
 				</table>

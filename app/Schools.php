@@ -20,7 +20,7 @@ class Schools extends Model
     // use Insertinbetweentext;
 
     protected $guarded = [];
-    protected $with = ['courses'];
+//    protected $with = ['courses'];
     protected $casts = [
         'admitting' => 'boolean',
         'hostels_accomodation' => 'boolean'
