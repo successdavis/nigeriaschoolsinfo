@@ -168,7 +168,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						@foreach ($school->courses()->select('name','slug')->get() as $course)
+						@foreach ($school->courses()->select('name','slug')->orderBy('name')->get() as $course)
                             <a href="{{$course->path()}}">
                                 <tr>
                                     <td>{{$course->name}}</td>
