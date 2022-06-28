@@ -92,7 +92,8 @@ class CourseSchoolAttachmentController extends Controller
             's'         => 'nullable|string',
             'faculty'   => 'nullable|string'
         ]);
-        $courses = Courses::latest()->filter($filters);
+        $courses = Courses::orderBy('name')->select('name','slug')->filter($filters);
+
 
         $courses = $courses->paginate(50);
 
